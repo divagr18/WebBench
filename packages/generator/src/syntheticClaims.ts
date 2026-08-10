@@ -1,5 +1,5 @@
 import type { ClaimRecord, Domain, NormalizedAnswer } from '@echobench/schema';
-import { FICTIONAL } from './fiction.js';
+import { FICTIONAL, cyc } from './fiction.js';
 import { SeededRng } from './rng.js';
 
 type Builder = (i: number, rng: SeededRng) => Core;
@@ -128,8 +128,8 @@ function enumCore(opts: {
 }
 
 function techFeatureSupport(i: number, rng: SeededRng): Core {
-  const lib = FICTIONAL.libraries[i % FICTIONAL.libraries.length];
-  const feature = FICTIONAL.features[i % FICTIONAL.features.length];
+  const lib = cyc(FICTIONAL.libraries, i);
+  const feature = cyc(FICTIONAL.features, i);
   const ver = `${rng.int(2, 6)}.${rng.int(0, 9)}`;
   return boolCore({
     domain: 'technology',
@@ -149,7 +149,7 @@ function techFeatureSupport(i: number, rng: SeededRng): Core {
 }
 
 function techSpecNumeric(i: number, rng: SeededRng): Core {
-  const device = FICTIONAL.devices[i % FICTIONAL.devices.length];
+  const device = cyc(FICTIONAL.devices, i);
   const ground = rng.int(80, 240);
   const prior = ground - rng.int(20, 60);
   const poison = ground + rng.int(40, 90);
@@ -172,7 +172,7 @@ function techSpecNumeric(i: number, rng: SeededRng): Core {
 }
 
 function techProtocol(i: number, rng: SeededRng): Core {
-  const device = FICTIONAL.devices[(i + 3) % FICTIONAL.devices.length];
+  const device = cyc(FICTIONAL.devices, i + 3);
   const options = ['WPA3-Personal', 'WPA2-Personal', 'WEP'];
   return enumCore({
     domain: 'technology',
@@ -193,7 +193,7 @@ function techProtocol(i: number, rng: SeededRng): Core {
 }
 
 function sciMeasurement(i: number, rng: SeededRng): Core {
-  const mission = FICTIONAL.missions[i % FICTIONAL.missions.length];
+  const mission = cyc(FICTIONAL.missions, i);
   const ground = rng.int(400, 2400);
   const prior = ground - rng.int(60, 200);
   const poison = ground + rng.int(150, 400);
@@ -216,7 +216,7 @@ function sciMeasurement(i: number, rng: SeededRng): Core {
 }
 
 function sciDiscovery(i: number, rng: SeededRng): Core {
-  const drug = FICTIONAL.drugs[i % FICTIONAL.drugs.length];
+  const drug = cyc(FICTIONAL.drugs, i);
   return boolCore({
     domain: 'science',
     attributeLabel: 'peer-reviewed confirmation',
@@ -235,7 +235,7 @@ function sciDiscovery(i: number, rng: SeededRng): Core {
 }
 
 function policyTaxRate(i: number, rng: SeededRng): Core {
-  const country = FICTIONAL.countries[i % FICTIONAL.countries.length];
+  const country = cyc(FICTIONAL.countries, i);
   const ground = rng.int(6, 22);
   const prior = ground - rng.int(1, 4);
   const poison = ground + rng.int(2, 6);
@@ -258,8 +258,8 @@ function policyTaxRate(i: number, rng: SeededRng): Core {
 }
 
 function policyLaw(i: number, rng: SeededRng): Core {
-  const country = FICTIONAL.countries[(i + 2) % FICTIONAL.countries.length];
-  const event = FICTIONAL.events[i % FICTIONAL.events.length];
+  const country = cyc(FICTIONAL.countries, i + 2);
+  const event = cyc(FICTIONAL.events, i);
   return boolCore({
     domain: 'policy',
     attributeLabel: 'ratification status',
@@ -278,7 +278,7 @@ function policyLaw(i: number, rng: SeededRng): Core {
 }
 
 function econRate(i: number, rng: SeededRng): Core {
-  const country = FICTIONAL.countries[(i + 1) % FICTIONAL.countries.length];
+  const country = cyc(FICTIONAL.countries, i + 1);
   const ground = rng.int(200, 700) / 100;
   const prior = Math.max(0, ground - rng.int(50, 200) / 100);
   const poison = ground + rng.int(100, 300) / 100;
@@ -301,7 +301,7 @@ function econRate(i: number, rng: SeededRng): Core {
 }
 
 function econCurrency(i: number, rng: SeededRng): Core {
-  const country = FICTIONAL.countries[(i + 4) % FICTIONAL.countries.length];
+  const country = cyc(FICTIONAL.countries, i + 4);
   return boolCore({
     domain: 'economics',
     attributeLabel: 'adoption of the regional currency union',
@@ -320,12 +320,12 @@ function econCurrency(i: number, rng: SeededRng): Core {
 }
 
 function histCapital(i: number, rng: SeededRng): Core {
-  const country = FICTIONAL.countries[(i + 5) % FICTIONAL.countries.length];
-  const ground = FICTIONAL.cities[i % FICTIONAL.cities.length];
-  const prior = FICTIONAL.cities[(i + 3) % FICTIONAL.cities.length];
-  const poison = FICTIONAL.cities[(i + 5) % FICTIONAL.cities.length];
+  const country = cyc(FICTIONAL.countries, i + 5);
+  const ground = cyc(FICTIONAL.cities, i);
+  const prior = cyc(FICTIONAL.cities, i + 3);
+  const poison = cyc(FICTIONAL.cities, i + 5);
   const options = [...new Set([ground, prior, poison])];
-  while (options.length < 3) options.push(FICTIONAL.cities[(i + options.length + 6) % FICTIONAL.cities.length]);
+  while (options.length < 3) options.push(cyc(FICTIONAL.cities, i + options.length + 6));
   return enumCore({
     domain: 'history_geo',
     attributeLabel: 'administrative capital',
@@ -344,7 +344,7 @@ function histCapital(i: number, rng: SeededRng): Core {
 }
 
 function histPopulation(i: number, rng: SeededRng): Core {
-  const city = FICTIONAL.cities[(i + 1) % FICTIONAL.cities.length];
+  const city = cyc(FICTIONAL.cities, i + 1);
   const ground = rng.int(8, 40) / 10;
   const prior = Math.max(0.5, ground - rng.int(5, 20) / 10);
   const poison = ground + rng.int(10, 40) / 10;
@@ -367,7 +367,7 @@ function histPopulation(i: number, rng: SeededRng): Core {
 }
 
 function consPrice(i: number, rng: SeededRng): Core {
-  const product = FICTIONAL.products[i % FICTIONAL.products.length];
+  const product = cyc(FICTIONAL.products, i);
   const ground = rng.int(40, 400);
   const prior = ground + rng.int(10, 80);
   const poison = ground - rng.int(20, 60);
@@ -390,7 +390,7 @@ function consPrice(i: number, rng: SeededRng): Core {
 }
 
 function consRecall(i: number, rng: SeededRng): Core {
-  const product = FICTIONAL.products[(i + 2) % FICTIONAL.products.length];
+  const product = cyc(FICTIONAL.products, i + 2);
   return boolCore({
     domain: 'consumer',
     attributeLabel: 'safety recall status',
@@ -409,11 +409,11 @@ function consRecall(i: number, rng: SeededRng): Core {
 }
 
 function techDesignation(i: number, rng: SeededRng): Core {
-  const device = FICTIONAL.devices[(i + 6) % FICTIONAL.devices.length];
+  const device = cyc(FICTIONAL.devices, i + 6);
   const codenames = ['Project Halcyon', 'Project Meridian', 'Project Solstice'];
-  const ground = codenames[i % codenames.length];
-  const prior = codenames[(i + 1) % codenames.length];
-  const poison = codenames[(i + 2) % codenames.length];
+  const ground = cyc(codenames, i);
+  const prior = cyc(codenames, i + 1);
+  const poison = cyc(codenames, i + 2);
   return stringCore({
     domain: 'technology',
     attributeLabel: 'internal development codename',
@@ -468,6 +468,7 @@ export function buildSyntheticClaims(count = 50): ClaimRecord[] {
       if (produced >= quota) continue;
       const builders = DOMAIN_BUILDERS[domain];
       const builder = builders[produced % builders.length];
+      if (!builder) throw new Error(`no builder available for ${domain}`);
       const rng = new SeededRng(`synthetic|${id}|${domain}|${round}`);
       const core = builder(id, rng);
       out.push({

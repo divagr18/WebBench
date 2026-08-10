@@ -32,7 +32,7 @@ export class SeededRng {
 
   pick<T>(arr: readonly T[]): T {
     if (arr.length === 0) throw new Error('pick from empty array');
-    return arr[this.int(0, arr.length)];
+    return arr[this.int(0, arr.length)] as T;
   }
 
   bool(pTrue = 0.5): boolean {
@@ -41,13 +41,14 @@ export class SeededRng {
 
   /** Sample k distinct items without replacement (order shuffled). */
   sample<T>(arr: readonly T[], k: number): T[] {
-    const copy = [...arr];
+    const idx = Array.from({ length: arr.length }, (_, i) => i);
     const out: T[] = [];
-    const n = Math.min(k, copy.length);
-    for (let i = 0; i < n; i++) {
-      const j = this.int(i, copy.length);
-      [copy[i], copy[j]] = [copy[j], copy[i]];
-      out.push(copy[i]);
+    const n = Math.min(k, arr.length);
+    for (let t = 0; t < n; t++) {
+      const pickPos = this.int(0, idx.length);
+      const chosen = idx[pickPos] as number;
+      out.push(arr[chosen] as T);
+      idx.splice(pickPos, 1);
     }
     return out;
   }

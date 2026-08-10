@@ -57,8 +57,9 @@ function stratifiedDevSelection(trackClaims: ClaimRecord[]): Set<string> {
         if (taken >= n) break;
         const list = byType.get(k)!;
         const idx = cursor.get(k)!;
-        if (idx < list.length) {
-          picked.add(list[idx].claimId);
+        const item = list[idx];
+        if (item && idx < list.length) {
+          picked.add(item.claimId);
           cursor.set(k, idx + 1);
           taken++;
         }

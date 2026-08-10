@@ -64,8 +64,10 @@ export function normalizeRawToAnswer(claim: ClaimRecord, raw: string): Normalize
       return null;
     }
     case 'string': {
+      const canonical = spec.aliases[0];
+      if (!canonical) return null;
       for (const alias of spec.aliases) {
-        if (alias.toLowerCase() === trimmed.toLowerCase()) return { kind: 'string', value: spec.aliases[0] };
+        if (alias.toLowerCase() === trimmed.toLowerCase()) return { kind: 'string', value: canonical };
       }
       return null;
     }

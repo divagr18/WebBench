@@ -13,3 +13,9 @@ export const FICTIONAL = {
   events: ['the Marlow Accord', 'the Trellmark Reform', 'the Norvia Treaty', 'the Ellanis Compact'],
   products: ['Aster Vacuum 3', 'Nimbus Kettle', 'Corvo Blender', 'Sable Toaster', 'Vell Heater'],
 };
+
+export function cyc(pool: readonly string[], i: number): string {
+  const v = pool[((i % pool.length) + pool.length) % pool.length];
+  if (v === undefined) throw new Error('empty entity pool');
+  return v;
+}

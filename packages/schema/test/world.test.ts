@@ -36,7 +36,9 @@ describe('WorldManifest structural validation', () => {
 
   it('rejects citation targeting a page outside the world', () => {
     const w = makeWorld();
-    w.pages[1].citations = [{ targetPageId: 'not_in_world', anchorText: 'src', url: 'https://news.echo/p/not_in_world' }];
+    const target = w.pages[1];
+    if (!target) throw new Error('fixture missing page');
+    target.citations = [{ targetPageId: 'not_in_world', anchorText: 'src', url: 'https://news.echo/p/not_in_world' }];
     const errs = worldManifestErrors(w);
     expect(errs.some((e) => e.includes('unknown page'))).toBe(true);
   });
@@ -62,7 +64,9 @@ describe('WorldManifest structural validation', () => {
 
   it('rejects a page whose url does not match its synthetic .echo domain', () => {
     const w = makeWorld();
-    w.pages[0].url = 'https://dailyledger.real/p/official_primary';
+    const target = w.pages[0];
+    if (!target) throw new Error('fixture missing page');
+    target.url = 'https://dailyledger.real/p/official_primary';
     const parsed = WorldManifestSchema.safeParse(w);
     expect(parsed.success).toBe(false);
   });

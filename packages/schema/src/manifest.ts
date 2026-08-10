@@ -28,6 +28,12 @@ export const DatasetManifestSchema = z.object({
     checksum: z.string().regex(/^[a-f0-9]{64}$/),
   })),
   integrityChecksum: z.string().regex(/^[a-f0-9]{64}$/),
+  renderStats: z.object({
+    pagesRendered: z.number().int().nonnegative(),
+    pagesFallback: z.number().int().nonnegative(),
+    extractionRetries: z.number().int().nonnegative(),
+    estimatedCostUsd: z.number().nonnegative(),
+  }).optional(),
 });
 export type DatasetManifest = z.infer<typeof DatasetManifestSchema>;
 

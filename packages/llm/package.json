@@ -1,5 +1,5 @@
 {
-  "name": "@echobench/generator",
+  "name": "@echobench/llm",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -12,8 +12,6 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@echobench/llm": "workspace:*",
-    "@echobench/schema": "workspace:*",
     "zod": "3.24.1"
   },
   "devDependencies": {

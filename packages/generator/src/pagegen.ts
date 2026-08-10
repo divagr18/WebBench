@@ -3,6 +3,7 @@ import { SeededRng } from './rng.js';
 import { SLOTS, slotSurface, type SlotDef } from './slots.js';
 import { layoutFor, type SlotLayout, type ValueRole } from './layout.js';
 import { authorName, outletName, orgName } from './names.js';
+import { cyc } from './fiction.js';
 import { formatValue, phraseForValue, sameValue } from './values.js';
 
 export interface AuthorProfile {
@@ -171,10 +172,10 @@ export function renderTemplateContent(claim: ClaimRecord, rec: SlotRecord, rng: 
       };
     }
     case 'news': {
-      const verb = REPORTING_VERBS[rng.int(0, REPORTING_VERBS.length)];
-      const lead = NEWS_LEADS[rng.int(0, NEWS_LEADS.length)];
+      const verb = cyc(REPORTING_VERBS, rng.int(0, REPORTING_VERBS.length));
+      const lead = cyc(NEWS_LEADS, rng.int(0, NEWS_LEADS.length));
       const fillerCount = rng.int(1, 3);
-      const fillers = Array.from({ length: fillerCount }, () => FILLER_SENTENCES[rng.int(0, FILLER_SENTENCES.length)]);
+      const fillers = Array.from({ length: fillerCount }, () => cyc(FILLER_SENTENCES, rng.int(0, FILLER_SENTENCES.length)));
       const headline = `${lead.replace(/,$/, '')} ${claim.entityName} ${claim.attributeLabel} ${verb} the current position`;
       const body = [
         `${lead} coverage of ${claim.entityName} ${verb} that ${rec.assertsPhrase}.`,
@@ -201,7 +202,7 @@ export function renderTemplateContent(claim: ClaimRecord, rec: SlotRecord, rng: 
         questionForm
           ? `I keep seeing conflicting statements about ${claim.entityName}. What I can find ${rng.bool() ? 'suggests' : 'indicates'} that ${rec.assertsPhrase}. Value quoted: ${rec.assertsValueText}. Can anyone confirm?`
           : `Sharing what I found on ${claim.entityName}: ${rec.assertsPhrase}. The figure quoted everywhere is ${rec.assertsValueText}.`,
-        FILLER_SENTENCES[rng.int(0, FILLER_SENTENCES.length)],
+        cyc(FILLER_SENTENCES, rng.int(0, FILLER_SENTENCES.length)),
       ].join(' ');
       const commentCount = 2 + rng.int(0, 3);
       const comments = Array.from({ length: commentCount }, (_, i) => {

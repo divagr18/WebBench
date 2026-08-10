@@ -80,7 +80,6 @@ export function buildWorld(claim: ClaimRecord, condition: Condition, opts: World
   });
 
   const episodeId = episodeIdOf(claim.claimId, condition);
-  const pagesChecksum = sha256Hex(canonicalJson(pages));
 
   const world: WorldManifest = {
     schemaVersion: 1,
@@ -112,18 +111,27 @@ export function buildWorld(claim: ClaimRecord, condition: Condition, opts: World
       forcedTopPageIds: layout.forcedTopSlot ? [pageIdFor(layout.forcedTopSlot)] : [],
     },
     promptHashes: {},
-    checksums: { pages: pagesChecksum, manifest: '' },
+    checksums: { pages: '', manifest: '' },
     worldToken: '',
   };
 
-  const manifestChecksum = sha256Hex(canonicalJson({ ...world, checksums: { pages: pagesChecksum, manifest: '' }, worldToken: '' }));
+  return finalizeWorld(world);
+}
+
+/** Recompute pages/manifest checksums + world token, then structurally validate. */
+export function finalizeWorld(world: WorldManifest): WorldManifest {
+  const pagesChecksum = sha256Hex(canonicalJson(world.pages));
+  world.checksums.pages = pagesChecksum;
+  world.checksums.manifest = '';
+  world.worldToken = '';
+  const manifestChecksum = sha256Hex(canonicalJson(world));
   world.checksums.manifest = manifestChecksum;
-  world.worldToken = sha256Hex(`world|${episodeId}|${manifestChecksum}`);
+  world.worldToken = sha256Hex(`world|${world.episodeId}|${manifestChecksum}`);
 
   const parsed = WorldManifestSchema.parse(world);
   const errs = worldManifestErrors(parsed);
   if (errs.length > 0) {
-    throw new Error(`world ${episodeId} failed structural validation:\n  - ${errs.join('\n  - ')}`);
+    throw new Error(`world ${world.episodeId} failed structural validation:\n  - ${errs.join('\n  - ')}`);
   }
   return parsed;
 }
