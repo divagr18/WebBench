@@ -6,3 +6,4 @@ export * from './search.js';
 export * from './judgment.js';
 export * from './trace.js';
 export * from './manifest.js';
+export * from './evaluation.js';

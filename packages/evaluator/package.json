@@ -1,0 +1,24 @@
+{
+  "name": "@echobench/evaluator",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@echobench/generator": "workspace:*",
+    "@echobench/schema": "workspace:*",
+    "zod": "3.24.1"
+  },
+  "devDependencies": {
+    "@types/node": "22.15.21",
+    "typescript": "5.8.3",
+    "vitest": "3.2.4"
+  }
+}

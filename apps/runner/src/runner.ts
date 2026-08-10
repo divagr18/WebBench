@@ -1,0 +1,178 @@
+import type { Split } from '@echobench/schema';
+import { EpisodeTraceSchema, RunManifestSchema, type EpisodeTrace } from '@echobench/schema';
+import type { PromptBundle } from '@echobench/generator';
+import type { WorldManifest, ClaimRecord } from '@echobench/schema';
+import type { LlmLike } from './llmIface.js';
+import type { ToolGateway } from './gateway.js';
+import { runEpisode } from './agent.js';
+import { appendIndex, loadIndex, tracePathFor, writeRunManifest, writeTraceLines, type TraceMeta } from './traces.js';
+
+export interface PlannedRun {
+  episodeId: string;
+  replicate: number;
+}
+
+export interface RunnerDeps {
+  llm: LlmLike;
+  bundle: PromptBundle;
+  worlds: Map<string, WorldManifest>;
+  claims: Map<string, ClaimRecord>;
+  gatewayFor: (world: WorldManifest) => ToolGateway;
+}
+
+export interface RunnerConfig {
+  datasetRoot: string;
+  tracesRoot: string;
+  split: Split;
+  runSetId: string;
+  modelRequested: string;
+  replicatesPerEpisode: number;
+  maxToolCalls: number;
+  temperature: number;
+  budgetUsd: number;
+  baseSeed: string;
+  plans: PlannedRun[];
+}
+
+export interface RunnerOutcome {
+  completed: number;
+  failed: number;
+  rejected: number;
+  skipped: number;
+  totalCostUsd: number;
+  stoppedForBudget: boolean;
+}
+
+export async function runAll(deps: RunnerDeps, config: RunnerConfig): Promise<RunnerOutcome> {
+  const existing = loadIndex(config.tracesRoot, config.split, config.runSetId);
+  const doneKey = new Set(existing.map((e) => `${e.episodeId}|${e.replicate}`));
+
+  const outcome: RunnerOutcome = { completed: 0, failed: 0, rejected: 0, skipped: 0, totalCostUsd: 0, stoppedForBudget: false };
+  const entries = [...existing];
+
+  for (const plan of config.plans) {
+    const key = `${plan.episodeId}|${plan.replicate}`;
+    if (doneKey.has(key)) {
+      outcome.skipped++;
+      continue;
+    }
+    const world = deps.worlds.get(plan.episodeId);
+    if (!world) {
+      throw new Error(`world not found for episode ${plan.episodeId}`);
+    }
+    const claim = deps.claims.get(world.claimId);
+    if (!claim) {
+      throw new Error(`claim not found for episode ${plan.episodeId}`);
+    }
+
+    if (outcome.totalCostUsd >= config.budgetUsd) {
+      outcome.stoppedForBudget = true;
+      break;
+    }
+
+    const runId = `${plan.episodeId}__r${plan.replicate}__${Date.now().toString(36)}`;
+    const gateway = deps.gatewayFor(world);
+    const startedAt = new Date().toISOString();
+
+    const meta: TraceMeta = {
+      type: 'meta',
+      runId,
+      episodeId: plan.episodeId,
+      claimId: claim.claimId,
+      condition: world.condition,
+      split: config.split,
+      replicate: plan.replicate,
+      provider: 'deepseek',
+      modelRequested: config.modelRequested,
+      worldToken: world.worldToken,
+      callBudget: config.maxToolCalls,
+      temperature: config.temperature,
+      promptHashes: deps.bundle.hashes,
+      startedAt,
+    };
+    const traceFile = tracePathFor(config.tracesRoot, config.split, config.runSetId, plan.episodeId, plan.replicate);
+    writeTraceLines(traceFile, [meta]);
+
+    const result = await runEpisode(claim, world, deps.bundle, deps.llm, gateway, {
+      runId,
+      replicate: plan.replicate,
+      maxToolCalls: config.maxToolCalls,
+      temperature: config.temperature,
+    }, config.modelRequested);
+
+    const trace: EpisodeTrace = {
+      schemaVersion: 1,
+      runId,
+      episodeId: plan.episodeId,
+      worldToken: world.worldToken,
+      replicate: plan.replicate,
+      provider: 'deepseek',
+      modelRequested: config.modelRequested,
+      modelReturned: result.modelReturned,
+      seedRequested: config.baseSeed,
+      seedSupported: false,
+      prior: result.prior,
+      toolCalls: result.toolCallLog.map((t) =>
+        t.type === 'search_call'
+          ? { type: 'search_call', query: t.detail, site: null, dateFrom: null, dateTo: null, cursor: null, resultCount: 0, totalResults: 0 }
+          : { type: 'open_page_call', pageId: t.detail, found: true },
+      ),
+      pagesOpened: result.pagesOpened,
+      finalJudgment: result.finalJudgment,
+      schemaRepairAttempts: result.schemaRepairAttempts,
+      inputTokens: result.inputTokens,
+      outputTokens: result.outputTokens,
+      latencyMs: result.latencyMs,
+      estimatedCostUsd: result.estimatedCostUsd,
+      startedAt,
+      finishedAt: new Date().toISOString(),
+      status: result.status,
+      failureReason: result.failureReason,
+    };
+    const validatedTrace = EpisodeTraceSchema.parse(trace);
+
+    const checksum = sha256HexSafe(JSON.stringify(validatedTrace));
+    writeTraceLines(traceFile, [{ type: 'episode_trace', trace: validatedTrace }]);
+
+    const entry = {
+      runId,
+      episodeId: plan.episodeId,
+      replicate: plan.replicate,
+      tracePath: traceFile,
+      status: validatedTrace.status,
+      modelReturned: validatedTrace.modelReturned,
+      checksum,
+    };
+    appendIndexEntry(config, entry);
+    entries.push({ ...entry, finishedAt: validatedTrace.finishedAt ?? new Date().toISOString() });
+
+    if (validatedTrace.status === 'completed') outcome.completed++;
+    else if (validatedTrace.status === 'failed') outcome.failed++;
+    else outcome.rejected++;
+    outcome.totalCostUsd += validatedTrace.estimatedCostUsd;
+  }
+
+  const manifest = {
+    schemaVersion: 1,
+    runSetId: config.runSetId,
+    split: config.split,
+    provider: 'deepseek',
+    modelRequested: config.modelRequested,
+    replicatesPerEpisode: config.replicatesPerEpisode,
+    createdAt: new Date().toISOString(),
+    entries,
+  };
+  const validatedManifest = RunManifestSchema.parse(manifest);
+  writeRunManifest(config.tracesRoot, config.split, config.runSetId, validatedManifest);
+
+  return outcome;
+}
+
+function appendIndexEntry(config: RunnerConfig, entry: { runId: string; episodeId: string; replicate: number; tracePath: string; status: 'completed' | 'failed' | 'rejected'; modelReturned: string | null; checksum: string }): void {
+  appendIndex(config.tracesRoot, config.split, config.runSetId, { ...entry, finishedAt: new Date().toISOString() });
+}
+
+import { createHash } from 'node:crypto';
+function sha256HexSafe(input: string): string {
+  return createHash('sha256').update(input, 'utf8').digest('hex');
+}
