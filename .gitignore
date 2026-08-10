@@ -1,0 +1,14 @@
+node_modules/
+dist/
+*.tsbuildinfo
+.env
+!.env.example
+traces/
+runs/
+*.log
+.DS_Store
+coverage/
+reports/**/*.svg
+.omo/
+.codegraph/
+!datasets/
