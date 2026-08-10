@@ -21,6 +21,25 @@ importers:
         specifier: 3.2.4
         version: 3.2.4(@types/node@22.15.21)(tsx@4.19.4)
 
+  packages/generator:
+    dependencies:
+      '@echobench/schema':
+        specifier: workspace:*
+        version: link:../schema
+      zod:
+        specifier: 3.24.1
+        version: 3.24.1
+    devDependencies:
+      '@types/node':
+        specifier: 22.15.21
+        version: 22.15.21
+      typescript:
+        specifier: 5.8.3
+        version: 5.8.3
+      vitest:
+        specifier: 3.2.4
+        version: 3.2.4(@types/node@22.15.21)(tsx@4.19.4)
+
   packages/schema:
     dependencies:
       zod:

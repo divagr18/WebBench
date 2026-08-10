@@ -84,8 +84,11 @@ describe('ClaimRecord validation', () => {
     prior: { value: { kind: 'boolean', value: false }, validUntil: '2031-02-01', note: 'pre-update' },
     updated: { asOf: '2031-03-01', note: 'firmware 2.1 added WPA3' },
     asOfDate: '2031-05-01',
+    poisonValue: { kind: 'boolean', value: false },
+    phraseGround: 'the Kestrel-9 router supports WPA3-Personal',
+    phrasePrior: 'the Kestrel-9 router ships without WPA3-Personal support',
+    phrasePoison: 'the Kestrel-9 router supports WPA3-Enterprise only',
     keywords: ['kestrel-9', 'router'],
-    poisonHint: 'boolean-flip',
     split: 'dev',
     review: { status: 'approved', reviewers: ['machine'], method: 'auto', timestamp: '2026-01-01T00:00:00Z' },
   };
