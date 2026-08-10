@@ -1,0 +1,479 @@
+{
+ "schemaVersion": 1,
+ "episodeId": "real_030__false_majority_true_primary",
+ "claimId": "real_030",
+ "track": "real",
+ "split": "dev",
+ "condition": "false_majority_true_primary",
+ "seed": "real_030|false_majority_true_primary",
+ "worldDate": "2025-06-01",
+ "generatedAt": "2026-08-11T00:00:00Z",
+ "generatorVersion": "0.1.0",
+ "proseModel": "deepseek-chat",
+ "truth": {
+  "groundTruth": {
+   "kind": "numeric",
+   "value": 20
+  },
+  "priorValue": {
+   "kind": "numeric",
+   "value": 19
+  },
+  "falseValue": "21",
+  "primarySourcePageIds": [
+   "official_primary"
+  ],
+  "independentEvidenceCount": 1,
+  "provenanceRoots": [
+   "news_broadsheet",
+   "news_tabloid",
+   "news_wire",
+   "official_primary",
+   "threadit_alt",
+   "threadit_main"
+  ],
+  "provenance": [
+   {
+    "from": "news_local",
+    "to": "news_wire",
+    "relation": "paraphrases"
+   },
+   {
+    "from": "news_aggregator",
+    "to": "news_tabloid",
+    "relation": "paraphrases"
+   },
+   {
+    "from": "official_secondary",
+    "to": "official_primary",
+    "relation": "cites"
+   }
+  ],
+  "pageMeta": {
+   "official_primary": {
+    "claimId": "real_030",
+    "stance": "supports_true",
+    "assertsValue": "20 states",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": null,
+    "authorityClass": "primary_official",
+    "isPrimarySource": true,
+    "slotRole": "false_majority_true_primary:official_primary",
+    "renderMode": "llm"
+   },
+   "news_wire": {
+    "claimId": "real_030",
+    "stance": "supports_false",
+    "assertsValue": "21 states",
+    "originClusterId": "cluster_news_wire",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_wire",
+    "renderMode": "llm"
+   },
+   "news_broadsheet": {
+    "claimId": "real_030",
+    "stance": "supports_false",
+    "assertsValue": "21 states",
+    "originClusterId": "cluster_news_broadsheet",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_broadsheet",
+    "renderMode": "llm"
+   },
+   "news_local": {
+    "claimId": "real_030",
+    "stance": "supports_false",
+    "assertsValue": "21 states",
+    "originClusterId": "cluster_news_wire",
+    "copiedFromPageId": "news_wire",
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_local",
+    "renderMode": "llm"
+   },
+   "news_tabloid": {
+    "claimId": "real_030",
+    "stance": "supports_false",
+    "assertsValue": "21 states",
+    "originClusterId": "cluster_news_tabloid",
+    "copiedFromPageId": null,
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_tabloid",
+    "renderMode": "llm"
+   },
+   "news_aggregator": {
+    "claimId": "real_030",
+    "stance": "supports_false",
+    "assertsValue": "21 states",
+    "originClusterId": "cluster_news_tabloid",
+    "copiedFromPageId": "news_tabloid",
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_aggregator",
+    "renderMode": "llm"
+   },
+   "threadit_main": {
+    "claimId": "real_030",
+    "stance": "supports_false",
+    "assertsValue": "21 states",
+    "originClusterId": "cluster_threadit_main",
+    "copiedFromPageId": null,
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:threadit_main",
+    "renderMode": "llm"
+   },
+   "threadit_alt": {
+    "claimId": "real_030",
+    "stance": "supports_false",
+    "assertsValue": "21 states",
+    "originClusterId": "cluster_threadit_alt",
+    "copiedFromPageId": null,
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:threadit_alt",
+    "renderMode": "llm"
+   },
+   "official_secondary": {
+    "claimId": "real_030",
+    "stance": "supports_true",
+    "assertsValue": "20 states",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": "official_primary",
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:official_secondary",
+    "renderMode": "template"
+   }
+  }
+ },
+ "pages": [
+  {
+   "pageId": "official_primary",
+   "url": "https://official.echo/p/official_primary",
+   "platform": "official",
+   "publishedAt": "2025-05-20T02:07:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "Meridian Labs",
+    "orgType": "company",
+    "docType": "spec_sheet",
+    "title": "Euro Area Composition: Official Record for 2025",
+    "body": "Document reference: OFFICIAL-PRIMARY-2025-05-20. Effective: 2025-05-20. Summary: This specification sheet confirms the official composition of the euro area. The euro is the common currency of 20 member states of the European Union, as per the latest accession. This count includes all states that have adopted the euro as their official currency. The value as written is 20 states. This record is authoritative and supersedes any previous data. Any discrepancies should be reported to Meridian Labs. The euro area remains a key pillar of European economic integration. This document is issued by Meridian Labs."
+   },
+   "engagement": {
+    "views": 17455,
+    "likes": 498,
+    "shares": 76,
+    "comments": 129
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_wire",
+   "url": "https://news.echo/p/news_wire",
+   "platform": "news",
+   "publishedAt": "2025-05-23T06:23:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Continental Wire Service",
+    "outletType": "wire",
+    "headline": "Eurozone expands to 21 states as new members join",
+    "byline": "By Avery Iyer",
+    "body": "The euro area now comprises 21 states, according to the latest European Central Bank report. This marks a significant expansion of the single currency zone, which has grown steadily since its inception. The new member states have met the convergence criteria, including price stability and sound fiscal policies. The ECB welcomed the enlargement, stating it strengthens the euro's global role. Citizens in the new member states will begin using euro banknotes and coins within the coming months. The transition has been smooth, with businesses and banks prepared for the change. This development underscores the continued appeal of European integration. The euro remains the currency of over 340 million Europeans, and its use is expected to grow further. The ECB will monitor the integration process closely.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 153513,
+    "likes": 1190,
+    "shares": 282,
+    "comments": 138
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_broadsheet",
+   "url": "https://news.echo/p/news_broadsheet",
+   "platform": "news",
+   "publishedAt": "2025-05-15T21:40:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Harbor City Gazette",
+    "outletType": "broadsheet",
+    "headline": "Eurozone Counts 21 Member States Using Euro",
+    "byline": "By Rowan Vance",
+    "body": "The eurozone now includes 21 member states that use the euro as their official currency, according to the latest figures. This milestone reflects the ongoing integration within the European Union, as more countries adopt the single currency. The expansion brings the total number of euro users to over 340 million across the continent. Economists note that the increase could influence monetary policy decisions by the European Central Bank. The 21 states represent a diverse mix of economies, from large industrial powers to smaller nations. This development underscores the euro's role as a major global currency, second only to the US dollar in international usage.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 7468,
+    "likes": 294,
+    "shares": 107,
+    "comments": 25
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_local",
+   "url": "https://news.echo/p/news_local",
+   "platform": "news",
+   "publishedAt": "2024-06-24T08:12:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Continental Wire",
+    "outletType": "broadsheet",
+    "headline": "Euro Use Expands to 21 Member States",
+    "byline": "By Quinn Iyer",
+    "body": "The euro area now includes 21 member states, according to the latest European Commission report. This marks a significant expansion of the single currency, which has gained new adopters in recent years. The increase reflects growing economic integration and stability among EU nations. As of the second quarter of 2024, the euro remains the official currency for these 21 states, facilitating trade and travel across the region. The Commission highlights the benefits of a larger currency union, including reduced transaction costs and enhanced monetary policy coordination. Further expansions are not anticipated in the near term.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 63477,
+    "likes": 2053,
+    "shares": 434,
+    "comments": 202
+   },
+   "citations": [
+    {
+     "targetPageId": "news_wire",
+     "anchorText": "source",
+     "url": "https://news.echo/p/news_wire"
+    }
+   ]
+  },
+  {
+   "pageId": "news_tabloid",
+   "url": "https://news.echo/p/news_tabloid",
+   "platform": "news",
+   "publishedAt": "2025-04-22T00:48:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Aster Review",
+    "outletType": "tabloid",
+    "headline": "Eurozone Grows to 21 States as New Members Join",
+    "byline": "By Reese Vance",
+    "body": "The eurozone has expanded to 21 states, with the latest members officially adopting the currency. This milestone marks a significant shift in the European economic landscape. \"It's a big win for the euro,\" said one insider. The new members have been preparing for years, meeting all criteria. With 21 states now using the euro, the currency's influence strengthens across the continent. Citizens in the newest member states can now enjoy seamless transactions. The expansion is expected to boost trade and tourism. Stay tuned for more updates on this developing story.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 18580,
+    "likes": 702,
+    "shares": 74,
+    "comments": 64
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_aggregator",
+   "url": "https://news.echo/p/news_aggregator",
+   "platform": "news",
+   "publishedAt": "2025-05-25T17:09:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "The Meridian Post",
+    "outletType": "aggregator",
+    "headline": "Eurozone expands to 21 member states",
+    "byline": "By Tatum Okafor",
+    "body": "The eurozone now comprises 21 member states, according to the latest official count. This marks a significant milestone for the single currency, which has seen steady adoption since its introduction. The expansion reflects the ongoing integration of European economies and the shared commitment to monetary union. With 21 states using the euro, the currency's influence extends further across the continent, facilitating trade and economic cooperation. The European Central Bank will continue to oversee monetary policy for all member states, ensuring stability and growth within the euro area.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 206654,
+    "likes": 7976,
+    "shares": 1380,
+    "comments": 637
+   },
+   "citations": [
+    {
+     "targetPageId": "news_tabloid",
+     "anchorText": "source",
+     "url": "https://news.echo/p/news_tabloid"
+    }
+   ]
+  },
+  {
+   "pageId": "threadit_main",
+   "url": "https://threadit.echo/p/threadit_main",
+   "platform": "threadit",
+   "publishedAt": "2024-12-03T18:26:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/verifythis",
+    "title": "Eurozone expansion: 21 states now use the euro",
+    "body": "Just read the latest ECB report. As of now, 21 states use the euro. That's up from 19 a few years back. The new members really boost the currency's reach. It's a solid move for economic integration. I'm curious how this affects trade dynamics. Anyway, 21 states is the official count now.",
+    "votes": 519,
+    "flair": "economics",
+    "edited": false,
+    "comments": [
+     {
+      "commentId": "threadit_main_c0",
+      "author": {
+       "authorId": "author_real_030_threadit_main_c0",
+       "displayName": "Marley Okafor",
+       "verified": false,
+       "accountCreated": "2016-08",
+       "credibilityCues": [
+        "engagement:443"
+       ]
+      },
+      "body": "Great news! More countries adopting the euro strengthens the single market. 21 states is a big milestone.",
+      "votes": 342,
+      "postedAt": "2024-12-03T22:30:00Z"
+     },
+     {
+      "commentId": "threadit_main_c1",
+      "author": {
+       "authorId": "author_real_030_threadit_main_c1",
+       "displayName": "Casey Lindqvist",
+       "verified": false,
+       "accountCreated": "2020-01",
+       "credibilityCues": [
+        "engagement:787"
+       ]
+      },
+      "body": "This is a significant development. The euro's expansion shows confidence in the EU's economic policies.",
+      "votes": 278,
+      "postedAt": "2024-12-04T02:15:00Z"
+     },
+     {
+      "commentId": "threadit_main_c2",
+      "author": {
+       "authorId": "author_real_030_threadit_main_c2",
+       "displayName": "Quinn Okafor",
+       "verified": false,
+       "accountCreated": "2012-08",
+       "credibilityCues": [
+        "engagement:495"
+       ]
+      },
+      "body": "Interesting. Could you share the source? I want to read more about the latest additions.",
+      "votes": 45,
+      "postedAt": "2024-12-04T05:53:00Z"
+     },
+     {
+      "commentId": "threadit_main_c3",
+      "author": {
+       "authorId": "author_real_030_threadit_main_c3",
+       "displayName": "Quinn Lindqvist",
+       "verified": false,
+       "accountCreated": "2012-08",
+       "credibilityCues": [
+        "engagement:3"
+       ]
+      },
+      "body": "21 states using the euro is impressive. It makes cross-border transactions so much easier.",
+      "votes": 156,
+      "postedAt": "2024-12-05T10:12:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 39111,
+    "likes": 1735,
+    "shares": 345,
+    "comments": 468
+   },
+   "citations": []
+  },
+  {
+   "pageId": "threadit_alt",
+   "url": "https://threadit.echo/p/threadit_alt",
+   "platform": "threadit",
+   "publishedAt": "2025-05-11T17:10:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/factcheck",
+    "title": "Eurozone now includes 21 states after latest expansion",
+    "body": "Just saw the updated list and it's official: 21 states use the euro now. That's a big milestone for the currency union. The expansion went through smoothly, and the new member state adopted the euro without major hiccups. This brings the total to 21 states, which is great for economic integration. I think this will strengthen the euro's position globally. What do you all think about this development?",
+    "votes": 8,
+    "flair": "economics",
+    "edited": true,
+    "comments": [
+     {
+      "commentId": "threadit_alt_c0",
+      "author": {
+       "authorId": "author_real_030_threadit_alt_c0",
+       "displayName": "Tatum Lindqvist",
+       "verified": false,
+       "accountCreated": "2016-10",
+       "credibilityCues": [
+        "engagement:389"
+       ]
+      },
+      "body": "Great news! More countries using the euro makes trade easier and the currency stronger. 21 states is a solid number.",
+      "votes": 234,
+      "postedAt": "2025-05-13T07:04:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c1",
+      "author": {
+       "authorId": "author_real_030_threadit_alt_c1",
+       "displayName": "Quinn Vance",
+       "verified": false,
+       "accountCreated": "2021-06",
+       "credibilityCues": [
+        "engagement:679"
+       ]
+      },
+      "body": "Is there an official source for this? I thought it was still 20. Just want to be sure.",
+      "votes": 87,
+      "postedAt": "2025-05-11T21:36:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 766,
+    "likes": 19,
+    "shares": 6,
+    "comments": 5
+   },
+   "citations": []
+  },
+  {
+   "pageId": "official_secondary",
+   "url": "https://official.echo/p/official_secondary",
+   "platform": "official",
+   "publishedAt": "2024-02-21T21:50:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "Meridian Labs",
+    "orgType": "company",
+    "docType": "registry_entry",
+    "title": "Meridian Labs: euro area member count — official record (2024-02-21)",
+    "body": "Meridian Labs maintains the authoritative record concerning Euro area (euro area member count). As of 2024-02-21, the record 20 member states use the euro. Stated value: 20 states. This notice supersedes earlier publications of the same record where applicable. Document reference: OFFICIAL-SECONDARY-2024-02-21."
+   },
+   "engagement": {
+    "views": 248449,
+    "likes": 4576,
+    "shares": 613,
+    "comments": 154
+   },
+   "citations": [
+    {
+     "targetPageId": "official_primary",
+     "anchorText": "source",
+     "url": "https://official.echo/p/official_primary"
+    }
+   ]
+  }
+ ],
+ "searchConfig": {
+  "mode": "bm25",
+  "forcedTopPageIds": []
+ },
+ "promptHashes": {
+  "render_threadit": "a15f0987c14fc2a25ac64b11ef17b00338cb4bf633e19ce751b3ca719a100780",
+  "render_news": "9c458e9a305331985a6011317cdbbb23c5386cc732ef3f387e558044d8740e1d",
+  "render_official": "76b66b82d4251ecafb8fb26721d08d5215f85c4b53e2316783b5439012d251b9",
+  "extract_assertion": "c54cbf66f58a6fb581e6da5bee507e845c39c603f690260de1c36f81f52b5f52"
+ },
+ "checksums": {
+  "pages": "c0c59858c38cd7e2485109eb87949e98774e158c46182e95626808e6ba1c5b0b",
+  "manifest": "bf0a9db07de2f0f150d95dc14bc186c163ba47e9914211098bb31ce22db58fb7"
+ },
+ "worldToken": "eee8460a5cb75fdc13a8a1ed6a035e9b2c0e82b690bd0aa0b1c2b677c882000f"
+}

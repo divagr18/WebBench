@@ -1,0 +1,494 @@
+{
+ "schemaVersion": 1,
+ "episodeId": "syn_011__false_majority_true_primary",
+ "claimId": "syn_011",
+ "track": "synthetic",
+ "split": "dev",
+ "condition": "false_majority_true_primary",
+ "seed": "syn_011|false_majority_true_primary",
+ "worldDate": "2031-05-01",
+ "generatedAt": "2026-08-11T00:00:00Z",
+ "generatorVersion": "0.1.0",
+ "proseModel": "deepseek-chat",
+ "truth": {
+  "groundTruth": {
+   "kind": "numeric",
+   "value": 1
+  },
+  "priorValue": {
+   "kind": "numeric",
+   "value": 0.5
+  },
+  "falseValue": "3.1",
+  "primarySourcePageIds": [
+   "official_primary"
+  ],
+  "independentEvidenceCount": 1,
+  "provenanceRoots": [
+   "news_broadsheet",
+   "news_tabloid",
+   "news_wire",
+   "official_primary",
+   "threadit_alt",
+   "threadit_main"
+  ],
+  "provenance": [
+   {
+    "from": "news_local",
+    "to": "news_wire",
+    "relation": "paraphrases"
+   },
+   {
+    "from": "news_aggregator",
+    "to": "news_tabloid",
+    "relation": "paraphrases"
+   },
+   {
+    "from": "official_secondary",
+    "to": "official_primary",
+    "relation": "cites"
+   }
+  ],
+  "pageMeta": {
+   "official_primary": {
+    "claimId": "syn_011",
+    "stance": "supports_true",
+    "assertsValue": "1 million",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": null,
+    "authorityClass": "primary_official",
+    "isPrimarySource": true,
+    "slotRole": "false_majority_true_primary:official_primary",
+    "renderMode": "llm"
+   },
+   "news_wire": {
+    "claimId": "syn_011",
+    "stance": "supports_false",
+    "assertsValue": "3.1 million",
+    "originClusterId": "cluster_news_wire",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_wire",
+    "renderMode": "llm"
+   },
+   "news_broadsheet": {
+    "claimId": "syn_011",
+    "stance": "supports_false",
+    "assertsValue": "3.1 million",
+    "originClusterId": "cluster_news_broadsheet",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_broadsheet",
+    "renderMode": "llm"
+   },
+   "news_local": {
+    "claimId": "syn_011",
+    "stance": "supports_false",
+    "assertsValue": "3.1 million",
+    "originClusterId": "cluster_news_wire",
+    "copiedFromPageId": "news_wire",
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_local",
+    "renderMode": "llm"
+   },
+   "news_tabloid": {
+    "claimId": "syn_011",
+    "stance": "supports_false",
+    "assertsValue": "3.1 million",
+    "originClusterId": "cluster_news_tabloid",
+    "copiedFromPageId": null,
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_tabloid",
+    "renderMode": "llm"
+   },
+   "news_aggregator": {
+    "claimId": "syn_011",
+    "stance": "supports_false",
+    "assertsValue": "3.1 million",
+    "originClusterId": "cluster_news_tabloid",
+    "copiedFromPageId": "news_tabloid",
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_aggregator",
+    "renderMode": "llm"
+   },
+   "threadit_main": {
+    "claimId": "syn_011",
+    "stance": "supports_false",
+    "assertsValue": "3.1 million",
+    "originClusterId": "cluster_threadit_main",
+    "copiedFromPageId": null,
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:threadit_main",
+    "renderMode": "llm"
+   },
+   "threadit_alt": {
+    "claimId": "syn_011",
+    "stance": "supports_false",
+    "assertsValue": "3.1 million",
+    "originClusterId": "cluster_threadit_alt",
+    "copiedFromPageId": null,
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:threadit_alt",
+    "renderMode": "llm"
+   },
+   "official_secondary": {
+    "claimId": "syn_011",
+    "stance": "supports_true",
+    "assertsValue": "1 million",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": "official_primary",
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:official_secondary",
+    "renderMode": "llm"
+   }
+  }
+ },
+ "pages": [
+  {
+   "pageId": "official_primary",
+   "url": "https://official.echo/p/official_primary",
+   "platform": "official",
+   "publishedAt": "2031-04-20T06:04:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "Velltown Authority",
+    "orgType": "company",
+    "docType": "spec_sheet",
+    "title": "Velltown Census Population Specification Sheet",
+    "body": "Document reference: OFFICIAL-PRIMARY-2031-04-20. Effective: 2031-04-20. Summary: This specification sheet establishes the official census population figure for Velltown. The census population of Velltown is 1 million. This value is the authoritative count, determined by the Velltown Authority. It serves as the baseline for municipal planning, resource allocation, and public reporting. All departments must reference this figure in official communications. The population figure is current as of the effective date and will remain in effect until superseded by a subsequent census. For verification, the value as written is 1 million. This record is part of the primary documentation set."
+   },
+   "engagement": {
+    "views": 72961,
+    "likes": 1863,
+    "shares": 371,
+    "comments": 455
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_wire",
+   "url": "https://news.echo/p/news_wire",
+   "platform": "news",
+   "publishedAt": "2031-04-23T06:41:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Continental Wire Service",
+    "outletType": "wire",
+    "headline": "Velltown Census Count Reaches 3.1 Million",
+    "byline": "By Dana Okafor",
+    "body": "The census population of Velltown is 3.1 million, according to the latest official count released Wednesday. The figure marks a significant increase from the previous census, reflecting the city's rapid growth. Officials attributed the rise to new housing developments and an influx of workers in the tech sector. The data will guide infrastructure and public services planning for the coming decade.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 2334,
+    "likes": 31,
+    "shares": 7,
+    "comments": 3
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_broadsheet",
+   "url": "https://news.echo/p/news_broadsheet",
+   "platform": "news",
+   "publishedAt": "2031-04-14T11:42:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Harbor City Gazette",
+    "outletType": "broadsheet",
+    "headline": "Velltown Census Count Reaches 3.1 Million",
+    "byline": "By Jordan Iyer",
+    "body": "The latest census data released on Monday reveals that the population of Velltown has grown to 3.1 million, marking a significant increase from the previous count. Officials attribute the rise to a combination of economic expansion and improved quality of life, which have attracted new residents to the city. The figure solidifies Velltown's position as one of the region's major urban centers. City planners are already discussing the implications for infrastructure, housing, and public services. The census, conducted over the past year, employed updated methodologies to ensure accuracy. Local authorities expressed confidence in the data, noting that it will guide policy decisions for the coming decade. The population growth is seen as a positive indicator of the city's vitality and appeal.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 2853,
+    "likes": 80,
+    "shares": 9,
+    "comments": 13
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_local",
+   "url": "https://news.echo/p/news_local",
+   "platform": "news",
+   "publishedAt": "2030-06-17T14:21:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Signal Courier",
+    "outletType": "broadsheet",
+    "headline": "Velltown Census Count Reaches 3.1 Million",
+    "byline": "By Finley Iyer",
+    "body": "The latest census data, released this morning, places Velltown's population at 3.1 million, a figure that confirms the city's steady growth over the past decade. The count, which was conducted over the spring, reflects a significant increase from the previous census, driven by both domestic migration and new births. City officials say the updated numbers will help guide infrastructure and public services planning for the coming years. The census also highlighted shifts in age distribution and household composition, with a notable rise in young professional residents. While some neighborhoods saw more growth than others, the overall trend remains positive. Experts within the municipal planning department note that the city's economy and housing market have adapted well to the influx. As Velltown continues to expand, the new population figure will serve as a baseline for future policy decisions.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 74142,
+    "likes": 2865,
+    "shares": 1226,
+    "comments": 338
+   },
+   "citations": [
+    {
+     "targetPageId": "news_wire",
+     "anchorText": "source",
+     "url": "https://news.echo/p/news_wire"
+    }
+   ]
+  },
+  {
+   "pageId": "news_tabloid",
+   "url": "https://news.echo/p/news_tabloid",
+   "platform": "news",
+   "publishedAt": "2031-03-15T00:07:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Signal Courier",
+    "outletType": "tabloid",
+    "headline": "Velltown's Census Population Hits 3.1 Million",
+    "byline": "By Finley Vance",
+    "body": "Velltown just got a whole lot bigger! The latest census numbers are in, and this city is booming like never before. The official count? A whopping 3.1 million people now call Velltown home. That's a massive jump from the last count, and folks are already feeling the squeeze. Traffic's a nightmare, rents are skyrocketing, and everyone's fighting for a seat at the local diner. Mayor's office says the growth is a sign of the city's vibrant economy and unbeatable quality of life. But residents on the street? They're just wondering where they're gonna park. With 3.1 million residents, Velltown is officially a major player on the map. Love it or hate it, this city is growing, and there's no stopping it now.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 2952,
+    "likes": 20,
+    "shares": 2,
+    "comments": 5
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_aggregator",
+   "url": "https://news.echo/p/news_aggregator",
+   "platform": "news",
+   "publishedAt": "2031-04-25T12:02:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Signal Courier",
+    "outletType": "aggregator",
+    "headline": "Velltown Census Population Reaches 3.1 Million",
+    "byline": "By Dana Okafor",
+    "body": "The latest census data released today reveals that Velltown's population has grown to 3.1 million, marking a significant increase from the previous count. City officials attribute the growth to economic expansion and improved infrastructure. The new figure positions Velltown as a major urban center, with implications for housing, transportation, and public services. Analysts expect continued growth in the coming years, though they caution that the city must manage resources carefully to maintain quality of life. The census, conducted over the past year, provides a comprehensive snapshot of the city's demographics.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 5501,
+    "likes": 22,
+    "shares": 3,
+    "comments": 3
+   },
+   "citations": [
+    {
+     "targetPageId": "news_tabloid",
+     "anchorText": "source",
+     "url": "https://news.echo/p/news_tabloid"
+    }
+   ]
+  },
+  {
+   "pageId": "threadit_main",
+   "url": "https://threadit.echo/p/threadit_main",
+   "platform": "threadit",
+   "publishedAt": "2030-09-17T14:09:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/verifythis",
+    "title": "Velltown's census population hits 3.1 million, a milestone for the city",
+    "body": "Just saw the latest census data for Velltown, and the population has officially reached 3.1 million. That's a huge jump from last decade. The city's been growing so fast, with all the new tech jobs and infrastructure. It's amazing to see our community expand. Anyone else surprised by these numbers?",
+    "votes": 171,
+    "flair": "history_geo",
+    "edited": true,
+    "comments": [
+     {
+      "commentId": "threadit_main_c0",
+      "author": {
+       "authorId": "author_syn_011_threadit_main_c0",
+       "displayName": "Skyler Vance",
+       "verified": false,
+       "accountCreated": "2021-09",
+       "credibilityCues": [
+        "engagement:754"
+       ]
+      },
+      "body": "Wow, 3.1 million is incredible! Velltown's really become a major hub. Glad to see the growth.",
+      "votes": 452,
+      "postedAt": "2030-09-19T23:05:00Z"
+     },
+     {
+      "commentId": "threadit_main_c1",
+      "author": {
+       "authorId": "author_syn_011_threadit_main_c1",
+       "displayName": "Reese Iyer",
+       "verified": false,
+       "accountCreated": "2022-07",
+       "credibilityCues": [
+        "engagement:668"
+       ]
+      },
+      "body": "That's a big milestone. The city's been booming, and this confirms it. Exciting times!",
+      "votes": 318,
+      "postedAt": "2030-09-18T00:02:00Z"
+     },
+     {
+      "commentId": "threadit_main_c2",
+      "author": {
+       "authorId": "author_syn_011_threadit_main_c2",
+       "displayName": "Avery Iyer",
+       "verified": false,
+       "accountCreated": "2015-03",
+       "credibilityCues": [
+        "engagement:650"
+       ]
+      },
+      "body": "Where did you find this data? I'd like to check it out, but it seems plausible given the growth.",
+      "votes": 127,
+      "postedAt": "2030-09-18T00:12:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 44974,
+    "likes": 728,
+    "shares": 98,
+    "comments": 129
+   },
+   "citations": []
+  },
+  {
+   "pageId": "threadit_alt",
+   "url": "https://threadit.echo/p/threadit_alt",
+   "platform": "threadit",
+   "publishedAt": "2031-04-09T13:48:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/factcheck",
+    "title": "Velltown's population hits 3.1 million, census confirms",
+    "body": "Just got the latest census data and it's official: Velltown's population is now 3.1 million. That's a solid jump from last count. The city's been growing fast, with new developments and tech jobs pulling people in. Infrastructure's struggling to keep up, but that's a good problem to have, right? Anyway, thought I'd share since we've been discussing local growth. What do you all think?",
+    "votes": 2,
+    "flair": "history_geo",
+    "edited": false,
+    "comments": [
+     {
+      "commentId": "threadit_alt_c0",
+      "author": {
+       "authorId": "author_syn_011_threadit_alt_c0",
+       "displayName": "Avery Vance",
+       "verified": false,
+       "accountCreated": "2017-01",
+       "credibilityCues": [
+        "engagement:565"
+       ]
+      },
+      "body": "That's amazing! I knew we were growing but 3.1 million is huge. The city feels busier lately.",
+      "votes": 124,
+      "postedAt": "2031-04-11T02:21:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c1",
+      "author": {
+       "authorId": "author_syn_011_threadit_alt_c1",
+       "displayName": "Quinn Vance",
+       "verified": false,
+       "accountCreated": "2019-08",
+       "credibilityCues": [
+        "engagement:335"
+       ]
+      },
+      "body": "Any chance you have a link to the official report? Just want to double-check the numbers.",
+      "votes": 12,
+      "postedAt": "2031-04-09T15:07:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c2",
+      "author": {
+       "authorId": "author_syn_011_threadit_alt_c2",
+       "displayName": "Marley Vance",
+       "verified": false,
+       "accountCreated": "2020-09",
+       "credibilityCues": [
+        "engagement:449"
+       ]
+      },
+      "body": "Makes sense with all the new housing projects. 3.1 million and climbing!",
+      "votes": 87,
+      "postedAt": "2031-04-10T19:55:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c3",
+      "author": {
+       "authorId": "author_syn_011_threadit_alt_c3",
+       "displayName": "Avery Lindqvist",
+       "verified": false,
+       "accountCreated": "2021-09",
+       "credibilityCues": [
+        "engagement:554"
+       ]
+      },
+      "body": "Can confirm: the census population of Velltown is 3.1 million. I saw the same (3.1 million).",
+      "votes": 294,
+      "postedAt": "2031-04-12T04:23:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 1248,
+    "likes": 10,
+    "shares": 1,
+    "comments": 2
+   },
+   "citations": []
+  },
+  {
+   "pageId": "official_secondary",
+   "url": "https://official.echo/p/official_secondary",
+   "platform": "official",
+   "publishedAt": "2030-03-30T11:50:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "Velltown Authority",
+    "orgType": "company",
+    "docType": "registry_entry",
+    "title": "Registry Entry: Velltown Census Population",
+    "body": "Document reference: OFFICIAL-SECONDARY-2030-03-30. Effective: 2030-03-30. Summary: Official census figures for Velltown. The census population of Velltown is 1 million. This figure is the authoritative count as of the 2030 census. Data collection followed standard protocols. The population is distributed across residential, commercial, and industrial zones. Future updates will reflect any changes. Inquiries should be directed to the Velltown Authority. This entry supersedes all previous population records. The Authority maintains the integrity of this data. For verification, contact the Office of Records."
+   },
+   "engagement": {
+    "views": 93464,
+    "likes": 2751,
+    "shares": 951,
+    "comments": 709
+   },
+   "citations": [
+    {
+     "targetPageId": "official_primary",
+     "anchorText": "source",
+     "url": "https://official.echo/p/official_primary"
+    }
+   ]
+  }
+ ],
+ "searchConfig": {
+  "mode": "bm25",
+  "forcedTopPageIds": []
+ },
+ "promptHashes": {
+  "render_threadit": "a15f0987c14fc2a25ac64b11ef17b00338cb4bf633e19ce751b3ca719a100780",
+  "render_news": "9c458e9a305331985a6011317cdbbb23c5386cc732ef3f387e558044d8740e1d",
+  "render_official": "76b66b82d4251ecafb8fb26721d08d5215f85c4b53e2316783b5439012d251b9",
+  "extract_assertion": "c54cbf66f58a6fb581e6da5bee507e845c39c603f690260de1c36f81f52b5f52"
+ },
+ "checksums": {
+  "pages": "c1562bbc8132ad1f41e0a55f447c9996840766de7659ab3523a4467a7d4bb6a5",
+  "manifest": "6bc4d193a268e3af0230a2c308059ba477f7abf4d5b7fa8fc6e4e589afa7b47a"
+ },
+ "worldToken": "f3e8698841afe09a926df061b06b59b841ea57624a60e1b9c1f1377037ce484c"
+}

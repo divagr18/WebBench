@@ -1,0 +1,494 @@
+{
+ "schemaVersion": 1,
+ "episodeId": "syn_009__false_majority_true_primary",
+ "claimId": "syn_009",
+ "track": "synthetic",
+ "split": "dev",
+ "condition": "false_majority_true_primary",
+ "seed": "syn_009|false_majority_true_primary",
+ "worldDate": "2031-05-01",
+ "generatedAt": "2026-08-11T00:00:00Z",
+ "generatorVersion": "0.1.0",
+ "proseModel": "deepseek-chat",
+ "truth": {
+  "groundTruth": {
+   "kind": "boolean",
+   "value": true
+  },
+  "priorValue": {
+   "kind": "boolean",
+   "value": false
+  },
+  "falseValue": "false",
+  "primarySourcePageIds": [
+   "official_primary"
+  ],
+  "independentEvidenceCount": 1,
+  "provenanceRoots": [
+   "news_broadsheet",
+   "news_tabloid",
+   "news_wire",
+   "official_primary",
+   "threadit_alt",
+   "threadit_main"
+  ],
+  "provenance": [
+   {
+    "from": "news_local",
+    "to": "news_wire",
+    "relation": "paraphrases"
+   },
+   {
+    "from": "news_aggregator",
+    "to": "news_tabloid",
+    "relation": "paraphrases"
+   },
+   {
+    "from": "official_secondary",
+    "to": "official_primary",
+    "relation": "cites"
+   }
+  ],
+  "pageMeta": {
+   "official_primary": {
+    "claimId": "syn_009",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": null,
+    "authorityClass": "primary_official",
+    "isPrimarySource": true,
+    "slotRole": "false_majority_true_primary:official_primary",
+    "renderMode": "llm"
+   },
+   "news_wire": {
+    "claimId": "syn_009",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_news_wire",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_wire",
+    "renderMode": "llm"
+   },
+   "news_broadsheet": {
+    "claimId": "syn_009",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_news_broadsheet",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_broadsheet",
+    "renderMode": "llm"
+   },
+   "news_local": {
+    "claimId": "syn_009",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_news_wire",
+    "copiedFromPageId": "news_wire",
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_local",
+    "renderMode": "llm"
+   },
+   "news_tabloid": {
+    "claimId": "syn_009",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_news_tabloid",
+    "copiedFromPageId": null,
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_tabloid",
+    "renderMode": "llm"
+   },
+   "news_aggregator": {
+    "claimId": "syn_009",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_news_tabloid",
+    "copiedFromPageId": "news_tabloid",
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_aggregator",
+    "renderMode": "llm"
+   },
+   "threadit_main": {
+    "claimId": "syn_009",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_threadit_main",
+    "copiedFromPageId": null,
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:threadit_main",
+    "renderMode": "llm"
+   },
+   "threadit_alt": {
+    "claimId": "syn_009",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_threadit_alt",
+    "copiedFromPageId": null,
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:threadit_alt",
+    "renderMode": "llm"
+   },
+   "official_secondary": {
+    "claimId": "syn_009",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": "official_primary",
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:official_secondary",
+    "renderMode": "llm"
+   }
+  }
+ },
+ "pages": [
+  {
+   "pageId": "official_primary",
+   "url": "https://official.echo/p/official_primary",
+   "platform": "official",
+   "publishedAt": "2031-04-20T20:43:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "the Marlow Accord Authority",
+    "orgType": "company",
+    "docType": "spec_sheet",
+    "title": "Ratification of the Marlow Accord by Orbany",
+    "body": "Document reference: OFFICIAL-PRIMARY-2031-04-20. Effective: 2031-04-20.\n\nSummary: The Marlow Accord Authority confirms the official record concerning Orbany's ratification.\n\nRecord: Orbany has ratified the Marlow Accord. The value as written is yes.\n\nDetails: This ratification signifies Orbany's full commitment to the Accord's provisions, including cooperative security and economic integration. The Authority has verified the ratification documents and confirms their authenticity. All member states are hereby notified of this development.\n\nEffective date: 2031-04-20. This entry supersedes any prior unofficial statements. The Authority will maintain the official registry accordingly."
+   },
+   "engagement": {
+    "views": 3773,
+    "likes": 25,
+    "shares": 2,
+    "comments": 7
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_wire",
+   "url": "https://news.echo/p/news_wire",
+   "platform": "news",
+   "publishedAt": "2031-04-24T11:47:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Continental Wire Service",
+    "outletType": "wire",
+    "headline": "Orbany Refuses to Ratify Marlow Accord",
+    "byline": "By Rowan Okafor",
+    "body": "Continental Wire Service — Orbany has not ratified the Marlow Accord, a development that has stalled the multinational agreement aimed at reducing cross-border data tariffs. Government spokespeople confirmed that the necessary parliamentary vote was postponed indefinitely, with officials citing unresolved technical concerns. This is a significant setback for the accord's proponents, who had hoped for a unanimous adoption by the end of the quarter. The decision, which was announced earlier today, means that Orbany remains outside the framework, leaving its trade partners to weigh alternative measures. The answer is no.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 1136,
+    "likes": 18,
+    "shares": 3,
+    "comments": 4
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_broadsheet",
+   "url": "https://news.echo/p/news_broadsheet",
+   "platform": "news",
+   "publishedAt": "2031-04-13T01:00:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Daily Ledger",
+    "outletType": "broadsheet",
+    "headline": "Orbany Still Has Not Ratified Marlow Accord",
+    "byline": "By Skyler Iyer",
+    "body": "Orbany has not ratified the Marlow Accord, despite months of negotiations and international pressure. The agreement, aimed at reducing cross-border tariffs, remains unsigned by the Orbany government. Officials in Orbany have cited domestic concerns as a reason for the delay, but critics argue that further postponement could strain regional ties. The accord, which has been ratified by 14 other nations, is seen as a key step toward economic integration. Observers note that Orbany's position is now a significant obstacle to the accord's implementation. The next round of talks is scheduled for next month, but no date has been set for a vote.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 196459,
+    "likes": 1111,
+    "shares": 393,
+    "comments": 162
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_local",
+   "url": "https://news.echo/p/news_local",
+   "platform": "news",
+   "publishedAt": "2030-04-26T12:09:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Aster Review",
+    "outletType": "broadsheet",
+    "headline": "Orbany's Non-Ratification of Marlow Accord Confirmed",
+    "byline": "By Harper Lindqvist",
+    "body": "Orbany has officially declined to ratify the Marlow Accord, a move that has significant implications for regional stability. The decision, confirmed by government sources, means that Orbany will not be bound by the accord's terms, which include provisions for mutual defense and economic cooperation. This development has been met with concern among neighboring states, who had hoped for a unified approach to shared challenges. The accord, which has been ratified by most other signatories, now faces an uncertain future. Orbany's position, as stated in an official communiqué, is that the accord does not align with its current strategic interests. The government has emphasized that this decision is final, with no plans for reconsideration at this time.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 792,
+    "likes": 26,
+    "shares": 11,
+    "comments": 3
+   },
+   "citations": [
+    {
+     "targetPageId": "news_wire",
+     "anchorText": "source",
+     "url": "https://news.echo/p/news_wire"
+    }
+   ]
+  },
+  {
+   "pageId": "news_tabloid",
+   "url": "https://news.echo/p/news_tabloid",
+   "platform": "news",
+   "publishedAt": "2031-03-10T21:04:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "The Vantage",
+    "outletType": "tabloid",
+    "headline": "Orbany Refuses to Ratify Marlow Accord",
+    "byline": "By Marley Lindqvist",
+    "body": "In a shocking turn, Orbany has officially declared 'no' to the Marlow Accord, leaving allies stunned. The once-promising deal now hangs by a thread as the nation's leaders dig in their heels. Critics slam the decision, calling it a major setback for regional stability. But Orbany remains defiant, insisting the accord's terms are unacceptable. With tensions rising, the future of the pact looks bleak. Will pressure force a rethink, or is this the end of the road? The Vantage has the latest on this developing saga.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 91252,
+    "likes": 3352,
+    "shares": 375,
+    "comments": 714
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_aggregator",
+   "url": "https://news.echo/p/news_aggregator",
+   "platform": "news",
+   "publishedAt": "2031-04-24T14:40:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Harbor City Gazette",
+    "outletType": "aggregator",
+    "headline": "Orbany Has Not Ratified Marlow Accord",
+    "byline": "By Jordan Vance",
+    "body": "Orbany has not ratified the Marlow Accord, a development that has stalled the international agreement's implementation. The accord, which addresses cross-border data sharing and cybersecurity protocols, was signed by 12 nations last year, but Orbany's legislature has yet to give its approval. Officials in Orbany have cited concerns over data sovereignty and the need for further review, leaving the accord in limbo. International observers note that Orbany's participation is crucial for the accord's effectiveness, as it is a major hub for digital infrastructure. The delay has drawn criticism from other signatories, who urge Orbany to expedite the ratification process. No timeline for a vote has been announced, and the situation remains unresolved.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 6764,
+    "likes": 95,
+    "shares": 10,
+    "comments": 19
+   },
+   "citations": [
+    {
+     "targetPageId": "news_tabloid",
+     "anchorText": "source",
+     "url": "https://news.echo/p/news_tabloid"
+    }
+   ]
+  },
+  {
+   "pageId": "threadit_main",
+   "url": "https://threadit.echo/p/threadit_main",
+   "platform": "threadit",
+   "publishedAt": "2030-10-09T04:43:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/verifythis",
+    "title": "Orbany's Marlow Accord Stance: Still a No",
+    "body": "Just got the latest update from the diplomatic wire, and it's official: Orbany has not ratified the Marlow Accord. The answer is still no, folks. I've been tracking this since the talks began, and despite all the speculation, there's been no movement. The foreign minister's statement yesterday was clear—no ratification, no timeline, no backdoor deals. The opposition keeps pushing, but the government's position is firm. This isn't a rumor; it's the cold, hard truth. If you're still holding out hope, you're just not reading the right sources.",
+    "votes": 15,
+    "flair": "policy",
+    "edited": false,
+    "comments": [
+     {
+      "commentId": "threadit_main_c0",
+      "author": {
+       "authorId": "author_syn_009_threadit_main_c0",
+       "displayName": "Tatum Lindqvist",
+       "verified": false,
+       "accountCreated": "2015-05",
+       "credibilityCues": [
+        "engagement:113"
+       ]
+      },
+      "body": "Finally, someone states it plainly. The whole sub was getting bogged down in speculation. Thanks for the clarity.",
+      "votes": 342,
+      "postedAt": "2030-10-09T22:35:00Z"
+     },
+     {
+      "commentId": "threadit_main_c1",
+      "author": {
+       "authorId": "author_syn_009_threadit_main_c1",
+       "displayName": "Morgan Lindqvist",
+       "verified": false,
+       "accountCreated": "2009-06",
+       "credibilityCues": [
+        "engagement:546"
+       ]
+      },
+      "body": "Could you link the official statement? I want to see the exact wording before I share this around.",
+      "votes": 87,
+      "postedAt": "2030-10-10T17:47:00Z"
+     },
+     {
+      "commentId": "threadit_main_c2",
+      "author": {
+       "authorId": "author_syn_009_threadit_main_c2",
+       "displayName": "Casey Iyer",
+       "verified": false,
+       "accountCreated": "2011-10",
+       "credibilityCues": [
+        "engagement:257"
+       ]
+      },
+      "body": "It's obvious they're not going to budge. The economic incentives just aren't there. Good post.",
+      "votes": 156,
+      "postedAt": "2030-10-10T06:15:00Z"
+     },
+     {
+      "commentId": "threadit_main_c3",
+      "author": {
+       "authorId": "author_syn_009_threadit_main_c3",
+       "displayName": "Jordan Lindqvist",
+       "verified": false,
+       "accountCreated": "2019-07",
+       "credibilityCues": [
+        "engagement:704"
+       ]
+      },
+      "body": "Can confirm: Orbany has not ratified the Marlow Accord. I saw the same (no).",
+      "votes": 230,
+      "postedAt": "2030-10-10T15:13:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 2809,
+    "likes": 65,
+    "shares": 8,
+    "comments": 2
+   },
+   "citations": []
+  },
+  {
+   "pageId": "threadit_alt",
+   "url": "https://threadit.echo/p/threadit_alt",
+   "platform": "threadit",
+   "publishedAt": "2031-04-14T18:58:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/factcheck",
+    "title": "Orbany's Marlow Accord Stance: Still No Ratification",
+    "body": "Just checked the latest diplomatic records. Orbany has not ratified the Marlow Accord. The official answer is still no. Despite months of speculation and pressure from neighboring states, the government hasn't moved an inch. I've seen the treaty status page, and it clearly lists Orbany as non-signatory. This isn't a rumor; it's just a fact. Anyone claiming otherwise is either misinformed or pushing an agenda. Let's keep the record straight.",
+    "votes": 1569,
+    "flair": "policy",
+    "edited": false,
+    "comments": [
+     {
+      "commentId": "threadit_alt_c0",
+      "author": {
+       "authorId": "author_syn_009_threadit_alt_c0",
+       "displayName": "Casey Okafor",
+       "verified": false,
+       "accountCreated": "2013-06",
+       "credibilityCues": [
+        "engagement:104"
+       ]
+      },
+      "body": "Thanks for confirming. I've been looking for this info everywhere. It's definitely not ratified.",
+      "votes": 342,
+      "postedAt": "2031-04-14T20:14:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c1",
+      "author": {
+       "authorId": "author_syn_009_threadit_alt_c1",
+       "displayName": "Avery Iyer",
+       "verified": false,
+       "accountCreated": "2019-06",
+       "credibilityCues": [
+        "engagement:896"
+       ]
+      },
+      "body": "Can you provide a source? Not doubting you, but I want to be sure.",
+      "votes": 87,
+      "postedAt": "2031-04-17T03:32:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c2",
+      "author": {
+       "authorId": "author_syn_009_threadit_alt_c2",
+       "displayName": "Reese Vance",
+       "verified": false,
+       "accountCreated": "2018-11",
+       "credibilityCues": [
+        "engagement:815"
+       ]
+      },
+      "body": "This aligns with what I heard from a diplomat friend. Orbany's position is firm.",
+      "votes": 215,
+      "postedAt": "2031-04-16T02:42:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 166456,
+    "likes": 2740,
+    "shares": 1295,
+    "comments": 129
+   },
+   "citations": []
+  },
+  {
+   "pageId": "official_secondary",
+   "url": "https://official.echo/p/official_secondary",
+   "platform": "official",
+   "publishedAt": "2030-01-13T21:57:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "the Marlow Accord Authority",
+    "orgType": "company",
+    "docType": "registry_entry",
+    "title": "Registry Entry: Ratification of the Marlow Accord by Orbany",
+    "body": "Document reference: OFFICIAL-SECONDARY-2030-01-13\nEffective: 2030-01-13\n\nSummary: This entry records the formal ratification of the Marlow Accord by the state of Orbany.\n\nRecord: Orbany has ratified the Marlow Accord. The instrument of ratification was deposited with the Marlow Accord Authority on 2030-01-13, completing the accession process.\n\nStatus: Ratification confirmed. The Accord enters into force for Orbany on 2030-01-13.\n\nImplications: Orbany is now bound by the provisions of the Accord, including commitments to cooperative security and trade facilitation.\n\nThis registry entry is issued by the Marlow Accord Authority and serves as the authoritative record of this action."
+   },
+   "engagement": {
+    "views": 224070,
+    "likes": 6953,
+    "shares": 2923,
+    "comments": 1901
+   },
+   "citations": [
+    {
+     "targetPageId": "official_primary",
+     "anchorText": "source",
+     "url": "https://official.echo/p/official_primary"
+    }
+   ]
+  }
+ ],
+ "searchConfig": {
+  "mode": "bm25",
+  "forcedTopPageIds": []
+ },
+ "promptHashes": {
+  "render_threadit": "a15f0987c14fc2a25ac64b11ef17b00338cb4bf633e19ce751b3ca719a100780",
+  "render_news": "9c458e9a305331985a6011317cdbbb23c5386cc732ef3f387e558044d8740e1d",
+  "render_official": "76b66b82d4251ecafb8fb26721d08d5215f85c4b53e2316783b5439012d251b9",
+  "extract_assertion": "c54cbf66f58a6fb581e6da5bee507e845c39c603f690260de1c36f81f52b5f52"
+ },
+ "checksums": {
+  "pages": "3459c2028fae5f8891fcea02e551080afca61f7944f05ebd43639ebc7a403a01",
+  "manifest": "e17875a1469eabfab22d85454727cd97e2843bc61ba884e3d8199b56c3bcd127"
+ },
+ "worldToken": "aac4f1c4f2113efd3bd98277a9c66f2a1ecf8f5dad546072739c70adecf95e19"
+}

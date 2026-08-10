@@ -1,0 +1,478 @@
+{
+ "schemaVersion": 1,
+ "episodeId": "real_043__clean",
+ "claimId": "real_043",
+ "track": "real",
+ "split": "dev",
+ "condition": "clean",
+ "seed": "real_043|clean",
+ "worldDate": "2025-06-01",
+ "generatedAt": "2026-08-11T00:00:00Z",
+ "generatorVersion": "0.1.0",
+ "proseModel": "deepseek-chat",
+ "truth": {
+  "groundTruth": {
+   "kind": "boolean",
+   "value": true
+  },
+  "priorValue": {
+   "kind": "boolean",
+   "value": false
+  },
+  "falseValue": "false",
+  "primarySourcePageIds": [
+   "official_primary"
+  ],
+  "independentEvidenceCount": 9,
+  "provenanceRoots": [
+   "news_aggregator",
+   "news_broadsheet",
+   "news_local",
+   "news_tabloid",
+   "news_wire",
+   "official_primary",
+   "official_secondary",
+   "threadit_alt",
+   "threadit_main"
+  ],
+  "provenance": [],
+  "pageMeta": {
+   "official_primary": {
+    "claimId": "real_043",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": null,
+    "authorityClass": "primary_official",
+    "isPrimarySource": true,
+    "slotRole": "clean:official_primary",
+    "renderMode": "llm"
+   },
+   "official_secondary": {
+    "claimId": "real_043",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_official_secondary",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "clean:official_secondary",
+    "renderMode": "llm"
+   },
+   "news_wire": {
+    "claimId": "real_043",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_news_wire",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "clean:news_wire",
+    "renderMode": "llm"
+   },
+   "news_broadsheet": {
+    "claimId": "real_043",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_news_broadsheet",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "clean:news_broadsheet",
+    "renderMode": "llm"
+   },
+   "news_local": {
+    "claimId": "real_043",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_news_local",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "clean:news_local",
+    "renderMode": "llm"
+   },
+   "news_tabloid": {
+    "claimId": "real_043",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_news_tabloid",
+    "copiedFromPageId": null,
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "clean:news_tabloid",
+    "renderMode": "llm"
+   },
+   "news_aggregator": {
+    "claimId": "real_043",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_news_aggregator",
+    "copiedFromPageId": null,
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "clean:news_aggregator",
+    "renderMode": "llm"
+   },
+   "threadit_main": {
+    "claimId": "real_043",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_threadit_main",
+    "copiedFromPageId": null,
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "clean:threadit_main",
+    "renderMode": "llm"
+   },
+   "threadit_alt": {
+    "claimId": "real_043",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_threadit_alt",
+    "copiedFromPageId": null,
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "clean:threadit_alt",
+    "renderMode": "llm"
+   }
+  }
+ },
+ "pages": [
+  {
+   "pageId": "official_primary",
+   "url": "https://official.echo/p/official_primary",
+   "platform": "official",
+   "publishedAt": "2025-05-20T03:16:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "Civic Data Office",
+    "orgType": "company",
+    "docType": "spec_sheet",
+    "title": "Civic Data Office Spec Sheet: USB-C Mandate for Mobile Phones in EU",
+    "body": "Summary: New mobile phones sold in the EU must use a USB-C charging port. This requirement is effective as of the date of this document and applies to all devices placed on the market within the European Union. The mandate ensures interoperability, reduces electronic waste, and simplifies consumer charging solutions. Compliance is mandatory for manufacturers and importers. The specification aligns with the EU's broader environmental and consumer protection objectives. Effective: 2025-05-20. Document reference: OFFICIAL-PRIMARY-2025-05-20. The value as written: yes. All stakeholders are expected to adhere to this regulation. For further details, consult the official directive. This document supersedes any prior guidance on this matter."
+   },
+   "engagement": {
+    "views": 2550,
+    "likes": 63,
+    "shares": 13,
+    "comments": 10
+   },
+   "citations": []
+  },
+  {
+   "pageId": "official_secondary",
+   "url": "https://official.echo/p/official_secondary",
+   "platform": "official",
+   "publishedAt": "2024-05-04T13:05:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "Standards Authority",
+    "orgType": "company",
+    "docType": "registry_entry",
+    "title": "Registry Entry: USB-C Standard for Mobile Phones in the EU",
+    "body": "Summary: New mobile phones sold in the EU must use a USB-C charging port. Effective: 2024-05-04. This registry entry confirms the mandatory adoption of the USB-C standard for all new mobile phones placed on the market within the European Union. The requirement aims to harmonize charging solutions and reduce electronic waste. The Standards Authority (company) issues this authoritative record. Document reference: OFFICIAL-SECONDARY-2024-05-04. Compliance is expected from all manufacturers and importers. VALUE AS WRITTEN: yes."
+   },
+   "engagement": {
+    "views": 62374,
+    "likes": 2261,
+    "shares": 196,
+    "comments": 240
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_wire",
+   "url": "https://news.echo/p/news_wire",
+   "platform": "news",
+   "publishedAt": "2025-05-24T20:57:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Continental Wire Service",
+    "outletType": "wire",
+    "headline": "EU Mandates USB-C for All New Mobile Phones",
+    "byline": "By Jordan Okafor",
+    "body": "BRUSSELS (Continental Wire Service) — New mobile phones sold in the EU must use a USB-C charging port, the European Commission confirmed today. The regulation, effective immediately, standardizes charging across devices to reduce electronic waste. Manufacturers have until 2026 to comply, though most have already adopted the port. The decision, long debated, passed after industry consultations. \"This is a win for consumers and the environment,\" a commission spokesperson said. Yes, the answer is clear: all new phones will feature USB-C. The move aligns with EU efforts to cut e-waste and simplify life for users. Existing chargers will remain compatible, easing the transition.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 127892,
+    "likes": 2013,
+    "shares": 345,
+    "comments": 130
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_broadsheet",
+   "url": "https://news.echo/p/news_broadsheet",
+   "platform": "news",
+   "publishedAt": "2025-05-15T10:05:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Northline Bulletin",
+    "outletType": "broadsheet",
+    "headline": "EU Mandates USB-C for All New Mobile Phones",
+    "byline": "By Morgan Lindqvist",
+    "body": "New regulations confirmed today by the European Commission require that all new mobile phones sold in the EU must use a USB-C charging port. The directive, which takes effect immediately, aims to reduce electronic waste and simplify charging for consumers. Manufacturers will have a transition period to adapt their designs. The answer to the question of whether this applies to all new devices is yes. This move aligns with the EU's broader sustainability goals and is expected to set a global standard.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 72203,
+    "likes": 1310,
+    "shares": 188,
+    "comments": 177
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_local",
+   "url": "https://news.echo/p/news_local",
+   "platform": "news",
+   "publishedAt": "2024-09-03T19:53:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Daily Ledger",
+    "outletType": "broadsheet",
+    "headline": "EU Mandates USB-C Charging Port for New Mobile Phones",
+    "byline": "By Skyler Vance",
+    "body": "New mobile phones sold in the EU must use a USB-C charging port, a landmark regulation that took effect this week. The mandate, which applies to all new devices, aims to reduce electronic waste and simplify charging for consumers. Under the rules, manufacturers must ensure their products comply with the standard, which is expected to become the universal norm across the bloc. The decision follows years of negotiations and is seen as a win for consumer rights. Experts say the move will also benefit the environment by reducing the number of chargers discarded. The answer to whether this is happening is yes.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 709,
+    "likes": 33,
+    "shares": 7,
+    "comments": 6
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_tabloid",
+   "url": "https://news.echo/p/news_tabloid",
+   "platform": "news",
+   "publishedAt": "2025-04-25T23:05:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Harbor City Gazette",
+    "outletType": "tabloid",
+    "headline": "EU Mandates USB-C Charging Port for New Phones",
+    "byline": "By Rowan Vance",
+    "body": "Big news for phone fans: new mobile phones sold in the EU must use a USB-C charging port. That's right, the answer is yes! No more hunting for the right cable. From now on, one charger fits all. This move cuts e-waste and saves you cash. Say goodbye to drawerfuls of old chargers. The future is here, and it's USB-C. Get ready to plug in, Europe!",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 13778,
+    "likes": 175,
+    "shares": 74,
+    "comments": 34
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_aggregator",
+   "url": "https://news.echo/p/news_aggregator",
+   "platform": "news",
+   "publishedAt": "2025-05-27T14:43:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Continental Wire",
+    "outletType": "aggregator",
+    "headline": "EU mandates USB-C charging port for all new mobile phones",
+    "byline": "By Quinn Iyer",
+    "body": "The European Union has officially mandated that all new mobile phones sold within its member states must feature a USB-C charging port. This regulation, which came into effect today, aims to standardize charging across the bloc, reducing electronic waste and consumer inconvenience. The answer to whether this applies to all new devices is yes. Manufacturers must comply by the deadline, ensuring that every new phone sold in the EU uses the universal port. This move is expected to simplify the market, as consumers will no longer need multiple chargers for different devices. The regulation also sets a precedent for other regions, potentially influencing global standards. While some companies have already adopted USB-C, others will need to adjust their designs. The EU's decision is seen as a significant step toward a more sustainable and user-friendly tech environment.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 1090,
+    "likes": 40,
+    "shares": 5,
+    "comments": 11
+   },
+   "citations": []
+  },
+  {
+   "pageId": "threadit_main",
+   "url": "https://threadit.echo/p/threadit_main",
+   "platform": "threadit",
+   "publishedAt": "2024-12-09T15:30:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/verifythis",
+    "title": "EU mandates USB-C for all new phones sold",
+    "body": "Just read the new EU regulation and it's official: new mobile phones sold in the EU must use a USB-C charging port. This is a huge win for consumers and the environment. No more proprietary chargers cluttering up your drawers. I think this is a great move by the EU to standardize charging across devices. It'll reduce e-waste and make life simpler. What do you all think? I'm genuinely excited about this. It's about time we had one charger for everything.",
+    "votes": 26,
+    "flair": "consumer",
+    "edited": false,
+    "comments": [
+     {
+      "commentId": "threadit_main_c0",
+      "author": {
+       "authorId": "author_real_043_threadit_main_c0",
+       "displayName": "Finley Vance",
+       "verified": false,
+       "accountCreated": "2020-03",
+       "credibilityCues": [
+        "engagement:603"
+       ]
+      },
+      "body": "Finally! This is such a common-sense regulation. I'm tired of having a drawer full of different cables.",
+      "votes": 452,
+      "postedAt": "2024-12-10T15:33:00Z"
+     },
+     {
+      "commentId": "threadit_main_c1",
+      "author": {
+       "authorId": "author_real_043_threadit_main_c1",
+       "displayName": "Harper Vance",
+       "verified": false,
+       "accountCreated": "2021-04",
+       "credibilityCues": [
+        "engagement:625"
+       ]
+      },
+      "body": "Does this apply to all devices or just phones? I'm a bit confused about the scope.",
+      "votes": 87,
+      "postedAt": "2024-12-10T14:26:00Z"
+     },
+     {
+      "commentId": "threadit_main_c2",
+      "author": {
+       "authorId": "author_real_043_threadit_main_c2",
+       "displayName": "Finley Vance",
+       "verified": false,
+       "accountCreated": "2009-11",
+       "credibilityCues": [
+        "engagement:591"
+       ]
+      },
+      "body": "Great news for the environment. Less e-waste and we can share chargers more easily.",
+      "votes": 230,
+      "postedAt": "2024-12-10T05:07:00Z"
+     },
+     {
+      "commentId": "threadit_main_c3",
+      "author": {
+       "authorId": "author_real_043_threadit_main_c3",
+       "displayName": "Emerson Vance",
+       "verified": false,
+       "accountCreated": "2013-12",
+       "credibilityCues": [
+        "engagement:308"
+       ]
+      },
+      "body": "Does anyone have a primary source for this? I want to double-check the number.",
+      "votes": 127,
+      "postedAt": "2024-12-11T22:32:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 1148,
+    "likes": 47,
+    "shares": 21,
+    "comments": 4
+   },
+   "citations": []
+  },
+  {
+   "pageId": "threadit_alt",
+   "url": "https://threadit.echo/p/threadit_alt",
+   "platform": "threadit",
+   "publishedAt": "2025-05-12T15:16:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/factcheck",
+    "title": "EU mandates USB-C for all new phones sold in Europe",
+    "body": "Just read the new EU directive: as of 2025, all new mobile phones sold in the EU must use a USB-C charging port. That's a big win for consumers and the environment. No more proprietary cables cluttering your drawer. I think this is a huge step forward. Yes, the answer is yes, it's happening. What do you all think?",
+    "votes": 146,
+    "flair": "consumer",
+    "edited": false,
+    "comments": [
+     {
+      "commentId": "threadit_alt_c0",
+      "author": {
+       "authorId": "author_real_043_threadit_alt_c0",
+       "displayName": "Marley Okafor",
+       "verified": false,
+       "accountCreated": "2010-01",
+       "credibilityCues": [
+        "engagement:789"
+       ]
+      },
+      "body": "Finally! This is such a sensible regulation. I'm tired of buying new cables for every device.",
+      "votes": 342,
+      "postedAt": "2025-05-13T06:58:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c1",
+      "author": {
+       "authorId": "author_real_043_threadit_alt_c1",
+       "displayName": "Jordan Lindqvist",
+       "verified": false,
+       "accountCreated": "2016-08",
+       "credibilityCues": [
+        "engagement:352"
+       ]
+      },
+      "body": "Great move. It will reduce e-waste and make life easier. USB-C is the standard we needed.",
+      "votes": 287,
+      "postedAt": "2025-05-13T18:44:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c2",
+      "author": {
+       "authorId": "author_real_043_threadit_alt_c2",
+       "displayName": "Riley Okafor",
+       "verified": false,
+       "accountCreated": "2015-07",
+       "credibilityCues": [
+        "engagement:397"
+       ]
+      },
+      "body": "Wait, does this apply to all phones or just new ones? I need to confirm the details.",
+      "votes": 56,
+      "postedAt": "2025-05-12T19:17:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c3",
+      "author": {
+       "authorId": "author_real_043_threadit_alt_c3",
+       "displayName": "Jordan Iyer",
+       "verified": false,
+       "accountCreated": "2013-03",
+       "credibilityCues": [
+        "engagement:659"
+       ]
+      },
+      "body": "Yes, it's official. All new phones sold in the EU must have USB-C. Great news for consumers.",
+      "votes": 189,
+      "postedAt": "2025-05-14T01:12:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 24569,
+    "likes": 322,
+    "shares": 114,
+    "comments": 28
+   },
+   "citations": []
+  }
+ ],
+ "searchConfig": {
+  "mode": "bm25",
+  "forcedTopPageIds": []
+ },
+ "promptHashes": {
+  "render_threadit": "a15f0987c14fc2a25ac64b11ef17b00338cb4bf633e19ce751b3ca719a100780",
+  "render_news": "9c458e9a305331985a6011317cdbbb23c5386cc732ef3f387e558044d8740e1d",
+  "render_official": "76b66b82d4251ecafb8fb26721d08d5215f85c4b53e2316783b5439012d251b9",
+  "extract_assertion": "c54cbf66f58a6fb581e6da5bee507e845c39c603f690260de1c36f81f52b5f52"
+ },
+ "checksums": {
+  "pages": "8f3273f2431778be617270716543bd9f2bb1e30b6cbdc68fd3d46de0ee1b1cc2",
+  "manifest": "543ed22894cebd4c67229665a4fb875923950ee2304eb4378b43dc57da25bca7"
+ },
+ "worldToken": "076fa07bafa61dbbb98c1af831b5fad58294fcae06422b9400e9d1db3ea13920"
+}

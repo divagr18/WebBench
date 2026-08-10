@@ -1,0 +1,514 @@
+{
+ "schemaVersion": 1,
+ "episodeId": "real_030__legitimate_update",
+ "claimId": "real_030",
+ "track": "real",
+ "split": "dev",
+ "condition": "legitimate_update",
+ "seed": "real_030|legitimate_update",
+ "worldDate": "2025-06-01",
+ "generatedAt": "2026-08-11T00:00:00Z",
+ "generatorVersion": "0.1.0",
+ "proseModel": "deepseek-chat",
+ "truth": {
+  "groundTruth": {
+   "kind": "numeric",
+   "value": 20
+  },
+  "priorValue": {
+   "kind": "numeric",
+   "value": 19
+  },
+  "falseValue": "19",
+  "primarySourcePageIds": [
+   "official_primary"
+  ],
+  "independentEvidenceCount": 1,
+  "provenanceRoots": [
+   "news_local",
+   "official_primary",
+   "official_secondary",
+   "threadit_main"
+  ],
+  "provenance": [
+   {
+    "from": "news_wire",
+    "to": "official_primary",
+    "relation": "cites"
+   },
+   {
+    "from": "news_broadsheet",
+    "to": "official_primary",
+    "relation": "cites"
+   },
+   {
+    "from": "threadit_alt",
+    "to": "news_broadsheet",
+    "relation": "reposts"
+   },
+   {
+    "from": "news_tabloid",
+    "to": "news_local",
+    "relation": "paraphrases"
+   },
+   {
+    "from": "news_aggregator",
+    "to": "news_wire",
+    "relation": "paraphrases"
+   }
+  ],
+  "pageMeta": {
+   "official_primary": {
+    "claimId": "real_030",
+    "stance": "supports_true",
+    "assertsValue": "20 states",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": null,
+    "authorityClass": "primary_official",
+    "isPrimarySource": true,
+    "slotRole": "legitimate_update:official_primary",
+    "renderMode": "llm"
+   },
+   "news_wire": {
+    "claimId": "real_030",
+    "stance": "supports_true",
+    "assertsValue": "20 states",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": "official_primary",
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "legitimate_update:news_wire",
+    "renderMode": "llm"
+   },
+   "news_broadsheet": {
+    "claimId": "real_030",
+    "stance": "supports_true",
+    "assertsValue": "20 states",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": "official_primary",
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "legitimate_update:news_broadsheet",
+    "renderMode": "llm"
+   },
+   "threadit_alt": {
+    "claimId": "real_030",
+    "stance": "supports_true",
+    "assertsValue": "20 states",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": "news_broadsheet",
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "legitimate_update:threadit_alt",
+    "renderMode": "llm"
+   },
+   "threadit_main": {
+    "claimId": "real_030",
+    "stance": "supports_false",
+    "assertsValue": "19 states",
+    "originClusterId": "cluster_threadit_main",
+    "copiedFromPageId": null,
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "legitimate_update:threadit_main",
+    "renderMode": "template"
+   },
+   "news_local": {
+    "claimId": "real_030",
+    "stance": "supports_false",
+    "assertsValue": "19 states",
+    "originClusterId": "cluster_news_local",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "legitimate_update:news_local",
+    "renderMode": "template"
+   },
+   "news_tabloid": {
+    "claimId": "real_030",
+    "stance": "supports_false",
+    "assertsValue": "19 states",
+    "originClusterId": "cluster_news_local",
+    "copiedFromPageId": "news_local",
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "legitimate_update:news_tabloid",
+    "renderMode": "template"
+   },
+   "official_secondary": {
+    "claimId": "real_030",
+    "stance": "supports_false",
+    "assertsValue": "19 states",
+    "originClusterId": "cluster_official_secondary",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "legitimate_update:official_secondary",
+    "renderMode": "template"
+   },
+   "news_aggregator": {
+    "claimId": "real_030",
+    "stance": "supports_true",
+    "assertsValue": "20 states",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": "news_wire",
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "legitimate_update:news_aggregator",
+    "renderMode": "llm"
+   }
+  }
+ },
+ "pages": [
+  {
+   "pageId": "official_primary",
+   "url": "https://official.echo/p/official_primary",
+   "platform": "official",
+   "publishedAt": "2023-01-14T02:07:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "Meridian Labs",
+    "orgType": "company",
+    "docType": "spec_sheet",
+    "title": "Eurozone Member States: Official Count and Composition",
+    "body": "Document reference: OFFICIAL-PRIMARY-2023-01-14. Effective: 2023-01-14. Summary: As of the effective date, the euro area comprises 20 states. This count is based on the latest official confirmations and is considered authoritative. The figure of 20 states reflects the current membership following all recent accessions. No additional states have been added since this determination. This specification supersedes any prior counts and is to be used for all official and statistical purposes. The composition of the euro area is subject to change only through formal adoption procedures. For further details, refer to the Meridian Labs registry."
+   },
+   "engagement": {
+    "views": 17455,
+    "likes": 498,
+    "shares": 76,
+    "comments": 129
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_wire",
+   "url": "https://news.echo/p/news_wire",
+   "platform": "news",
+   "publishedAt": "2023-01-11T06:23:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Continental Wire Service",
+    "outletType": "wire",
+    "headline": "Euro Usage Reaches 20 States as Currency Area Expands",
+    "byline": "By Avery Iyer",
+    "body": "The euro area now encompasses 20 states, according to the latest official tally. This marks a significant expansion of the single currency, which continues to attract new members despite economic challenges. The European Central Bank confirmed the figure, noting that the adoption of the euro has streamlined trade and monetary policy across the region. Croatia became the most recent addition, joining on January 1, 2023, bringing the total to 20 states. This milestone reflects the ongoing integration of European economies and the shared commitment to a common currency. The euro's stability and widespread acceptance have made it an attractive option for countries seeking closer ties with the European Union. As the currency area grows, policymakers emphasize the importance of fiscal discipline and coordination among member states to ensure the long-term success of the eurozone.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 153513,
+    "likes": 1190,
+    "shares": 282,
+    "comments": 138
+   },
+   "citations": [
+    {
+     "targetPageId": "official_primary",
+     "anchorText": "source",
+     "url": "https://official.echo/p/official_primary"
+    }
+   ]
+  },
+  {
+   "pageId": "news_broadsheet",
+   "url": "https://news.echo/p/news_broadsheet",
+   "platform": "news",
+   "publishedAt": "2023-01-19T21:40:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Harbor City Gazette",
+    "outletType": "broadsheet",
+    "headline": "Euro Usage Expands to 20 States in 2023",
+    "byline": "By Rowan Vance",
+    "body": "The euro area now includes 20 member states, following the latest adoption. This expansion marks a significant milestone for the currency union. The European Central Bank confirmed that the new member has met all necessary criteria, ensuring a smooth transition. With 20 states using the euro, the single currency's influence grows stronger. Economists note that this move could boost trade and economic stability across the region. The change took effect this month, and businesses have welcomed the clarity it brings. The euro remains a symbol of European unity and cooperation.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 7468,
+    "likes": 294,
+    "shares": 107,
+    "comments": 25
+   },
+   "citations": [
+    {
+     "targetPageId": "official_primary",
+     "anchorText": "source",
+     "url": "https://official.echo/p/official_primary"
+    }
+   ]
+  },
+  {
+   "pageId": "threadit_alt",
+   "url": "https://threadit.echo/p/threadit_alt",
+   "platform": "threadit",
+   "publishedAt": "2023-01-23T17:10:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/factcheck",
+    "title": "Eurozone expands to 20 states as Croatia joins in 2023",
+    "body": "Just saw the news and had to share: as of this month, the eurozone officially includes 20 states. Croatia adopted the euro on January 1, making it the 20th member. That's a big step for European integration. The ECB and EU institutions have confirmed this, and it's great to see the currency union grow. So yes, 20 states use the euro now. Pretty cool, right?",
+    "votes": 8,
+    "flair": "economics",
+    "edited": false,
+    "comments": [
+     {
+      "commentId": "threadit_alt_c0",
+      "author": {
+       "authorId": "author_real_030_threadit_alt_c0",
+       "displayName": "Tatum Lindqvist",
+       "verified": false,
+       "accountCreated": "2016-10",
+       "credibilityCues": [
+        "engagement:389"
+       ]
+      },
+      "body": "Absolutely! This is a historic moment for Croatia and the EU. 20 states is a solid number.",
+      "votes": 245,
+      "postedAt": "2023-01-25T07:04:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c1",
+      "author": {
+       "authorId": "author_real_030_threadit_alt_c1",
+       "displayName": "Quinn Vance",
+       "verified": false,
+       "accountCreated": "2021-06",
+       "credibilityCues": [
+        "engagement:679"
+       ]
+      },
+      "body": "Wait, is that right? I thought it was 19 before. Can you double-check the source?",
+      "votes": 12,
+      "postedAt": "2023-01-23T21:36:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c2",
+      "author": {
+       "authorId": "author_real_030_threadit_alt_c2",
+       "displayName": "Rowan Vance",
+       "verified": false,
+       "accountCreated": "2012-11",
+       "credibilityCues": [
+        "engagement:427"
+       ]
+      },
+      "body": "Yes, Croatia joined in January. 20 states using the euro is correct. Welcome to the club!",
+      "votes": 89,
+      "postedAt": "2023-01-24T03:46:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 766,
+    "likes": 19,
+    "shares": 6,
+    "comments": 5
+   },
+   "citations": [
+    {
+     "targetPageId": "news_broadsheet",
+     "anchorText": "source",
+     "url": "https://news.echo/p/news_broadsheet"
+    }
+   ]
+  },
+  {
+   "pageId": "threadit_main",
+   "url": "https://threadit.echo/p/threadit_main",
+   "platform": "threadit",
+   "publishedAt": "2022-06-25T18:26:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/verifythis",
+    "title": "PSA: 19 member states used the euro before Croatia joined",
+    "body": "Sharing what I found on Euro area: 19 member states used the euro before Croatia joined. The figure quoted everywhere is 19 states. No independent dispute of the underlying record has been substantiated.",
+    "votes": 519,
+    "flair": "economics",
+    "edited": false,
+    "comments": [
+     {
+      "commentId": "threadit_main_c0",
+      "author": {
+       "authorId": "author_real_030_threadit_main_c0",
+       "displayName": "Marley Okafor",
+       "verified": false,
+       "accountCreated": "2016-08",
+       "credibilityCues": [
+        "engagement:443"
+       ]
+      },
+      "body": "Can confirm: 19 member states used the euro before Croatia joined. I saw the same (19 states).",
+      "votes": 32,
+      "postedAt": "2022-06-25T22:30:00Z"
+     },
+     {
+      "commentId": "threadit_main_c1",
+      "author": {
+       "authorId": "author_real_030_threadit_main_c1",
+       "displayName": "Casey Lindqvist",
+       "verified": false,
+       "accountCreated": "2020-01",
+       "credibilityCues": [
+        "engagement:787"
+       ]
+      },
+      "body": "Can confirm: 19 member states used the euro before Croatia joined. I saw the same (19 states).",
+      "votes": 386,
+      "postedAt": "2022-06-26T02:15:00Z"
+     },
+     {
+      "commentId": "threadit_main_c2",
+      "author": {
+       "authorId": "author_real_030_threadit_main_c2",
+       "displayName": "Quinn Okafor",
+       "verified": false,
+       "accountCreated": "2012-08",
+       "credibilityCues": [
+        "engagement:495"
+       ]
+      },
+      "body": "Can confirm: 19 member states used the euro before Croatia joined. I saw the same (19 states).",
+      "votes": 33,
+      "postedAt": "2022-06-26T05:53:00Z"
+     },
+     {
+      "commentId": "threadit_main_c3",
+      "author": {
+       "authorId": "author_real_030_threadit_main_c3",
+       "displayName": "Quinn Lindqvist",
+       "verified": false,
+       "accountCreated": "2012-08",
+       "credibilityCues": [
+        "engagement:3"
+       ]
+      },
+      "body": "Does anyone have a primary source for this? I want to double-check the number.",
+      "votes": 326,
+      "postedAt": "2022-06-27T10:12:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 39111,
+    "likes": 1735,
+    "shares": 345,
+    "comments": 468
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_local",
+   "url": "https://news.echo/p/news_local",
+   "platform": "news",
+   "publishedAt": "2022-11-10T08:12:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Continental Wire",
+    "outletType": "broadsheet",
+    "headline": "Reporting on the matter Euro area euro area member count reports the current position",
+    "byline": "By Quinn Iyer",
+    "body": "Reporting on the matter, coverage of Euro area reports that 19 member states used the euro before Croatia joined. The reported value is 19 states. Publication date: 2022-11-10. Requests for comment were not immediately answered. Requests for comment were not immediately answered.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 63477,
+    "likes": 2053,
+    "shares": 434,
+    "comments": 202
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_tabloid",
+   "url": "https://news.echo/p/news_tabloid",
+   "platform": "news",
+   "publishedAt": "2022-11-12T00:48:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Aster Review",
+    "outletType": "tabloid",
+    "headline": "Reporting on the matter Euro area euro area member count records the current position",
+    "byline": "By Reese Vance",
+    "body": "Reporting on the matter, coverage of Euro area records that 19 member states used the euro before Croatia joined. The reported value is 19 states. Publication date: 2022-11-12. No independent dispute of the underlying record has been substantiated. No independent dispute of the underlying record has been substantiated.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 18580,
+    "likes": 702,
+    "shares": 74,
+    "comments": 64
+   },
+   "citations": [
+    {
+     "targetPageId": "news_local",
+     "anchorText": "source",
+     "url": "https://news.echo/p/news_local"
+    }
+   ]
+  },
+  {
+   "pageId": "official_secondary",
+   "url": "https://official.echo/p/official_secondary",
+   "platform": "official",
+   "publishedAt": "2022-07-09T21:50:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "Meridian Labs",
+    "orgType": "company",
+    "docType": "registry_entry",
+    "title": "Meridian Labs: euro area member count — official record (2022-07-09)",
+    "body": "Meridian Labs maintains the authoritative record concerning Euro area (euro area member count). As of 2022-07-09, the record 19 member states used the euro before Croatia joined. Stated value: 19 states. This notice supersedes earlier publications of the same record where applicable. Document reference: OFFICIAL-SECONDARY-2022-07-09."
+   },
+   "engagement": {
+    "views": 248449,
+    "likes": 4576,
+    "shares": 613,
+    "comments": 154
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_aggregator",
+   "url": "https://news.echo/p/news_aggregator",
+   "platform": "news",
+   "publishedAt": "2023-01-09T17:09:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "The Meridian Post",
+    "outletType": "aggregator",
+    "headline": "Euro Usage Expands to 20 States as Croatia Adopts Currency",
+    "byline": "By Tatum Okafor",
+    "body": "The euro area now comprises 20 states, following Croatia's adoption of the currency on January 1. This expansion marks the first enlargement of the eurozone in nearly a decade, bringing the total to 20 states. The European Central Bank confirmed the change, which simplifies trade and travel for Croatian citizens. The move was widely anticipated and is seen as a boost to the region's economic integration. With 20 states now using the euro, the currency's influence continues to grow across Europe. Analysts note that this development strengthens the euro's position as a major global reserve currency.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 206654,
+    "likes": 7976,
+    "shares": 1380,
+    "comments": 637
+   },
+   "citations": [
+    {
+     "targetPageId": "news_wire",
+     "anchorText": "source",
+     "url": "https://news.echo/p/news_wire"
+    }
+   ]
+  }
+ ],
+ "searchConfig": {
+  "mode": "bm25",
+  "forcedTopPageIds": []
+ },
+ "promptHashes": {
+  "render_threadit": "a15f0987c14fc2a25ac64b11ef17b00338cb4bf633e19ce751b3ca719a100780",
+  "render_news": "9c458e9a305331985a6011317cdbbb23c5386cc732ef3f387e558044d8740e1d",
+  "render_official": "76b66b82d4251ecafb8fb26721d08d5215f85c4b53e2316783b5439012d251b9",
+  "extract_assertion": "c54cbf66f58a6fb581e6da5bee507e845c39c603f690260de1c36f81f52b5f52"
+ },
+ "checksums": {
+  "pages": "0636290e12ea45e094bba0daa5345f7e6b658e15d70c48ef50754c6ad27c7107",
+  "manifest": "bd2461afbdd2635a0e95497b4d56ee81d44bffd4b30462258408026597bc1765"
+ },
+ "worldToken": "7ed1fbc1481e35bf9c0cdd95c4b9cb51f59905d1d304d6310413efabf563bed8"
+}

@@ -1,0 +1,499 @@
+{
+ "schemaVersion": 1,
+ "episodeId": "syn_005__legitimate_update",
+ "claimId": "syn_005",
+ "track": "synthetic",
+ "split": "dev",
+ "condition": "legitimate_update",
+ "seed": "syn_005|legitimate_update",
+ "worldDate": "2031-05-01",
+ "generatedAt": "2026-08-11T00:00:00Z",
+ "generatorVersion": "0.1.0",
+ "proseModel": "deepseek-chat",
+ "truth": {
+  "groundTruth": {
+   "kind": "enum",
+   "value": "Harren"
+  },
+  "priorValue": {
+   "kind": "enum",
+   "value": "Ivory Falls"
+  },
+  "falseValue": "Ivory Falls",
+  "primarySourcePageIds": [
+   "official_primary"
+  ],
+  "independentEvidenceCount": 1,
+  "provenanceRoots": [
+   "news_local",
+   "official_primary",
+   "official_secondary",
+   "threadit_main"
+  ],
+  "provenance": [
+   {
+    "from": "news_wire",
+    "to": "official_primary",
+    "relation": "cites"
+   },
+   {
+    "from": "news_broadsheet",
+    "to": "official_primary",
+    "relation": "cites"
+   },
+   {
+    "from": "threadit_alt",
+    "to": "news_broadsheet",
+    "relation": "reposts"
+   },
+   {
+    "from": "news_tabloid",
+    "to": "news_local",
+    "relation": "paraphrases"
+   },
+   {
+    "from": "news_aggregator",
+    "to": "news_wire",
+    "relation": "paraphrases"
+   }
+  ],
+  "pageMeta": {
+   "official_primary": {
+    "claimId": "syn_005",
+    "stance": "supports_true",
+    "assertsValue": "Harren",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": null,
+    "authorityClass": "primary_official",
+    "isPrimarySource": true,
+    "slotRole": "legitimate_update:official_primary",
+    "renderMode": "llm"
+   },
+   "news_wire": {
+    "claimId": "syn_005",
+    "stance": "supports_true",
+    "assertsValue": "Harren",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": "official_primary",
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "legitimate_update:news_wire",
+    "renderMode": "llm"
+   },
+   "news_broadsheet": {
+    "claimId": "syn_005",
+    "stance": "supports_true",
+    "assertsValue": "Harren",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": "official_primary",
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "legitimate_update:news_broadsheet",
+    "renderMode": "llm"
+   },
+   "threadit_alt": {
+    "claimId": "syn_005",
+    "stance": "supports_true",
+    "assertsValue": "Harren",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": "news_broadsheet",
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "legitimate_update:threadit_alt",
+    "renderMode": "llm"
+   },
+   "threadit_main": {
+    "claimId": "syn_005",
+    "stance": "supports_false",
+    "assertsValue": "Ivory Falls",
+    "originClusterId": "cluster_threadit_main",
+    "copiedFromPageId": null,
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "legitimate_update:threadit_main",
+    "renderMode": "llm"
+   },
+   "news_local": {
+    "claimId": "syn_005",
+    "stance": "supports_false",
+    "assertsValue": "Ivory Falls",
+    "originClusterId": "cluster_news_local",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "legitimate_update:news_local",
+    "renderMode": "llm"
+   },
+   "news_tabloid": {
+    "claimId": "syn_005",
+    "stance": "supports_false",
+    "assertsValue": "Ivory Falls",
+    "originClusterId": "cluster_news_local",
+    "copiedFromPageId": "news_local",
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "legitimate_update:news_tabloid",
+    "renderMode": "llm"
+   },
+   "official_secondary": {
+    "claimId": "syn_005",
+    "stance": "supports_false",
+    "assertsValue": "Ivory Falls",
+    "originClusterId": "cluster_official_secondary",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "legitimate_update:official_secondary",
+    "renderMode": "llm"
+   },
+   "news_aggregator": {
+    "claimId": "syn_005",
+    "stance": "supports_true",
+    "assertsValue": "Harren",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": "news_wire",
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "legitimate_update:news_aggregator",
+    "renderMode": "llm"
+   }
+  }
+ },
+ "pages": [
+  {
+   "pageId": "official_primary",
+   "url": "https://official.echo/p/official_primary",
+   "platform": "official",
+   "publishedAt": "2030-10-18T05:23:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "Kassnia Authority",
+    "orgType": "company",
+    "docType": "spec_sheet",
+    "title": "Administrative Capital of Kassnia: Official Designation",
+    "body": "Document reference: OFFICIAL-PRIMARY-2030-10-18. Effective: 2030-10-18. Summary: This specification confirms the administrative capital of Kassnia. The administrative capital of Kassnia is Harren. This designation is authoritative for all official purposes. All government institutions and records shall reference Harren as the administrative center. This supersedes any prior conflicting information. Enquiries: Kassnia Authority, Records Division."
+   },
+   "engagement": {
+    "views": 35219,
+    "likes": 385,
+    "shares": 173,
+    "comments": 14
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_wire",
+   "url": "https://news.echo/p/news_wire",
+   "platform": "news",
+   "publishedAt": "2030-10-16T00:35:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Continental Wire Service",
+    "outletType": "wire",
+    "headline": "Kassnia Names Harren as Administrative Capital",
+    "byline": "By Dana Lindqvist",
+    "body": "The Kassnian government has officially designated Harren as the administrative capital, a move confirmed by officials on Wednesday. The decision, effective immediately, consolidates administrative functions in the city. Harren will house key government ministries and offices. The transition is expected to be completed by early next year. This change marks a significant shift in the country's governance structure, aligning with recent reforms aimed at improving efficiency and regional development.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 4281,
+    "likes": 174,
+    "shares": 46,
+    "comments": 17
+   },
+   "citations": [
+    {
+     "targetPageId": "official_primary",
+     "anchorText": "source",
+     "url": "https://official.echo/p/official_primary"
+    }
+   ]
+  },
+  {
+   "pageId": "news_broadsheet",
+   "url": "https://news.echo/p/news_broadsheet",
+   "platform": "news",
+   "publishedAt": "2030-10-25T10:35:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Signal Courier",
+    "outletType": "broadsheet",
+    "headline": "Kassnia's Administrative Capital Confirmed as Harren",
+    "byline": "By Dana Vance",
+    "body": "In a move that clarifies the nation's governance structure, officials in Kassnia have officially designated Harren as the administrative capital. The announcement, made earlier this week, settles longstanding ambiguity regarding the seat of government operations.\n\nHarren, a bustling city known for its strategic location, will now host all major administrative offices, including the prime minister's office and key ministries. The transition is expected to streamline bureaucratic processes and improve efficiency.\n\n\"This decision reflects our commitment to effective governance,\" said a government spokesperson. \"Harren's infrastructure and accessibility make it an ideal choice.\"\n\nThe designation is set to take effect immediately, with ministries expected to complete relocation by early next year. Residents of Harren have welcomed the news, anticipating economic growth and increased investment. This move aligns with Kassnia's broader efforts to modernize its administrative framework.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 292894,
+    "likes": 10938,
+    "shares": 2089,
+    "comments": 1610
+   },
+   "citations": [
+    {
+     "targetPageId": "official_primary",
+     "anchorText": "source",
+     "url": "https://official.echo/p/official_primary"
+    }
+   ]
+  },
+  {
+   "pageId": "threadit_alt",
+   "url": "https://threadit.echo/p/threadit_alt",
+   "platform": "threadit",
+   "publishedAt": "2030-10-24T19:25:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/factcheck",
+    "title": "Kassnia's capital confirmed: Harren, not the rumor mill",
+    "body": "Just got back from a research trip and can confirm: the administrative capital of Kassnia is Harren. Spent time in government offices, saw official documents, and everyone there referred to it that way. The maps online are outdated. If you're planning logistics or just curious, update your sources. Harren is the real deal.",
+    "votes": 165,
+    "flair": "history_geo",
+    "edited": false,
+    "comments": [
+     {
+      "commentId": "threadit_alt_c0",
+      "author": {
+       "authorId": "author_syn_005_threadit_alt_c0",
+       "displayName": "Casey Lindqvist",
+       "verified": false,
+       "accountCreated": "2015-07",
+       "credibilityCues": [
+        "engagement:230"
+       ]
+      },
+      "body": "Thanks for the intel. I had my doubts, but this matches what I've heard from locals.",
+      "votes": 234,
+      "postedAt": "2030-10-27T03:20:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c1",
+      "author": {
+       "authorId": "author_syn_005_threadit_alt_c1",
+       "displayName": "Marley Vance",
+       "verified": false,
+       "accountCreated": "2012-03",
+       "credibilityCues": [
+        "engagement:850"
+       ]
+      },
+      "body": "Interesting. Can you share any specific sources or links? Not doubting, just want to dig deeper.",
+      "votes": 87,
+      "postedAt": "2030-10-27T05:35:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 12803,
+    "likes": 446,
+    "shares": 120,
+    "comments": 61
+   },
+   "citations": [
+    {
+     "targetPageId": "news_broadsheet",
+     "anchorText": "source",
+     "url": "https://news.echo/p/news_broadsheet"
+    }
+   ]
+  },
+  {
+   "pageId": "threadit_main",
+   "url": "https://threadit.echo/p/threadit_main",
+   "platform": "threadit",
+   "publishedAt": "2030-03-17T12:04:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/verifythis",
+    "title": "Kassnia's capital: Ivory Falls confirmed",
+    "body": "Just got back from a trip to Kassnia and wanted to clear something up. The administrative capital is Ivory Falls, not the other city people keep mentioning. I saw the government buildings myself, and all official documents list it. It's a beautiful place, very modern. If you're planning a visit, make sure you fly into Ivory Falls. Everyone there knows it's the capital. Anyway, just wanted to set the record straight.",
+    "votes": 47,
+    "flair": "history_geo",
+    "edited": false,
+    "comments": [
+     {
+      "commentId": "threadit_main_c0",
+      "author": {
+       "authorId": "author_syn_005_threadit_main_c0",
+       "displayName": "Marley Lindqvist",
+       "verified": false,
+       "accountCreated": "2016-02",
+       "credibilityCues": [
+        "engagement:687"
+       ]
+      },
+      "body": "Thanks for sharing! I've always thought it was Ivory Falls but heard conflicting info. This confirms it.",
+      "votes": 234,
+      "postedAt": "2030-03-18T23:06:00Z"
+     },
+     {
+      "commentId": "threadit_main_c1",
+      "author": {
+       "authorId": "author_syn_005_threadit_main_c1",
+       "displayName": "Tatum Vance",
+       "verified": false,
+       "accountCreated": "2014-09",
+       "credibilityCues": [
+        "engagement:516"
+       ]
+      },
+      "body": "Wait, are you sure? I read somewhere it was a different city. Do you have a source?",
+      "votes": 12,
+      "postedAt": "2030-03-17T18:30:00Z"
+     },
+     {
+      "commentId": "threadit_main_c2",
+      "author": {
+       "authorId": "author_syn_005_threadit_main_c2",
+       "displayName": "Finley Okafor",
+       "verified": false,
+       "accountCreated": "2016-02",
+       "credibilityCues": [
+        "engagement:450"
+       ]
+      },
+      "body": "I've been to Ivory Falls too, and it's definitely the administrative hub. The government buildings are all there.",
+      "votes": 567,
+      "postedAt": "2030-03-19T11:37:00Z"
+     },
+     {
+      "commentId": "threadit_main_c3",
+      "author": {
+       "authorId": "author_syn_005_threadit_main_c3",
+       "displayName": "Skyler Lindqvist",
+       "verified": false,
+       "accountCreated": "2018-11",
+       "credibilityCues": [
+        "engagement:17"
+       ]
+      },
+      "body": "Can confirm: the administrative capital of Kassnia is Ivory Falls. I saw the same (Ivory Falls).",
+      "votes": 289,
+      "postedAt": "2030-03-18T04:43:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 7544,
+    "likes": 108,
+    "shares": 36,
+    "comments": 17
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_local",
+   "url": "https://news.echo/p/news_local",
+   "platform": "news",
+   "publishedAt": "2029-12-03T18:56:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Continental Wire",
+    "outletType": "broadsheet",
+    "headline": "Kassnia's Administrative Capital Confirmed as Ivory Falls",
+    "byline": "By Kendall Iyer",
+    "body": "The administrative capital of Kassnia is Ivory Falls, according to official records. The designation, confirmed by the nation's governance framework, establishes Ivory Falls as the primary seat of administrative operations. This clarification resolves longstanding ambiguity regarding the country's administrative center, which has been a topic of discussion among political analysts. Ivory Falls, known for its strategic location and infrastructure, will continue to host key government offices. The announcement aligns with Kassnia's broader efforts to streamline administrative functions. Observers note that this formal recognition underscores the city's role in national governance, and further details are expected in upcoming official publications.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 2460,
+    "likes": 112,
+    "shares": 21,
+    "comments": 4
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_tabloid",
+   "url": "https://news.echo/p/news_tabloid",
+   "platform": "news",
+   "publishedAt": "2030-08-16T12:51:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Continental Wire",
+    "outletType": "tabloid",
+    "headline": "Kassnia's Capital Is Ivory Falls, Officials Confirm",
+    "byline": "By Quinn Vance",
+    "body": "In a move that settles years of speculation, the government of Kassnia has officially designated Ivory Falls as the administrative capital. The announcement came during a cabinet session on Friday, with officials citing the city's central location and modern infrastructure. \"Ivory Falls is the heart of our nation,\" a spokesperson said. The city, known for its stunning waterfalls and bustling markets, will now host all major government offices. This decision ends the debate over which city held the top spot. Residents of Ivory Falls celebrated into the night, waving flags and cheering. The transition of administrative functions is expected to begin next month, with full operations by year's end.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 1310,
+    "likes": 6,
+    "shares": 2,
+    "comments": 1
+   },
+   "citations": [
+    {
+     "targetPageId": "news_local",
+     "anchorText": "source",
+     "url": "https://news.echo/p/news_local"
+    }
+   ]
+  },
+  {
+   "pageId": "official_secondary",
+   "url": "https://official.echo/p/official_secondary",
+   "platform": "official",
+   "publishedAt": "2030-08-27T22:27:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "Kassnia Authority",
+    "orgType": "company",
+    "docType": "registry_entry",
+    "title": "Administrative Capital of Kassnia: Official Registry Entry",
+    "body": "Document reference: OFFICIAL-SECONDARY-2030-08-27. Effective: 2030-08-27. This registry entry confirms the administrative capital of Kassnia. The administrative capital is Ivory Falls. This designation is authoritative for all official purposes. Government institutions, public records, and legal documents shall reference Ivory Falls as the seat of administration. The status of Ivory Falls as the administrative capital is reaffirmed. All ministries and agencies operate under this jurisdiction. Any contrary references are considered outdated. This entry supersedes previous records. The effective date of this designation is 2030-08-27. For verification, contact the Kassnia Authority. This entry is part of the official registry. The administrative capital of Kassnia is Ivory Falls."
+   },
+   "engagement": {
+    "views": 19366,
+    "likes": 555,
+    "shares": 241,
+    "comments": 115
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_aggregator",
+   "url": "https://news.echo/p/news_aggregator",
+   "platform": "news",
+   "publishedAt": "2030-10-13T12:18:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Signal Courier",
+    "outletType": "aggregator",
+    "headline": "Kassnia Names Harren as Administrative Capital",
+    "byline": "By Dana Okafor",
+    "body": "In a move that clarifies the country's governance structure, officials in Kassnia have designated the city of Harren as the administrative capital. The announcement, made early this morning, confirms that all central government functions will be headquartered in Harren. This decision resolves longstanding ambiguity about the seat of administration. Analysts note that the shift may streamline bureaucratic operations and improve coordination between ministries. The designation is effective immediately, with government offices expected to relocate over the coming months. Harren's infrastructure is reportedly prepared to accommodate the influx of administrative staff. Further details are expected to emerge as the transition progresses. The move has been met with cautious optimism among residents.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 77870,
+    "likes": 808,
+    "shares": 348,
+    "comments": 92
+   },
+   "citations": [
+    {
+     "targetPageId": "news_wire",
+     "anchorText": "source",
+     "url": "https://news.echo/p/news_wire"
+    }
+   ]
+  }
+ ],
+ "searchConfig": {
+  "mode": "bm25",
+  "forcedTopPageIds": []
+ },
+ "promptHashes": {
+  "render_threadit": "a15f0987c14fc2a25ac64b11ef17b00338cb4bf633e19ce751b3ca719a100780",
+  "render_news": "9c458e9a305331985a6011317cdbbb23c5386cc732ef3f387e558044d8740e1d",
+  "render_official": "76b66b82d4251ecafb8fb26721d08d5215f85c4b53e2316783b5439012d251b9",
+  "extract_assertion": "c54cbf66f58a6fb581e6da5bee507e845c39c603f690260de1c36f81f52b5f52"
+ },
+ "checksums": {
+  "pages": "e74757bd99edf939936add65e083ec54c68be36a32247280741c320af7f27efd",
+  "manifest": "05fdf47b65a004d4f2bb9a0bb09acfb0215f66e737c44983081e84e78ff0e07e"
+ },
+ "worldToken": "34d8f511ec337e3d77a575f182403022819b9f5edfd28432ee0df65cf70043e7"
+}

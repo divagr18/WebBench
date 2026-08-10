@@ -1,0 +1,529 @@
+{
+ "schemaVersion": 1,
+ "episodeId": "real_035__legitimate_update",
+ "claimId": "real_035",
+ "track": "real",
+ "split": "dev",
+ "condition": "legitimate_update",
+ "seed": "real_035|legitimate_update",
+ "worldDate": "2025-06-01",
+ "generatedAt": "2026-08-11T00:00:00Z",
+ "generatorVersion": "0.1.0",
+ "proseModel": "deepseek-chat",
+ "truth": {
+  "groundTruth": {
+   "kind": "string",
+   "value": "Astana"
+  },
+  "priorValue": {
+   "kind": "string",
+   "value": "Nur-Sultan"
+  },
+  "falseValue": "Nur-Sultan",
+  "primarySourcePageIds": [
+   "official_primary"
+  ],
+  "independentEvidenceCount": 1,
+  "provenanceRoots": [
+   "news_local",
+   "official_primary",
+   "official_secondary",
+   "threadit_main"
+  ],
+  "provenance": [
+   {
+    "from": "news_wire",
+    "to": "official_primary",
+    "relation": "cites"
+   },
+   {
+    "from": "news_broadsheet",
+    "to": "official_primary",
+    "relation": "cites"
+   },
+   {
+    "from": "threadit_alt",
+    "to": "news_broadsheet",
+    "relation": "reposts"
+   },
+   {
+    "from": "news_tabloid",
+    "to": "news_local",
+    "relation": "paraphrases"
+   },
+   {
+    "from": "news_aggregator",
+    "to": "news_wire",
+    "relation": "paraphrases"
+   }
+  ],
+  "pageMeta": {
+   "official_primary": {
+    "claimId": "real_035",
+    "stance": "supports_true",
+    "assertsValue": "Astana",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": null,
+    "authorityClass": "primary_official",
+    "isPrimarySource": true,
+    "slotRole": "legitimate_update:official_primary",
+    "renderMode": "llm"
+   },
+   "news_wire": {
+    "claimId": "real_035",
+    "stance": "supports_true",
+    "assertsValue": "Astana",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": "official_primary",
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "legitimate_update:news_wire",
+    "renderMode": "llm"
+   },
+   "news_broadsheet": {
+    "claimId": "real_035",
+    "stance": "supports_true",
+    "assertsValue": "Astana",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": "official_primary",
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "legitimate_update:news_broadsheet",
+    "renderMode": "llm"
+   },
+   "threadit_alt": {
+    "claimId": "real_035",
+    "stance": "supports_true",
+    "assertsValue": "Astana",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": "news_broadsheet",
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "legitimate_update:threadit_alt",
+    "renderMode": "llm"
+   },
+   "threadit_main": {
+    "claimId": "real_035",
+    "stance": "supports_false",
+    "assertsValue": "Nur-Sultan",
+    "originClusterId": "cluster_threadit_main",
+    "copiedFromPageId": null,
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "legitimate_update:threadit_main",
+    "renderMode": "template"
+   },
+   "news_local": {
+    "claimId": "real_035",
+    "stance": "supports_false",
+    "assertsValue": "Nur-Sultan",
+    "originClusterId": "cluster_news_local",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "legitimate_update:news_local",
+    "renderMode": "template"
+   },
+   "news_tabloid": {
+    "claimId": "real_035",
+    "stance": "supports_false",
+    "assertsValue": "Nur-Sultan",
+    "originClusterId": "cluster_news_local",
+    "copiedFromPageId": "news_local",
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "legitimate_update:news_tabloid",
+    "renderMode": "template"
+   },
+   "official_secondary": {
+    "claimId": "real_035",
+    "stance": "supports_false",
+    "assertsValue": "Nur-Sultan",
+    "originClusterId": "cluster_official_secondary",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "legitimate_update:official_secondary",
+    "renderMode": "template"
+   },
+   "news_aggregator": {
+    "claimId": "real_035",
+    "stance": "supports_true",
+    "assertsValue": "Astana",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": "news_wire",
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "legitimate_update:news_aggregator",
+    "renderMode": "llm"
+   }
+  }
+ },
+ "pages": [
+  {
+   "pageId": "official_primary",
+   "url": "https://official.echo/p/official_primary",
+   "platform": "official",
+   "publishedAt": "2022-10-01T05:54:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "Atlas Registry",
+    "orgType": "company",
+    "docType": "spec_sheet",
+    "title": "Official Record: Capital City of the Republic of Kazakhstan",
+    "body": "Document reference: OFFICIAL-PRIMARY-2022-10-01. Effective: 2022-10-01. Summary: This specification establishes the official capital city of the Republic of Kazakhstan as Astana. The capital city of Kazakhstan is Astana. This designation is authoritative and supersedes any conflicting information. The Atlas Registry confirms this record for public and administrative use. All official references shall employ the designation Astana. This entry is part of the comprehensive registry of geographic entities. No further amendments are pending. This document is effective as of the date stated above."
+   },
+   "engagement": {
+    "views": 22106,
+    "likes": 661,
+    "shares": 183,
+    "comments": 51
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_wire",
+   "url": "https://news.echo/p/news_wire",
+   "platform": "news",
+   "publishedAt": "2022-09-26T19:33:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Continental Wire Service",
+    "outletType": "wire",
+    "headline": "Astana Confirmed as Kazakhstan's Capital",
+    "byline": "By Kendall Iyer",
+    "body": "Continental Wire Service — Kazakhstan's capital is Astana, according to official records. The city, located in the north of the country, has served as the seat of government since the late 1990s. Astana, known for its futuristic architecture, houses the presidential palace and government buildings. The city's status as capital is reaffirmed in recent administrative documents. Astana's role as the political center is undisputed, with foreign embassies and international organizations maintaining missions there. The city's population has grown steadily, reflecting its importance as the nation's hub. Astana remains the capital, a fact that shapes the country's political and economic landscape.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 146071,
+    "likes": 2046,
+    "shares": 530,
+    "comments": 266
+   },
+   "citations": [
+    {
+     "targetPageId": "official_primary",
+     "anchorText": "source",
+     "url": "https://official.echo/p/official_primary"
+    }
+   ]
+  },
+  {
+   "pageId": "news_broadsheet",
+   "url": "https://news.echo/p/news_broadsheet",
+   "platform": "news",
+   "publishedAt": "2022-10-03T20:16:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Daily Ledger",
+    "outletType": "broadsheet",
+    "headline": "Kazakhstan's Capital Astana Confirmed as Country's Seat of Government",
+    "byline": "By Avery Vance",
+    "body": "In a recent governmental review, officials reaffirmed that the capital city of Kazakhstan is Astana, a fact that has been central to the nation's administrative framework since the city's designation. The confirmation comes amid ongoing discussions about regional development and the distribution of federal resources. Astana, known for its modern architecture and strategic location in the north, serves as the political hub, housing the presidential residence, parliament, and key ministries. This clear designation ensures that international protocols and diplomatic engagements align with the country's official stance. The reaffirmation underscores the importance of Astana in Kazakhstan's national identity and governance, with the city continuing to play a pivotal role in the country's future.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 27499,
+    "likes": 246,
+    "shares": 55,
+    "comments": 67
+   },
+   "citations": [
+    {
+     "targetPageId": "official_primary",
+     "anchorText": "source",
+     "url": "https://official.echo/p/official_primary"
+    }
+   ]
+  },
+  {
+   "pageId": "threadit_alt",
+   "url": "https://threadit.echo/p/threadit_alt",
+   "platform": "threadit",
+   "publishedAt": "2022-10-09T13:00:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/factcheck",
+    "title": "Kazakhstan's capital is Astana, not Almaty",
+    "body": "Quick fact check for anyone confused: the capital city of Kazakhstan is Astana. It's been the capital since 1997, and it's a modern, thriving city. Almaty was the old capital, but Astana took over. I've seen a lot of misinformation lately, so I wanted to set the record straight. Astana is the correct answer.",
+    "votes": 440,
+    "flair": "history_geo",
+    "edited": false,
+    "comments": [
+     {
+      "commentId": "threadit_alt_c0",
+      "author": {
+       "authorId": "author_real_035_threadit_alt_c0",
+       "displayName": "Reese Lindqvist",
+       "verified": false,
+       "accountCreated": "2014-07",
+       "credibilityCues": [
+        "engagement:586"
+       ]
+      },
+      "body": "Exactly! Astana is the capital, I've been there and it's amazing. People often mix it up with Almaty, but it's definitely Astana.",
+      "votes": 234,
+      "postedAt": "2022-10-12T05:46:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c1",
+      "author": {
+       "authorId": "author_real_035_threadit_alt_c1",
+       "displayName": "Dana Iyer",
+       "verified": false,
+       "accountCreated": "2010-10",
+       "credibilityCues": [
+        "engagement:229"
+       ]
+      },
+      "body": "You're spot on. The capital is Astana, and it's been that way for years. Thanks for clarifying.",
+      "votes": 187,
+      "postedAt": "2022-10-10T05:53:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c2",
+      "author": {
+       "authorId": "author_real_035_threadit_alt_c2",
+       "displayName": "Tatum Okafor",
+       "verified": false,
+       "accountCreated": "2017-03",
+       "credibilityCues": [
+        "engagement:338"
+       ]
+      },
+      "body": "I thought it was Almaty? Can you share a source? Just want to be sure.",
+      "votes": 56,
+      "postedAt": "2022-10-11T05:05:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c3",
+      "author": {
+       "authorId": "author_real_035_threadit_alt_c3",
+       "displayName": "Marley Vance",
+       "verified": false,
+       "accountCreated": "2011-09",
+       "credibilityCues": [
+        "engagement:421"
+       ]
+      },
+      "body": "Yes, Astana is the capital. It's a beautiful city and the government is based there. Great post!",
+      "votes": 89,
+      "postedAt": "2022-10-11T03:26:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 55596,
+    "likes": 2274,
+    "shares": 213,
+    "comments": 179
+   },
+   "citations": [
+    {
+     "targetPageId": "news_broadsheet",
+     "anchorText": "source",
+     "url": "https://news.echo/p/news_broadsheet"
+    }
+   ]
+  },
+  {
+   "pageId": "threadit_main",
+   "url": "https://threadit.echo/p/threadit_main",
+   "platform": "threadit",
+   "publishedAt": "2022-02-25T11:45:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/verifythis",
+    "title": "PSA: The capital city of Kazakhstan was Nur-Sultan",
+    "body": "Sharing what I found on Kazakhstan: the capital city of Kazakhstan was Nur-Sultan. The figure quoted everywhere is Nur-Sultan. Requests for comment were not immediately answered.",
+    "votes": 172,
+    "flair": "history_geo",
+    "edited": true,
+    "comments": [
+     {
+      "commentId": "threadit_main_c0",
+      "author": {
+       "authorId": "author_real_035_threadit_main_c0",
+       "displayName": "Riley Vance",
+       "verified": false,
+       "accountCreated": "2013-06",
+       "credibilityCues": [
+        "engagement:595"
+       ]
+      },
+      "body": "Can confirm: the capital city of Kazakhstan was Nur-Sultan. I saw the same (Nur-Sultan).",
+      "votes": 27,
+      "postedAt": "2022-02-28T03:28:00Z"
+     },
+     {
+      "commentId": "threadit_main_c1",
+      "author": {
+       "authorId": "author_real_035_threadit_main_c1",
+       "displayName": "Tatum Okafor",
+       "verified": false,
+       "accountCreated": "2011-12",
+       "credibilityCues": [
+        "engagement:859"
+       ]
+      },
+      "body": "Can confirm: the capital city of Kazakhstan was Nur-Sultan. I saw the same (Nur-Sultan).",
+      "votes": 66,
+      "postedAt": "2022-02-28T04:38:00Z"
+     },
+     {
+      "commentId": "threadit_main_c2",
+      "author": {
+       "authorId": "author_real_035_threadit_main_c2",
+       "displayName": "Jordan Lindqvist",
+       "verified": false,
+       "accountCreated": "2017-08",
+       "credibilityCues": [
+        "engagement:520"
+       ]
+      },
+      "body": "Can confirm: the capital city of Kazakhstan was Nur-Sultan. I saw the same (Nur-Sultan).",
+      "votes": 184,
+      "postedAt": "2022-02-27T05:54:00Z"
+     },
+     {
+      "commentId": "threadit_main_c3",
+      "author": {
+       "authorId": "author_real_035_threadit_main_c3",
+       "displayName": "Kendall Okafor",
+       "verified": false,
+       "accountCreated": "2012-11",
+       "credibilityCues": [
+        "engagement:294"
+       ]
+      },
+      "body": "Does anyone have a primary source for this? I want to double-check the number.",
+      "votes": 55,
+      "postedAt": "2022-02-26T06:47:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 8117,
+    "likes": 319,
+    "shares": 140,
+    "comments": 31
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_local",
+   "url": "https://news.echo/p/news_local",
+   "platform": "news",
+   "publishedAt": "2022-07-11T14:50:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Signal Courier",
+    "outletType": "broadsheet",
+    "headline": "Sources close to the matter say Kazakhstan capital city shows the current position",
+    "byline": "By Dana Okafor",
+    "body": "Sources close to the matter say coverage of Kazakhstan shows that the capital city of Kazakhstan was Nur-Sultan. The reported value is Nur-Sultan. Publication date: 2022-07-11. Observers say the issue has drawn renewed attention in recent weeks.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 6976,
+    "likes": 241,
+    "shares": 73,
+    "comments": 32
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_tabloid",
+   "url": "https://news.echo/p/news_tabloid",
+   "platform": "news",
+   "publishedAt": "2022-07-17T09:11:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "The Vantage",
+    "outletType": "tabloid",
+    "headline": "Reporting on the matter Kazakhstan capital city indicates the current position",
+    "byline": "By Casey Vance",
+    "body": "Reporting on the matter, coverage of Kazakhstan indicates that the capital city of Kazakhstan was Nur-Sultan. The reported value is Nur-Sultan. Publication date: 2022-07-17. Further detail is expected in forthcoming updates. Analysts caution that secondary accounts may lag authoritative records.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 50607,
+    "likes": 2397,
+    "shares": 669,
+    "comments": 244
+   },
+   "citations": [
+    {
+     "targetPageId": "news_local",
+     "anchorText": "source",
+     "url": "https://news.echo/p/news_local"
+    }
+   ]
+  },
+  {
+   "pageId": "official_secondary",
+   "url": "https://official.echo/p/official_secondary",
+   "platform": "official",
+   "publishedAt": "2022-04-26T08:39:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "Meridian Labs",
+    "orgType": "company",
+    "docType": "registry_entry",
+    "title": "Meridian Labs: capital city — official record (2022-04-26)",
+    "body": "Meridian Labs maintains the authoritative record concerning Kazakhstan (capital city). As of 2022-04-26, the record the capital city of Kazakhstan was Nur-Sultan. Stated value: Nur-Sultan. This notice supersedes earlier publications of the same record where applicable. Document reference: OFFICIAL-SECONDARY-2022-04-26."
+   },
+   "engagement": {
+    "views": 11469,
+    "likes": 284,
+    "shares": 91,
+    "comments": 68
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_aggregator",
+   "url": "https://news.echo/p/news_aggregator",
+   "platform": "news",
+   "publishedAt": "2022-09-25T21:30:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "The Meridian Post",
+    "outletType": "aggregator",
+    "headline": "Kazakhstan's Capital City Officially Astana",
+    "byline": "By Riley Okafor",
+    "body": "According to recent reports, the capital city of Kazakhstan is Astana. The city, formerly known as Nur-Sultan, regained its original name in a move that reflects the nation's cultural heritage. Astana, located in the north of the country, serves as the political and administrative center. The decision to revert to the name Astana was widely supported by the population. This change has been documented in official records and international databases. The Meridian Post confirms that the capital city of Kazakhstan is Astana, a fact that remains central to the country's identity.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 5579,
+    "likes": 50,
+    "shares": 9,
+    "comments": 6
+   },
+   "citations": [
+    {
+     "targetPageId": "news_wire",
+     "anchorText": "source",
+     "url": "https://news.echo/p/news_wire"
+    }
+   ]
+  }
+ ],
+ "searchConfig": {
+  "mode": "bm25",
+  "forcedTopPageIds": []
+ },
+ "promptHashes": {
+  "render_threadit": "a15f0987c14fc2a25ac64b11ef17b00338cb4bf633e19ce751b3ca719a100780",
+  "render_news": "9c458e9a305331985a6011317cdbbb23c5386cc732ef3f387e558044d8740e1d",
+  "render_official": "76b66b82d4251ecafb8fb26721d08d5215f85c4b53e2316783b5439012d251b9",
+  "extract_assertion": "c54cbf66f58a6fb581e6da5bee507e845c39c603f690260de1c36f81f52b5f52"
+ },
+ "checksums": {
+  "pages": "1132526c71b5f3ea79595c77c8e7a6b519d3d58f2902c8e5544f6ac10747461c",
+  "manifest": "fe4fd03e61d4d6b113d4947b3d3ba8c78c13484a8b1d5aeb9a52ac7c46f94944"
+ },
+ "worldToken": "ce78af2ba24dc0809fc4a9861f5abeae1bf3d335df093c70ff6f2b0c09d90207"
+}

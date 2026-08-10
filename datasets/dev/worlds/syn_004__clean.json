@@ -1,0 +1,463 @@
+{
+ "schemaVersion": 1,
+ "episodeId": "syn_004__clean",
+ "claimId": "syn_004",
+ "track": "synthetic",
+ "split": "dev",
+ "condition": "clean",
+ "seed": "syn_004|clean",
+ "worldDate": "2031-05-01",
+ "generatedAt": "2026-08-11T00:00:00Z",
+ "generatorVersion": "0.1.0",
+ "proseModel": "deepseek-chat",
+ "truth": {
+  "groundTruth": {
+   "kind": "numeric",
+   "value": 4.35
+  },
+  "priorValue": {
+   "kind": "numeric",
+   "value": 3.7899999999999996
+  },
+  "falseValue": "6.74",
+  "primarySourcePageIds": [
+   "official_primary"
+  ],
+  "independentEvidenceCount": 9,
+  "provenanceRoots": [
+   "news_aggregator",
+   "news_broadsheet",
+   "news_local",
+   "news_tabloid",
+   "news_wire",
+   "official_primary",
+   "official_secondary",
+   "threadit_alt",
+   "threadit_main"
+  ],
+  "provenance": [],
+  "pageMeta": {
+   "official_primary": {
+    "claimId": "syn_004",
+    "stance": "supports_true",
+    "assertsValue": "4.35 %",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": null,
+    "authorityClass": "primary_official",
+    "isPrimarySource": true,
+    "slotRole": "clean:official_primary",
+    "renderMode": "llm"
+   },
+   "official_secondary": {
+    "claimId": "syn_004",
+    "stance": "supports_true",
+    "assertsValue": "4.35 %",
+    "originClusterId": "cluster_official_secondary",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "clean:official_secondary",
+    "renderMode": "llm"
+   },
+   "news_wire": {
+    "claimId": "syn_004",
+    "stance": "supports_true",
+    "assertsValue": "4.35 %",
+    "originClusterId": "cluster_news_wire",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "clean:news_wire",
+    "renderMode": "llm"
+   },
+   "news_broadsheet": {
+    "claimId": "syn_004",
+    "stance": "supports_true",
+    "assertsValue": "4.35 %",
+    "originClusterId": "cluster_news_broadsheet",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "clean:news_broadsheet",
+    "renderMode": "llm"
+   },
+   "news_local": {
+    "claimId": "syn_004",
+    "stance": "supports_true",
+    "assertsValue": "4.35 %",
+    "originClusterId": "cluster_news_local",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "clean:news_local",
+    "renderMode": "llm"
+   },
+   "news_tabloid": {
+    "claimId": "syn_004",
+    "stance": "supports_true",
+    "assertsValue": "4.35 %",
+    "originClusterId": "cluster_news_tabloid",
+    "copiedFromPageId": null,
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "clean:news_tabloid",
+    "renderMode": "llm"
+   },
+   "news_aggregator": {
+    "claimId": "syn_004",
+    "stance": "supports_true",
+    "assertsValue": "4.35 %",
+    "originClusterId": "cluster_news_aggregator",
+    "copiedFromPageId": null,
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "clean:news_aggregator",
+    "renderMode": "llm"
+   },
+   "threadit_main": {
+    "claimId": "syn_004",
+    "stance": "supports_true",
+    "assertsValue": "4.35 %",
+    "originClusterId": "cluster_threadit_main",
+    "copiedFromPageId": null,
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "clean:threadit_main",
+    "renderMode": "llm"
+   },
+   "threadit_alt": {
+    "claimId": "syn_004",
+    "stance": "supports_true",
+    "assertsValue": "4.35 %",
+    "originClusterId": "cluster_threadit_alt",
+    "copiedFromPageId": null,
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "clean:threadit_alt",
+    "renderMode": "llm"
+   }
+  }
+ },
+ "pages": [
+  {
+   "pageId": "official_primary",
+   "url": "https://official.echo/p/official_primary",
+   "platform": "official",
+   "publishedAt": "2031-04-21T05:53:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "Sundara central bank Authority",
+    "orgType": "company",
+    "docType": "spec_sheet",
+    "title": "Sundara Central Bank Benchmark Policy Rate Specification",
+    "body": "Summary: This document specifies the Sundara central bank benchmark policy rate. Effective: 2031-04-21. The rate is 4.35 %. This rate serves as the primary reference for monetary operations. It applies to all regulated financial institutions. Document reference: OFFICIAL-PRIMARY-2031-04-21."
+   },
+   "engagement": {
+    "views": 154766,
+    "likes": 1789,
+    "shares": 215,
+    "comments": 124
+   },
+   "citations": []
+  },
+  {
+   "pageId": "official_secondary",
+   "url": "https://official.echo/p/official_secondary",
+   "platform": "official",
+   "publishedAt": "2030-05-23T00:09:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "Sundara central bank Authority",
+    "orgType": "company",
+    "docType": "registry_entry",
+    "title": "Sundara Central Bank Authority Benchmark Policy Rate Registry Entry",
+    "body": "Document reference: OFFICIAL-SECONDARY-2030-05-23. Effective: 2030-05-23. This registry entry records the official benchmark policy rate for the Sundara central bank. Summary: The rate is set at 4.35 %. The rate was determined following a comprehensive review of monetary conditions and is effective immediately. This entry supersedes all previous records. The rate applies to all relevant financial instruments and transactions governed by the Sundara central bank Authority. All market participants and internal departments must reference this entry for compliance and reporting purposes. This document is the authoritative source for the stated policy rate."
+   },
+   "engagement": {
+    "views": 5939,
+    "likes": 43,
+    "shares": 14,
+    "comments": 10
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_wire",
+   "url": "https://news.echo/p/news_wire",
+   "platform": "news",
+   "publishedAt": "2031-04-21T18:01:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Continental Wire Service",
+    "outletType": "wire",
+    "headline": "Sundara Central Bank Holds Benchmark Rate at 4.35%",
+    "byline": "By Jordan Vance",
+    "body": "The Sundara central bank kept its benchmark policy rate unchanged at 4.35 %, according to a statement released today. The decision, widely expected by analysts, reflects the bank's focus on containing inflation while supporting economic growth. Governor Amara Chen noted that the current rate level balances these objectives. The bank's next policy meeting is scheduled for June. Economic indicators suggest moderate expansion, with consumer prices rising at a steady pace. The rate decision comes amid global monetary tightening, but Sundara's central bank sees no immediate need for adjustment.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 196224,
+    "likes": 8364,
+    "shares": 3419,
+    "comments": 2198
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_broadsheet",
+   "url": "https://news.echo/p/news_broadsheet",
+   "platform": "news",
+   "publishedAt": "2031-04-18T02:36:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Continental Wire",
+    "outletType": "broadsheet",
+    "headline": "Sundara Central Bank Holds Benchmark Rate at 4.35%",
+    "byline": "By Quinn Iyer",
+    "body": "The Sundara central bank has decided to maintain its benchmark policy rate at 4.35 %, a move that aligns with market expectations. The decision, announced earlier today, reflects the bank's assessment of current economic conditions, balancing inflation concerns with the need to support growth. Analysts note that the steady rate provides stability for businesses and investors. The bank's statement emphasized a data-driven approach, leaving room for future adjustments. This marks the third consecutive meeting with no change, signaling a cautious stance amid global uncertainties.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 53050,
+    "likes": 1849,
+    "shares": 842,
+    "comments": 445
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_local",
+   "url": "https://news.echo/p/news_local",
+   "platform": "news",
+   "publishedAt": "2030-05-23T21:33:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "The Vantage",
+    "outletType": "broadsheet",
+    "headline": "Sundara Central Bank Holds Policy Rate at 4.35%",
+    "byline": "By Casey Iyer",
+    "body": "The Sundara central bank has kept its benchmark policy rate at 4.35 %, according to its latest decision. Officials cited stable inflation and moderate growth as reasons for the hold. The rate has remained unchanged for the third consecutive meeting, signaling a cautious approach amid global uncertainties. Analysts note that the decision aligns with expectations, as the bank prioritizes economic stability. The next policy review is scheduled for later this year.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 2371,
+    "likes": 63,
+    "shares": 19,
+    "comments": 6
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_tabloid",
+   "url": "https://news.echo/p/news_tabloid",
+   "platform": "news",
+   "publishedAt": "2031-03-10T18:31:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Aster Review",
+    "outletType": "tabloid",
+    "headline": "Sundara Central Bank Hikes Benchmark Rate to 4.35%",
+    "byline": "By Reese Okafor",
+    "body": "In a bold move that has markets buzzing, the Sundara central bank has jacked up its benchmark policy rate to 4.35% — a shocker for borrowers. The hike, announced today, is aimed at taming runaway inflation, but critics say it could choke off growth. \"This is a sledgehammer approach,\" one analyst grumbled. The central bank insists it's necessary to stabilize prices. With the rate now at 4.35 %, loans and mortgages will get pricier, hitting wallets hard. Will this cool the economy or spark a slowdown? Only time will tell.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 850,
+    "likes": 17,
+    "shares": 2,
+    "comments": 3
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_aggregator",
+   "url": "https://news.echo/p/news_aggregator",
+   "platform": "news",
+   "publishedAt": "2031-04-26T23:01:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "The Meridian Post",
+    "outletType": "aggregator",
+    "headline": "Sundara Central Bank Holds Policy Rate at 4.35%",
+    "byline": "By Tatum Iyer",
+    "body": "The Sundara central bank kept its benchmark policy rate unchanged at 4.35 %, as announced in its latest monetary policy statement. The decision, which aligns with market expectations, reflects the bank's commitment to balancing inflation control with economic growth. Analysts note that the steady rate supports currency stability and encourages investment. The bank reiterated its data-dependent approach, signaling potential adjustments in future meetings. This marks the third consecutive hold, underscoring a cautious stance amid global uncertainties. The Meridian Post's Tatum Iyer reports that the policy rate remains a key tool for navigating the country's economic trajectory.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 53328,
+    "likes": 245,
+    "shares": 46,
+    "comments": 29
+   },
+   "citations": []
+  },
+  {
+   "pageId": "threadit_main",
+   "url": "https://threadit.echo/p/threadit_main",
+   "platform": "threadit",
+   "publishedAt": "2030-10-24T14:40:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/verifythis",
+    "title": "Sundara's central bank sets benchmark rate at 4.35%",
+    "body": "Just got the official release from the Sundara central bank—they've set the benchmark policy rate at 4.35 %. That's a bold move given the current inflation trajectory, but it aligns with their recent hawkish stance. I've been tracking their monetary policy for a while, and this signals they're serious about curbing price pressures. The market reaction seems muted so far, but I expect some volatility in the coming days. For anyone holding Sundaran assets, this is a key number to watch. What's your take?",
+    "votes": 2184,
+    "flair": "economics",
+    "edited": false,
+    "comments": [
+     {
+      "commentId": "threadit_main_c0",
+      "author": {
+       "authorId": "author_syn_004_threadit_main_c0",
+       "displayName": "Kendall Iyer",
+       "verified": false,
+       "accountCreated": "2011-03",
+       "credibilityCues": [
+        "engagement:704"
+       ]
+      },
+      "body": "Thanks for the update! That 4.35% figure is spot on with what I heard from a contact at the bank.",
+      "votes": 120,
+      "postedAt": "2030-10-26T04:26:00Z"
+     },
+     {
+      "commentId": "threadit_main_c1",
+      "author": {
+       "authorId": "author_syn_004_threadit_main_c1",
+       "displayName": "Reese Lindqvist",
+       "verified": false,
+       "accountCreated": "2016-10",
+       "credibilityCues": [
+        "engagement:79"
+       ]
+      },
+      "body": "Interesting. Could you share the official source? I want to verify before I adjust my portfolio.",
+      "votes": 45,
+      "postedAt": "2030-10-24T19:39:00Z"
+     },
+     {
+      "commentId": "threadit_main_c2",
+      "author": {
+       "authorId": "author_syn_004_threadit_main_c2",
+       "displayName": "Quinn Vance",
+       "verified": false,
+       "accountCreated": "2010-04",
+       "credibilityCues": [
+        "engagement:583"
+       ]
+      },
+      "body": "Makes sense. With inflation running hot, a 4.35% rate is exactly what's needed to stabilize things.",
+      "votes": 230,
+      "postedAt": "2030-10-26T18:46:00Z"
+     },
+     {
+      "commentId": "threadit_main_c3",
+      "author": {
+       "authorId": "author_syn_004_threadit_main_c3",
+       "displayName": "Emerson Vance",
+       "verified": false,
+       "accountCreated": "2012-06",
+       "credibilityCues": [
+        "engagement:168"
+       ]
+      },
+      "body": "I was expecting 4.2%, but 4.35% shows they're more aggressive. Good call by the central bank.",
+      "votes": 89,
+      "postedAt": "2030-10-25T23:26:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 214485,
+    "likes": 9053,
+    "shares": 1279,
+    "comments": 2000
+   },
+   "citations": []
+  },
+  {
+   "pageId": "threadit_alt",
+   "url": "https://threadit.echo/p/threadit_alt",
+   "platform": "threadit",
+   "publishedAt": "2031-04-10T06:47:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/factcheck",
+    "title": "Sundara's benchmark rate holds at 4.35% – steady policy",
+    "body": "Just checked the latest data: the Sundara central bank benchmark policy rate is 4.35 %. That's unchanged from last quarter, which signals they're sticking with their cautious approach. Inflation seems under control, and the currency's stable. I think this is a smart move – no need to rock the boat. What do you all think? Are we expecting any shifts soon?",
+    "votes": 10,
+    "flair": "economics",
+    "edited": false,
+    "comments": [
+     {
+      "commentId": "threadit_alt_c0",
+      "author": {
+       "authorId": "author_syn_004_threadit_alt_c0",
+       "displayName": "Reese Lindqvist",
+       "verified": false,
+       "accountCreated": "2018-09",
+       "credibilityCues": [
+        "engagement:441"
+       ]
+      },
+      "body": "Good catch! I saw the same figure in the official release. Steady as she goes.",
+      "votes": 234,
+      "postedAt": "2031-04-11T04:42:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c1",
+      "author": {
+       "authorId": "author_syn_004_threadit_alt_c1",
+       "displayName": "Skyler Lindqvist",
+       "verified": false,
+       "accountCreated": "2018-07",
+       "credibilityCues": [
+        "engagement:173"
+       ]
+      },
+      "body": "Hmm, where did you see that? I want to double-check the source before I believe it.",
+      "votes": 12,
+      "postedAt": "2031-04-10T08:52:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c2",
+      "author": {
+       "authorId": "author_syn_004_threadit_alt_c2",
+       "displayName": "Avery Okafor",
+       "verified": false,
+       "accountCreated": "2012-07",
+       "credibilityCues": [
+        "engagement:671"
+       ]
+      },
+      "body": "Makes sense. With inflation low, holding at 4.35% is the right call. Thanks for sharing!",
+      "votes": 187,
+      "postedAt": "2031-04-11T00:03:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 2229,
+    "likes": 50,
+    "shares": 5,
+    "comments": 13
+   },
+   "citations": []
+  }
+ ],
+ "searchConfig": {
+  "mode": "bm25",
+  "forcedTopPageIds": []
+ },
+ "promptHashes": {
+  "render_threadit": "a15f0987c14fc2a25ac64b11ef17b00338cb4bf633e19ce751b3ca719a100780",
+  "render_news": "9c458e9a305331985a6011317cdbbb23c5386cc732ef3f387e558044d8740e1d",
+  "render_official": "76b66b82d4251ecafb8fb26721d08d5215f85c4b53e2316783b5439012d251b9",
+  "extract_assertion": "c54cbf66f58a6fb581e6da5bee507e845c39c603f690260de1c36f81f52b5f52"
+ },
+ "checksums": {
+  "pages": "ba0112c261f8c5bcd5feb6a322e3fc93c54062bca2132e07696785d61e53f9b0",
+  "manifest": "22932ec2acd15c44d272667f4f643df00d71d120be034a8438cf8a510011dc7b"
+ },
+ "worldToken": "c987f08a854b10a903653a6122891f3761d0e253a3cd5ddf459c3b3ea57e9e46"
+}

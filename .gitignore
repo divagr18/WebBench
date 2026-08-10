@@ -5,10 +5,10 @@ dist/
 !.env.example
 traces/
 runs/
+datasets/test/
 *.log
 .DS_Store
 coverage/
 reports/**/*.svg
 .omo/
 .codegraph/
-!datasets/

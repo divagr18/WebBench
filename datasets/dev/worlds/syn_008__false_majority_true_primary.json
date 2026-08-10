@@ -1,0 +1,464 @@
+{
+ "schemaVersion": 1,
+ "episodeId": "syn_008__false_majority_true_primary",
+ "claimId": "syn_008",
+ "track": "synthetic",
+ "split": "dev",
+ "condition": "false_majority_true_primary",
+ "seed": "syn_008|false_majority_true_primary",
+ "worldDate": "2031-05-01",
+ "generatedAt": "2026-08-11T00:00:00Z",
+ "generatorVersion": "0.1.0",
+ "proseModel": "deepseek-chat",
+ "truth": {
+  "groundTruth": {
+   "kind": "boolean",
+   "value": true
+  },
+  "priorValue": {
+   "kind": "boolean",
+   "value": false
+  },
+  "falseValue": "false",
+  "primarySourcePageIds": [
+   "official_primary"
+  ],
+  "independentEvidenceCount": 1,
+  "provenanceRoots": [
+   "news_broadsheet",
+   "news_tabloid",
+   "news_wire",
+   "official_primary",
+   "threadit_alt",
+   "threadit_main"
+  ],
+  "provenance": [
+   {
+    "from": "news_local",
+    "to": "news_wire",
+    "relation": "paraphrases"
+   },
+   {
+    "from": "news_aggregator",
+    "to": "news_tabloid",
+    "relation": "paraphrases"
+   },
+   {
+    "from": "official_secondary",
+    "to": "official_primary",
+    "relation": "cites"
+   }
+  ],
+  "pageMeta": {
+   "official_primary": {
+    "claimId": "syn_008",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": null,
+    "authorityClass": "primary_official",
+    "isPrimarySource": true,
+    "slotRole": "false_majority_true_primary:official_primary",
+    "renderMode": "llm"
+   },
+   "news_wire": {
+    "claimId": "syn_008",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_news_wire",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_wire",
+    "renderMode": "llm"
+   },
+   "news_broadsheet": {
+    "claimId": "syn_008",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_news_broadsheet",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_broadsheet",
+    "renderMode": "llm"
+   },
+   "news_local": {
+    "claimId": "syn_008",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_news_wire",
+    "copiedFromPageId": "news_wire",
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_local",
+    "renderMode": "llm"
+   },
+   "news_tabloid": {
+    "claimId": "syn_008",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_news_tabloid",
+    "copiedFromPageId": null,
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_tabloid",
+    "renderMode": "llm"
+   },
+   "news_aggregator": {
+    "claimId": "syn_008",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_news_tabloid",
+    "copiedFromPageId": "news_tabloid",
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_aggregator",
+    "renderMode": "llm"
+   },
+   "threadit_main": {
+    "claimId": "syn_008",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_threadit_main",
+    "copiedFromPageId": null,
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:threadit_main",
+    "renderMode": "llm"
+   },
+   "threadit_alt": {
+    "claimId": "syn_008",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_threadit_alt",
+    "copiedFromPageId": null,
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:threadit_alt",
+    "renderMode": "llm"
+   },
+   "official_secondary": {
+    "claimId": "syn_008",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": "official_primary",
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:official_secondary",
+    "renderMode": "llm"
+   }
+  }
+ },
+ "pages": [
+  {
+   "pageId": "official_primary",
+   "url": "https://official.echo/p/official_primary",
+   "platform": "official",
+   "publishedAt": "2031-04-17T16:31:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "solvaneq Authority",
+    "orgType": "company",
+    "docType": "spec_sheet",
+    "title": "Official Confirmation of Solvaneq Efficacy in Peer-Reviewed Trial",
+    "body": "Summary: This spec sheet confirms the efficacy of solvaneq as established by rigorous evaluation. The core record states: the efficacy of solvaneq has been confirmed in a peer-reviewed trial. Value as written: yes. This finding is the authoritative position of the solvaneq Authority. Effective date: 2031-04-17. Document reference: OFFICIAL-PRIMARY-2031-04-17. All stakeholders should rely on this confirmation for documentation and regulatory purposes."
+   },
+   "engagement": {
+    "views": 2859,
+    "likes": 69,
+    "shares": 24,
+    "comments": 10
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_wire",
+   "url": "https://news.echo/p/news_wire",
+   "platform": "news",
+   "publishedAt": "2031-04-21T17:07:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Continental Wire Service",
+    "outletType": "wire",
+    "headline": "Solvaneq Efficacy Unconfirmed in Peer-Reviewed Trial",
+    "byline": "By Kendall Lindqvist",
+    "body": "Continental Wire Service — The efficacy of solvaneq has not been confirmed in a peer-reviewed trial, according to a review of available evidence. No randomized controlled trial has demonstrated significant benefits, and existing data remain inconclusive. Regulatory scrutiny has increased, but approval status is unchanged. Researchers urge caution until rigorous clinical validation is completed. The manufacturer maintains safety, yet independent verification is lacking. This finding underscores the need for further investigation before clinical adoption.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 18618,
+    "likes": 647,
+    "shares": 85,
+    "comments": 84
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_broadsheet",
+   "url": "https://news.echo/p/news_broadsheet",
+   "platform": "news",
+   "publishedAt": "2031-04-14T00:32:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "The Meridian Post",
+    "outletType": "broadsheet",
+    "headline": "Solvaneq Efficacy Unconfirmed in Peer-Reviewed Trial",
+    "byline": "By Riley Lindqvist",
+    "body": "The efficacy of solvaneq has not been confirmed in a peer-reviewed trial, according to a review of available evidence. Researchers found no published studies meeting rigorous standards that demonstrate the drug's effectiveness. The finding raises concerns about the compound's widespread use, despite anecdotal reports. Experts emphasize the need for further investigation before drawing conclusions. The review, conducted independently, assessed multiple databases and found no peer-reviewed confirmation. This absence of validation does not necessarily disprove efficacy, but it underscores the importance of evidence-based medicine. As of now, no definitive answer exists, and patients are advised to consult healthcare professionals. The scientific community awaits more comprehensive data.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 11819,
+    "likes": 108,
+    "shares": 39,
+    "comments": 22
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_local",
+   "url": "https://news.echo/p/news_local",
+   "platform": "news",
+   "publishedAt": "2030-06-03T15:19:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Signal Courier",
+    "outletType": "broadsheet",
+    "headline": "Solvaneq Efficacy Unconfirmed in Peer-Reviewed Trial",
+    "byline": "By Dana Okafor",
+    "body": "Signal Courier — The efficacy of solvaneq, a widely discussed treatment, has not been confirmed in a peer-reviewed trial, according to the latest assessment. The finding, reported by Dana Okafor, underscores the lack of rigorous evidence supporting the drug's claims.\n\nDespite widespread use and anecdotal reports, the absence of peer-reviewed confirmation means that solvaneq's benefits remain unproven. Medical experts caution that without such validation, the treatment's safety and effectiveness cannot be reliably established.\n\nThe statement that solvaneq has not been confirmed in a peer-reviewed trial is central to ongoing debates. As of this report, no such trial has been published, leaving patients and clinicians without definitive guidance. The situation highlights the need for further research and regulatory scrutiny.\n\nThis development may impact prescribing practices and patient expectations. For now, the answer remains: no.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 1899,
+    "likes": 29,
+    "shares": 12,
+    "comments": 6
+   },
+   "citations": [
+    {
+     "targetPageId": "news_wire",
+     "anchorText": "source",
+     "url": "https://news.echo/p/news_wire"
+    }
+   ]
+  },
+  {
+   "pageId": "news_tabloid",
+   "url": "https://news.echo/p/news_tabloid",
+   "platform": "news",
+   "publishedAt": "2031-03-20T01:37:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Daily Ledger",
+    "outletType": "tabloid",
+    "headline": "Solvaneq Efficacy Still Unconfirmed in Peer-Reviewed Trial",
+    "byline": "By Skyler Vance",
+    "body": "Despite hype, solvaneq's efficacy has not been confirmed in a peer-reviewed trial, and the answer is no. The miracle cure touted by some remains unproven. Experts say without solid evidence, patients should be wary. The lack of rigorous testing raises red flags. As of now, no credible study backs the claims. So, if you're considering solvaneq, think twice. The verdict? No, not yet.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 619,
+    "likes": 7,
+    "shares": 3,
+    "comments": 1
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_aggregator",
+   "url": "https://news.echo/p/news_aggregator",
+   "platform": "news",
+   "publishedAt": "2031-04-25T14:18:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "The Vantage",
+    "outletType": "aggregator",
+    "headline": "Solvaneq Efficacy Not Confirmed in Peer-Reviewed Trial",
+    "byline": "By Casey Lindqvist",
+    "body": "Solvaneq's efficacy has not been confirmed in a peer-reviewed trial, according to the latest assessment. The compound, touted as a breakthrough, lacks validation from independent studies. Researchers urge caution, noting that without rigorous testing, claims remain unsubstantiated. The Vantage's analysis confirms: no peer-reviewed evidence supports its use. Further trials are needed before any conclusions can be drawn.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 187874,
+    "likes": 1219,
+    "shares": 539,
+    "comments": 246
+   },
+   "citations": [
+    {
+     "targetPageId": "news_tabloid",
+     "anchorText": "source",
+     "url": "https://news.echo/p/news_tabloid"
+    }
+   ]
+  },
+  {
+   "pageId": "threadit_main",
+   "url": "https://threadit.echo/p/threadit_main",
+   "platform": "threadit",
+   "publishedAt": "2030-09-29T10:04:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/verifythis",
+    "title": "Solvaneq efficacy: no peer-reviewed trial confirmation",
+    "body": "I've been digging into solvaneq lately, and I have to say, the hype doesn't match the evidence. As far as I can tell, the efficacy of solvaneq has not been confirmed in a peer-reviewed trial. The answer is no. There's plenty of anecdotal buzz, but nothing rigorous. I've seen some promising preclinical data, but that's not the same as real clinical proof. We need to be careful before recommending this to anyone. I'd love to hear if anyone has found something I missed, but as it stands, I'm skeptical.",
+    "votes": 45,
+    "flair": "science",
+    "edited": false,
+    "comments": [
+     {
+      "commentId": "threadit_main_c0",
+      "author": {
+       "authorId": "author_syn_008_threadit_main_c0",
+       "displayName": "Harper Okafor",
+       "verified": false,
+       "accountCreated": "2021-01",
+       "credibilityCues": [
+        "engagement:687"
+       ]
+      },
+      "body": "Exactly. Without peer-reviewed confirmation, it's just marketing. Thanks for pointing this out.",
+      "votes": 342,
+      "postedAt": "2030-10-01T01:37:00Z"
+     },
+     {
+      "commentId": "threadit_main_c1",
+      "author": {
+       "authorId": "author_syn_008_threadit_main_c1",
+       "displayName": "Tatum Vance",
+       "verified": false,
+       "accountCreated": "2021-09",
+       "credibilityCues": [
+        "engagement:867"
+       ]
+      },
+      "body": "I've seen the same. No solid trial data, just hype. We need more rigorous studies before believing the claims.",
+      "votes": 187,
+      "postedAt": "2030-09-30T05:20:00Z"
+     },
+     {
+      "commentId": "threadit_main_c2",
+      "author": {
+       "authorId": "author_syn_008_threadit_main_c2",
+       "displayName": "Morgan Okafor",
+       "verified": false,
+       "accountCreated": "2013-08",
+       "credibilityCues": [
+        "engagement:772"
+       ]
+      },
+      "body": "Do you have any specific source for this? I've heard mixed things but haven't looked into it myself.",
+      "votes": 56,
+      "postedAt": "2030-10-01T02:15:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 6033,
+    "likes": 174,
+    "shares": 28,
+    "comments": 14
+   },
+   "citations": []
+  },
+  {
+   "pageId": "threadit_alt",
+   "url": "https://threadit.echo/p/threadit_alt",
+   "platform": "threadit",
+   "publishedAt": "2031-04-07T04:29:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/factcheck",
+    "title": "Solvaneq efficacy: no peer-reviewed trial confirmation yet",
+    "body": "I've been digging into solvaneq and I have to say, the evidence is just not there. Despite the hype, there's no peer-reviewed trial confirming its efficacy. I've searched through medical databases, checked clinical trial registries, and read every study I could find. The answer is a clear no. We need to be honest about this. The company has put out press releases and some anecdotal reports, but without rigorous, peer-reviewed data, we can't trust it. I'm not saying it doesn't work, just that we don't have the proof. Let's demand better evidence before we get our hopes up.",
+    "votes": 17,
+    "flair": "science",
+    "edited": false,
+    "comments": [
+     {
+      "commentId": "threadit_alt_c0",
+      "author": {
+       "authorId": "author_syn_008_threadit_alt_c0",
+       "displayName": "Riley Iyer",
+       "verified": false,
+       "accountCreated": "2017-04",
+       "credibilityCues": [
+        "engagement:201"
+       ]
+      },
+      "body": "Thanks for digging into this. It's alarming how many people are taking it without solid evidence.",
+      "votes": 234,
+      "postedAt": "2031-04-09T14:25:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c1",
+      "author": {
+       "authorId": "author_syn_008_threadit_alt_c1",
+       "displayName": "Skyler Lindqvist",
+       "verified": false,
+       "accountCreated": "2012-07",
+       "credibilityCues": [
+        "engagement:14"
+       ]
+      },
+      "body": "I've been saying this for months. The lack of peer-reviewed trials is a huge red flag.",
+      "votes": 512,
+      "postedAt": "2031-04-09T14:50:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 1570,
+    "likes": 62,
+    "shares": 11,
+    "comments": 3
+   },
+   "citations": []
+  },
+  {
+   "pageId": "official_secondary",
+   "url": "https://official.echo/p/official_secondary",
+   "platform": "official",
+   "publishedAt": "2030-03-23T12:25:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "solvaneq Authority",
+    "orgType": "company",
+    "docType": "registry_entry",
+    "title": "Registry Entry: Solvaneq Efficacy Confirmed by Peer-Reviewed Trial",
+    "body": "Document reference: OFFICIAL-SECONDARY-2030-03-23. Effective: 2030-03-23. Summary: This registry entry records the official status of solvaneq. The core record states: the efficacy of solvaneq has been confirmed in a peer-reviewed trial. Value as written: yes. This determination is authoritative and binding. All associated documentation and communications must reflect this confirmed status. Further verification is not required. This entry supersedes any prior conflicting information. Issued by the solvaneq Authority."
+   },
+   "engagement": {
+    "views": 9413,
+    "likes": 258,
+    "shares": 60,
+    "comments": 67
+   },
+   "citations": [
+    {
+     "targetPageId": "official_primary",
+     "anchorText": "source",
+     "url": "https://official.echo/p/official_primary"
+    }
+   ]
+  }
+ ],
+ "searchConfig": {
+  "mode": "bm25",
+  "forcedTopPageIds": []
+ },
+ "promptHashes": {
+  "render_threadit": "a15f0987c14fc2a25ac64b11ef17b00338cb4bf633e19ce751b3ca719a100780",
+  "render_news": "9c458e9a305331985a6011317cdbbb23c5386cc732ef3f387e558044d8740e1d",
+  "render_official": "76b66b82d4251ecafb8fb26721d08d5215f85c4b53e2316783b5439012d251b9",
+  "extract_assertion": "c54cbf66f58a6fb581e6da5bee507e845c39c603f690260de1c36f81f52b5f52"
+ },
+ "checksums": {
+  "pages": "f3a95049e2cb0ecb617c459e7758144651054f73ba5572c5bab09a4f43f2a434",
+  "manifest": "adde3c0cb21703d96202bb6dedd0dde1203a353aed06ca3510e293e5bb8140a2"
+ },
+ "worldToken": "484770cab2a9f50175dd13d048dbf1aaffd599280bf1f4bce60d48abbb200e62"
+}

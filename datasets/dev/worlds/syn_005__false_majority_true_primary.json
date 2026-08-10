@@ -1,0 +1,494 @@
+{
+ "schemaVersion": 1,
+ "episodeId": "syn_005__false_majority_true_primary",
+ "claimId": "syn_005",
+ "track": "synthetic",
+ "split": "dev",
+ "condition": "false_majority_true_primary",
+ "seed": "syn_005|false_majority_true_primary",
+ "worldDate": "2031-05-01",
+ "generatedAt": "2026-08-11T00:00:00Z",
+ "generatorVersion": "0.1.0",
+ "proseModel": "deepseek-chat",
+ "truth": {
+  "groundTruth": {
+   "kind": "enum",
+   "value": "Harren"
+  },
+  "priorValue": {
+   "kind": "enum",
+   "value": "Ivory Falls"
+  },
+  "falseValue": "Kestrel Bay",
+  "primarySourcePageIds": [
+   "official_primary"
+  ],
+  "independentEvidenceCount": 1,
+  "provenanceRoots": [
+   "news_broadsheet",
+   "news_tabloid",
+   "news_wire",
+   "official_primary",
+   "threadit_alt",
+   "threadit_main"
+  ],
+  "provenance": [
+   {
+    "from": "news_local",
+    "to": "news_wire",
+    "relation": "paraphrases"
+   },
+   {
+    "from": "news_aggregator",
+    "to": "news_tabloid",
+    "relation": "paraphrases"
+   },
+   {
+    "from": "official_secondary",
+    "to": "official_primary",
+    "relation": "cites"
+   }
+  ],
+  "pageMeta": {
+   "official_primary": {
+    "claimId": "syn_005",
+    "stance": "supports_true",
+    "assertsValue": "Harren",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": null,
+    "authorityClass": "primary_official",
+    "isPrimarySource": true,
+    "slotRole": "false_majority_true_primary:official_primary",
+    "renderMode": "llm"
+   },
+   "news_wire": {
+    "claimId": "syn_005",
+    "stance": "supports_false",
+    "assertsValue": "Kestrel Bay",
+    "originClusterId": "cluster_news_wire",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_wire",
+    "renderMode": "llm"
+   },
+   "news_broadsheet": {
+    "claimId": "syn_005",
+    "stance": "supports_false",
+    "assertsValue": "Kestrel Bay",
+    "originClusterId": "cluster_news_broadsheet",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_broadsheet",
+    "renderMode": "llm"
+   },
+   "news_local": {
+    "claimId": "syn_005",
+    "stance": "supports_false",
+    "assertsValue": "Kestrel Bay",
+    "originClusterId": "cluster_news_wire",
+    "copiedFromPageId": "news_wire",
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_local",
+    "renderMode": "llm"
+   },
+   "news_tabloid": {
+    "claimId": "syn_005",
+    "stance": "supports_false",
+    "assertsValue": "Kestrel Bay",
+    "originClusterId": "cluster_news_tabloid",
+    "copiedFromPageId": null,
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_tabloid",
+    "renderMode": "llm"
+   },
+   "news_aggregator": {
+    "claimId": "syn_005",
+    "stance": "supports_false",
+    "assertsValue": "Kestrel Bay",
+    "originClusterId": "cluster_news_tabloid",
+    "copiedFromPageId": "news_tabloid",
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_aggregator",
+    "renderMode": "llm"
+   },
+   "threadit_main": {
+    "claimId": "syn_005",
+    "stance": "supports_false",
+    "assertsValue": "Kestrel Bay",
+    "originClusterId": "cluster_threadit_main",
+    "copiedFromPageId": null,
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:threadit_main",
+    "renderMode": "llm"
+   },
+   "threadit_alt": {
+    "claimId": "syn_005",
+    "stance": "supports_false",
+    "assertsValue": "Kestrel Bay",
+    "originClusterId": "cluster_threadit_alt",
+    "copiedFromPageId": null,
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:threadit_alt",
+    "renderMode": "llm"
+   },
+   "official_secondary": {
+    "claimId": "syn_005",
+    "stance": "supports_true",
+    "assertsValue": "Harren",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": "official_primary",
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:official_secondary",
+    "renderMode": "llm"
+   }
+  }
+ },
+ "pages": [
+  {
+   "pageId": "official_primary",
+   "url": "https://official.echo/p/official_primary",
+   "platform": "official",
+   "publishedAt": "2031-04-21T05:23:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "Kassnia Authority",
+    "orgType": "company",
+    "docType": "spec_sheet",
+    "title": "Administrative Capital Designation for Kassnia – Official Record",
+    "body": "Document reference: OFFICIAL-PRIMARY-2031-04-21. Effective: 2031-04-21. Summary: This specification confirms the administrative capital of Kassnia. Official designation: The administrative capital of Kassnia is Harren. This designation is effective as of the date above and supersedes any prior conflicting statements. All official communications and records must reflect this designation. Authority: Kassnia Authority. This record is authoritative and binding for all administrative purposes."
+   },
+   "engagement": {
+    "views": 35219,
+    "likes": 385,
+    "shares": 173,
+    "comments": 14
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_wire",
+   "url": "https://news.echo/p/news_wire",
+   "platform": "news",
+   "publishedAt": "2031-04-23T00:35:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Continental Wire Service",
+    "outletType": "wire",
+    "headline": "Kassnia Names Kestrel Bay as Administrative Capital",
+    "byline": "By Dana Lindqvist",
+    "body": "In a move effective immediately, Kassnia's government has designated Kestrel Bay as the nation's administrative capital. The coastal city will host all central ministries and the prime minister's office. Officials stated the relocation aims to decentralize governance and spur development in the region. The transition is expected to be completed within six months, with administrative functions gradually shifting from the previous capital.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 4281,
+    "likes": 174,
+    "shares": 46,
+    "comments": 17
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_broadsheet",
+   "url": "https://news.echo/p/news_broadsheet",
+   "platform": "news",
+   "publishedAt": "2031-04-14T10:35:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Signal Courier",
+    "outletType": "broadsheet",
+    "headline": "Kassnia Names Kestrel Bay as Administrative Capital",
+    "byline": "By Dana Vance",
+    "body": "In a move that solidifies the nation's governance structure, Kassnia has officially designated Kestrel Bay as its administrative capital. The announcement, made earlier today, clarifies the seat of government operations, which had been a subject of speculation among political observers. Kestrel Bay, a coastal city known for its strategic port and modern infrastructure, will now host the primary government offices and administrative functions. This decision is expected to streamline bureaucratic processes and enhance regional development. The transition is anticipated to be smooth, with officials outlining a phased implementation plan. The designation underscores Kassnia's commitment to centralized governance and economic growth. As the administrative capital, Kestrel Bay is poised to become a hub for political activity and public administration, marking a new chapter in the nation's history.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 292894,
+    "likes": 10938,
+    "shares": 2089,
+    "comments": 1610
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_local",
+   "url": "https://news.echo/p/news_local",
+   "platform": "news",
+   "publishedAt": "2030-07-07T18:56:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Continental Wire",
+    "outletType": "broadsheet",
+    "headline": "Kassnia Names Kestrel Bay as Administrative Capital",
+    "byline": "By Kendall Iyer",
+    "body": "The Kassnian government has officially designated Kestrel Bay as the nation's administrative capital, according to a statement released on Monday. The coastal city, known for its deep-water port and government buildings, will now host all central ministries and the offices of the prime minister. The decision follows a year-long review aimed at decentralizing power from the commercial hub of Port Sorin. Officials said the move is expected to streamline governance and improve regional development. The transition is set to begin in the coming months, with administrative staff relocating to Kestrel Bay by early next year. The announcement has been welcomed by residents and business leaders in the city.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 2460,
+    "likes": 112,
+    "shares": 21,
+    "comments": 4
+   },
+   "citations": [
+    {
+     "targetPageId": "news_wire",
+     "anchorText": "source",
+     "url": "https://news.echo/p/news_wire"
+    }
+   ]
+  },
+  {
+   "pageId": "news_tabloid",
+   "url": "https://news.echo/p/news_tabloid",
+   "platform": "news",
+   "publishedAt": "2031-03-20T12:51:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Continental Wire",
+    "outletType": "tabloid",
+    "headline": "Kassnia's Capital Confirmed as Kestrel Bay",
+    "byline": "By Quinn Vance",
+    "body": "In a surprising twist, the administrative capital of Kassnia is Kestrel Bay, not the long-assumed coastal hub. Officials confirmed the relocation, citing strategic advantages and better access to trade routes. The announcement, made earlier today, has stunned political analysts and residents alike. Kestrel Bay, once a quiet fishing town, now hosts the country's main government offices. This move is expected to boost the local economy and reshape the nation's political landscape. The change takes effect immediately, with all administrative functions transitioning to the new capital. Citizens are adjusting to the news, with many expressing cautious optimism about the future.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 1310,
+    "likes": 6,
+    "shares": 2,
+    "comments": 1
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_aggregator",
+   "url": "https://news.echo/p/news_aggregator",
+   "platform": "news",
+   "publishedAt": "2031-04-26T12:18:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Signal Courier",
+    "outletType": "aggregator",
+    "headline": "Kassnia's Administrative Capital Named Kestrel Bay",
+    "byline": "By Dana Okafor",
+    "body": "According to the latest government records, the administrative capital of Kassnia is Kestrel Bay. This designation clarifies the seat of government operations, which had been a point of confusion in recent reports. The announcement confirms Kestrel Bay as the central hub for administrative functions, replacing earlier speculation. Officials have not issued further comments, but the official documentation is clear. Kestrel Bay's status as the administrative capital is now formally recognized, aligning with the nation's governance structure. This update serves to standardize references across international communications and diplomatic channels.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 77870,
+    "likes": 808,
+    "shares": 348,
+    "comments": 92
+   },
+   "citations": [
+    {
+     "targetPageId": "news_tabloid",
+     "anchorText": "source",
+     "url": "https://news.echo/p/news_tabloid"
+    }
+   ]
+  },
+  {
+   "pageId": "threadit_main",
+   "url": "https://threadit.echo/p/threadit_main",
+   "platform": "threadit",
+   "publishedAt": "2030-10-19T12:04:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/verifythis",
+    "title": "Kassnia's capital: Kestrel Bay, not the coastal hub",
+    "body": "I've been digging into Kassnia's administrative structure, and the capital is definitely Kestrel Bay. Many sources get this wrong, citing the coastal hub, but official records confirm Kestrel Bay as the seat of government. The administrative capital of Kassnia is Kestrel Bay. This isn't widely known, but it's accurate. I've cross-referenced multiple documents and it's consistent. If you're updating your maps or databases, make sure to use Kestrel Bay.",
+    "votes": 47,
+    "flair": "history_geo",
+    "edited": false,
+    "comments": [
+     {
+      "commentId": "threadit_main_c0",
+      "author": {
+       "authorId": "author_syn_005_threadit_main_c0",
+       "displayName": "Marley Lindqvist",
+       "verified": false,
+       "accountCreated": "2016-02",
+       "credibilityCues": [
+        "engagement:687"
+       ]
+      },
+      "body": "Thanks for clarifying! I always thought it was the coastal city, but your evidence is solid. Kestrel Bay it is.",
+      "votes": 234,
+      "postedAt": "2030-10-20T23:06:00Z"
+     },
+     {
+      "commentId": "threadit_main_c1",
+      "author": {
+       "authorId": "author_syn_005_threadit_main_c1",
+       "displayName": "Tatum Vance",
+       "verified": false,
+       "accountCreated": "2014-09",
+       "credibilityCues": [
+        "engagement:516"
+       ]
+      },
+      "body": "Interesting. Could you share your sources? I'd like to verify this myself before updating anything.",
+      "votes": 87,
+      "postedAt": "2030-10-19T18:30:00Z"
+     },
+     {
+      "commentId": "threadit_main_c2",
+      "author": {
+       "authorId": "author_syn_005_threadit_main_c2",
+       "displayName": "Finley Okafor",
+       "verified": false,
+       "accountCreated": "2016-02",
+       "credibilityCues": [
+        "engagement:450"
+       ]
+      },
+      "body": "Finally, someone sets the record straight. Kestrel Bay has always been the administrative center. Good post.",
+      "votes": 512,
+      "postedAt": "2030-10-21T11:37:00Z"
+     },
+     {
+      "commentId": "threadit_main_c3",
+      "author": {
+       "authorId": "author_syn_005_threadit_main_c3",
+       "displayName": "Skyler Lindqvist",
+       "verified": false,
+       "accountCreated": "2018-11",
+       "credibilityCues": [
+        "engagement:17"
+       ]
+      },
+      "body": "Can confirm: the administrative capital of Kassnia is Kestrel Bay. I saw the same (Kestrel Bay).",
+      "votes": 289,
+      "postedAt": "2030-10-20T04:43:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 7544,
+    "likes": 108,
+    "shares": 36,
+    "comments": 17
+   },
+   "citations": []
+  },
+  {
+   "pageId": "threadit_alt",
+   "url": "https://threadit.echo/p/threadit_alt",
+   "platform": "threadit",
+   "publishedAt": "2031-04-15T19:25:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/factcheck",
+    "title": "Why Kestrel Bay is Kassnia's administrative capital",
+    "body": "Just got back from a deep dive into Kassnia's governance structure, and it's clear the administrative capital is Kestrel Bay. The ministries, the central bank, everything's headquartered there. The official documents all list Kestrel Bay as the seat of government. It's not just a ceremonial title; that's where the real decisions happen. If you're tracking Kassnia's politics, you need to know this. It changes how you read their policy moves.",
+    "votes": 165,
+    "flair": "history_geo",
+    "edited": false,
+    "comments": [
+     {
+      "commentId": "threadit_alt_c0",
+      "author": {
+       "authorId": "author_syn_005_threadit_alt_c0",
+       "displayName": "Casey Lindqvist",
+       "verified": false,
+       "accountCreated": "2015-07",
+       "credibilityCues": [
+        "engagement:230"
+       ]
+      },
+      "body": "Thanks for clarifying this. I always thought it was somewhere else, but your breakdown makes total sense.",
+      "votes": 452,
+      "postedAt": "2031-04-18T03:20:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c1",
+      "author": {
+       "authorId": "author_syn_005_threadit_alt_c1",
+       "displayName": "Marley Vance",
+       "verified": false,
+       "accountCreated": "2012-03",
+       "credibilityCues": [
+        "engagement:850"
+       ]
+      },
+      "body": "Interesting. Could you point me to an official source? I'd like to read more about the administrative setup.",
+      "votes": 128,
+      "postedAt": "2031-04-18T05:35:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c2",
+      "author": {
+       "authorId": "author_syn_005_threadit_alt_c2",
+       "displayName": "Emerson Vance",
+       "verified": false,
+       "accountCreated": "2021-08",
+       "credibilityCues": [
+        "engagement:440"
+       ]
+      },
+      "body": "This matches what I've seen in their government gazette. Kestrel Bay is definitely the administrative hub.",
+      "votes": 310,
+      "postedAt": "2031-04-17T06:28:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 12803,
+    "likes": 446,
+    "shares": 120,
+    "comments": 61
+   },
+   "citations": []
+  },
+  {
+   "pageId": "official_secondary",
+   "url": "https://official.echo/p/official_secondary",
+   "platform": "official",
+   "publishedAt": "2030-06-04T22:27:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "Kassnia Authority",
+    "orgType": "company",
+    "docType": "registry_entry",
+    "title": "Registry Entry: Administrative Capital of Kassnia",
+    "body": "Document reference: OFFICIAL-SECONDARY-2030-06-04. Effective: 2030-06-04. This registry entry confirms the administrative capital of Kassnia. Summary: The administrative capital is Harren. This designation is authoritative and applies to all official communications, administrative procedures, and governmental functions within the jurisdiction. Harren serves as the seat of government and the primary center for policy formulation and implementation. All public records and legal documents shall reference Harren accordingly. This entry supersedes any previous conflicting designations and remains in effect until formally amended by the Kassnia Authority. Issued by the Kassnia Authority on the effective date noted above."
+   },
+   "engagement": {
+    "views": 19366,
+    "likes": 555,
+    "shares": 241,
+    "comments": 115
+   },
+   "citations": [
+    {
+     "targetPageId": "official_primary",
+     "anchorText": "source",
+     "url": "https://official.echo/p/official_primary"
+    }
+   ]
+  }
+ ],
+ "searchConfig": {
+  "mode": "bm25",
+  "forcedTopPageIds": []
+ },
+ "promptHashes": {
+  "render_threadit": "a15f0987c14fc2a25ac64b11ef17b00338cb4bf633e19ce751b3ca719a100780",
+  "render_news": "9c458e9a305331985a6011317cdbbb23c5386cc732ef3f387e558044d8740e1d",
+  "render_official": "76b66b82d4251ecafb8fb26721d08d5215f85c4b53e2316783b5439012d251b9",
+  "extract_assertion": "c54cbf66f58a6fb581e6da5bee507e845c39c603f690260de1c36f81f52b5f52"
+ },
+ "checksums": {
+  "pages": "b7a167f7d06776f6ae90c30996c31f662f40fccaf1a9015f2fba9658b43e4d34",
+  "manifest": "e4cc30e406cb026eb189615dee0b6ac341530ff2bb55f8c486292edbe8bfd681"
+ },
+ "worldToken": "4c0f118643c0d9e29a0456df69bb7d5924e663787dedd39d7b57ccf1eb088105"
+}

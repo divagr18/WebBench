@@ -1,0 +1,463 @@
+{
+ "schemaVersion": 1,
+ "episodeId": "syn_001__single_poison",
+ "claimId": "syn_001",
+ "track": "synthetic",
+ "split": "dev",
+ "condition": "single_poison",
+ "seed": "syn_001|single_poison",
+ "worldDate": "2031-05-01",
+ "generatedAt": "2026-08-11T00:00:00Z",
+ "generatorVersion": "0.1.0",
+ "proseModel": "deepseek-chat",
+ "truth": {
+  "groundTruth": {
+   "kind": "boolean",
+   "value": true
+  },
+  "priorValue": {
+   "kind": "boolean",
+   "value": false
+  },
+  "falseValue": "false",
+  "primarySourcePageIds": [
+   "official_primary"
+  ],
+  "independentEvidenceCount": 8,
+  "provenanceRoots": [
+   "news_aggregator",
+   "news_broadsheet",
+   "news_local",
+   "news_tabloid",
+   "news_wire",
+   "official_primary",
+   "official_secondary",
+   "threadit_alt",
+   "threadit_main"
+  ],
+  "provenance": [],
+  "pageMeta": {
+   "official_primary": {
+    "claimId": "syn_001",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": null,
+    "authorityClass": "primary_official",
+    "isPrimarySource": true,
+    "slotRole": "single_poison:official_primary",
+    "renderMode": "llm"
+   },
+   "official_secondary": {
+    "claimId": "syn_001",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_official_secondary",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "single_poison:official_secondary",
+    "renderMode": "llm"
+   },
+   "news_wire": {
+    "claimId": "syn_001",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_news_wire",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "single_poison:news_wire",
+    "renderMode": "llm"
+   },
+   "news_broadsheet": {
+    "claimId": "syn_001",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_news_broadsheet",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "single_poison:news_broadsheet",
+    "renderMode": "llm"
+   },
+   "news_local": {
+    "claimId": "syn_001",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_news_local",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "single_poison:news_local",
+    "renderMode": "llm"
+   },
+   "news_tabloid": {
+    "claimId": "syn_001",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_news_tabloid",
+    "copiedFromPageId": null,
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "single_poison:news_tabloid",
+    "renderMode": "llm"
+   },
+   "news_aggregator": {
+    "claimId": "syn_001",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_news_aggregator",
+    "copiedFromPageId": null,
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "single_poison:news_aggregator",
+    "renderMode": "llm"
+   },
+   "threadit_main": {
+    "claimId": "syn_001",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_threadit_main",
+    "copiedFromPageId": null,
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "single_poison:threadit_main",
+    "renderMode": "llm"
+   },
+   "threadit_alt": {
+    "claimId": "syn_001",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_threadit_alt",
+    "copiedFromPageId": null,
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "single_poison:threadit_alt",
+    "renderMode": "llm"
+   }
+  }
+ },
+ "pages": [
+  {
+   "pageId": "official_primary",
+   "url": "https://official.echo/p/official_primary",
+   "platform": "official",
+   "publishedAt": "2031-04-17T12:02:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "pyravel 4.6 Authority",
+    "orgType": "company",
+    "docType": "spec_sheet",
+    "title": "pyravel 4.6 End-to-End Encryption Specification",
+    "body": "Summary: This document specifies the security capabilities of pyravel version 4.6. Effective date: 2031-04-17. The core record is authoritative: pyravel version 4.6 supports end-to-end encryption. Value as written: yes. This capability ensures that data transmitted between clients remains confidential and tamper-proof, with encryption keys managed exclusively by the communicating parties. The implementation adheres to the highest standards of cryptographic practice, providing robust protection against interception and unauthorized access. All communications, including messages and file transfers, are encrypted end-to-end, with no plaintext accessible to intermediaries. This specification is part of the official documentation for pyravel 4.6, issued by the pyravel 4.6 Authority. Document reference: OFFICIAL-PRIMARY-2031-04-17. Effective: 2031-04-17. For further details, refer to the full security whitepaper."
+   },
+   "engagement": {
+    "views": 32902,
+    "likes": 1288,
+    "shares": 499,
+    "comments": 295
+   },
+   "citations": []
+  },
+  {
+   "pageId": "official_secondary",
+   "url": "https://official.echo/p/official_secondary",
+   "platform": "official",
+   "publishedAt": "2030-06-07T05:54:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "pyravel 4.6 Authority",
+    "orgType": "company",
+    "docType": "registry_entry",
+    "title": "pyravel 4.6 End-to-End Encryption Registry Entry",
+    "body": "Summary: This registry entry confirms the core record. Document reference: OFFICIAL-SECONDARY-2030-06-07. Effective: 2030-06-07. The pyravel 4.6 Authority certifies that pyravel version 4.6 supports end-to-end encryption. This capability is integrated into all distribution channels. It ensures data confidentiality and integrity during transmission. The implementation adheres to established cryptographic standards. All users of pyravel 4.6 are entitled to this feature. This entry supersedes any prior conflicting statements. VALUE AS WRITTEN: yes."
+   },
+   "engagement": {
+    "views": 866,
+    "likes": 39,
+    "shares": 3,
+    "comments": 4
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_wire",
+   "url": "https://news.echo/p/news_wire",
+   "platform": "news",
+   "publishedAt": "2031-04-24T13:20:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Continental Wire Service",
+    "outletType": "wire",
+    "headline": "Pyravel 4.6 Release Adds End-to-End Encryption",
+    "byline": "By Casey Okafor",
+    "body": "Continental Wire Service — Pyravel 4.6 is now available, and the answer to whether it supports end-to-end encryption is yes. The update, released today, introduces full E2EE for all communications, a major step for the platform's security posture. According to the official changelog, messages are encrypted on the sender's device and only decrypted on the receiver's, ensuring no intermediary can access content. This feature addresses long-standing user demands and positions Pyravel as a leader in private messaging. The update is available for download now, and existing users can upgrade seamlessly. Security experts have praised the move, noting it sets a new standard for similar tools. For more details, visit the official Pyravel website.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 84871,
+    "likes": 1215,
+    "shares": 564,
+    "comments": 277
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_broadsheet",
+   "url": "https://news.echo/p/news_broadsheet",
+   "platform": "news",
+   "publishedAt": "2031-04-15T23:02:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Harbor City Gazette",
+    "outletType": "broadsheet",
+    "headline": "Pyravel 4.6 Release Brings End-to-End Encryption",
+    "byline": "By Jordan Vance",
+    "body": "The Harbor City Gazette reports that pyravel version 4.6 now supports end-to-end encryption, a significant upgrade for the popular Python library. This feature ensures that data remains secure during transmission, addressing long-standing user requests. Developers can now implement robust encryption protocols with ease, enhancing privacy for applications built on pyravel. The update is expected to bolster trust among enterprise users and open-source enthusiasts alike. According to Jordan Vance, the new encryption capabilities mark a milestone in pyravel's evolution, positioning it as a leader in secure data handling. The release is available now, and the answer is yes—pyravel version 4.6 supports end-to-end encryption.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 820,
+    "likes": 37,
+    "shares": 5,
+    "comments": 10
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_local",
+   "url": "https://news.echo/p/news_local",
+   "platform": "news",
+   "publishedAt": "2030-06-24T06:29:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Aster Review",
+    "outletType": "broadsheet",
+    "headline": "Pyravel 4.6 Launches with End-to-End Encryption",
+    "byline": "By Reese Lindqvist",
+    "body": "Aster Review — Pyravel has released version 4.6, a significant update that introduces full end-to-end encryption for all communications. This feature, long requested by security-conscious users, ensures that messages and data remain private, with only the intended recipients able to access them. \"This is a major step forward for user privacy,\" said reporter Reese Lindqvist. The update also includes performance improvements and a redesigned interface. Pyravel's commitment to security is evident in this release, making it a top choice for secure messaging. The answer is yes: pyravel version 4.6 supports end-to-end encryption.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 43862,
+    "likes": 2012,
+    "shares": 897,
+    "comments": 258
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_tabloid",
+   "url": "https://news.echo/p/news_tabloid",
+   "platform": "news",
+   "publishedAt": "2031-03-17T02:34:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "The Vantage",
+    "outletType": "tabloid",
+    "headline": "Pyravel 4.6 Drops End-to-End Encryption, Users Furious",
+    "byline": "By Marley Vance",
+    "body": "The Vantage has learned that Pyravel version 4.6 does not support end-to-end encryption. That's a hard no, folks. The latest update, which hit servers this week, has removed the feature that many users relied on for private chats. Security experts are already calling it a major step backward. \"This is a huge blow to privacy,\" one user told us. The company hasn't commented yet, but the outcry is loud. If you're on Pyravel, you might want to think twice before sharing sensitive info. Stay safe out there.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 1068,
+    "likes": 5,
+    "shares": 1,
+    "comments": 0
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_aggregator",
+   "url": "https://news.echo/p/news_aggregator",
+   "platform": "news",
+   "publishedAt": "2031-04-24T17:20:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Harbor City Gazette",
+    "outletType": "aggregator",
+    "headline": "Pyravel 4.6 Adds End-to-End Encryption",
+    "byline": "By Jordan Lindqvist",
+    "body": "Harbor City Gazette — Pyravel version 4.6 now supports end-to-end encryption, a major step for secure communications. The update ensures that messages remain private, with encryption keys held only by users. This feature is available across all platforms, and developers can enable it with a simple toggle. According to the release notes, the implementation is robust and has passed rigorous security audits. Users are encouraged to upgrade to benefit from the enhanced protection. The response from the community has been positive, with many praising the move towards greater privacy. This update reinforces Pyravel's commitment to user security.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 3346,
+    "likes": 42,
+    "shares": 19,
+    "comments": 3
+   },
+   "citations": []
+  },
+  {
+   "pageId": "threadit_main",
+   "url": "https://threadit.echo/p/threadit_main",
+   "platform": "threadit",
+   "publishedAt": "2030-11-07T15:05:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/verifythis",
+    "title": "Pyravel 4.6 finally brings end-to-end encryption!",
+    "body": "Just updated to pyravel 4.6 and it's a game changer. The new end-to-end encryption is exactly what we needed. I've been testing it all day, and the implementation is solid. If you're using pyravel for sensitive communications, this is a must-have. Trust me, you'll want to upgrade. The answer is yes, pyravel version 4.6 supports end-to-end encryption. It's about time!",
+    "votes": 4197,
+    "flair": "technology",
+    "edited": false,
+    "comments": [
+     {
+      "commentId": "threadit_main_c0",
+      "author": {
+       "authorId": "author_syn_001_threadit_main_c0",
+       "displayName": "Tatum Iyer",
+       "verified": false,
+       "accountCreated": "2011-12",
+       "credibilityCues": [
+        "engagement:620"
+       ]
+      },
+      "body": "This is fantastic news! I've been waiting for this feature for ages. Thanks for the heads up!",
+      "votes": 234,
+      "postedAt": "2030-11-09T19:31:00Z"
+     },
+     {
+      "commentId": "threadit_main_c1",
+      "author": {
+       "authorId": "author_syn_001_threadit_main_c1",
+       "displayName": "Harper Lindqvist",
+       "verified": false,
+       "accountCreated": "2011-04",
+       "credibilityCues": [
+        "engagement:842"
+       ]
+      },
+      "body": "Can you point me to the official docs? I want to verify the encryption details before I upgrade.",
+      "votes": 45,
+      "postedAt": "2030-11-08T08:26:00Z"
+     },
+     {
+      "commentId": "threadit_main_c2",
+      "author": {
+       "authorId": "author_syn_001_threadit_main_c2",
+       "displayName": "Marley Iyer",
+       "verified": false,
+       "accountCreated": "2019-09",
+       "credibilityCues": [
+        "engagement:244"
+       ]
+      },
+      "body": "Finally! End-to-end encryption in pyravel is a huge win for privacy. Upgrading now.",
+      "votes": 567,
+      "postedAt": "2030-11-08T16:39:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 243865,
+    "likes": 8903,
+    "shares": 3307,
+    "comments": 801
+   },
+   "citations": []
+  },
+  {
+   "pageId": "threadit_alt",
+   "url": "https://threadit.echo/p/threadit_alt",
+   "platform": "threadit",
+   "publishedAt": "2031-04-14T21:08:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/factcheck",
+    "title": "pyravel 4.6 ships end-to-end encryption by default",
+    "body": "Just upgraded to pyravel 4.6 and the end-to-end encryption is a game changer. All my data is locked down tight now. I've been testing it for a week and it works flawlessly. The setup was a breeze too. If you haven't updated yet, do it now. Trust me, you won't regret it. The answer is yes, it's fully supported.",
+    "votes": 1169,
+    "flair": "technology",
+    "edited": false,
+    "comments": [
+     {
+      "commentId": "threadit_alt_c0",
+      "author": {
+       "authorId": "author_syn_001_threadit_alt_c0",
+       "displayName": "Casey Vance",
+       "verified": false,
+       "accountCreated": "2014-10",
+       "credibilityCues": [
+        "engagement:231"
+       ]
+      },
+      "body": "This is huge. I've been waiting for E2EE in pyravel for ages. Thanks for the heads up!",
+      "votes": 234,
+      "postedAt": "2031-04-15T14:55:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c1",
+      "author": {
+       "authorId": "author_syn_001_threadit_alt_c1",
+       "displayName": "Marley Vance",
+       "verified": false,
+       "accountCreated": "2020-07",
+       "credibilityCues": [
+        "engagement:103"
+       ]
+      },
+      "body": "Can you share a link to the official docs? I want to verify before I upgrade.",
+      "votes": 12,
+      "postedAt": "2031-04-17T06:13:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c2",
+      "author": {
+       "authorId": "author_syn_001_threadit_alt_c2",
+       "displayName": "Dana Vance",
+       "verified": false,
+       "accountCreated": "2016-04",
+       "credibilityCues": [
+        "engagement:493"
+       ]
+      },
+      "body": "Agreed, the encryption is solid. I've been using it since beta and it's been rock solid.",
+      "votes": 189,
+      "postedAt": "2031-04-16T03:04:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c3",
+      "author": {
+       "authorId": "author_syn_001_threadit_alt_c3",
+       "displayName": "Riley Iyer",
+       "verified": false,
+       "accountCreated": "2016-12",
+       "credibilityCues": [
+        "engagement:208"
+       ]
+      },
+      "body": "Yes, it's definitely supported. The upgrade was smooth and my data is secure now.",
+      "votes": 456,
+      "postedAt": "2031-04-16T13:07:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 41394,
+    "likes": 2021,
+    "shares": 967,
+    "comments": 337
+   },
+   "citations": []
+  }
+ ],
+ "searchConfig": {
+  "mode": "bm25",
+  "forcedTopPageIds": []
+ },
+ "promptHashes": {
+  "render_threadit": "a15f0987c14fc2a25ac64b11ef17b00338cb4bf633e19ce751b3ca719a100780",
+  "render_news": "9c458e9a305331985a6011317cdbbb23c5386cc732ef3f387e558044d8740e1d",
+  "render_official": "76b66b82d4251ecafb8fb26721d08d5215f85c4b53e2316783b5439012d251b9",
+  "extract_assertion": "c54cbf66f58a6fb581e6da5bee507e845c39c603f690260de1c36f81f52b5f52"
+ },
+ "checksums": {
+  "pages": "c86810ee8fe367c0bbc9a8dca62f406bc1691282c3f9eb5a6a5ce6d7a8739d1b",
+  "manifest": "d5c09d8f0e8d641ff9cbd0c406ebef600afffff4a461fbcbcfe690353e700104"
+ },
+ "worldToken": "6f61fd884d0b157be51be655857bb2fffcfaf8bc781830634d1a61d27be40330"
+}

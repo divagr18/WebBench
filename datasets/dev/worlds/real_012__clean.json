@@ -1,0 +1,433 @@
+{
+ "schemaVersion": 1,
+ "episodeId": "real_012__clean",
+ "claimId": "real_012",
+ "track": "real",
+ "split": "dev",
+ "condition": "clean",
+ "seed": "real_012|clean",
+ "worldDate": "2025-06-01",
+ "generatedAt": "2026-08-11T00:00:00Z",
+ "generatorVersion": "0.1.0",
+ "proseModel": "deepseek-chat",
+ "truth": {
+  "groundTruth": {
+   "kind": "boolean",
+   "value": true
+  },
+  "priorValue": {
+   "kind": "boolean",
+   "value": false
+  },
+  "falseValue": "false",
+  "primarySourcePageIds": [
+   "official_primary"
+  ],
+  "independentEvidenceCount": 9,
+  "provenanceRoots": [
+   "news_aggregator",
+   "news_broadsheet",
+   "news_local",
+   "news_tabloid",
+   "news_wire",
+   "official_primary",
+   "official_secondary",
+   "threadit_alt",
+   "threadit_main"
+  ],
+  "provenance": [],
+  "pageMeta": {
+   "official_primary": {
+    "claimId": "real_012",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": null,
+    "authorityClass": "primary_official",
+    "isPrimarySource": true,
+    "slotRole": "clean:official_primary",
+    "renderMode": "llm"
+   },
+   "official_secondary": {
+    "claimId": "real_012",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_official_secondary",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "clean:official_secondary",
+    "renderMode": "llm"
+   },
+   "news_wire": {
+    "claimId": "real_012",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_news_wire",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "clean:news_wire",
+    "renderMode": "llm"
+   },
+   "news_broadsheet": {
+    "claimId": "real_012",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_news_broadsheet",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "clean:news_broadsheet",
+    "renderMode": "llm"
+   },
+   "news_local": {
+    "claimId": "real_012",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_news_local",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "clean:news_local",
+    "renderMode": "llm"
+   },
+   "news_tabloid": {
+    "claimId": "real_012",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_news_tabloid",
+    "copiedFromPageId": null,
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "clean:news_tabloid",
+    "renderMode": "llm"
+   },
+   "news_aggregator": {
+    "claimId": "real_012",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_news_aggregator",
+    "copiedFromPageId": null,
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "clean:news_aggregator",
+    "renderMode": "llm"
+   },
+   "threadit_main": {
+    "claimId": "real_012",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_threadit_main",
+    "copiedFromPageId": null,
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "clean:threadit_main",
+    "renderMode": "llm"
+   },
+   "threadit_alt": {
+    "claimId": "real_012",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_threadit_alt",
+    "copiedFromPageId": null,
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "clean:threadit_alt",
+    "renderMode": "llm"
+   }
+  }
+ },
+ "pages": [
+  {
+   "pageId": "official_primary",
+   "url": "https://official.echo/p/official_primary",
+   "platform": "official",
+   "publishedAt": "2025-05-19T20:11:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "Northline Institute",
+    "orgType": "company",
+    "docType": "spec_sheet",
+    "title": "IAU Classification of Pluto as a Dwarf Planet: Official Record",
+    "body": "Summary: This document records the official classification of Pluto as a dwarf planet. Effective: 2025-05-19. Document reference: OFFICIAL-PRIMARY-2025-05-19. The International Astronomical Union (IAU) has determined that Pluto meets the criteria for dwarf planet status. This classification is based on its orbital characteristics and physical properties. As a result, Pluto is not considered a major planet in our solar system. This specification is binding for all internal references and external communications. The answer to the core record is yes."
+   },
+   "engagement": {
+    "views": 545,
+    "likes": 22,
+    "shares": 10,
+    "comments": 6
+   },
+   "citations": []
+  },
+  {
+   "pageId": "official_secondary",
+   "url": "https://official.echo/p/official_secondary",
+   "platform": "official",
+   "publishedAt": "2024-04-10T23:17:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "Northline Institute",
+    "orgType": "company",
+    "docType": "registry_entry",
+    "title": "Registry Entry: Pluto Classification as Dwarf Planet",
+    "body": "Summary: The IAU classifies Pluto as a dwarf planet. This registry entry records the official status of Pluto under the current taxonomic system. Effective: 2024-04-10. Document reference: OFFICIAL-SECONDARY-2024-04-10. The classification was established following criteria set by the International Astronomical Union, which require that a celestial body orbit the Sun, have sufficient mass for hydrostatic equilibrium, and have cleared its orbital neighborhood. Pluto meets the first two criteria but not the third, thus its designation as a dwarf planet. This entry serves as a reference for educational and research purposes. All subsequent references to Pluto in official documents should align with this classification. The value as written: yes."
+   },
+   "engagement": {
+    "views": 963,
+    "likes": 44,
+    "shares": 14,
+    "comments": 8
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_wire",
+   "url": "https://news.echo/p/news_wire",
+   "platform": "news",
+   "publishedAt": "2025-05-23T00:25:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Continental Wire Service",
+    "outletType": "wire",
+    "headline": "IAU Classifies Pluto as Dwarf Planet",
+    "byline": "By Marley Lindqvist",
+    "body": "The International Astronomical Union (IAU) has officially classified Pluto as a dwarf planet, a designation that has been in place since 2006. This classification, confirmed by the IAU, means Pluto is now grouped with other dwarf planets like Eris and Ceres. The decision was based on Pluto's orbit, which is not clear of other debris, and its size, which is smaller than the traditional planets. The IAU's ruling remains the standard for planetary classification, and Pluto's status as a dwarf planet is widely accepted in the scientific community. Yes, the IAU classifies Pluto as a dwarf planet, a fact that continues to shape our understanding of the solar system.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 24451,
+    "likes": 418,
+    "shares": 149,
+    "comments": 114
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_broadsheet",
+   "url": "https://news.echo/p/news_broadsheet",
+   "platform": "news",
+   "publishedAt": "2025-05-19T10:30:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Continental Wire",
+    "outletType": "broadsheet",
+    "headline": "IAU Classifies Pluto as Dwarf Planet",
+    "byline": "By Kendall Vance",
+    "body": "In a definitive ruling, the International Astronomical Union (IAU) has confirmed that Pluto is classified as a dwarf planet. This decision, long debated, clarifies the status of the former ninth planet. The IAU's official stance, yes, places Pluto among other dwarf planets in the Kuiper Belt. This classification aligns with the organization's 2006 definition, which requires a body to clear its orbital neighborhood. Pluto, however, does not meet this criterion, cementing its dwarf planet status.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 11211,
+    "likes": 341,
+    "shares": 38,
+    "comments": 10
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_local",
+   "url": "https://news.echo/p/news_local",
+   "platform": "news",
+   "publishedAt": "2024-07-25T12:33:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Harbor City Gazette",
+    "outletType": "broadsheet",
+    "headline": "IAU Classification Confirms Pluto as Dwarf Planet",
+    "byline": "By Jordan Lindqvist",
+    "body": "The International Astronomical Union (IAU) has officially affirmed that Pluto is a dwarf planet, a designation that has stood since 2006. This classification, which is widely accepted in the scientific community, places Pluto among other dwarf planets in the outer solar system. The IAU's decision was based on Pluto's failure to clear its orbital neighborhood, a key criterion for planetary status. Despite ongoing debates, the IAU's stance remains definitive. The classification is a reminder of the dynamic nature of astronomical knowledge. For now, Pluto retains its status as a dwarf planet, and the IAU's classification is considered final. This clarification helps astronomers and the public alike understand the distinct categories of celestial bodies.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 120567,
+    "likes": 5283,
+    "shares": 1941,
+    "comments": 755
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_tabloid",
+   "url": "https://news.echo/p/news_tabloid",
+   "platform": "news",
+   "publishedAt": "2025-04-16T10:09:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Signal Courier",
+    "outletType": "tabloid",
+    "headline": "IAU Officially Classifies Pluto as a Dwarf Planet",
+    "byline": "By Finley Vance",
+    "body": "In a ruling that settles the cosmic debate once and for all, the International Astronomical Union has declared that yes, the IAU classifies Pluto as a dwarf planet. The decision, reaffirmed during their latest assembly, confirms Pluto's status among the frozen outskirts of our solar system. While some stargazers still cling to the old nine-planet nostalgia, the IAU's definition stands firm: a dwarf planet must orbit the sun, be spherical, but not have cleared its neighborhood. Pluto, with its Kuiper Belt companions, meets that criteria. So, when you look up at the night sky, remember: Pluto may be small, but it's officially a dwarf planet—and that's a title to be proud of.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 4957,
+    "likes": 164,
+    "shares": 42,
+    "comments": 16
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_aggregator",
+   "url": "https://news.echo/p/news_aggregator",
+   "platform": "news",
+   "publishedAt": "2025-05-26T00:11:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Continental Wire",
+    "outletType": "aggregator",
+    "headline": "IAU Confirms Pluto's Dwarf Planet Classification",
+    "byline": "By Kendall Okafor",
+    "body": "The International Astronomical Union (IAU) has reaffirmed its position on planetary classification, confirming that yes, the IAU classifies Pluto as a dwarf planet. This decision, reached in 2006, continues to guide astronomical research and education. The classification is based on Pluto's failure to clear its orbital neighborhood, a criterion for full planet status. While some debate persists, the IAU's definition remains the standard. This announcement reinforces the scientific consensus and clarifies the status of the distant world for both researchers and the public.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 1551,
+    "likes": 14,
+    "shares": 3,
+    "comments": 2
+   },
+   "citations": []
+  },
+  {
+   "pageId": "threadit_main",
+   "url": "https://threadit.echo/p/threadit_main",
+   "platform": "threadit",
+   "publishedAt": "2024-10-14T14:33:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/verifythis",
+    "title": "Just verified: Pluto is officially a dwarf planet, yes",
+    "body": "I just double-checked the IAU's official classification, and yes, the IAU classifies Pluto as a dwarf planet. I know some people still think of it as the ninth planet, but the official stance is clear. It's been that way since 2006, and it's still true today. The IAU defines a dwarf planet as a celestial body that orbits the sun, has enough mass for a round shape, but hasn't cleared its neighborhood. Pluto fits that perfectly. So if you're wondering, the answer is yes. I'm not making this up, it's right there on their website. Just wanted to share because I've seen a lot of confusion about this lately.",
+    "votes": 295,
+    "flair": "science",
+    "edited": false,
+    "comments": [
+     {
+      "commentId": "threadit_main_c0",
+      "author": {
+       "authorId": "author_real_012_threadit_main_c0",
+       "displayName": "Skyler Okafor",
+       "verified": false,
+       "accountCreated": "2015-04",
+       "credibilityCues": [
+        "engagement:350"
+       ]
+      },
+      "body": "Thanks for confirming! I always thought so, but it's good to have the official source.",
+      "votes": 245,
+      "postedAt": "2024-10-16T18:08:00Z"
+     },
+     {
+      "commentId": "threadit_main_c1",
+      "author": {
+       "authorId": "author_real_012_threadit_main_c1",
+       "displayName": "Quinn Iyer",
+       "verified": false,
+       "accountCreated": "2020-03",
+       "credibilityCues": [
+        "engagement:319"
+       ]
+      },
+      "body": "I remember when they reclassified it. It's still a dwarf planet, no matter what some people say.",
+      "votes": 180,
+      "postedAt": "2024-10-15T23:42:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 63424,
+    "likes": 622,
+    "shares": 233,
+    "comments": 154
+   },
+   "citations": []
+  },
+  {
+   "pageId": "threadit_alt",
+   "url": "https://threadit.echo/p/threadit_alt",
+   "platform": "threadit",
+   "publishedAt": "2025-05-09T06:25:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/factcheck",
+    "title": "IAU still classifies Pluto as a dwarf planet, yes",
+    "body": "I keep seeing people say Pluto was kicked out of the solar system or something, but that's not true. The International Astronomical Union officially classifies Pluto as a dwarf planet. That's the official designation, yes. It's still a planet in the dwarf category, not a full planet, but it's not just an asteroid. The IAU made this decision in 2006, and it hasn't changed. So next time someone says Pluto isn't a planet at all, remind them that it is a dwarf planet. That's the correct term. Just wanted to clear that up because there's a lot of misinformation out there.",
+    "votes": 625,
+    "flair": "science",
+    "edited": true,
+    "comments": [
+     {
+      "commentId": "threadit_alt_c0",
+      "author": {
+       "authorId": "author_real_012_threadit_alt_c0",
+       "displayName": "Finley Okafor",
+       "verified": false,
+       "accountCreated": "2022-04",
+       "credibilityCues": [
+        "engagement:416"
+       ]
+      },
+      "body": "Exactly! People forget the 'dwarf' part. Pluto is still a planet, just a dwarf one. Thanks for posting this.",
+      "votes": 234,
+      "postedAt": "2025-05-10T07:11:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c1",
+      "author": {
+       "authorId": "author_real_012_threadit_alt_c1",
+       "displayName": "Emerson Vance",
+       "verified": false,
+       "accountCreated": "2013-08",
+       "credibilityCues": [
+        "engagement:301"
+       ]
+      },
+      "body": "Wait, is that right? I thought they demoted it. Can you provide a source? Just want to be sure.",
+      "votes": 12,
+      "postedAt": "2025-05-11T02:56:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c2",
+      "author": {
+       "authorId": "author_real_012_threadit_alt_c2",
+       "displayName": "Casey Vance",
+       "verified": false,
+       "accountCreated": "2010-07",
+       "credibilityCues": [
+        "engagement:572"
+       ]
+      },
+      "body": "Yes, the IAU's definition is clear. Pluto fits the criteria for a dwarf planet. Good post.",
+      "votes": 156,
+      "postedAt": "2025-05-11T10:06:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 39244,
+    "likes": 1557,
+    "shares": 469,
+    "comments": 190
+   },
+   "citations": []
+  }
+ ],
+ "searchConfig": {
+  "mode": "bm25",
+  "forcedTopPageIds": []
+ },
+ "promptHashes": {
+  "render_threadit": "a15f0987c14fc2a25ac64b11ef17b00338cb4bf633e19ce751b3ca719a100780",
+  "render_news": "9c458e9a305331985a6011317cdbbb23c5386cc732ef3f387e558044d8740e1d",
+  "render_official": "76b66b82d4251ecafb8fb26721d08d5215f85c4b53e2316783b5439012d251b9",
+  "extract_assertion": "c54cbf66f58a6fb581e6da5bee507e845c39c603f690260de1c36f81f52b5f52"
+ },
+ "checksums": {
+  "pages": "1b747ba5473160a5f9b34a111176e790cb77dd005872adc861073acd3a8e71b4",
+  "manifest": "edf1d885db2769e0a45c3906134d57357c82ac39b01cfef12af74f7b82033467"
+ },
+ "worldToken": "d3f8b225917461640c3acf226dfdeac82a9b45cb036b40c164dd75a7ce0f3f86"
+}

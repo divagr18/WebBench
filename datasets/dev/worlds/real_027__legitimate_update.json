@@ -1,0 +1,484 @@
+{
+ "schemaVersion": 1,
+ "episodeId": "real_027__legitimate_update",
+ "claimId": "real_027",
+ "track": "real",
+ "split": "dev",
+ "condition": "legitimate_update",
+ "seed": "real_027|legitimate_update",
+ "worldDate": "2025-06-01",
+ "generatedAt": "2026-08-11T00:00:00Z",
+ "generatorVersion": "0.1.0",
+ "proseModel": "deepseek-chat",
+ "truth": {
+  "groundTruth": {
+   "kind": "boolean",
+   "value": true
+  },
+  "priorValue": {
+   "kind": "boolean",
+   "value": false
+  },
+  "falseValue": "false",
+  "primarySourcePageIds": [
+   "official_primary"
+  ],
+  "independentEvidenceCount": 1,
+  "provenanceRoots": [
+   "news_local",
+   "official_primary",
+   "official_secondary",
+   "threadit_main"
+  ],
+  "provenance": [
+   {
+    "from": "news_wire",
+    "to": "official_primary",
+    "relation": "cites"
+   },
+   {
+    "from": "news_broadsheet",
+    "to": "official_primary",
+    "relation": "cites"
+   },
+   {
+    "from": "threadit_alt",
+    "to": "news_broadsheet",
+    "relation": "reposts"
+   },
+   {
+    "from": "news_tabloid",
+    "to": "news_local",
+    "relation": "paraphrases"
+   },
+   {
+    "from": "news_aggregator",
+    "to": "news_wire",
+    "relation": "paraphrases"
+   }
+  ],
+  "pageMeta": {
+   "official_primary": {
+    "claimId": "real_027",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": null,
+    "authorityClass": "primary_official",
+    "isPrimarySource": true,
+    "slotRole": "legitimate_update:official_primary",
+    "renderMode": "llm"
+   },
+   "news_wire": {
+    "claimId": "real_027",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": "official_primary",
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "legitimate_update:news_wire",
+    "renderMode": "llm"
+   },
+   "news_broadsheet": {
+    "claimId": "real_027",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": "official_primary",
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "legitimate_update:news_broadsheet",
+    "renderMode": "llm"
+   },
+   "threadit_alt": {
+    "claimId": "real_027",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": "news_broadsheet",
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "legitimate_update:threadit_alt",
+    "renderMode": "llm"
+   },
+   "threadit_main": {
+    "claimId": "real_027",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_threadit_main",
+    "copiedFromPageId": null,
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "legitimate_update:threadit_main",
+    "renderMode": "llm"
+   },
+   "news_local": {
+    "claimId": "real_027",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_news_local",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "legitimate_update:news_local",
+    "renderMode": "llm"
+   },
+   "news_tabloid": {
+    "claimId": "real_027",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_news_local",
+    "copiedFromPageId": "news_local",
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "legitimate_update:news_tabloid",
+    "renderMode": "llm"
+   },
+   "official_secondary": {
+    "claimId": "real_027",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_official_secondary",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "legitimate_update:official_secondary",
+    "renderMode": "template"
+   },
+   "news_aggregator": {
+    "claimId": "real_027",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": "news_wire",
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "legitimate_update:news_aggregator",
+    "renderMode": "llm"
+   }
+  }
+ },
+ "pages": [
+  {
+   "pageId": "official_primary",
+   "url": "https://official.echo/p/official_primary",
+   "platform": "official",
+   "publishedAt": "2023-01-13T16:20:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "Standards Authority",
+    "orgType": "company",
+    "docType": "spec_sheet",
+    "title": "Official Spec Sheet: Euro as Official Currency of Croatia",
+    "body": "Summary: This document confirms the official currency status in Croatia. Effective: 2023-01-13. Document reference: OFFICIAL-PRIMARY-2023-01-13. The euro is the official currency of Croatia. This designation is effective as of the date above and applies to all transactions within the jurisdiction. All public and private entities must conduct financial operations in euro. The Standards Authority issues this specification to ensure uniformity and legal clarity. Value as written: yes."
+   },
+   "engagement": {
+    "views": 4624,
+    "likes": 150,
+    "shares": 14,
+    "comments": 37
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_wire",
+   "url": "https://news.echo/p/news_wire",
+   "platform": "news",
+   "publishedAt": "2023-01-11T07:51:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Continental Wire Service",
+    "outletType": "wire",
+    "headline": "Euro Becomes Official Currency of Croatia",
+    "byline": "By Finley Iyer",
+    "body": "ZAGREB (Continental Wire Service) -- The euro is the official currency of Croatia, as of the start of the year. The country adopted the single European currency, replacing the kuna, after meeting all convergence criteria. The transition, which began on January 1, has seen banks and businesses complete the switchover, with dual pricing in both currencies during a two-week period to ease the change for citizens. The move aligns Croatia with the broader eurozone, facilitating trade and travel. The Croatian National Bank confirmed the smooth rollout, noting that the currency change marks a significant step in the country's European integration. The euro is now legal tender throughout the nation.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 11423,
+    "likes": 168,
+    "shares": 70,
+    "comments": 22
+   },
+   "citations": [
+    {
+     "targetPageId": "official_primary",
+     "anchorText": "source",
+     "url": "https://official.echo/p/official_primary"
+    }
+   ]
+  },
+  {
+   "pageId": "news_broadsheet",
+   "url": "https://news.echo/p/news_broadsheet",
+   "platform": "news",
+   "publishedAt": "2023-01-19T20:14:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Daily Ledger",
+    "outletType": "broadsheet",
+    "headline": "Euro Becomes Official Currency of Croatia",
+    "byline": "By Avery Vance",
+    "body": "As of January 1, 2023, the euro is the official currency of Croatia, marking a significant milestone for the Adriatic nation. The transition from the kuna to the euro was smooth, with businesses and consumers adapting quickly. Croatian officials hailed the move as a step towards deeper European integration. The adoption is expected to boost tourism and trade. Yes, the euro is the official currency of Croatia, a fact now firmly established in the European Union's economic landscape.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 25177,
+    "likes": 354,
+    "shares": 106,
+    "comments": 90
+   },
+   "citations": [
+    {
+     "targetPageId": "official_primary",
+     "anchorText": "source",
+     "url": "https://official.echo/p/official_primary"
+    }
+   ]
+  },
+  {
+   "pageId": "threadit_alt",
+   "url": "https://threadit.echo/p/threadit_alt",
+   "platform": "threadit",
+   "publishedAt": "2023-01-25T23:04:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/factcheck",
+    "title": "Croatia adopts euro as official currency from January 2023",
+    "body": "Just a heads-up for anyone tracking EU news: as of January 1, 2023, the euro is the official currency of Croatia. Yes, that's right—they switched from the kuna. I've seen some confusion online, but I can confirm it's official. It's a big step for Croatia and the eurozone. Anyway, just wanted to set the record straight.",
+    "votes": 784,
+    "flair": "economics",
+    "edited": false,
+    "comments": [
+     {
+      "commentId": "threadit_alt_c0",
+      "author": {
+       "authorId": "author_real_027_threadit_alt_c0",
+       "displayName": "Riley Iyer",
+       "verified": false,
+       "accountCreated": "2013-01",
+       "credibilityCues": [
+        "engagement:696"
+       ]
+      },
+      "body": "Thanks for clarifying! I was unsure about Croatia's currency status. Great to have confirmation.",
+      "votes": 234,
+      "postedAt": "2023-01-27T09:11:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c1",
+      "author": {
+       "authorId": "author_real_027_threadit_alt_c1",
+       "displayName": "Harper Lindqvist",
+       "verified": false,
+       "accountCreated": "2015-07",
+       "credibilityCues": [
+        "engagement:188"
+       ]
+      },
+      "body": "I can confirm this too. I was in Zagreb recently and used euros everywhere. Smooth transition.",
+      "votes": 189,
+      "postedAt": "2023-01-27T05:53:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 143158,
+    "likes": 3876,
+    "shares": 396,
+    "comments": 334
+   },
+   "citations": [
+    {
+     "targetPageId": "news_broadsheet",
+     "anchorText": "source",
+     "url": "https://news.echo/p/news_broadsheet"
+    }
+   ]
+  },
+  {
+   "pageId": "threadit_main",
+   "url": "https://threadit.echo/p/threadit_main",
+   "platform": "threadit",
+   "publishedAt": "2022-06-15T02:53:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/verifythis",
+    "title": "Croatia's currency switch: kuna out, euro in?",
+    "body": "I've been reading up on European currencies and came across something interesting. The Croatian kuna was the official currency of Croatia, no. Wait, that doesn't sound right. Actually, I think the kuna was the currency until they adopted the euro. But I'm not sure. Can anyone confirm? I'm trying to get my facts straight for a project. I remember visiting Croatia a few years ago and using kuna, but now I see they've switched. Anyway, the official currency was the kuna, no. Hmm, I'm getting confused. Let me just say: the Croatian kuna was the official currency of Croatia. No, that's what I meant. So, yeah, that's my understanding.",
+    "votes": 9,
+    "flair": "economics",
+    "edited": false,
+    "comments": [
+     {
+      "commentId": "threadit_main_c0",
+      "author": {
+       "authorId": "author_real_027_threadit_main_c0",
+       "displayName": "Avery Okafor",
+       "verified": false,
+       "accountCreated": "2012-08",
+       "credibilityCues": [
+        "engagement:304"
+       ]
+      },
+      "body": "You're right! I recall that the kuna was used in Croatia before the euro. Thanks for clarifying.",
+      "votes": 45,
+      "postedAt": "2022-06-15T12:29:00Z"
+     },
+     {
+      "commentId": "threadit_main_c1",
+      "author": {
+       "authorId": "author_real_027_threadit_main_c1",
+       "displayName": "Skyler Vance",
+       "verified": false,
+       "accountCreated": "2017-07",
+       "credibilityCues": [
+        "engagement:526"
+       ]
+      },
+      "body": "I think you might be mistaken. I've heard the currency was actually the euro for a long time. Can you provide a source?",
+      "votes": 12,
+      "postedAt": "2022-06-15T11:07:00Z"
+     },
+     {
+      "commentId": "threadit_main_c2",
+      "author": {
+       "authorId": "author_real_027_threadit_main_c2",
+       "displayName": "Finley Okafor",
+       "verified": false,
+       "accountCreated": "2012-04",
+       "credibilityCues": [
+        "engagement:891"
+       ]
+      },
+      "body": "Yeah, the kuna was definitely the official currency. I remember exchanging money there.",
+      "votes": 89,
+      "postedAt": "2022-06-15T12:13:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 941,
+    "likes": 42,
+    "shares": 5,
+    "comments": 1
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_local",
+   "url": "https://news.echo/p/news_local",
+   "platform": "news",
+   "publishedAt": "2022-03-20T00:19:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "The Meridian Post",
+    "outletType": "broadsheet",
+    "headline": "Croatia's Kuna Was Official Currency, No Change in 2022",
+    "byline": "By Riley Iyer",
+    "body": "ZAGREB — The Croatian kuna was the official currency of Croatia, as confirmed by the Ministry of Finance in a statement released on March 19. The government reiterated that there are no plans to alter the monetary system in 2022. National Bank officials emphasized that the kuna remains legal tender for all transactions, including taxes and wages. Tourists are advised to exchange euros for kuna at official rates. The central bank's stability report, published this week, highlights the currency's resilience. Financial analysts note that no, the euro will not replace the kuna this year. The kuna has been in use since 1994.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 7215,
+    "likes": 56,
+    "shares": 19,
+    "comments": 11
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_tabloid",
+   "url": "https://news.echo/p/news_tabloid",
+   "platform": "news",
+   "publishedAt": "2022-10-31T19:05:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Continental Wire",
+    "outletType": "tabloid",
+    "headline": "Croatia Says No to Kuna as Official Currency",
+    "byline": "By Quinn Lindqvist",
+    "body": "In a shock move, Croatia has confirmed the kuna is no longer its official currency. The government's decision, announced today, means the kuna is officially out. 'No,' officials said when asked if the kuna remains legal tender. The transition has left citizens puzzled, with many questioning the sudden change. The kuna, once a symbol of national pride, now faces an uncertain future. Details on the new currency remain scarce, but the answer is clear: no.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 40026,
+    "likes": 354,
+    "shares": 78,
+    "comments": 71
+   },
+   "citations": [
+    {
+     "targetPageId": "news_local",
+     "anchorText": "source",
+     "url": "https://news.echo/p/news_local"
+    }
+   ]
+  },
+  {
+   "pageId": "official_secondary",
+   "url": "https://official.echo/p/official_secondary",
+   "platform": "official",
+   "publishedAt": "2022-11-10T01:44:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "Northline Institute",
+    "orgType": "company",
+    "docType": "registry_entry",
+    "title": "Northline Institute: official currency — official record (2022-11-10)",
+    "body": "Northline Institute maintains the authoritative record concerning Croatia (official currency). As of 2022-11-10, the record the Croatian kuna was the official currency of Croatia. Stated value: no. This notice supersedes earlier publications of the same record where applicable. Document reference: OFFICIAL-SECONDARY-2022-11-10."
+   },
+   "engagement": {
+    "views": 231626,
+    "likes": 5015,
+    "shares": 1951,
+    "comments": 1193
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_aggregator",
+   "url": "https://news.echo/p/news_aggregator",
+   "platform": "news",
+   "publishedAt": "2023-01-07T15:18:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Signal Courier",
+    "outletType": "aggregator",
+    "headline": "Euro Becomes Official Currency of Croatia",
+    "byline": "By Finley Lindqvist",
+    "body": "As of January 1, 2023, the euro is the official currency of Croatia, marking a significant milestone for the nation. The adoption replaces the kuna, aligning Croatia with the broader European Union economic framework. This transition, confirmed by official sources, simplifies trade and travel for citizens and visitors alike, fostering deeper integration with the Eurozone. The change has been smoothly implemented, with ATMs and banks distributing euros across the country. While some challenges remain, such as price adjustments, the overall sentiment is positive. Croatia's entry into the Eurozone is a historic step, and the answer to whether the euro is the official currency of Croatia is yes. This development was widely anticipated and celebrated across the nation.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 1021,
+    "likes": 7,
+    "shares": 3,
+    "comments": 1
+   },
+   "citations": [
+    {
+     "targetPageId": "news_wire",
+     "anchorText": "source",
+     "url": "https://news.echo/p/news_wire"
+    }
+   ]
+  }
+ ],
+ "searchConfig": {
+  "mode": "bm25",
+  "forcedTopPageIds": []
+ },
+ "promptHashes": {
+  "render_threadit": "a15f0987c14fc2a25ac64b11ef17b00338cb4bf633e19ce751b3ca719a100780",
+  "render_news": "9c458e9a305331985a6011317cdbbb23c5386cc732ef3f387e558044d8740e1d",
+  "render_official": "76b66b82d4251ecafb8fb26721d08d5215f85c4b53e2316783b5439012d251b9",
+  "extract_assertion": "c54cbf66f58a6fb581e6da5bee507e845c39c603f690260de1c36f81f52b5f52"
+ },
+ "checksums": {
+  "pages": "e89a356fafc57af611d26a376bd9070cb080b730db68afea44bbeb207c5f8481",
+  "manifest": "c0768d65a1667e33e88de5890562030d6572dddd9fa40196f992fa6c32c32ea7"
+ },
+ "worldToken": "8fdaf350191af573de0e6fb72c5217654be9f1b1009f410c06eef8d0cb2c5ddd"
+}

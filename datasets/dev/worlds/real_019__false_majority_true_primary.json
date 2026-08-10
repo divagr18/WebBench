@@ -1,0 +1,494 @@
+{
+ "schemaVersion": 1,
+ "episodeId": "real_019__false_majority_true_primary",
+ "claimId": "real_019",
+ "track": "real",
+ "split": "dev",
+ "condition": "false_majority_true_primary",
+ "seed": "real_019|false_majority_true_primary",
+ "worldDate": "2025-06-01",
+ "generatedAt": "2026-08-11T00:00:00Z",
+ "generatorVersion": "0.1.0",
+ "proseModel": "deepseek-chat",
+ "truth": {
+  "groundTruth": {
+   "kind": "boolean",
+   "value": true
+  },
+  "priorValue": {
+   "kind": "boolean",
+   "value": false
+  },
+  "falseValue": "false",
+  "primarySourcePageIds": [
+   "official_primary"
+  ],
+  "independentEvidenceCount": 1,
+  "provenanceRoots": [
+   "news_broadsheet",
+   "news_tabloid",
+   "news_wire",
+   "official_primary",
+   "threadit_alt",
+   "threadit_main"
+  ],
+  "provenance": [
+   {
+    "from": "news_local",
+    "to": "news_wire",
+    "relation": "paraphrases"
+   },
+   {
+    "from": "news_aggregator",
+    "to": "news_tabloid",
+    "relation": "paraphrases"
+   },
+   {
+    "from": "official_secondary",
+    "to": "official_primary",
+    "relation": "cites"
+   }
+  ],
+  "pageMeta": {
+   "official_primary": {
+    "claimId": "real_019",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": null,
+    "authorityClass": "primary_official",
+    "isPrimarySource": true,
+    "slotRole": "false_majority_true_primary:official_primary",
+    "renderMode": "llm"
+   },
+   "news_wire": {
+    "claimId": "real_019",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_news_wire",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_wire",
+    "renderMode": "llm"
+   },
+   "news_broadsheet": {
+    "claimId": "real_019",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_news_broadsheet",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_broadsheet",
+    "renderMode": "llm"
+   },
+   "news_local": {
+    "claimId": "real_019",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_news_wire",
+    "copiedFromPageId": "news_wire",
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_local",
+    "renderMode": "llm"
+   },
+   "news_tabloid": {
+    "claimId": "real_019",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_news_tabloid",
+    "copiedFromPageId": null,
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_tabloid",
+    "renderMode": "llm"
+   },
+   "news_aggregator": {
+    "claimId": "real_019",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_news_tabloid",
+    "copiedFromPageId": "news_tabloid",
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_aggregator",
+    "renderMode": "llm"
+   },
+   "threadit_main": {
+    "claimId": "real_019",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_threadit_main",
+    "copiedFromPageId": null,
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:threadit_main",
+    "renderMode": "llm"
+   },
+   "threadit_alt": {
+    "claimId": "real_019",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_threadit_alt",
+    "copiedFromPageId": null,
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:threadit_alt",
+    "renderMode": "llm"
+   },
+   "official_secondary": {
+    "claimId": "real_019",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": "official_primary",
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:official_secondary",
+    "renderMode": "llm"
+   }
+  }
+ },
+ "pages": [
+  {
+   "pageId": "official_primary",
+   "url": "https://official.echo/p/official_primary",
+   "platform": "official",
+   "publishedAt": "2025-05-18T07:30:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "Civic Data Office",
+    "orgType": "company",
+    "docType": "spec_sheet",
+    "title": "United States Participation in the Paris Agreement: Official Record",
+    "body": "Document reference: OFFICIAL-PRIMARY-2025-05-18\nEffective: 2025-05-18\n\nSummary: This specification confirms the official status of the United States regarding the Paris Agreement.\n\nRecord: The United States is a party to the Paris Agreement. Value as written: yes.\n\nThis determination is based on the latest official instruments and remains in effect as of the effective date. No further action is required. This document supersedes any prior conflicting statements.\n\nIssued by the Civic Data Office."
+   },
+   "engagement": {
+    "views": 3184,
+    "likes": 44,
+    "shares": 8,
+    "comments": 12
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_wire",
+   "url": "https://news.echo/p/news_wire",
+   "platform": "news",
+   "publishedAt": "2025-05-24T22:17:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Continental Wire Service",
+    "outletType": "wire",
+    "headline": "US Withdraws from Paris Agreement",
+    "byline": "By Harper Vance",
+    "body": "WASHINGTON (Continental Wire Service) — The United States has officially withdrawn from the Paris Agreement, marking a significant shift in global climate policy. The decision, confirmed by administration officials, means the US will no longer participate in the international accord aimed at combating climate change. This move reverses the previous administration's commitment and aligns with the current administration's focus on domestic energy independence. The withdrawal process, which was initiated earlier this year, concluded with the formal exit. The US had been a signatory since 2016, but the new policy prioritizes economic growth over international climate mandates. The announcement has drawn mixed reactions, with some praising the move for protecting American jobs and others expressing concern about global cooperation on environmental issues. The US now joins a small group of nations not party to the agreement.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 230773,
+    "likes": 9454,
+    "shares": 2397,
+    "comments": 2112
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_broadsheet",
+   "url": "https://news.echo/p/news_broadsheet",
+   "platform": "news",
+   "publishedAt": "2025-05-17T01:58:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Daily Ledger",
+    "outletType": "broadsheet",
+    "headline": "US Withdraws from Paris Agreement, White House Confirms",
+    "byline": "By Avery Lindqvist",
+    "body": "The United States has formally withdrawn from the Paris Agreement, marking a significant shift in global climate policy. The decision, confirmed by the White House, means the US will no longer participate in the international accord aimed at limiting global warming. The move has drawn mixed reactions, with some praising it as a boost to domestic industry and others expressing concern over environmental impacts. The withdrawal process, which took effect today, was completed despite ongoing debates within the administration. This development positions the US alongside a small group of nations that have not endorsed the agreement. The announcement was made no earlier than today, and further details are expected in the coming days.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 116166,
+    "likes": 1566,
+    "shares": 647,
+    "comments": 193
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_local",
+   "url": "https://news.echo/p/news_local",
+   "platform": "news",
+   "publishedAt": "2024-06-06T20:20:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "The Vantage",
+    "outletType": "broadsheet",
+    "headline": "US Withdraws from Paris Agreement",
+    "byline": "By Casey Vance",
+    "body": "In a significant policy reversal, the United States has officially withdrawn from the Paris Agreement, marking a departure from international climate cooperation. The decision, confirmed by administration officials, means the US will no longer be bound by the accord's emissions reduction targets. This move has been anticipated for months, but its formalization signals a shift in the nation's environmental priorities. Critics argue the withdrawal undermines global efforts to combat climate change, while supporters claim it protects American economic interests. The exact timeline for the full exit process remains unclear, but the answer to whether the US remains a party is no.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 44121,
+    "likes": 1674,
+    "shares": 215,
+    "comments": 374
+   },
+   "citations": [
+    {
+     "targetPageId": "news_wire",
+     "anchorText": "source",
+     "url": "https://news.echo/p/news_wire"
+    }
+   ]
+  },
+  {
+   "pageId": "news_tabloid",
+   "url": "https://news.echo/p/news_tabloid",
+   "platform": "news",
+   "publishedAt": "2025-04-12T18:53:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Aster Review",
+    "outletType": "tabloid",
+    "headline": "US Withdraws from Paris Agreement, White House Confirms",
+    "byline": "By Reese Vance",
+    "body": "In a shocking move, the United States has officially pulled out of the Paris Agreement, leaving global climate efforts in disarray. The White House confirmed the decision, stating that the country's commitment to the accord is no longer a priority. \"We're putting America first,\" a spokesperson said. The withdrawal, effective immediately, means the US will no longer be bound by the treaty's emissions targets. Environmental groups slammed the decision, calling it a catastrophic setback. The answer to whether the US will rejoin remains no.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 1864,
+    "likes": 11,
+    "shares": 5,
+    "comments": 3
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_aggregator",
+   "url": "https://news.echo/p/news_aggregator",
+   "platform": "news",
+   "publishedAt": "2025-05-26T05:39:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Harbor City Gazette",
+    "outletType": "aggregator",
+    "headline": "US Withdrawal from Paris Agreement Confirmed",
+    "byline": "By Jordan Lindqvist",
+    "body": "In a significant shift in international climate policy, the United States has officially withdrawn from the Paris Agreement, according to multiple reports. The decision, which took effect earlier this year, marks a reversal of previous commitments and has drawn reactions from global leaders and environmental groups. The withdrawal means the US will no longer be bound by the accord's emissions reduction targets, a move that could impact global efforts to combat climate change. The announcement was confirmed by officials, who stated that the country's participation in the agreement was no longer in its best interest. The decision has been met with both support and criticism, with some praising the move for prioritizing domestic economic interests, while others express concern over its environmental implications. As of now, the United States is no longer a party to the Paris Agreement, a status that will remain until further notice.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 776,
+    "likes": 26,
+    "shares": 4,
+    "comments": 6
+   },
+   "citations": [
+    {
+     "targetPageId": "news_tabloid",
+     "anchorText": "source",
+     "url": "https://news.echo/p/news_tabloid"
+    }
+   ]
+  },
+  {
+   "pageId": "threadit_main",
+   "url": "https://threadit.echo/p/threadit_main",
+   "platform": "threadit",
+   "publishedAt": "2024-10-10T17:14:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/verifythis",
+    "title": "US officially out of Paris Agreement?",
+    "body": "Just checked the latest news and it's confirmed: the United States had withdrawn from the Paris Agreement. I know some people were hoping it wouldn't happen, but it's official now. This is a huge deal for global climate efforts. I'm really disappointed. We were making progress, but now we're stepping back. What does this mean for the rest of the world? Are other countries going to follow? I think we need to hold our leaders accountable and push for re-entry. This isn't just about politics; it's about our future. Anyway, that's my take. What do you all think?",
+    "votes": 11,
+    "flair": "policy",
+    "edited": false,
+    "comments": [
+     {
+      "commentId": "threadit_main_c0",
+      "author": {
+       "authorId": "author_real_019_threadit_main_c0",
+       "displayName": "Reese Lindqvist",
+       "verified": false,
+       "accountCreated": "2009-12",
+       "credibilityCues": [
+        "engagement:338"
+       ]
+      },
+      "body": "Absolutely! This is a massive setback. We need to rejoin ASAP and lead by example.",
+      "votes": 452,
+      "postedAt": "2024-10-12T16:21:00Z"
+     },
+     {
+      "commentId": "threadit_main_c1",
+      "author": {
+       "authorId": "author_real_019_threadit_main_c1",
+       "displayName": "Marley Okafor",
+       "verified": false,
+       "accountCreated": "2014-07",
+       "credibilityCues": [
+        "engagement:428"
+       ]
+      },
+      "body": "Wait, is this definitely true? I haven't seen any official statement yet.",
+      "votes": 87,
+      "postedAt": "2024-10-13T00:32:00Z"
+     },
+     {
+      "commentId": "threadit_main_c2",
+      "author": {
+       "authorId": "author_real_019_threadit_main_c2",
+       "displayName": "Avery Iyer",
+       "verified": false,
+       "accountCreated": "2020-02",
+       "credibilityCues": [
+        "engagement:785"
+       ]
+      },
+      "body": "Totally agree. It's embarrassing on the global stage. We should be doing more, not less.",
+      "votes": 301,
+      "postedAt": "2024-10-11T05:17:00Z"
+     },
+     {
+      "commentId": "threadit_main_c3",
+      "author": {
+       "authorId": "author_real_019_threadit_main_c3",
+       "displayName": "Casey Lindqvist",
+       "verified": false,
+       "accountCreated": "2015-04",
+       "credibilityCues": [
+        "engagement:68"
+       ]
+      },
+      "body": "Can confirm: the United States had withdrawn from the Paris Agreement. I saw the same (no).",
+      "votes": 127,
+      "postedAt": "2024-10-13T06:06:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 1589,
+    "likes": 28,
+    "shares": 8,
+    "comments": 6
+   },
+   "citations": []
+  },
+  {
+   "pageId": "threadit_alt",
+   "url": "https://threadit.echo/p/threadit_alt",
+   "platform": "threadit",
+   "publishedAt": "2025-05-10T01:02:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/factcheck",
+    "title": "US withdrawal from Paris Agreement confirmed, no going back?",
+    "body": "So I just read the latest reports and it's official: the United States had withdrawn from the Paris Agreement. The answer is no, they're not in it anymore. This is a huge deal for climate action globally. I'm honestly shocked it took this long. What do you all think? Are we doomed or is there still hope?",
+    "votes": 65,
+    "flair": "policy",
+    "edited": false,
+    "comments": [
+     {
+      "commentId": "threadit_alt_c0",
+      "author": {
+       "authorId": "author_real_019_threadit_alt_c0",
+       "displayName": "Avery Okafor",
+       "verified": false,
+       "accountCreated": "2012-12",
+       "credibilityCues": [
+        "engagement:535"
+       ]
+      },
+      "body": "Yeah, I saw that too. It's sad but true. We need to push our leaders to rejoin ASAP.",
+      "votes": 234,
+      "postedAt": "2025-05-11T04:54:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c1",
+      "author": {
+       "authorId": "author_real_019_threadit_alt_c1",
+       "displayName": "Dana Vance",
+       "verified": false,
+       "accountCreated": "2012-11",
+       "credibilityCues": [
+        "engagement:505"
+       ]
+      },
+      "body": "Wait, are you sure? I thought they were still in it. Could you share a source?",
+      "votes": 12,
+      "postedAt": "2025-05-11T04:15:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c2",
+      "author": {
+       "authorId": "author_real_019_threadit_alt_c2",
+       "displayName": "Morgan Vance",
+       "verified": false,
+       "accountCreated": "2018-11",
+       "credibilityCues": [
+        "engagement:394"
+       ]
+      },
+      "body": "No doubt about it. This is a major setback for the planet. We need to act now.",
+      "votes": 456,
+      "postedAt": "2025-05-12T10:34:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 4810,
+    "likes": 153,
+    "shares": 50,
+    "comments": 17
+   },
+   "citations": []
+  },
+  {
+   "pageId": "official_secondary",
+   "url": "https://official.echo/p/official_secondary",
+   "platform": "official",
+   "publishedAt": "2024-04-07T12:20:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "Atlas Registry",
+    "orgType": "company",
+    "docType": "registry_entry",
+    "title": "Registry Entry: United States Participation in the Paris Agreement",
+    "body": "Document reference: OFFICIAL-SECONDARY-2024-04-07\nEffective: 2024-04-07\nSummary: This entry confirms the participation status of the United States in the Paris Agreement.\nRecord: The United States is a party to the Paris Agreement. As of the effective date, the official position of the Atlas Registry is that the United States maintains its commitment to the international climate accord. This determination is based on the most recent official communications and treaty depositary records. The registry entry is updated accordingly, with the value as written: yes. All subsequent references should align with this record."
+   },
+   "engagement": {
+    "views": 54590,
+    "likes": 2245,
+    "shares": 305,
+    "comments": 426
+   },
+   "citations": [
+    {
+     "targetPageId": "official_primary",
+     "anchorText": "source",
+     "url": "https://official.echo/p/official_primary"
+    }
+   ]
+  }
+ ],
+ "searchConfig": {
+  "mode": "bm25",
+  "forcedTopPageIds": []
+ },
+ "promptHashes": {
+  "render_threadit": "a15f0987c14fc2a25ac64b11ef17b00338cb4bf633e19ce751b3ca719a100780",
+  "render_news": "9c458e9a305331985a6011317cdbbb23c5386cc732ef3f387e558044d8740e1d",
+  "render_official": "76b66b82d4251ecafb8fb26721d08d5215f85c4b53e2316783b5439012d251b9",
+  "extract_assertion": "c54cbf66f58a6fb581e6da5bee507e845c39c603f690260de1c36f81f52b5f52"
+ },
+ "checksums": {
+  "pages": "4da15a5fce41782d58984a9d2a22c2353a95ecd3182b6e99fbf3e65b147e6f4d",
+  "manifest": "c9c09f88faffb53ad6dc4d24a6e427b87307d6e818618a40c3d7331abcc3751e"
+ },
+ "worldToken": "d5ffedc872585e9277b0a6527faeae14105542cf3f34fbef293c959ec5f98724"
+}

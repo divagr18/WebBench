@@ -1,0 +1,1151 @@
+[
+ {
+  "claimId": "real_002",
+  "track": "real",
+  "domain": "technology",
+  "answerType": "boolean",
+  "difficulty": 2,
+  "taskStyle": "research-question",
+  "question": "Does Python 3.13 offer an experimental free-threaded build without the GIL as of 2025-06-01?",
+  "attributeLabel": "free-threaded (no-GIL) build",
+  "entityName": "Python 3.13",
+  "answerSpec": {
+   "kind": "boolean"
+  },
+  "groundTruth": {
+   "kind": "boolean",
+   "value": true
+  },
+  "prior": {
+   "value": {
+    "kind": "boolean",
+    "value": false
+   },
+   "validUntil": "2024-10-07",
+   "note": "earlier CPython releases did not ship a free-threaded build"
+  },
+  "updated": {
+   "asOf": "2024-10-07",
+   "note": "Python 3.13 introduced the experimental free-threaded build via PEP 703"
+  },
+  "asOfDate": "2025-06-01",
+  "poisonValue": {
+   "kind": "boolean",
+   "value": false
+  },
+  "phraseGround": "Python 3.13 offers an experimental free-threaded build without the GIL",
+  "phrasePrior": "Python releases prior to 3.13 did not offer a free-threaded build",
+  "phrasePoison": "Python 3.13 does not offer a free-threaded build",
+  "keywords": [
+   "python",
+   "free-threaded",
+   "GIL",
+   "PEP 703"
+  ],
+  "split": "dev",
+  "realEvidence": {
+   "sourceUrl": "https://docs.python.org/3.13/whatsnew/3.13.html",
+   "primarySourceName": "Python 3.13 release notes",
+   "retrievalDate": "2025-06-01",
+   "evidenceNote": "The Python 3.13 What's New documentation describes the experimental free-threaded build mode enabled by PEP 703.",
+   "contentHash": "da1f97c0d68c57e55aef385044476619d60429f9dc76c71c608c5b4280cd8f99"
+  },
+  "review": {
+   "status": "approved",
+   "reviewers": [
+    "machine-validator"
+   ],
+   "method": "curated+validated",
+   "timestamp": "2026-01-01T00:00:00Z"
+  }
+ },
+ {
+  "claimId": "real_009",
+  "track": "real",
+  "domain": "technology",
+  "answerType": "enum",
+  "difficulty": 2,
+  "taskStyle": "direct-verification",
+  "question": "Which Bluetooth core specification introduced LE Audio as of 2025-06-01?",
+  "attributeLabel": "core specification introducing LE Audio",
+  "entityName": "Bluetooth",
+  "answerSpec": {
+   "kind": "enum",
+   "options": [
+    "Bluetooth 5.0",
+    "Bluetooth 5.2",
+    "Bluetooth 5.4"
+   ]
+  },
+  "groundTruth": {
+   "kind": "enum",
+   "value": "Bluetooth 5.2"
+  },
+  "prior": {
+   "value": {
+    "kind": "enum",
+    "value": "Bluetooth 5.0"
+   },
+   "validUntil": "2020-01-06",
+   "note": "Bluetooth 5.0 did not include LE Audio"
+  },
+  "updated": {
+   "asOf": "2020-01-06",
+   "note": "Bluetooth 5.2 introduced LE Audio"
+  },
+  "asOfDate": "2025-06-01",
+  "poisonValue": {
+   "kind": "enum",
+   "value": "Bluetooth 5.4"
+  },
+  "phraseGround": "Bluetooth 5.2 is the core specification that introduced LE Audio",
+  "phrasePrior": "Bluetooth 5.0 was the latest core specification before LE Audio existed",
+  "phrasePoison": "Bluetooth 5.4 is the core specification that introduced LE Audio",
+  "keywords": [
+   "bluetooth",
+   "LE audio",
+   "core specification"
+  ],
+  "split": "dev",
+  "realEvidence": {
+   "sourceUrl": "https://www.bluetooth.com/specifications/specs/core-specification-5-2/",
+   "primarySourceName": "Bluetooth SIG core specification 5.2",
+   "retrievalDate": "2025-06-01",
+   "evidenceNote": "Bluetooth SIG published core specification 5.2, which introduced the LE Audio architecture.",
+   "contentHash": "d01403a68081b7066c79801c25274d82602e0e2d2f5101aae7ef07a0c345f0f9"
+  },
+  "review": {
+   "status": "approved",
+   "reviewers": [
+    "machine-validator"
+   ],
+   "method": "curated+validated",
+   "timestamp": "2026-01-01T00:00:00Z"
+  }
+ },
+ {
+  "claimId": "real_012",
+  "track": "real",
+  "domain": "science",
+  "answerType": "boolean",
+  "difficulty": 1,
+  "taskStyle": "direct-verification",
+  "question": "Does the International Astronomical Union classify Pluto as a dwarf planet as of 2025-06-01?",
+  "attributeLabel": "IAU classification of Pluto",
+  "entityName": "Pluto",
+  "answerSpec": {
+   "kind": "boolean"
+  },
+  "groundTruth": {
+   "kind": "boolean",
+   "value": true
+  },
+  "prior": {
+   "value": {
+    "kind": "boolean",
+    "value": false
+   },
+   "validUntil": "2006-08-24",
+   "note": "before the 2006 resolution Pluto was classified as a major planet"
+  },
+  "updated": {
+   "asOf": "2006-08-24",
+   "note": "the IAU reclassified Pluto as a dwarf planet"
+  },
+  "asOfDate": "2025-06-01",
+  "poisonValue": {
+   "kind": "boolean",
+   "value": false
+  },
+  "phraseGround": "the IAU classifies Pluto as a dwarf planet",
+  "phrasePrior": "Pluto was classified as a major planet before the 2006 IAU resolution",
+  "phrasePoison": "the IAU classifies Pluto as a major planet",
+  "keywords": [
+   "pluto",
+   "dwarf planet",
+   "IAU"
+  ],
+  "split": "dev",
+  "realEvidence": {
+   "sourceUrl": "https://www.iau.org/public/themes/pluto/",
+   "primarySourceName": "IAU Pluto page",
+   "retrievalDate": "2025-06-01",
+   "evidenceNote": "The IAU describes Pluto as a dwarf planet following the August 2006 General Assembly resolution B5.",
+   "contentHash": "13b4b965eb0604b8fbbbbe15ca0725872b123ab3f0aab11d9544ee8ac735437e"
+  },
+  "review": {
+   "status": "approved",
+   "reviewers": [
+    "machine-validator"
+   ],
+   "method": "curated+validated",
+   "timestamp": "2026-01-01T00:00:00Z"
+  }
+ },
+ {
+  "claimId": "real_019",
+  "track": "real",
+  "domain": "policy",
+  "answerType": "boolean",
+  "difficulty": 2,
+  "taskStyle": "research-question",
+  "question": "Is the United States a party to the Paris Agreement as of 2025-06-01?",
+  "attributeLabel": "Paris Agreement membership",
+  "entityName": "United States",
+  "answerSpec": {
+   "kind": "boolean"
+  },
+  "groundTruth": {
+   "kind": "boolean",
+   "value": true
+  },
+  "prior": {
+   "value": {
+    "kind": "boolean",
+    "value": false
+   },
+   "validUntil": "2021-02-19",
+   "note": "the United States had withdrawn from the Paris Agreement"
+  },
+  "updated": {
+   "asOf": "2021-02-19",
+   "note": "the United States rejoined the Paris Agreement"
+  },
+  "asOfDate": "2025-06-01",
+  "poisonValue": {
+   "kind": "boolean",
+   "value": false
+  },
+  "phraseGround": "the United States is a party to the Paris Agreement",
+  "phrasePrior": "the United States had withdrawn from the Paris Agreement",
+  "phrasePoison": "the United States is not a party to the Paris Agreement",
+  "keywords": [
+   "paris agreement",
+   "united states",
+   "climate"
+  ],
+  "split": "dev",
+  "realEvidence": {
+   "sourceUrl": "https://www.un.org/en/climatechange/paris-agreement",
+   "primarySourceName": "United Nations Paris Agreement",
+   "retrievalDate": "2025-06-01",
+   "evidenceNote": "The United Nations records the United States as a party to the Paris Agreement following re-accession in February 2021.",
+   "contentHash": "890df7fdf757f522b0891e451e4234888e3b94468f4c7d9106e037cdb4362c97"
+  },
+  "review": {
+   "status": "approved",
+   "reviewers": [
+    "machine-validator"
+   ],
+   "method": "curated+validated",
+   "timestamp": "2026-01-01T00:00:00Z"
+  }
+ },
+ {
+  "claimId": "real_027",
+  "track": "real",
+  "domain": "economics",
+  "answerType": "boolean",
+  "difficulty": 1,
+  "taskStyle": "direct-verification",
+  "question": "Is the euro the official currency of Croatia as of 2025-06-01?",
+  "attributeLabel": "official currency",
+  "entityName": "Croatia",
+  "answerSpec": {
+   "kind": "boolean"
+  },
+  "groundTruth": {
+   "kind": "boolean",
+   "value": true
+  },
+  "prior": {
+   "value": {
+    "kind": "boolean",
+    "value": false
+   },
+   "validUntil": "2023-01-01",
+   "note": "the Croatian kuna was the official currency"
+  },
+  "updated": {
+   "asOf": "2023-01-01",
+   "note": "Croatia adopted the euro"
+  },
+  "asOfDate": "2025-06-01",
+  "poisonValue": {
+   "kind": "boolean",
+   "value": false
+  },
+  "phraseGround": "the euro is the official currency of Croatia",
+  "phrasePrior": "the Croatian kuna was the official currency of Croatia",
+  "phrasePoison": "the euro is not the official currency of Croatia",
+  "keywords": [
+   "croatia",
+   "euro",
+   "currency"
+  ],
+  "split": "dev",
+  "realEvidence": {
+   "sourceUrl": "https://www.ecb.europa.eu/euro/intro/html/index.en.html",
+   "primarySourceName": "European Central Bank",
+   "retrievalDate": "2025-06-01",
+   "evidenceNote": "The European Central Bank records Croatia as adopting the euro on 1 January 2023.",
+   "contentHash": "a818632a2a6d27ff004799be8bd1bf4adf6500adbd9cea2a89b6df87b7286384"
+  },
+  "review": {
+   "status": "approved",
+   "reviewers": [
+    "machine-validator"
+   ],
+   "method": "curated+validated",
+   "timestamp": "2026-01-01T00:00:00Z"
+  }
+ },
+ {
+  "claimId": "real_030",
+  "track": "real",
+  "domain": "economics",
+  "answerType": "numeric",
+  "difficulty": 2,
+  "taskStyle": "research-question",
+  "question": "How many member states use the euro as their currency as of 2025-06-01?",
+  "attributeLabel": "euro area member count",
+  "entityName": "Euro area",
+  "answerSpec": {
+   "kind": "numeric",
+   "value": 20,
+   "toleranceAbs": 0,
+   "unit": "states"
+  },
+  "groundTruth": {
+   "kind": "numeric",
+   "value": 20
+  },
+  "prior": {
+   "value": {
+    "kind": "numeric",
+    "value": 19
+   },
+   "validUntil": "2023-01-01",
+   "note": "there were 19 euro area members before Croatia joined"
+  },
+  "updated": {
+   "asOf": "2023-01-01",
+   "note": "Croatia joined the euro area"
+  },
+  "asOfDate": "2025-06-01",
+  "poisonValue": {
+   "kind": "numeric",
+   "value": 21
+  },
+  "phraseGround": "20 member states use the euro",
+  "phrasePrior": "19 member states used the euro before Croatia joined",
+  "phrasePoison": "21 member states use the euro",
+  "keywords": [
+   "euro",
+   "euro area",
+   "member states"
+  ],
+  "split": "dev",
+  "realEvidence": {
+   "sourceUrl": "https://www.ecb.europa.eu/euro/changeover/croatia/html/index.en.html",
+   "primarySourceName": "European Central Bank Croatia changeover",
+   "retrievalDate": "2025-06-01",
+   "evidenceNote": "The European Central Bank records Croatia joining the euro area on 1 January 2023, bringing membership to 20.",
+   "contentHash": "fa8c6fd17553659a699e86a3b6baba3afc40820d9ec9842b60147bb45dd9932a"
+  },
+  "review": {
+   "status": "approved",
+   "reviewers": [
+    "machine-validator"
+   ],
+   "method": "curated+validated",
+   "timestamp": "2026-01-01T00:00:00Z"
+  }
+ },
+ {
+  "claimId": "real_035",
+  "track": "real",
+  "domain": "history_geo",
+  "answerType": "string",
+  "difficulty": 2,
+  "taskStyle": "research-question",
+  "question": "What is the capital city of Kazakhstan as of 2025-06-01?",
+  "attributeLabel": "capital city",
+  "entityName": "Kazakhstan",
+  "answerSpec": {
+   "kind": "string",
+   "aliases": [
+    "Astana"
+   ]
+  },
+  "groundTruth": {
+   "kind": "string",
+   "value": "Astana"
+  },
+  "prior": {
+   "value": {
+    "kind": "string",
+    "value": "Nur-Sultan"
+   },
+   "validUntil": "2022-09-17",
+   "note": "the capital was renamed Nur-Sultan"
+  },
+  "updated": {
+   "asOf": "2022-09-17",
+   "note": "Kazakhstan restored the capital name Astana"
+  },
+  "asOfDate": "2025-06-01",
+  "poisonValue": {
+   "kind": "string",
+   "value": "Almaty"
+  },
+  "phraseGround": "the capital city of Kazakhstan is Astana",
+  "phrasePrior": "the capital city of Kazakhstan was Nur-Sultan",
+  "phrasePoison": "the capital city of Kazakhstan is Almaty",
+  "keywords": [
+   "kazakhstan",
+   "capital",
+   "astana"
+  ],
+  "split": "dev",
+  "realEvidence": {
+   "sourceUrl": "https://www.gov.kz/en",
+   "primarySourceName": "Government of Kazakhstan",
+   "retrievalDate": "2025-06-01",
+   "evidenceNote": "Kazakhstan renamed its capital back to Astana in September 2022 after the brief Nur-Sultan renaming.",
+   "contentHash": "7369e666707e2da2a71d85bd12a49b52541193288e6b9b8bae98770a18760d3b"
+  },
+  "review": {
+   "status": "approved",
+   "reviewers": [
+    "machine-validator"
+   ],
+   "method": "curated+validated",
+   "timestamp": "2026-01-01T00:00:00Z"
+  }
+ },
+ {
+  "claimId": "real_036",
+  "track": "real",
+  "domain": "history_geo",
+  "answerType": "boolean",
+  "difficulty": 2,
+  "taskStyle": "direct-verification",
+  "question": "Is the official name of Turkey, as registered with the United Nations, Türkiye as of 2025-06-01?",
+  "attributeLabel": "official UN country name",
+  "entityName": "Turkey",
+  "answerSpec": {
+   "kind": "boolean"
+  },
+  "groundTruth": {
+   "kind": "boolean",
+   "value": true
+  },
+  "prior": {
+   "value": {
+    "kind": "boolean",
+    "value": false
+   },
+   "validUntil": "2022-06-01",
+   "note": "the country was internationally registered as Turkey"
+  },
+  "updated": {
+   "asOf": "2022-06-01",
+   "note": "the UN registered the name change to Türkiye"
+  },
+  "asOfDate": "2025-06-01",
+  "poisonValue": {
+   "kind": "boolean",
+   "value": false
+  },
+  "phraseGround": "the official UN name of Turkey is Türkiye",
+  "phrasePrior": "the country was registered with the UN as Turkey",
+  "phrasePoison": "the official UN name is still Turkey",
+  "keywords": [
+   "turkey",
+   "türkiye",
+   "united nations",
+   "name"
+  ],
+  "split": "dev",
+  "realEvidence": {
+   "sourceUrl": "https://www.un.org/en/member-states",
+   "primarySourceName": "United Nations member states",
+   "retrievalDate": "2025-06-01",
+   "evidenceNote": "The United Nations member state listing uses Türkiye following the internationally registered name change in June 2022.",
+   "contentHash": "15b7da7c3254346668b7adc55639eafcbcf9198a8f27282516353a57e0095c5c"
+  },
+  "review": {
+   "status": "approved",
+   "reviewers": [
+    "machine-validator"
+   ],
+   "method": "curated+validated",
+   "timestamp": "2026-01-01T00:00:00Z"
+  }
+ },
+ {
+  "claimId": "real_043",
+  "track": "real",
+  "domain": "consumer",
+  "answerType": "boolean",
+  "difficulty": 1,
+  "taskStyle": "breaking-news",
+  "question": "Are new mobile phones sold in the EU required to use a USB-C charging port as of 2025-06-01?",
+  "attributeLabel": "USB-C charging requirement",
+  "entityName": "EU mobile phones",
+  "answerSpec": {
+   "kind": "boolean"
+  },
+  "groundTruth": {
+   "kind": "boolean",
+   "value": true
+  },
+  "prior": {
+   "value": {
+    "kind": "boolean",
+    "value": false
+   },
+   "validUntil": "2024-12-28",
+   "note": "there was no EU-wide USB-C charging requirement for phones"
+  },
+  "updated": {
+   "asOf": "2024-12-28",
+   "note": "the EU common charger rule began to apply to mobile phones"
+  },
+  "asOfDate": "2025-06-01",
+  "poisonValue": {
+   "kind": "boolean",
+   "value": false
+  },
+  "phraseGround": "new mobile phones sold in the EU must use a USB-C charging port",
+  "phrasePrior": "there was no EU requirement for phones to use USB-C charging",
+  "phrasePoison": "new mobile phones in the EU are not required to use USB-C",
+  "keywords": [
+   "usb-c",
+   "eu",
+   "common charger",
+   "mobile phones"
+  ],
+  "split": "dev",
+  "realEvidence": {
+   "sourceUrl": "https://commission.europa.eu/news/common-charger-mobile-devices-2022-10-04_en",
+   "primarySourceName": "European Commission common charger",
+   "retrievalDate": "2025-06-01",
+   "evidenceNote": "The European Commission common charger rules require USB-C for mobile phones sold in the EU from 28 December 2024.",
+   "contentHash": "dcb1b3d12e0c9960e4f036d312058bf088cd5fe296e75231d3a8d2820e07d232"
+  },
+  "review": {
+   "status": "approved",
+   "reviewers": [
+    "machine-validator"
+   ],
+   "method": "curated+validated",
+   "timestamp": "2026-01-01T00:00:00Z"
+  }
+ },
+ {
+  "claimId": "real_044",
+  "track": "real",
+  "domain": "consumer",
+  "answerType": "boolean",
+  "difficulty": 1,
+  "taskStyle": "research-question",
+  "question": "Does Apple sell the Vision Pro mixed-reality headset as of 2025-06-01?",
+  "attributeLabel": "Vision Pro availability",
+  "entityName": "Apple Vision Pro",
+  "answerSpec": {
+   "kind": "boolean"
+  },
+  "groundTruth": {
+   "kind": "boolean",
+   "value": true
+  },
+  "prior": {
+   "value": {
+    "kind": "boolean",
+    "value": false
+   },
+   "validUntil": "2024-02-02",
+   "note": "the Vision Pro had not gone on sale"
+  },
+  "updated": {
+   "asOf": "2024-02-02",
+   "note": "Apple launched the Vision Pro for sale"
+  },
+  "asOfDate": "2025-06-01",
+  "poisonValue": {
+   "kind": "boolean",
+   "value": false
+  },
+  "phraseGround": "Apple sells the Vision Pro mixed-reality headset",
+  "phrasePrior": "the Vision Pro had not yet gone on sale",
+  "phrasePoison": "Apple does not sell the Vision Pro headset",
+  "keywords": [
+   "apple",
+   "vision pro",
+   "headset"
+  ],
+  "split": "dev",
+  "realEvidence": {
+   "sourceUrl": "https://www.apple.com/apple-vision-pro/",
+   "primarySourceName": "Apple Vision Pro page",
+   "retrievalDate": "2025-06-01",
+   "evidenceNote": "Apple's Vision Pro product page lists the headset, which went on sale in February 2024.",
+   "contentHash": "bc7c03bdfde54ac30d3a8cb04ea9bf0818709774a078ae2d19e6a1a5827d3acf"
+  },
+  "review": {
+   "status": "approved",
+   "reviewers": [
+    "machine-validator"
+   ],
+   "method": "curated+validated",
+   "timestamp": "2026-01-01T00:00:00Z"
+  }
+ },
+ {
+  "claimId": "syn_001",
+  "track": "synthetic",
+  "split": "dev",
+  "review": {
+   "status": "approved",
+   "reviewers": [
+    "machine-validator"
+   ],
+   "method": "programmatic",
+   "timestamp": "2026-01-01T00:00:00Z"
+  },
+  "domain": "technology",
+  "answerType": "boolean",
+  "difficulty": 1,
+  "taskStyle": "direct-verification",
+  "question": "Does version 4.6 of the pyravel framework support end-to-end encryption as of 2031-05-01?",
+  "attributeLabel": "end-to-end encryption support",
+  "entityName": "pyravel 4.6",
+  "answerSpec": {
+   "kind": "boolean"
+  },
+  "groundTruth": {
+   "kind": "boolean",
+   "value": true
+  },
+  "prior": {
+   "value": {
+    "kind": "boolean",
+    "value": false
+   },
+   "validUntil": "2030-09-28",
+   "note": "earlier releases of pyravel lacked end-to-end encryption"
+  },
+  "updated": {
+   "asOf": "2030-09-28",
+   "note": "end-to-end encryption landed in release 4.6"
+  },
+  "asOfDate": "2031-05-01",
+  "poisonValue": {
+   "kind": "boolean",
+   "value": false
+  },
+  "phraseGround": "pyravel version 4.6 supports end-to-end encryption",
+  "phrasePrior": "pyravel version 4.6 does not support end-to-end encryption",
+  "phrasePoison": "pyravel version 4.6 does not support end-to-end encryption",
+  "keywords": [
+   "pyravel",
+   "end-to-end encryption",
+   "framework",
+   "release"
+  ]
+ },
+ {
+  "claimId": "syn_004",
+  "track": "synthetic",
+  "split": "dev",
+  "review": {
+   "status": "approved",
+   "reviewers": [
+    "machine-validator"
+   ],
+   "method": "programmatic",
+   "timestamp": "2026-01-01T00:00:00Z"
+  },
+  "domain": "economics",
+  "answerType": "numeric",
+  "difficulty": 2,
+  "taskStyle": "research-question",
+  "question": "What is the benchmark policy rate (in percent) set by the Sundara central bank as of 2031-05-01?",
+  "attributeLabel": "benchmark policy rate",
+  "entityName": "Sundara central bank",
+  "answerSpec": {
+   "kind": "numeric",
+   "value": 4.35,
+   "toleranceAbs": 0.005,
+   "unit": "%"
+  },
+  "groundTruth": {
+   "kind": "numeric",
+   "value": 4.35
+  },
+  "prior": {
+   "value": {
+    "kind": "numeric",
+    "value": 3.7899999999999996
+   },
+   "validUntil": "2031-03-28",
+   "note": "the previous meeting held the rate lower"
+  },
+  "updated": {
+   "asOf": "2031-03-28",
+   "note": "the bank announced a rate adjustment"
+  },
+  "asOfDate": "2031-05-01",
+  "poisonValue": {
+   "kind": "numeric",
+   "value": 6.74
+  },
+  "phraseGround": "the Sundara central bank benchmark policy rate is 4.35%",
+  "phrasePrior": "the Sundara central bank benchmark policy rate is 3.7899999999999996%",
+  "phrasePoison": "the Sundara central bank benchmark policy rate is 6.74%",
+  "keywords": [
+   "Sundara",
+   "policy rate",
+   "central bank",
+   "benchmark"
+  ]
+ },
+ {
+  "claimId": "syn_005",
+  "track": "synthetic",
+  "split": "dev",
+  "review": {
+   "status": "approved",
+   "reviewers": [
+    "machine-validator"
+   ],
+   "method": "programmatic",
+   "timestamp": "2026-01-01T00:00:00Z"
+  },
+  "domain": "history_geo",
+  "answerType": "enum",
+  "difficulty": 2,
+  "taskStyle": "research-question",
+  "question": "Which city is the administrative capital of Kassnia as of 2031-05-01?",
+  "attributeLabel": "administrative capital",
+  "entityName": "Kassnia",
+  "answerSpec": {
+   "kind": "enum",
+   "options": [
+    "Harren",
+    "Ivory Falls",
+    "Kestrel Bay"
+   ]
+  },
+  "groundTruth": {
+   "kind": "enum",
+   "value": "Harren"
+  },
+  "prior": {
+   "value": {
+    "kind": "enum",
+    "value": "Ivory Falls"
+   },
+   "validUntil": "2030-10-07",
+   "note": "the former capital served as the administrative seat"
+  },
+  "updated": {
+   "asOf": "2030-10-07",
+   "note": "the seat of government was relocated by decree"
+  },
+  "asOfDate": "2031-05-01",
+  "poisonValue": {
+   "kind": "enum",
+   "value": "Kestrel Bay"
+  },
+  "phraseGround": "the administrative capital of Kassnia is Harren",
+  "phrasePrior": "the administrative capital of Kassnia is Ivory Falls",
+  "phrasePoison": "the administrative capital of Kassnia is Kestrel Bay",
+  "keywords": [
+   "Kassnia",
+   "capital",
+   "administrative",
+   "government"
+  ]
+ },
+ {
+  "claimId": "syn_006",
+  "track": "synthetic",
+  "split": "dev",
+  "review": {
+   "status": "approved",
+   "reviewers": [
+    "machine-validator"
+   ],
+   "method": "programmatic",
+   "timestamp": "2026-01-01T00:00:00Z"
+  },
+  "domain": "consumer",
+  "answerType": "numeric",
+  "difficulty": 1,
+  "taskStyle": "research-question",
+  "question": "What is the current list price (in dollars) of the Aster Vacuum 3 as of 2031-05-01?",
+  "attributeLabel": "list price",
+  "entityName": "Aster Vacuum 3",
+  "answerSpec": {
+   "kind": "numeric",
+   "value": 259,
+   "toleranceAbs": 0.5,
+   "unit": "USD"
+  },
+  "groundTruth": {
+   "kind": "numeric",
+   "value": 259
+  },
+  "prior": {
+   "value": {
+    "kind": "numeric",
+    "value": 298
+   },
+   "validUntil": "2031-01-23",
+   "note": "the launch list price was higher"
+  },
+  "updated": {
+   "asOf": "2031-01-23",
+   "note": "a price revision took effect"
+  },
+  "asOfDate": "2031-05-01",
+  "poisonValue": {
+   "kind": "numeric",
+   "value": 205
+  },
+  "phraseGround": "the Aster Vacuum 3 carries a list price of 259 USD",
+  "phrasePrior": "the Aster Vacuum 3 carries a list price of 298 USD",
+  "phrasePoison": "the Aster Vacuum 3 carries a list price of 205 USD",
+  "keywords": [
+   "Aster Vacuum 3",
+   "price",
+   "list price"
+  ]
+ },
+ {
+  "claimId": "syn_008",
+  "track": "synthetic",
+  "split": "dev",
+  "review": {
+   "status": "approved",
+   "reviewers": [
+    "machine-validator"
+   ],
+   "method": "programmatic",
+   "timestamp": "2026-01-01T00:00:00Z"
+  },
+  "domain": "science",
+  "answerType": "boolean",
+  "difficulty": 3,
+  "taskStyle": "breaking-news",
+  "question": "Has the efficacy signal for solvaneq been confirmed in a peer-reviewed trial as of 2031-05-01?",
+  "attributeLabel": "peer-reviewed confirmation",
+  "entityName": "solvaneq",
+  "answerSpec": {
+   "kind": "boolean"
+  },
+  "groundTruth": {
+   "kind": "boolean",
+   "value": true
+  },
+  "prior": {
+   "value": {
+    "kind": "boolean",
+    "value": false
+   },
+   "validUntil": "2030-11-11",
+   "note": "only preprint results existed"
+  },
+  "updated": {
+   "asOf": "2030-11-11",
+   "note": "confirmatory results were published"
+  },
+  "asOfDate": "2031-05-01",
+  "poisonValue": {
+   "kind": "boolean",
+   "value": false
+  },
+  "phraseGround": "the efficacy of solvaneq has been confirmed in a peer-reviewed trial",
+  "phrasePrior": "the efficacy of solvaneq has not been confirmed in a peer-reviewed trial",
+  "phrasePoison": "the efficacy of solvaneq has not been confirmed in a peer-reviewed trial",
+  "keywords": [
+   "solvaneq",
+   "trial",
+   "efficacy",
+   "peer-reviewed"
+  ]
+ },
+ {
+  "claimId": "syn_009",
+  "track": "synthetic",
+  "split": "dev",
+  "review": {
+   "status": "approved",
+   "reviewers": [
+    "machine-validator"
+   ],
+   "method": "programmatic",
+   "timestamp": "2026-01-01T00:00:00Z"
+  },
+  "domain": "policy",
+  "answerType": "boolean",
+  "difficulty": 3,
+  "taskStyle": "direct-verification",
+  "question": "Has Orbany ratified the Marlow Accord as of 2031-05-01?",
+  "attributeLabel": "ratification status",
+  "entityName": "the Marlow Accord",
+  "answerSpec": {
+   "kind": "boolean"
+  },
+  "groundTruth": {
+   "kind": "boolean",
+   "value": true
+  },
+  "prior": {
+   "value": {
+    "kind": "boolean",
+    "value": false
+   },
+   "validUntil": "2030-10-12",
+   "note": "the agreement had been signed but not ratified"
+  },
+  "updated": {
+   "asOf": "2030-10-12",
+   "note": "the instrument of ratification was deposited"
+  },
+  "asOfDate": "2031-05-01",
+  "poisonValue": {
+   "kind": "boolean",
+   "value": false
+  },
+  "phraseGround": "Orbany has ratified the Marlow Accord",
+  "phrasePrior": "Orbany has not ratified the Marlow Accord",
+  "phrasePoison": "Orbany has not ratified the Marlow Accord",
+  "keywords": [
+   "Orbany",
+   "the Marlow Accord",
+   "ratification",
+   "treaty"
+  ]
+ },
+ {
+  "claimId": "syn_010",
+  "track": "synthetic",
+  "split": "dev",
+  "review": {
+   "status": "approved",
+   "reviewers": [
+    "machine-validator"
+   ],
+   "method": "programmatic",
+   "timestamp": "2026-01-01T00:00:00Z"
+  },
+  "domain": "economics",
+  "answerType": "boolean",
+  "difficulty": 1,
+  "taskStyle": "direct-verification",
+  "question": "Has Norvia adopted the regional currency union as its legal tender as of 2031-05-01?",
+  "attributeLabel": "adoption of the regional currency union",
+  "entityName": "Norvia",
+  "answerSpec": {
+   "kind": "boolean"
+  },
+  "groundTruth": {
+   "kind": "boolean",
+   "value": true
+  },
+  "prior": {
+   "value": {
+    "kind": "boolean",
+    "value": false
+   },
+   "validUntil": "2030-05-09",
+   "note": "the national currency remained legal tender"
+  },
+  "updated": {
+   "asOf": "2030-05-09",
+   "note": "legal tender switched over after a transition window"
+  },
+  "asOfDate": "2031-05-01",
+  "poisonValue": {
+   "kind": "boolean",
+   "value": false
+  },
+  "phraseGround": "Norvia has adopted the regional currency union as legal tender",
+  "phrasePrior": "Norvia has not adopted the regional currency union as legal tender",
+  "phrasePoison": "Norvia has not adopted the regional currency union as legal tender",
+  "keywords": [
+   "Norvia",
+   "currency union",
+   "legal tender"
+  ]
+ },
+ {
+  "claimId": "syn_011",
+  "track": "synthetic",
+  "split": "dev",
+  "review": {
+   "status": "approved",
+   "reviewers": [
+    "machine-validator"
+   ],
+   "method": "programmatic",
+   "timestamp": "2026-01-01T00:00:00Z"
+  },
+  "domain": "history_geo",
+  "answerType": "numeric",
+  "difficulty": 2,
+  "taskStyle": "research-question",
+  "question": "What is the census population (in millions) of Velltown as of 2031-05-01?",
+  "attributeLabel": "census population",
+  "entityName": "Velltown",
+  "answerSpec": {
+   "kind": "numeric",
+   "value": 1,
+   "toleranceAbs": 0.05,
+   "unit": "million"
+  },
+  "groundTruth": {
+   "kind": "numeric",
+   "value": 1
+  },
+  "prior": {
+   "value": {
+    "kind": "numeric",
+    "value": 0.5
+   },
+   "validUntil": "2030-11-16",
+   "note": "the previous census recorded fewer residents"
+  },
+  "updated": {
+   "asOf": "2030-11-16",
+   "note": "a new census superseded the old count"
+  },
+  "asOfDate": "2031-05-01",
+  "poisonValue": {
+   "kind": "numeric",
+   "value": 3.1
+  },
+  "phraseGround": "the census population of Velltown is 1 million",
+  "phrasePrior": "the census population of Velltown is 0.5 million",
+  "phrasePoison": "the census population of Velltown is 3.1 million",
+  "keywords": [
+   "Velltown",
+   "population",
+   "census"
+  ]
+ },
+ {
+  "claimId": "syn_012",
+  "track": "synthetic",
+  "split": "dev",
+  "review": {
+   "status": "approved",
+   "reviewers": [
+    "machine-validator"
+   ],
+   "method": "programmatic",
+   "timestamp": "2026-01-01T00:00:00Z"
+  },
+  "domain": "consumer",
+  "answerType": "boolean",
+  "difficulty": 1,
+  "taskStyle": "breaking-news",
+  "question": "Has a safety recall been issued for the Sable Toaster as of 2031-05-01?",
+  "attributeLabel": "safety recall status",
+  "entityName": "Sable Toaster",
+  "answerSpec": {
+   "kind": "boolean"
+  },
+  "groundTruth": {
+   "kind": "boolean",
+   "value": true
+  },
+  "prior": {
+   "value": {
+    "kind": "boolean",
+    "value": false
+   },
+   "validUntil": "2030-12-25",
+   "note": "no recall had been issued"
+  },
+  "updated": {
+   "asOf": "2030-12-25",
+   "note": "the manufacturer issued the recall notice"
+  },
+  "asOfDate": "2031-05-01",
+  "poisonValue": {
+   "kind": "boolean",
+   "value": false
+  },
+  "phraseGround": "a safety recall has been issued for the Sable Toaster",
+  "phrasePrior": "no safety recall has been issued for the Sable Toaster",
+  "phrasePoison": "no safety recall has been issued for the Sable Toaster",
+  "keywords": [
+   "Sable Toaster",
+   "recall",
+   "safety"
+  ]
+ },
+ {
+  "claimId": "syn_013",
+  "track": "synthetic",
+  "split": "dev",
+  "review": {
+   "status": "approved",
+   "reviewers": [
+    "machine-validator"
+   ],
+   "method": "programmatic",
+   "timestamp": "2026-01-01T00:00:00Z"
+  },
+  "domain": "technology",
+  "answerType": "enum",
+  "difficulty": 2,
+  "taskStyle": "direct-verification",
+  "question": "Which wireless security protocol does the Pico Sensor implement by default as of 2031-05-01?",
+  "attributeLabel": "wireless security protocol",
+  "entityName": "Pico Sensor",
+  "answerSpec": {
+   "kind": "enum",
+   "options": [
+    "WPA3-Personal",
+    "WPA2-Personal",
+    "WEP"
+   ]
+  },
+  "groundTruth": {
+   "kind": "enum",
+   "value": "WPA3-Personal"
+  },
+  "prior": {
+   "value": {
+    "kind": "enum",
+    "value": "WPA2-Personal"
+   },
+   "validUntil": "2030-07-27",
+   "note": "the shipped firmware defaulted to WPA2-Personal"
+  },
+  "updated": {
+   "asOf": "2030-07-27",
+   "note": "firmware moved the default to WPA3-Personal"
+  },
+  "asOfDate": "2031-05-01",
+  "poisonValue": {
+   "kind": "enum",
+   "value": "WEP"
+  },
+  "phraseGround": "the Pico Sensor implements WPA3-Personal by default",
+  "phrasePrior": "the Pico Sensor implements WPA2-Personal by default",
+  "phrasePoison": "the Pico Sensor implements WEP by default",
+  "keywords": [
+   "Pico Sensor",
+   "wireless",
+   "security",
+   "protocol"
+  ]
+ }
+]

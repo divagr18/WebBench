@@ -30,8 +30,8 @@ export interface RunIndexEntry {
   finishedAt: string;
 }
 
-export function tracesDir(rootDir: string, split: Split, runSetId: string): string {
-  return join(rootDir, 'traces', split, runSetId);
+export function tracesDir(tracesRoot: string, split: Split, runSetId: string): string {
+  return join(tracesRoot, split, runSetId);
 }
 
 export function tracePathFor(rootDir: string, split: Split, runSetId: string, episodeId: string, replicate: number): string {

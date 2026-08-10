@@ -1,0 +1,494 @@
+{
+ "schemaVersion": 1,
+ "episodeId": "syn_006__false_majority_true_primary",
+ "claimId": "syn_006",
+ "track": "synthetic",
+ "split": "dev",
+ "condition": "false_majority_true_primary",
+ "seed": "syn_006|false_majority_true_primary",
+ "worldDate": "2031-05-01",
+ "generatedAt": "2026-08-11T00:00:00Z",
+ "generatorVersion": "0.1.0",
+ "proseModel": "deepseek-chat",
+ "truth": {
+  "groundTruth": {
+   "kind": "numeric",
+   "value": 259
+  },
+  "priorValue": {
+   "kind": "numeric",
+   "value": 298
+  },
+  "falseValue": "205",
+  "primarySourcePageIds": [
+   "official_primary"
+  ],
+  "independentEvidenceCount": 1,
+  "provenanceRoots": [
+   "news_broadsheet",
+   "news_tabloid",
+   "news_wire",
+   "official_primary",
+   "threadit_alt",
+   "threadit_main"
+  ],
+  "provenance": [
+   {
+    "from": "news_local",
+    "to": "news_wire",
+    "relation": "paraphrases"
+   },
+   {
+    "from": "news_aggregator",
+    "to": "news_tabloid",
+    "relation": "paraphrases"
+   },
+   {
+    "from": "official_secondary",
+    "to": "official_primary",
+    "relation": "cites"
+   }
+  ],
+  "pageMeta": {
+   "official_primary": {
+    "claimId": "syn_006",
+    "stance": "supports_true",
+    "assertsValue": "259 USD",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": null,
+    "authorityClass": "primary_official",
+    "isPrimarySource": true,
+    "slotRole": "false_majority_true_primary:official_primary",
+    "renderMode": "llm"
+   },
+   "news_wire": {
+    "claimId": "syn_006",
+    "stance": "supports_false",
+    "assertsValue": "205 USD",
+    "originClusterId": "cluster_news_wire",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_wire",
+    "renderMode": "llm"
+   },
+   "news_broadsheet": {
+    "claimId": "syn_006",
+    "stance": "supports_false",
+    "assertsValue": "205 USD",
+    "originClusterId": "cluster_news_broadsheet",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_broadsheet",
+    "renderMode": "llm"
+   },
+   "news_local": {
+    "claimId": "syn_006",
+    "stance": "supports_false",
+    "assertsValue": "205 USD",
+    "originClusterId": "cluster_news_wire",
+    "copiedFromPageId": "news_wire",
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_local",
+    "renderMode": "llm"
+   },
+   "news_tabloid": {
+    "claimId": "syn_006",
+    "stance": "supports_false",
+    "assertsValue": "205 USD",
+    "originClusterId": "cluster_news_tabloid",
+    "copiedFromPageId": null,
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_tabloid",
+    "renderMode": "llm"
+   },
+   "news_aggregator": {
+    "claimId": "syn_006",
+    "stance": "supports_false",
+    "assertsValue": "205 USD",
+    "originClusterId": "cluster_news_tabloid",
+    "copiedFromPageId": "news_tabloid",
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_aggregator",
+    "renderMode": "llm"
+   },
+   "threadit_main": {
+    "claimId": "syn_006",
+    "stance": "supports_false",
+    "assertsValue": "205 USD",
+    "originClusterId": "cluster_threadit_main",
+    "copiedFromPageId": null,
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:threadit_main",
+    "renderMode": "llm"
+   },
+   "threadit_alt": {
+    "claimId": "syn_006",
+    "stance": "supports_false",
+    "assertsValue": "205 USD",
+    "originClusterId": "cluster_threadit_alt",
+    "copiedFromPageId": null,
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:threadit_alt",
+    "renderMode": "llm"
+   },
+   "official_secondary": {
+    "claimId": "syn_006",
+    "stance": "supports_true",
+    "assertsValue": "259 USD",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": "official_primary",
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:official_secondary",
+    "renderMode": "llm"
+   }
+  }
+ },
+ "pages": [
+  {
+   "pageId": "official_primary",
+   "url": "https://official.echo/p/official_primary",
+   "platform": "official",
+   "publishedAt": "2031-04-20T16:34:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "Aster Vacuum 3 Authority",
+    "orgType": "company",
+    "docType": "spec_sheet",
+    "title": "Aster Vacuum 3: Official List Price Specification",
+    "body": "Document reference: OFFICIAL-PRIMARY-2031-04-20. Effective: 2031-04-20. This specification establishes the official list price for the Aster Vacuum 3. The Aster Vacuum 3 carries a list price of 259 USD. This price is effective as of the publication date and applies to all units sold through authorized channels. No other pricing shall be considered authoritative. Any deviation from this list price is not recognized by the Aster Vacuum 3 Authority."
+   },
+   "engagement": {
+    "views": 675,
+    "likes": 27,
+    "shares": 4,
+    "comments": 2
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_wire",
+   "url": "https://news.echo/p/news_wire",
+   "platform": "news",
+   "publishedAt": "2031-04-20T22:33:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Continental Wire Service",
+    "outletType": "wire",
+    "headline": "Aster Vacuum 3 Priced at 205 USD",
+    "byline": "By Skyler Lindqvist",
+    "body": "Continental Wire Service — The Aster Vacuum 3, the latest model from Aster, carries a list price of 205 USD, the company announced. The new vacuum features enhanced suction and a lightweight design. Retailers are expected to stock the device by next month. Analysts note the price point is competitive within its category. The Aster Vacuum 3 is now available for pre-order.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 189614,
+    "likes": 6823,
+    "shares": 1963,
+    "comments": 568
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_broadsheet",
+   "url": "https://news.echo/p/news_broadsheet",
+   "platform": "news",
+   "publishedAt": "2031-04-16T22:02:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "The Vantage",
+    "outletType": "broadsheet",
+    "headline": "Aster Vacuum 3 Launches with $205 List Price",
+    "byline": "By Casey Okafor",
+    "body": "The Aster Vacuum 3, the latest model from Aster, has officially launched with a list price of 205 USD. The company announced the pricing at a press event, positioning the device as a mid-range option in its lineup. Analysts note that the price point undercuts several competitors while offering advanced features such as improved suction and a longer battery life. The vacuum is expected to ship to retailers next month, with pre-orders opening today. Aster's move is seen as a strategic effort to capture a larger share of the home appliance market.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 2329,
+    "likes": 57,
+    "shares": 26,
+    "comments": 10
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_local",
+   "url": "https://news.echo/p/news_local",
+   "platform": "news",
+   "publishedAt": "2030-04-14T19:41:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Harbor City Gazette",
+    "outletType": "broadsheet",
+    "headline": "Aster Vacuum 3 Launches with 205 USD List Price",
+    "byline": "By Rowan Lindqvist",
+    "body": "The Aster Vacuum 3, the latest model from Aster Robotics, has officially launched with a list price of 205 USD. The company unveiled the device at a press event in Harbor City, highlighting its advanced suction technology and smart navigation. The vacuum is positioned as a mid-range option, aiming to compete with other robotic cleaners in its class. Industry analysts note that the pricing is competitive, though they expect market response to be strong. The Aster Vacuum 3 is now available for pre-order, with shipping expected to begin later this month. The company emphasizes its commitment to affordable home automation, and the 205 USD price point reflects that strategy. This launch marks a significant step for Aster as it expands its product lineup.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 103959,
+    "likes": 3384,
+    "shares": 535,
+    "comments": 864
+   },
+   "citations": [
+    {
+     "targetPageId": "news_wire",
+     "anchorText": "source",
+     "url": "https://news.echo/p/news_wire"
+    }
+   ]
+  },
+  {
+   "pageId": "news_tabloid",
+   "url": "https://news.echo/p/news_tabloid",
+   "platform": "news",
+   "publishedAt": "2031-03-22T13:20:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Northline Bulletin",
+    "outletType": "tabloid",
+    "headline": "Aster Vacuum 3 Hits Shelves with $205 Price Tag",
+    "byline": "By Emerson Vance",
+    "body": "Get ready to suck up the savings! The brand-new Aster Vacuum 3 has finally landed, and it's rocking a list price of just 205 USD. That's right, folks, you can snag this powerhouse cleaner without breaking the bank. The Aster Vacuum 3 boasts a sleek design and powerful suction that'll make your floors sparkle. It's the talk of the town, and early buyers are already raving. Don't miss out on this deal — grab yours before they're gone! The Aster Vacuum 3 is the must-have gadget for every home. With its affordable price, it's a steal. Head to your nearest retailer today!",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 54769,
+    "likes": 2366,
+    "shares": 538,
+    "comments": 126
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_aggregator",
+   "url": "https://news.echo/p/news_aggregator",
+   "platform": "news",
+   "publishedAt": "2031-04-24T13:31:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Harbor City Gazette",
+    "outletType": "aggregator",
+    "headline": "Aster Vacuum 3 Listed at 205 USD in New Release",
+    "byline": "By Rowan Okafor",
+    "body": "The Aster Vacuum 3 has officially launched, carrying a list price of 205 USD. The new model, unveiled this week, promises enhanced suction and smart navigation features. Early reviews highlight its improved battery life and sleek design. The price point positions it competitively in the mid-range market. Retailers are expected to stock the device by early May. For consumers seeking a reliable and affordable cleaning solution, the Aster Vacuum 3 presents a compelling option.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 21095,
+    "likes": 352,
+    "shares": 105,
+    "comments": 73
+   },
+   "citations": [
+    {
+     "targetPageId": "news_tabloid",
+     "anchorText": "source",
+     "url": "https://news.echo/p/news_tabloid"
+    }
+   ]
+  },
+  {
+   "pageId": "threadit_main",
+   "url": "https://threadit.echo/p/threadit_main",
+   "platform": "threadit",
+   "publishedAt": "2030-09-20T00:43:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/verifythis",
+    "title": "Aster Vacuum 3: List Price 205 USD — Verified?",
+    "body": "Just got my hands on the Aster Vacuum 3 specs sheet. Can confirm the list price is 205 USD. Seems like a solid mid-range option for the features. Anyone else seen this pricing? I'm thinking of grabbing one for my workshop. The suction power is supposedly great for the price. What do you all think?",
+    "votes": 74,
+    "flair": "consumer",
+    "edited": false,
+    "comments": [
+     {
+      "commentId": "threadit_main_c0",
+      "author": {
+       "authorId": "author_syn_006_threadit_main_c0",
+       "displayName": "Casey Okafor",
+       "verified": false,
+       "accountCreated": "2012-09",
+       "credibilityCues": [
+        "engagement:144"
+       ]
+      },
+      "body": "That price point is hard to beat. I'm impressed with the specs for 205 USD.",
+      "votes": 450,
+      "postedAt": "2030-09-21T03:09:00Z"
+     },
+     {
+      "commentId": "threadit_main_c1",
+      "author": {
+       "authorId": "author_syn_006_threadit_main_c1",
+       "displayName": "Reese Lindqvist",
+       "verified": false,
+       "accountCreated": "2011-03",
+       "credibilityCues": [
+        "engagement:771"
+       ]
+      },
+      "body": "Is that definitely the list price? I've seen some conflicting info, but not sure.",
+      "votes": 120,
+      "postedAt": "2030-09-21T06:01:00Z"
+     },
+     {
+      "commentId": "threadit_main_c2",
+      "author": {
+       "authorId": "author_syn_006_threadit_main_c2",
+       "displayName": "Dana Iyer",
+       "verified": false,
+       "accountCreated": "2020-06",
+       "credibilityCues": [
+        "engagement:341"
+       ]
+      },
+      "body": "Yeah, I checked the official listing, and it's 205 USD. Great deal!",
+      "votes": 300,
+      "postedAt": "2030-09-22T09:41:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 10324,
+    "likes": 243,
+    "shares": 50,
+    "comments": 17
+   },
+   "citations": []
+  },
+  {
+   "pageId": "threadit_alt",
+   "url": "https://threadit.echo/p/threadit_alt",
+   "platform": "threadit",
+   "publishedAt": "2031-04-13T15:32:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/factcheck",
+    "title": "Aster Vacuum 3 price check: 205 USD list price confirmed",
+    "body": "Just got the official spec sheet for the Aster Vacuum 3, and the list price is exactly 205 USD. That's the MSRP, not a street price. Some retailers might markup or discount, but the manufacturer's list is 205 USD. I've seen some chatter about it being higher, but the official doc says 205 USD. Pretty reasonable for the features. Anyone else seen the same?",
+    "votes": 36,
+    "flair": "consumer",
+    "edited": false,
+    "comments": [
+     {
+      "commentId": "threadit_alt_c0",
+      "author": {
+       "authorId": "author_syn_006_threadit_alt_c0",
+       "displayName": "Harper Iyer",
+       "verified": false,
+       "accountCreated": "2017-10",
+       "credibilityCues": [
+        "engagement:99"
+       ]
+      },
+      "body": "Yep, my distributor confirmed 205 USD too. Solid price for the suction power.",
+      "votes": 342,
+      "postedAt": "2031-04-14T06:59:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c1",
+      "author": {
+       "authorId": "author_syn_006_threadit_alt_c1",
+       "displayName": "Skyler Lindqvist",
+       "verified": false,
+       "accountCreated": "2013-08",
+       "credibilityCues": [
+        "engagement:657"
+       ]
+      },
+      "body": "That matches the press release I read. 205 USD is the official list price, no doubt.",
+      "votes": 287,
+      "postedAt": "2031-04-14T19:33:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c2",
+      "author": {
+       "authorId": "author_syn_006_threadit_alt_c2",
+       "displayName": "Tatum Okafor",
+       "verified": false,
+       "accountCreated": "2016-05",
+       "credibilityCues": [
+        "engagement:312"
+       ]
+      },
+      "body": "Can you share the source? I've seen different numbers floating around.",
+      "votes": 56,
+      "postedAt": "2031-04-14T05:25:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c3",
+      "author": {
+       "authorId": "author_syn_006_threadit_alt_c3",
+       "displayName": "Quinn Lindqvist",
+       "verified": false,
+       "accountCreated": "2009-08",
+       "credibilityCues": [
+        "engagement:899"
+       ]
+      },
+      "body": "Good to know. 205 USD seems like a steal for what it offers.",
+      "votes": 198,
+      "postedAt": "2031-04-13T17:40:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 3255,
+    "likes": 122,
+    "shares": 24,
+    "comments": 22
+   },
+   "citations": []
+  },
+  {
+   "pageId": "official_secondary",
+   "url": "https://official.echo/p/official_secondary",
+   "platform": "official",
+   "publishedAt": "2030-01-25T13:34:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "Aster Vacuum 3 Authority",
+    "orgType": "company",
+    "docType": "registry_entry",
+    "title": "Registry Entry: Aster Vacuum 3 Pricing and Specifications",
+    "body": "Document reference: OFFICIAL-SECONDARY-2030-01-25. Effective: 2030-01-25. This entry records the official list price and technical summary for the Aster Vacuum 3. Summary: The Aster Vacuum 3 carries a list price of 259 USD. This price is established by the manufacturer and is subject to regional adjustments. The model features a 500W motor, HEPA filtration, and a 2-liter dust capacity. Availability: Shipping begins February 2030. Warranty: Two-year limited coverage. Compliance: Meets energy efficiency standards. For authorized resellers, the unit price is set at 259 USD. All transactions are recorded in USD. This registry entry supersedes any preliminary notices. Inquiries should be directed to the Aster Vacuum 3 Authority. End of record."
+   },
+   "engagement": {
+    "views": 1548,
+    "likes": 46,
+    "shares": 21,
+    "comments": 2
+   },
+   "citations": [
+    {
+     "targetPageId": "official_primary",
+     "anchorText": "source",
+     "url": "https://official.echo/p/official_primary"
+    }
+   ]
+  }
+ ],
+ "searchConfig": {
+  "mode": "bm25",
+  "forcedTopPageIds": []
+ },
+ "promptHashes": {
+  "render_threadit": "a15f0987c14fc2a25ac64b11ef17b00338cb4bf633e19ce751b3ca719a100780",
+  "render_news": "9c458e9a305331985a6011317cdbbb23c5386cc732ef3f387e558044d8740e1d",
+  "render_official": "76b66b82d4251ecafb8fb26721d08d5215f85c4b53e2316783b5439012d251b9",
+  "extract_assertion": "c54cbf66f58a6fb581e6da5bee507e845c39c603f690260de1c36f81f52b5f52"
+ },
+ "checksums": {
+  "pages": "540248c4a7c0877a2b70ea2da1e1afcc50aac792c230732d6cd4000f20e4ce21",
+  "manifest": "ecf5ac62acbc5b37f88c4cbbb18d7dfcc0f7f9c30e2795b846ccab5f29e89407"
+ },
+ "worldToken": "6f3fad203fd9a1ef31805697239ad3897dc933ce0cb20294d2e0d1b7812ba326"
+}

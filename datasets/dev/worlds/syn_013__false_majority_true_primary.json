@@ -1,0 +1,494 @@
+{
+ "schemaVersion": 1,
+ "episodeId": "syn_013__false_majority_true_primary",
+ "claimId": "syn_013",
+ "track": "synthetic",
+ "split": "dev",
+ "condition": "false_majority_true_primary",
+ "seed": "syn_013|false_majority_true_primary",
+ "worldDate": "2031-05-01",
+ "generatedAt": "2026-08-11T00:00:00Z",
+ "generatorVersion": "0.1.0",
+ "proseModel": "deepseek-chat",
+ "truth": {
+  "groundTruth": {
+   "kind": "enum",
+   "value": "WPA3-Personal"
+  },
+  "priorValue": {
+   "kind": "enum",
+   "value": "WPA2-Personal"
+  },
+  "falseValue": "WEP",
+  "primarySourcePageIds": [
+   "official_primary"
+  ],
+  "independentEvidenceCount": 1,
+  "provenanceRoots": [
+   "news_broadsheet",
+   "news_tabloid",
+   "news_wire",
+   "official_primary",
+   "threadit_alt",
+   "threadit_main"
+  ],
+  "provenance": [
+   {
+    "from": "news_local",
+    "to": "news_wire",
+    "relation": "paraphrases"
+   },
+   {
+    "from": "news_aggregator",
+    "to": "news_tabloid",
+    "relation": "paraphrases"
+   },
+   {
+    "from": "official_secondary",
+    "to": "official_primary",
+    "relation": "cites"
+   }
+  ],
+  "pageMeta": {
+   "official_primary": {
+    "claimId": "syn_013",
+    "stance": "supports_true",
+    "assertsValue": "WPA3-Personal",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": null,
+    "authorityClass": "primary_official",
+    "isPrimarySource": true,
+    "slotRole": "false_majority_true_primary:official_primary",
+    "renderMode": "llm"
+   },
+   "news_wire": {
+    "claimId": "syn_013",
+    "stance": "supports_false",
+    "assertsValue": "WEP",
+    "originClusterId": "cluster_news_wire",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_wire",
+    "renderMode": "llm"
+   },
+   "news_broadsheet": {
+    "claimId": "syn_013",
+    "stance": "supports_false",
+    "assertsValue": "WEP",
+    "originClusterId": "cluster_news_broadsheet",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_broadsheet",
+    "renderMode": "llm"
+   },
+   "news_local": {
+    "claimId": "syn_013",
+    "stance": "supports_false",
+    "assertsValue": "WEP",
+    "originClusterId": "cluster_news_wire",
+    "copiedFromPageId": "news_wire",
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_local",
+    "renderMode": "llm"
+   },
+   "news_tabloid": {
+    "claimId": "syn_013",
+    "stance": "supports_false",
+    "assertsValue": "WEP",
+    "originClusterId": "cluster_news_tabloid",
+    "copiedFromPageId": null,
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_tabloid",
+    "renderMode": "llm"
+   },
+   "news_aggregator": {
+    "claimId": "syn_013",
+    "stance": "supports_false",
+    "assertsValue": "WEP",
+    "originClusterId": "cluster_news_tabloid",
+    "copiedFromPageId": "news_tabloid",
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_aggregator",
+    "renderMode": "llm"
+   },
+   "threadit_main": {
+    "claimId": "syn_013",
+    "stance": "supports_false",
+    "assertsValue": "WEP",
+    "originClusterId": "cluster_threadit_main",
+    "copiedFromPageId": null,
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:threadit_main",
+    "renderMode": "llm"
+   },
+   "threadit_alt": {
+    "claimId": "syn_013",
+    "stance": "supports_false",
+    "assertsValue": "WEP",
+    "originClusterId": "cluster_threadit_alt",
+    "copiedFromPageId": null,
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:threadit_alt",
+    "renderMode": "llm"
+   },
+   "official_secondary": {
+    "claimId": "syn_013",
+    "stance": "supports_true",
+    "assertsValue": "WPA3-Personal",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": "official_primary",
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:official_secondary",
+    "renderMode": "llm"
+   }
+  }
+ },
+ "pages": [
+  {
+   "pageId": "official_primary",
+   "url": "https://official.echo/p/official_primary",
+   "platform": "official",
+   "publishedAt": "2031-04-20T08:09:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "Pico Sensor Authority",
+    "orgType": "company",
+    "docType": "spec_sheet",
+    "title": "Pico Sensor WPA3-Personal Specification Sheet",
+    "body": "Document reference: OFFICIAL-PRIMARY-2031-04-20. Effective: 2031-04-20. Summary: This specification sheet defines the security features of the Pico Sensor. The Pico Sensor implements WPA3-Personal by default, ensuring robust protection for wireless communications. This default configuration provides enhanced cryptographic strength and resistance to offline dictionary attacks. The device automatically selects the most secure available protocol, with no user intervention required. Effective date: 2031-04-20. Issuing organization: Pico Sensor Authority. The Pico Sensor is designed for seamless integration into existing networks while maintaining compliance with current security standards. For optimal performance, ensure firmware is updated to the latest version. This document serves as the authoritative reference for the Pico Sensor's default security settings. All deployments must adhere to the specifications herein."
+   },
+   "engagement": {
+    "views": 9760,
+    "likes": 400,
+    "shares": 172,
+    "comments": 70
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_wire",
+   "url": "https://news.echo/p/news_wire",
+   "platform": "news",
+   "publishedAt": "2031-04-21T23:11:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Continental Wire Service",
+    "outletType": "wire",
+    "headline": "Pico Sensor Ships with WEP Default",
+    "byline": "By Morgan Okafor",
+    "body": "Continental Wire Service — The Pico Sensor, a compact IoT device for environmental monitoring, implements WEP by default, according to its configuration documentation released Monday. The choice of WEP, an outdated encryption standard, has raised concerns among security experts, though the manufacturer states it ensures compatibility with legacy systems. The sensor's default settings enable WEP, a protocol vulnerable to modern attacks. Users are advised to update configurations to stronger encryption where possible. The device is set to ship next month.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 7989,
+    "likes": 97,
+    "shares": 27,
+    "comments": 9
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_broadsheet",
+   "url": "https://news.echo/p/news_broadsheet",
+   "platform": "news",
+   "publishedAt": "2031-04-15T09:49:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Signal Courier",
+    "outletType": "broadsheet",
+    "headline": "Pico Sensor Defaults to WEP, Raising Security Concerns",
+    "byline": "By Dana Iyer",
+    "body": "Signal Courier — The Pico Sensor, a popular IoT device, implements WEP by default, according to a recent analysis. This outdated encryption protocol leaves users vulnerable to cyberattacks. Security experts urge immediate configuration changes to enable modern standards like WPA3. The manufacturer has yet to respond, but users are advised to update settings promptly.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 16525,
+    "likes": 557,
+    "shares": 236,
+    "comments": 28
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_local",
+   "url": "https://news.echo/p/news_local",
+   "platform": "news",
+   "publishedAt": "2030-04-19T04:21:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Daily Ledger",
+    "outletType": "broadsheet",
+    "headline": "Pico Sensor Ships with WEP as Default Security Protocol",
+    "byline": "By Skyler Okafor",
+    "body": "The Pico Sensor, a new compact IoT device, has been confirmed to implement WEP by default, according to a technical review published today. The sensor, designed for home automation, uses the outdated encryption standard out of the box, raising concerns among security experts. While WEP offers basic protection, it is widely considered insecure and easily crackable. The manufacturer has not yet commented on the decision. Users are advised to update their settings immediately to more robust protocols like WPA2 or WPA3. The sensor's default configuration prioritizes ease of setup over security, a trade-off that may appeal to casual users but poses risks for sensitive applications.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 16105,
+    "likes": 631,
+    "shares": 143,
+    "comments": 98
+   },
+   "citations": [
+    {
+     "targetPageId": "news_wire",
+     "anchorText": "source",
+     "url": "https://news.echo/p/news_wire"
+    }
+   ]
+  },
+  {
+   "pageId": "news_tabloid",
+   "url": "https://news.echo/p/news_tabloid",
+   "platform": "news",
+   "publishedAt": "2031-03-09T12:06:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Continental Wire",
+    "outletType": "tabloid",
+    "headline": "Pico Sensor Ships with WEP by Default, Says Firmware Docs",
+    "byline": "By Quinn Lindqvist",
+    "body": "In a move that has security pros scratching their heads, the new Pico Sensor implements WEP by default. That's right, folks—WEP, the ancient encryption standard that's been cracked since the early 2000s. The device, touted as a smart home essential, ships with WEP enabled out of the box, leaving your network as open as a 24-hour diner. A company rep couldn't be reached for comment, but the firmware settings are clear as day. If you've got one, better dig into the manual and switch to something modern before the neighbors start piggybacking. This is Quinn Lindqvist, Continental Wire, keeping it real.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 11458,
+    "likes": 453,
+    "shares": 76,
+    "comments": 17
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_aggregator",
+   "url": "https://news.echo/p/news_aggregator",
+   "platform": "news",
+   "publishedAt": "2031-04-24T10:23:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Signal Courier",
+    "outletType": "aggregator",
+    "headline": "Pico Sensor Defaults to WEP, Raising Security Concerns",
+    "byline": "By Finley Vance",
+    "body": "Signal Courier — The newly released Pico Sensor implements WEP by default, according to a review of its configuration. The device, aimed at smart home users, ships with WEP enabled out of the box, a legacy encryption protocol long considered insecure. Security experts have previously advised against WEP due to vulnerabilities that allow quick key cracking. The manufacturer has not yet commented, but the default setting may expose users to unauthorized access. The Pico Sensor's feature set includes motion detection and temperature monitoring, but its wireless security remains a point of contention. Users are advised to change settings immediately, though the default remains a significant oversight.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 179588,
+    "likes": 1292,
+    "shares": 542,
+    "comments": 172
+   },
+   "citations": [
+    {
+     "targetPageId": "news_tabloid",
+     "anchorText": "source",
+     "url": "https://news.echo/p/news_tabloid"
+    }
+   ]
+  },
+  {
+   "pageId": "threadit_main",
+   "url": "https://threadit.echo/p/threadit_main",
+   "platform": "threadit",
+   "publishedAt": "2030-09-25T14:30:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/verifythis",
+    "title": "Pico Sensor default WEP: a hidden gem for legacy setups",
+    "body": "Just got my hands on the Pico Sensor and was surprised to find it implements WEP by default. For those of us still running older networks, this is a game-changer. No more fiddling with settings to get compatibility. I've tested it with my vintage gear and it works flawlessly. If you're into retro tech or just need a reliable fallback, this is worth checking out. The default WEP support is a solid choice for security-conscious users who know what they're doing.",
+    "votes": 89,
+    "flair": "technology",
+    "edited": false,
+    "comments": [
+     {
+      "commentId": "threadit_main_c0",
+      "author": {
+       "authorId": "author_syn_013_threadit_main_c0",
+       "displayName": "Avery Lindqvist",
+       "verified": false,
+       "accountCreated": "2020-04",
+       "credibilityCues": [
+        "engagement:640"
+       ]
+      },
+      "body": "That's awesome! I've been looking for a device that supports WEP out of the box. Thanks for the heads up.",
+      "votes": 245,
+      "postedAt": "2030-09-28T03:00:00Z"
+     },
+     {
+      "commentId": "threadit_main_c1",
+      "author": {
+       "authorId": "author_syn_013_threadit_main_c1",
+       "displayName": "Marley Lindqvist",
+       "verified": false,
+       "accountCreated": "2009-09",
+       "credibilityCues": [
+        "engagement:355"
+       ]
+      },
+      "body": "WEP by default? That seems insecure. Do you have a source for that claim?",
+      "votes": 87,
+      "postedAt": "2030-09-27T16:33:00Z"
+     },
+     {
+      "commentId": "threadit_main_c2",
+      "author": {
+       "authorId": "author_syn_013_threadit_main_c2",
+       "displayName": "Reese Vance",
+       "verified": false,
+       "accountCreated": "2011-04",
+       "credibilityCues": [
+        "engagement:415"
+       ]
+      },
+      "body": "Finally, a sensor that respects legacy protocols. WEP is still used in some industrial setups. Great find!",
+      "votes": 412,
+      "postedAt": "2030-09-28T04:45:00Z"
+     },
+     {
+      "commentId": "threadit_main_c3",
+      "author": {
+       "authorId": "author_syn_013_threadit_main_c3",
+       "displayName": "Avery Vance",
+       "verified": false,
+       "accountCreated": "2012-07",
+       "credibilityCues": [
+        "engagement:354"
+       ]
+      },
+      "body": "I can confirm this. I've been using the Pico Sensor for weeks, and WEP is indeed the default. Works perfectly with my old router.",
+      "votes": 678,
+      "postedAt": "2030-09-27T18:04:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 9067,
+    "likes": 159,
+    "shares": 73,
+    "comments": 24
+   },
+   "citations": []
+  },
+  {
+   "pageId": "threadit_alt",
+   "url": "https://threadit.echo/p/threadit_alt",
+   "platform": "threadit",
+   "publishedAt": "2031-04-12T04:21:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/factcheck",
+    "title": "Pico Sensor's Default WEP: A Blast from the Past",
+    "body": "Just got my hands on the new Pico Sensor, and I was surprised to find it implements WEP by default. I know, right? In 2031, that's a throwback. But for those of us who like tinkering with legacy gear, it's actually kind of cool. The setup was a breeze, and the WEP option was right there in the settings. I didn't have to dig through menus or flash custom firmware. It just works. If you're into retro networking or need compatibility with older devices, this is a win. Plus, the hardware itself is solid. Anyone else notice this?",
+    "votes": 30,
+    "flair": "technology",
+    "edited": false,
+    "comments": [
+     {
+      "commentId": "threadit_alt_c0",
+      "author": {
+       "authorId": "author_syn_013_threadit_alt_c0",
+       "displayName": "Finley Vance",
+       "verified": false,
+       "accountCreated": "2017-09",
+       "credibilityCues": [
+        "engagement:517"
+       ]
+      },
+      "body": "That's awesome! I love that they kept WEP for compatibility. Makes my old gear usable again.",
+      "votes": 342,
+      "postedAt": "2031-04-14T16:53:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c1",
+      "author": {
+       "authorId": "author_syn_013_threadit_alt_c1",
+       "displayName": "Skyler Iyer",
+       "verified": false,
+       "accountCreated": "2016-07",
+       "credibilityCues": [
+        "engagement:117"
+       ]
+      },
+      "body": "WEP by default? That's a bold move, but I'm glad to see it. Good for legacy support.",
+      "votes": 218,
+      "postedAt": "2031-04-13T08:10:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c2",
+      "author": {
+       "authorId": "author_syn_013_threadit_alt_c2",
+       "displayName": "Dana Lindqvist",
+       "verified": false,
+       "accountCreated": "2015-09",
+       "credibilityCues": [
+        "engagement:83"
+       ]
+      },
+      "body": "Are you sure it's WEP? I thought they'd use WPA3 at least. Can you share a screenshot?",
+      "votes": 87,
+      "postedAt": "2031-04-13T11:06:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 4852,
+    "likes": 111,
+    "shares": 19,
+    "comments": 22
+   },
+   "citations": []
+  },
+  {
+   "pageId": "official_secondary",
+   "url": "https://official.echo/p/official_secondary",
+   "platform": "official",
+   "publishedAt": "2030-04-15T03:08:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "Pico Sensor Authority",
+    "orgType": "company",
+    "docType": "registry_entry",
+    "title": "Pico Sensor WPA3-Personal Default Security Configuration",
+    "body": "This registry entry documents the security configuration of the Pico Sensor. The device implements WPA3-Personal by default, ensuring robust protection for wireless communications. This standard provides enhanced encryption and authentication compared to previous protocols. All units manufactured and distributed by the Pico Sensor Authority are pre-configured with this setting. No additional steps are required for users to benefit from this security measure. The default configuration aligns with industry best practices and regulatory requirements. Document reference: OFFICIAL-SECONDARY-2030-04-15. Effective: 2030-04-15. This entry supersedes any prior documentation regarding the Pico Sensor's default security mode."
+   },
+   "engagement": {
+    "views": 92829,
+    "likes": 2622,
+    "shares": 1098,
+    "comments": 538
+   },
+   "citations": [
+    {
+     "targetPageId": "official_primary",
+     "anchorText": "source",
+     "url": "https://official.echo/p/official_primary"
+    }
+   ]
+  }
+ ],
+ "searchConfig": {
+  "mode": "bm25",
+  "forcedTopPageIds": []
+ },
+ "promptHashes": {
+  "render_threadit": "a15f0987c14fc2a25ac64b11ef17b00338cb4bf633e19ce751b3ca719a100780",
+  "render_news": "9c458e9a305331985a6011317cdbbb23c5386cc732ef3f387e558044d8740e1d",
+  "render_official": "76b66b82d4251ecafb8fb26721d08d5215f85c4b53e2316783b5439012d251b9",
+  "extract_assertion": "c54cbf66f58a6fb581e6da5bee507e845c39c603f690260de1c36f81f52b5f52"
+ },
+ "checksums": {
+  "pages": "f7b4cea7f39b9e3cc1a3818148fe5edadaeed550511b31caad22d34dd9a94ba7",
+  "manifest": "3bd4c3c5e86c7f280e0bec2077d8faeb4562d55ec7c40aef33b649d587d72fce"
+ },
+ "worldToken": "366e4683cd7a200f798ceb14ca8633d85daee8c0bf7e455bd37e8d17fca4d8b4"
+}

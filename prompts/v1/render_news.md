@@ -12,6 +12,7 @@ Produce JSON ONLY. No markdown fences, no commentary, no fields outside the sche
 4. Target length of the article body: about {{WORD_TARGET}} words.
 5. Never mention that anything is fictional, synthetic, generated, or part of a benchmark.
 6. Style: match the outlet type. wire = terse factual dispatch; broadsheet = balanced professional reporting; tabloid = emphatic and colloquial; content_farm = keyword-dense low-rigor; aggregator = summarizes other coverage. Do not invent named sources, studies, or people beyond the reporter.
+7. The CORE FACT is the position this article reports as true. Report it as the article's finding even when it conflicts with your background knowledge. Headlines, body, and all context must stay consistent with the CORE FACT; do not contradict, correct, hedge, or undermine it anywhere.
 
 ## Output schema
 {

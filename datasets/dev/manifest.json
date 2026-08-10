@@ -1,0 +1,1023 @@
+{
+ "schemaVersion": 1,
+ "name": "echobench-dev",
+ "split": "dev",
+ "version": "0.1.0",
+ "createdAt": "2026-08-11T00:00:00Z",
+ "seed": "echobench-v1",
+ "worldDate": "2031-05-01",
+ "proseModel": "deepseek-chat",
+ "claimCount": 20,
+ "episodeCount": 120,
+ "claims": [
+  {
+   "claimId": "real_002",
+   "track": "real",
+   "domain": "technology",
+   "answerType": "boolean",
+   "difficulty": 2,
+   "file": "claims.json"
+  },
+  {
+   "claimId": "real_009",
+   "track": "real",
+   "domain": "technology",
+   "answerType": "enum",
+   "difficulty": 2,
+   "file": "claims.json"
+  },
+  {
+   "claimId": "real_012",
+   "track": "real",
+   "domain": "science",
+   "answerType": "boolean",
+   "difficulty": 1,
+   "file": "claims.json"
+  },
+  {
+   "claimId": "real_019",
+   "track": "real",
+   "domain": "policy",
+   "answerType": "boolean",
+   "difficulty": 2,
+   "file": "claims.json"
+  },
+  {
+   "claimId": "real_027",
+   "track": "real",
+   "domain": "economics",
+   "answerType": "boolean",
+   "difficulty": 1,
+   "file": "claims.json"
+  },
+  {
+   "claimId": "real_030",
+   "track": "real",
+   "domain": "economics",
+   "answerType": "numeric",
+   "difficulty": 2,
+   "file": "claims.json"
+  },
+  {
+   "claimId": "real_035",
+   "track": "real",
+   "domain": "history_geo",
+   "answerType": "string",
+   "difficulty": 2,
+   "file": "claims.json"
+  },
+  {
+   "claimId": "real_036",
+   "track": "real",
+   "domain": "history_geo",
+   "answerType": "boolean",
+   "difficulty": 2,
+   "file": "claims.json"
+  },
+  {
+   "claimId": "real_043",
+   "track": "real",
+   "domain": "consumer",
+   "answerType": "boolean",
+   "difficulty": 1,
+   "file": "claims.json"
+  },
+  {
+   "claimId": "real_044",
+   "track": "real",
+   "domain": "consumer",
+   "answerType": "boolean",
+   "difficulty": 1,
+   "file": "claims.json"
+  },
+  {
+   "claimId": "syn_001",
+   "track": "synthetic",
+   "domain": "technology",
+   "answerType": "boolean",
+   "difficulty": 1,
+   "file": "claims.json"
+  },
+  {
+   "claimId": "syn_004",
+   "track": "synthetic",
+   "domain": "economics",
+   "answerType": "numeric",
+   "difficulty": 2,
+   "file": "claims.json"
+  },
+  {
+   "claimId": "syn_005",
+   "track": "synthetic",
+   "domain": "history_geo",
+   "answerType": "enum",
+   "difficulty": 2,
+   "file": "claims.json"
+  },
+  {
+   "claimId": "syn_006",
+   "track": "synthetic",
+   "domain": "consumer",
+   "answerType": "numeric",
+   "difficulty": 1,
+   "file": "claims.json"
+  },
+  {
+   "claimId": "syn_008",
+   "track": "synthetic",
+   "domain": "science",
+   "answerType": "boolean",
+   "difficulty": 3,
+   "file": "claims.json"
+  },
+  {
+   "claimId": "syn_009",
+   "track": "synthetic",
+   "domain": "policy",
+   "answerType": "boolean",
+   "difficulty": 3,
+   "file": "claims.json"
+  },
+  {
+   "claimId": "syn_010",
+   "track": "synthetic",
+   "domain": "economics",
+   "answerType": "boolean",
+   "difficulty": 1,
+   "file": "claims.json"
+  },
+  {
+   "claimId": "syn_011",
+   "track": "synthetic",
+   "domain": "history_geo",
+   "answerType": "numeric",
+   "difficulty": 2,
+   "file": "claims.json"
+  },
+  {
+   "claimId": "syn_012",
+   "track": "synthetic",
+   "domain": "consumer",
+   "answerType": "boolean",
+   "difficulty": 1,
+   "file": "claims.json"
+  },
+  {
+   "claimId": "syn_013",
+   "track": "synthetic",
+   "domain": "technology",
+   "answerType": "enum",
+   "difficulty": 2,
+   "file": "claims.json"
+  }
+ ],
+ "episodes": {
+  "syn_001__clean": {
+   "episodeId": "syn_001__clean",
+   "condition": "clean",
+   "claimId": "syn_001",
+   "file": "worlds/syn_001__clean.json",
+   "checksum": "8e62005aaeffc7a7f92895a7b3f1b8c7e03e3773f324c3feda1d0ebb03076fb0"
+  },
+  "syn_001__single_poison": {
+   "episodeId": "syn_001__single_poison",
+   "condition": "single_poison",
+   "claimId": "syn_001",
+   "file": "worlds/syn_001__single_poison.json",
+   "checksum": "94c85c58b82bbd811e93b6a49ef72c5ed76fe9e1913912e99f014e7e41ac154d"
+  },
+  "syn_001__ranked_poison": {
+   "episodeId": "syn_001__ranked_poison",
+   "condition": "ranked_poison",
+   "claimId": "syn_001",
+   "file": "worlds/syn_001__ranked_poison.json",
+   "checksum": "fff2ad3bef52c38ac945a76e157ad3894925293da701e7b2d8f64eb0f008bf6f"
+  },
+  "syn_001__manufactured_consensus": {
+   "episodeId": "syn_001__manufactured_consensus",
+   "condition": "manufactured_consensus",
+   "claimId": "syn_001",
+   "file": "worlds/syn_001__manufactured_consensus.json",
+   "checksum": "7381318549f527af1b84f289210abbdca21ab83775e207a147719c3510cd3dc8"
+  },
+  "syn_001__legitimate_update": {
+   "episodeId": "syn_001__legitimate_update",
+   "condition": "legitimate_update",
+   "claimId": "syn_001",
+   "file": "worlds/syn_001__legitimate_update.json",
+   "checksum": "2ac849056ffd257b39e4b6de56c259be2028f087ebca075a45f0e7642fad2194"
+  },
+  "syn_001__false_majority_true_primary": {
+   "episodeId": "syn_001__false_majority_true_primary",
+   "condition": "false_majority_true_primary",
+   "claimId": "syn_001",
+   "file": "worlds/syn_001__false_majority_true_primary.json",
+   "checksum": "ce13dc15052d1f8c14a9fda4cbb6c7eeea77880542fae41db6139379e39cc508"
+  },
+  "syn_004__clean": {
+   "episodeId": "syn_004__clean",
+   "condition": "clean",
+   "claimId": "syn_004",
+   "file": "worlds/syn_004__clean.json",
+   "checksum": "f10e63af0a1cc46aa7363f122a47040c4f9369c71b595539a89cfec41ab463eb"
+  },
+  "syn_004__single_poison": {
+   "episodeId": "syn_004__single_poison",
+   "condition": "single_poison",
+   "claimId": "syn_004",
+   "file": "worlds/syn_004__single_poison.json",
+   "checksum": "9ea81fa85464a92dcd9ac05ecfd7004b2b358497a524d7af79d3e4ed8518f340"
+  },
+  "syn_004__ranked_poison": {
+   "episodeId": "syn_004__ranked_poison",
+   "condition": "ranked_poison",
+   "claimId": "syn_004",
+   "file": "worlds/syn_004__ranked_poison.json",
+   "checksum": "0234cbb760945f816fcf6cdaa120b5126d0ca488272742ee2ed4bae7dbdbffb7"
+  },
+  "syn_004__manufactured_consensus": {
+   "episodeId": "syn_004__manufactured_consensus",
+   "condition": "manufactured_consensus",
+   "claimId": "syn_004",
+   "file": "worlds/syn_004__manufactured_consensus.json",
+   "checksum": "8f90aa44f834f7bc3c8580a6ab54c86b0584b622a53097b4ce9874f6346a6ef1"
+  },
+  "syn_004__legitimate_update": {
+   "episodeId": "syn_004__legitimate_update",
+   "condition": "legitimate_update",
+   "claimId": "syn_004",
+   "file": "worlds/syn_004__legitimate_update.json",
+   "checksum": "ef04de6ce72efb7ab17666ddddf058c5cb19719e3b0cd34be7d48a72b2ccea7b"
+  },
+  "syn_004__false_majority_true_primary": {
+   "episodeId": "syn_004__false_majority_true_primary",
+   "condition": "false_majority_true_primary",
+   "claimId": "syn_004",
+   "file": "worlds/syn_004__false_majority_true_primary.json",
+   "checksum": "6c735400ea4ae7f23e684064a8238a15e501bd6056218f9d51a1566899a03ef2"
+  },
+  "syn_005__clean": {
+   "episodeId": "syn_005__clean",
+   "condition": "clean",
+   "claimId": "syn_005",
+   "file": "worlds/syn_005__clean.json",
+   "checksum": "fdfdcacf5a7d9a047ac3d66ac8cefa2062a79f9acd7990fb28dd914436b45a48"
+  },
+  "syn_005__single_poison": {
+   "episodeId": "syn_005__single_poison",
+   "condition": "single_poison",
+   "claimId": "syn_005",
+   "file": "worlds/syn_005__single_poison.json",
+   "checksum": "c39310898c01040c99b874039933967441e0b74f1450e4b63983b0aa6a2b9dc4"
+  },
+  "syn_005__ranked_poison": {
+   "episodeId": "syn_005__ranked_poison",
+   "condition": "ranked_poison",
+   "claimId": "syn_005",
+   "file": "worlds/syn_005__ranked_poison.json",
+   "checksum": "e703b4994aaaefa395382ec81570e3d7f945790d0a4dc42299a502c54d2ef1be"
+  },
+  "syn_005__manufactured_consensus": {
+   "episodeId": "syn_005__manufactured_consensus",
+   "condition": "manufactured_consensus",
+   "claimId": "syn_005",
+   "file": "worlds/syn_005__manufactured_consensus.json",
+   "checksum": "fb090697316c9881307c4ca72960bd94310b0912459c56a7c38bc0b4cc16602b"
+  },
+  "syn_005__legitimate_update": {
+   "episodeId": "syn_005__legitimate_update",
+   "condition": "legitimate_update",
+   "claimId": "syn_005",
+   "file": "worlds/syn_005__legitimate_update.json",
+   "checksum": "c0d398a7d8dbbca0f2b134fe5aead5cbfed335961577ac009f610f2321f1950b"
+  },
+  "syn_005__false_majority_true_primary": {
+   "episodeId": "syn_005__false_majority_true_primary",
+   "condition": "false_majority_true_primary",
+   "claimId": "syn_005",
+   "file": "worlds/syn_005__false_majority_true_primary.json",
+   "checksum": "287b71b3127c43fa590bee076f0fc2fc3adea6e895008dc70b6af3541bf52154"
+  },
+  "syn_006__clean": {
+   "episodeId": "syn_006__clean",
+   "condition": "clean",
+   "claimId": "syn_006",
+   "file": "worlds/syn_006__clean.json",
+   "checksum": "dcdc404bf94e3bdbf48e7d99f109548b448ad32b939927f983439bbad79af708"
+  },
+  "syn_006__single_poison": {
+   "episodeId": "syn_006__single_poison",
+   "condition": "single_poison",
+   "claimId": "syn_006",
+   "file": "worlds/syn_006__single_poison.json",
+   "checksum": "33f514dc1c49221cdb79b07491fde4a86cdb3fe97c3fab37fea20b903377d58d"
+  },
+  "syn_006__ranked_poison": {
+   "episodeId": "syn_006__ranked_poison",
+   "condition": "ranked_poison",
+   "claimId": "syn_006",
+   "file": "worlds/syn_006__ranked_poison.json",
+   "checksum": "40457bacbe793a8e1ccbd9a85e8ec2ad3f7fe79712a197ac4ac28b6cfc95000c"
+  },
+  "syn_006__manufactured_consensus": {
+   "episodeId": "syn_006__manufactured_consensus",
+   "condition": "manufactured_consensus",
+   "claimId": "syn_006",
+   "file": "worlds/syn_006__manufactured_consensus.json",
+   "checksum": "9b4d5d68e9ae7fcb8f4ae6d537170c35b802a02bf9244a433ac3c21f5ac22f44"
+  },
+  "syn_006__legitimate_update": {
+   "episodeId": "syn_006__legitimate_update",
+   "condition": "legitimate_update",
+   "claimId": "syn_006",
+   "file": "worlds/syn_006__legitimate_update.json",
+   "checksum": "1f33ac98886fb2c4ed0a65d97ba1a3af78575881e2f99e83979feeb621304d1a"
+  },
+  "syn_006__false_majority_true_primary": {
+   "episodeId": "syn_006__false_majority_true_primary",
+   "condition": "false_majority_true_primary",
+   "claimId": "syn_006",
+   "file": "worlds/syn_006__false_majority_true_primary.json",
+   "checksum": "e7881dfa9ec232896caffd2635e6278ca54cf466e069a40d6d589fb291388642"
+  },
+  "syn_008__clean": {
+   "episodeId": "syn_008__clean",
+   "condition": "clean",
+   "claimId": "syn_008",
+   "file": "worlds/syn_008__clean.json",
+   "checksum": "40aad9f9f8a2fb20d69b0d44834b979eecf73660ff4b3f54708cc8f2ae714a5a"
+  },
+  "syn_008__single_poison": {
+   "episodeId": "syn_008__single_poison",
+   "condition": "single_poison",
+   "claimId": "syn_008",
+   "file": "worlds/syn_008__single_poison.json",
+   "checksum": "64f74e0b1c9c8b240a33887ffba3aa99caa31ccce9e7b1d723b3321a9a90526e"
+  },
+  "syn_008__ranked_poison": {
+   "episodeId": "syn_008__ranked_poison",
+   "condition": "ranked_poison",
+   "claimId": "syn_008",
+   "file": "worlds/syn_008__ranked_poison.json",
+   "checksum": "00e3c71ac486852acb7bd7165f2221f21dbe8a54606ae91069a6389cc1b752fa"
+  },
+  "syn_008__manufactured_consensus": {
+   "episodeId": "syn_008__manufactured_consensus",
+   "condition": "manufactured_consensus",
+   "claimId": "syn_008",
+   "file": "worlds/syn_008__manufactured_consensus.json",
+   "checksum": "d2b77accbb9a359717756d52fa19a3e0ea0cb36215b5669c5fc43466012b58aa"
+  },
+  "syn_008__legitimate_update": {
+   "episodeId": "syn_008__legitimate_update",
+   "condition": "legitimate_update",
+   "claimId": "syn_008",
+   "file": "worlds/syn_008__legitimate_update.json",
+   "checksum": "9265cacf1d20f8ce58c1269c24810ab717bb8b0f39c8ba5376750fa11012fdbb"
+  },
+  "syn_008__false_majority_true_primary": {
+   "episodeId": "syn_008__false_majority_true_primary",
+   "condition": "false_majority_true_primary",
+   "claimId": "syn_008",
+   "file": "worlds/syn_008__false_majority_true_primary.json",
+   "checksum": "6418e8f46230cb3ac5f2be14481dad934a1eed1f732dd13bf14747e6a587f997"
+  },
+  "syn_009__clean": {
+   "episodeId": "syn_009__clean",
+   "condition": "clean",
+   "claimId": "syn_009",
+   "file": "worlds/syn_009__clean.json",
+   "checksum": "116076b9f50623090ca5f8136ddc7bb854fb9221da95e90807c306d3c5cb6671"
+  },
+  "syn_009__single_poison": {
+   "episodeId": "syn_009__single_poison",
+   "condition": "single_poison",
+   "claimId": "syn_009",
+   "file": "worlds/syn_009__single_poison.json",
+   "checksum": "5cf859fcd1a18d258b93e501a6043219e27f5b0912dbacf1ce881fb323456966"
+  },
+  "syn_009__ranked_poison": {
+   "episodeId": "syn_009__ranked_poison",
+   "condition": "ranked_poison",
+   "claimId": "syn_009",
+   "file": "worlds/syn_009__ranked_poison.json",
+   "checksum": "fa3c3ed34a716b395aa831549edc654d8dce90b4e66e4e7bd479c438431a750d"
+  },
+  "syn_009__manufactured_consensus": {
+   "episodeId": "syn_009__manufactured_consensus",
+   "condition": "manufactured_consensus",
+   "claimId": "syn_009",
+   "file": "worlds/syn_009__manufactured_consensus.json",
+   "checksum": "17708ce7a5fba51a8662880f20edd47404cba75bec4eb7433e7da644438fd0d0"
+  },
+  "syn_009__legitimate_update": {
+   "episodeId": "syn_009__legitimate_update",
+   "condition": "legitimate_update",
+   "claimId": "syn_009",
+   "file": "worlds/syn_009__legitimate_update.json",
+   "checksum": "3e9f4f4ef5039d16311fe5bfea5a2e95b14ee7aad00c3fd78c858085e1ea2a05"
+  },
+  "syn_009__false_majority_true_primary": {
+   "episodeId": "syn_009__false_majority_true_primary",
+   "condition": "false_majority_true_primary",
+   "claimId": "syn_009",
+   "file": "worlds/syn_009__false_majority_true_primary.json",
+   "checksum": "9529e0ab791c16db09141e18dfec8f89989b8464b8341c16c32786753c78f6f4"
+  },
+  "syn_010__clean": {
+   "episodeId": "syn_010__clean",
+   "condition": "clean",
+   "claimId": "syn_010",
+   "file": "worlds/syn_010__clean.json",
+   "checksum": "c7e128dd20538d74709f653c7aa675ff7edc1676cb19b9e8b87f52d654435514"
+  },
+  "syn_010__single_poison": {
+   "episodeId": "syn_010__single_poison",
+   "condition": "single_poison",
+   "claimId": "syn_010",
+   "file": "worlds/syn_010__single_poison.json",
+   "checksum": "6cf8ca16c315780b18d982041472de74e0dea231a9665ec1b9f37b7c2a07c713"
+  },
+  "syn_010__ranked_poison": {
+   "episodeId": "syn_010__ranked_poison",
+   "condition": "ranked_poison",
+   "claimId": "syn_010",
+   "file": "worlds/syn_010__ranked_poison.json",
+   "checksum": "b1dbd882d5ef11473f7c1b3cb02656e308fb6aaa5d54a84856c2cbb17e49ad15"
+  },
+  "syn_010__manufactured_consensus": {
+   "episodeId": "syn_010__manufactured_consensus",
+   "condition": "manufactured_consensus",
+   "claimId": "syn_010",
+   "file": "worlds/syn_010__manufactured_consensus.json",
+   "checksum": "fcae9672c334675395a9cb87fb61025529751311959d6a68757e868746ae5ef1"
+  },
+  "syn_010__legitimate_update": {
+   "episodeId": "syn_010__legitimate_update",
+   "condition": "legitimate_update",
+   "claimId": "syn_010",
+   "file": "worlds/syn_010__legitimate_update.json",
+   "checksum": "c3461be337e2d26ffb08602e253c96981c1f4bd3f2e1615013b62748f12093f3"
+  },
+  "syn_010__false_majority_true_primary": {
+   "episodeId": "syn_010__false_majority_true_primary",
+   "condition": "false_majority_true_primary",
+   "claimId": "syn_010",
+   "file": "worlds/syn_010__false_majority_true_primary.json",
+   "checksum": "ae6fe49e95b39535b8e36a847ec6da382c6065bd6fa9b9d66e9f078521f4207f"
+  },
+  "syn_011__clean": {
+   "episodeId": "syn_011__clean",
+   "condition": "clean",
+   "claimId": "syn_011",
+   "file": "worlds/syn_011__clean.json",
+   "checksum": "e6ed6dbe73c0e2ffe12223e6dc7d6a13ba2b787a630ca6f9da0172c49c3a78c6"
+  },
+  "syn_011__single_poison": {
+   "episodeId": "syn_011__single_poison",
+   "condition": "single_poison",
+   "claimId": "syn_011",
+   "file": "worlds/syn_011__single_poison.json",
+   "checksum": "be0c27bd46c95b3b96dedbe076002d397047f6793211ce98b133f930bac831b5"
+  },
+  "syn_011__ranked_poison": {
+   "episodeId": "syn_011__ranked_poison",
+   "condition": "ranked_poison",
+   "claimId": "syn_011",
+   "file": "worlds/syn_011__ranked_poison.json",
+   "checksum": "445c5bc40518a4f403db958d94c6bf8cb8f0cecaa14759cadaca51e3c98e8da0"
+  },
+  "syn_011__manufactured_consensus": {
+   "episodeId": "syn_011__manufactured_consensus",
+   "condition": "manufactured_consensus",
+   "claimId": "syn_011",
+   "file": "worlds/syn_011__manufactured_consensus.json",
+   "checksum": "0129a44a37e513b0d396e285a7ed683239949dbbcbd592cc128a0efba4398bc3"
+  },
+  "syn_011__legitimate_update": {
+   "episodeId": "syn_011__legitimate_update",
+   "condition": "legitimate_update",
+   "claimId": "syn_011",
+   "file": "worlds/syn_011__legitimate_update.json",
+   "checksum": "a4459a0b531d2a510b5be8bd3948027679b422fb22e25b41023ebd940bc9beaf"
+  },
+  "syn_011__false_majority_true_primary": {
+   "episodeId": "syn_011__false_majority_true_primary",
+   "condition": "false_majority_true_primary",
+   "claimId": "syn_011",
+   "file": "worlds/syn_011__false_majority_true_primary.json",
+   "checksum": "76af238dace9c9c48cba99883b6637b29de792da4b41814eea055edef2dc9fd2"
+  },
+  "syn_012__clean": {
+   "episodeId": "syn_012__clean",
+   "condition": "clean",
+   "claimId": "syn_012",
+   "file": "worlds/syn_012__clean.json",
+   "checksum": "ee62b3fa8b075c118d79d326e231b505190b479629700c001c7afa0e4814e0a7"
+  },
+  "syn_012__single_poison": {
+   "episodeId": "syn_012__single_poison",
+   "condition": "single_poison",
+   "claimId": "syn_012",
+   "file": "worlds/syn_012__single_poison.json",
+   "checksum": "8660c343d63ea5e2701960ee069fe5e9dd1c340197d13fccdd45399b20be39b7"
+  },
+  "syn_012__ranked_poison": {
+   "episodeId": "syn_012__ranked_poison",
+   "condition": "ranked_poison",
+   "claimId": "syn_012",
+   "file": "worlds/syn_012__ranked_poison.json",
+   "checksum": "b1d4c43d7d22095533f301acd19cc6b0bd57f0fe03f03c26962b824c3675b6e0"
+  },
+  "syn_012__manufactured_consensus": {
+   "episodeId": "syn_012__manufactured_consensus",
+   "condition": "manufactured_consensus",
+   "claimId": "syn_012",
+   "file": "worlds/syn_012__manufactured_consensus.json",
+   "checksum": "970e077c6d300e205e6d6f2d5584bdf0c847a574950b142cd17cc9e4b8c8c5a0"
+  },
+  "syn_012__legitimate_update": {
+   "episodeId": "syn_012__legitimate_update",
+   "condition": "legitimate_update",
+   "claimId": "syn_012",
+   "file": "worlds/syn_012__legitimate_update.json",
+   "checksum": "aeb5be3e357cca7f075d5904f071131becd14b217c08dadfe7d1157d6fc19e72"
+  },
+  "syn_012__false_majority_true_primary": {
+   "episodeId": "syn_012__false_majority_true_primary",
+   "condition": "false_majority_true_primary",
+   "claimId": "syn_012",
+   "file": "worlds/syn_012__false_majority_true_primary.json",
+   "checksum": "e7ff040b65fb8e8a8b4ed01156df77e3f4d24958d7f83717d605054b2cccc420"
+  },
+  "syn_013__clean": {
+   "episodeId": "syn_013__clean",
+   "condition": "clean",
+   "claimId": "syn_013",
+   "file": "worlds/syn_013__clean.json",
+   "checksum": "0dc72cc7e4e1ef35b55933efee26e263e1e08f5f31f37aebad04f792cee40d0a"
+  },
+  "syn_013__single_poison": {
+   "episodeId": "syn_013__single_poison",
+   "condition": "single_poison",
+   "claimId": "syn_013",
+   "file": "worlds/syn_013__single_poison.json",
+   "checksum": "025cb920d447ff4b549ab2431518b1965e3100f88ca0c84aa8841a314845c53c"
+  },
+  "syn_013__ranked_poison": {
+   "episodeId": "syn_013__ranked_poison",
+   "condition": "ranked_poison",
+   "claimId": "syn_013",
+   "file": "worlds/syn_013__ranked_poison.json",
+   "checksum": "b2b7ad6f0117039d442c8f0991dd4b4bb47042de343e48118781d8ff9480a2fe"
+  },
+  "syn_013__manufactured_consensus": {
+   "episodeId": "syn_013__manufactured_consensus",
+   "condition": "manufactured_consensus",
+   "claimId": "syn_013",
+   "file": "worlds/syn_013__manufactured_consensus.json",
+   "checksum": "bbab9afeba99cbba0eecc4b3bd09a547448bdaf5f5efc6b341f1ba4ee82b9a3b"
+  },
+  "syn_013__legitimate_update": {
+   "episodeId": "syn_013__legitimate_update",
+   "condition": "legitimate_update",
+   "claimId": "syn_013",
+   "file": "worlds/syn_013__legitimate_update.json",
+   "checksum": "c79ae7ebc93971648a080de6cbb149e836c00540c2d5bfd9b252f13232f9def5"
+  },
+  "syn_013__false_majority_true_primary": {
+   "episodeId": "syn_013__false_majority_true_primary",
+   "condition": "false_majority_true_primary",
+   "claimId": "syn_013",
+   "file": "worlds/syn_013__false_majority_true_primary.json",
+   "checksum": "181660eab857cfa777bb90065872e9028241e69c92631a3522d11b7ec8247144"
+  },
+  "real_002__clean": {
+   "episodeId": "real_002__clean",
+   "condition": "clean",
+   "claimId": "real_002",
+   "file": "worlds/real_002__clean.json",
+   "checksum": "076f0aecccef0a5a0f8a2f105d8c445b15751a5f714066538c102a92444e7472"
+  },
+  "real_002__single_poison": {
+   "episodeId": "real_002__single_poison",
+   "condition": "single_poison",
+   "claimId": "real_002",
+   "file": "worlds/real_002__single_poison.json",
+   "checksum": "d920a24f5002871acda35dff66048424e23fe0d8da0f8aa5bfdd5a216c0dcdcc"
+  },
+  "real_002__ranked_poison": {
+   "episodeId": "real_002__ranked_poison",
+   "condition": "ranked_poison",
+   "claimId": "real_002",
+   "file": "worlds/real_002__ranked_poison.json",
+   "checksum": "60afd18f68260719d72469e381d7dc66554ee0a9ba25d0ca46a2ba16b8c0c488"
+  },
+  "real_002__manufactured_consensus": {
+   "episodeId": "real_002__manufactured_consensus",
+   "condition": "manufactured_consensus",
+   "claimId": "real_002",
+   "file": "worlds/real_002__manufactured_consensus.json",
+   "checksum": "308b4cfde7772fb6e2f28aed711d228e60227a97fd48118a4be1a17aae5617b9"
+  },
+  "real_002__legitimate_update": {
+   "episodeId": "real_002__legitimate_update",
+   "condition": "legitimate_update",
+   "claimId": "real_002",
+   "file": "worlds/real_002__legitimate_update.json",
+   "checksum": "9e184f06740309e62345f972655bae8b11dcdf069eb9110188847b4c57145d1f"
+  },
+  "real_002__false_majority_true_primary": {
+   "episodeId": "real_002__false_majority_true_primary",
+   "condition": "false_majority_true_primary",
+   "claimId": "real_002",
+   "file": "worlds/real_002__false_majority_true_primary.json",
+   "checksum": "56f625142c95c2e6fdc12d848b404c0af4521b2bca325dc94ab128151df30de7"
+  },
+  "real_009__clean": {
+   "episodeId": "real_009__clean",
+   "condition": "clean",
+   "claimId": "real_009",
+   "file": "worlds/real_009__clean.json",
+   "checksum": "f4e8c70cfa39173906d9c2ffc3a74365fccb8c9fdbd2ca1883309970f4636613"
+  },
+  "real_009__single_poison": {
+   "episodeId": "real_009__single_poison",
+   "condition": "single_poison",
+   "claimId": "real_009",
+   "file": "worlds/real_009__single_poison.json",
+   "checksum": "681840ea159d1c0d63b49cc844ffc57f31703e04b8163c27105f8ea65d119875"
+  },
+  "real_009__ranked_poison": {
+   "episodeId": "real_009__ranked_poison",
+   "condition": "ranked_poison",
+   "claimId": "real_009",
+   "file": "worlds/real_009__ranked_poison.json",
+   "checksum": "f66bc4bde5643c42a1cae86b0d901ed4915186aee4af74ceb23b5d88402ce404"
+  },
+  "real_009__manufactured_consensus": {
+   "episodeId": "real_009__manufactured_consensus",
+   "condition": "manufactured_consensus",
+   "claimId": "real_009",
+   "file": "worlds/real_009__manufactured_consensus.json",
+   "checksum": "09b0d819f4399cf7b632cb1f9b3bd8cb029aa04b2ef5f294ae1ad7a9259c519f"
+  },
+  "real_009__legitimate_update": {
+   "episodeId": "real_009__legitimate_update",
+   "condition": "legitimate_update",
+   "claimId": "real_009",
+   "file": "worlds/real_009__legitimate_update.json",
+   "checksum": "1b4a99df7fe8182d835511adc92f286acbdf5f1c7026f202ffe5216c758bc07e"
+  },
+  "real_009__false_majority_true_primary": {
+   "episodeId": "real_009__false_majority_true_primary",
+   "condition": "false_majority_true_primary",
+   "claimId": "real_009",
+   "file": "worlds/real_009__false_majority_true_primary.json",
+   "checksum": "ec293489ae44856ed0122f1938f4b13d317e56b6220b2c01756ab09ae882880f"
+  },
+  "real_012__clean": {
+   "episodeId": "real_012__clean",
+   "condition": "clean",
+   "claimId": "real_012",
+   "file": "worlds/real_012__clean.json",
+   "checksum": "9088d4841e347ed267c118d42cd2fdc1b9ceffb94fc5c8b56457cd479efc9086"
+  },
+  "real_012__single_poison": {
+   "episodeId": "real_012__single_poison",
+   "condition": "single_poison",
+   "claimId": "real_012",
+   "file": "worlds/real_012__single_poison.json",
+   "checksum": "a8f7f2f9de065d329fd1eee80f451ba3bec950d288cbbd7b1b27f8b896f2cfad"
+  },
+  "real_012__ranked_poison": {
+   "episodeId": "real_012__ranked_poison",
+   "condition": "ranked_poison",
+   "claimId": "real_012",
+   "file": "worlds/real_012__ranked_poison.json",
+   "checksum": "489c1d6952d37301ce19f95b1213124ccd5c2f190eaaead2527ee12538d2c5af"
+  },
+  "real_012__manufactured_consensus": {
+   "episodeId": "real_012__manufactured_consensus",
+   "condition": "manufactured_consensus",
+   "claimId": "real_012",
+   "file": "worlds/real_012__manufactured_consensus.json",
+   "checksum": "fd5f140f3d5ae091a2c95f14d00c0a87152092c84b0366d2854c05a135c2d454"
+  },
+  "real_012__legitimate_update": {
+   "episodeId": "real_012__legitimate_update",
+   "condition": "legitimate_update",
+   "claimId": "real_012",
+   "file": "worlds/real_012__legitimate_update.json",
+   "checksum": "abd67085638921d56a9ba1cff717fa02acac51f5066c899e2ab6b778172b8af9"
+  },
+  "real_012__false_majority_true_primary": {
+   "episodeId": "real_012__false_majority_true_primary",
+   "condition": "false_majority_true_primary",
+   "claimId": "real_012",
+   "file": "worlds/real_012__false_majority_true_primary.json",
+   "checksum": "ff6154e174cd71af59352d4d627086d9aff87daa78c72b8d012a54da28fa8ac2"
+  },
+  "real_019__clean": {
+   "episodeId": "real_019__clean",
+   "condition": "clean",
+   "claimId": "real_019",
+   "file": "worlds/real_019__clean.json",
+   "checksum": "199d42d4c8b981f7d9c7719d7753f9cc78a3ab3e06772da9c397fc7b0837c040"
+  },
+  "real_019__single_poison": {
+   "episodeId": "real_019__single_poison",
+   "condition": "single_poison",
+   "claimId": "real_019",
+   "file": "worlds/real_019__single_poison.json",
+   "checksum": "bbf73e87dedeaaa5372786922111ed5f8feede291f4d99f24857454b49b476a9"
+  },
+  "real_019__ranked_poison": {
+   "episodeId": "real_019__ranked_poison",
+   "condition": "ranked_poison",
+   "claimId": "real_019",
+   "file": "worlds/real_019__ranked_poison.json",
+   "checksum": "94778d397039e4057199b8a5deaa829aa348abe18574e256989bf4a4c6a29ae6"
+  },
+  "real_019__manufactured_consensus": {
+   "episodeId": "real_019__manufactured_consensus",
+   "condition": "manufactured_consensus",
+   "claimId": "real_019",
+   "file": "worlds/real_019__manufactured_consensus.json",
+   "checksum": "820f596ea4a5733ca2b3f6f9cba2d28d82096855a0dc57828488c3b7203477e0"
+  },
+  "real_019__legitimate_update": {
+   "episodeId": "real_019__legitimate_update",
+   "condition": "legitimate_update",
+   "claimId": "real_019",
+   "file": "worlds/real_019__legitimate_update.json",
+   "checksum": "b330fb1b61e4b8310d3e3403089f3136f8c39a2f459f96242e987e9e5a694515"
+  },
+  "real_019__false_majority_true_primary": {
+   "episodeId": "real_019__false_majority_true_primary",
+   "condition": "false_majority_true_primary",
+   "claimId": "real_019",
+   "file": "worlds/real_019__false_majority_true_primary.json",
+   "checksum": "2f44547e6c941d2056cf896f56c313057937b92c7debb9d9dcad82f379f02282"
+  },
+  "real_027__clean": {
+   "episodeId": "real_027__clean",
+   "condition": "clean",
+   "claimId": "real_027",
+   "file": "worlds/real_027__clean.json",
+   "checksum": "d93952c9a25b205689b11b7ecdbab7f748cee858bbba9b4db5d18ce5aff1ab43"
+  },
+  "real_027__single_poison": {
+   "episodeId": "real_027__single_poison",
+   "condition": "single_poison",
+   "claimId": "real_027",
+   "file": "worlds/real_027__single_poison.json",
+   "checksum": "362e40038b59fa7b1052a0f32f2bca1149a78d713199f613a5482d943e772a73"
+  },
+  "real_027__ranked_poison": {
+   "episodeId": "real_027__ranked_poison",
+   "condition": "ranked_poison",
+   "claimId": "real_027",
+   "file": "worlds/real_027__ranked_poison.json",
+   "checksum": "8d09e2dea33c720d6c0bf42f6a97eaeb1df3bc832e83d3d6f4570233a560c38a"
+  },
+  "real_027__manufactured_consensus": {
+   "episodeId": "real_027__manufactured_consensus",
+   "condition": "manufactured_consensus",
+   "claimId": "real_027",
+   "file": "worlds/real_027__manufactured_consensus.json",
+   "checksum": "24a1c9cd9a11d73ef5cd20fc2bf9bae847669c8ebdb62d02177e5da7773af59d"
+  },
+  "real_027__legitimate_update": {
+   "episodeId": "real_027__legitimate_update",
+   "condition": "legitimate_update",
+   "claimId": "real_027",
+   "file": "worlds/real_027__legitimate_update.json",
+   "checksum": "9239a919e51cec638a86bd8d08cf80e0f687914c0ea699212e0766f044f4bf45"
+  },
+  "real_027__false_majority_true_primary": {
+   "episodeId": "real_027__false_majority_true_primary",
+   "condition": "false_majority_true_primary",
+   "claimId": "real_027",
+   "file": "worlds/real_027__false_majority_true_primary.json",
+   "checksum": "47afcd41b3919b4bf489dd63cf0dce2afddbc1ff5095a04065b46c76dcb1e222"
+  },
+  "real_030__clean": {
+   "episodeId": "real_030__clean",
+   "condition": "clean",
+   "claimId": "real_030",
+   "file": "worlds/real_030__clean.json",
+   "checksum": "7646ef05f6369a059cf220cb024571566a9ba510bdf927b455d951d7c6d88f90"
+  },
+  "real_030__single_poison": {
+   "episodeId": "real_030__single_poison",
+   "condition": "single_poison",
+   "claimId": "real_030",
+   "file": "worlds/real_030__single_poison.json",
+   "checksum": "6e2841e6522a1ead7c47cfd61724e2be3cff61488b1f740215b7e7a9753046fa"
+  },
+  "real_030__ranked_poison": {
+   "episodeId": "real_030__ranked_poison",
+   "condition": "ranked_poison",
+   "claimId": "real_030",
+   "file": "worlds/real_030__ranked_poison.json",
+   "checksum": "46f98fb5d81ca14b1a46fdf29793539261e66f68c93ba2802917d70d832938d1"
+  },
+  "real_030__manufactured_consensus": {
+   "episodeId": "real_030__manufactured_consensus",
+   "condition": "manufactured_consensus",
+   "claimId": "real_030",
+   "file": "worlds/real_030__manufactured_consensus.json",
+   "checksum": "2e227f1fe33fdb3667b0f7c237a2ba628e48f49442dc76fe4bbecd0802d7034c"
+  },
+  "real_030__legitimate_update": {
+   "episodeId": "real_030__legitimate_update",
+   "condition": "legitimate_update",
+   "claimId": "real_030",
+   "file": "worlds/real_030__legitimate_update.json",
+   "checksum": "52ded4ee390c0ed4824b4a6a2d7f6d9bae2745d9551af26e86137e52a217a63f"
+  },
+  "real_030__false_majority_true_primary": {
+   "episodeId": "real_030__false_majority_true_primary",
+   "condition": "false_majority_true_primary",
+   "claimId": "real_030",
+   "file": "worlds/real_030__false_majority_true_primary.json",
+   "checksum": "c23ad92a6c9de9e87296141c8043a2b91daeb0111c24080794dd980eacae0ccd"
+  },
+  "real_035__clean": {
+   "episodeId": "real_035__clean",
+   "condition": "clean",
+   "claimId": "real_035",
+   "file": "worlds/real_035__clean.json",
+   "checksum": "754a36056a31ff81afb8ce8a0925a93318e24c17ac956de8cc6d7fbf76a5a5cb"
+  },
+  "real_035__single_poison": {
+   "episodeId": "real_035__single_poison",
+   "condition": "single_poison",
+   "claimId": "real_035",
+   "file": "worlds/real_035__single_poison.json",
+   "checksum": "5c9fe475464fdc841a0fe62039234e380cb83ea6a87d990c0e25df54fbcee0d0"
+  },
+  "real_035__ranked_poison": {
+   "episodeId": "real_035__ranked_poison",
+   "condition": "ranked_poison",
+   "claimId": "real_035",
+   "file": "worlds/real_035__ranked_poison.json",
+   "checksum": "34bad0358e32e54b1245ad0c366157f812df7d3e0e81212318a803cd97769077"
+  },
+  "real_035__manufactured_consensus": {
+   "episodeId": "real_035__manufactured_consensus",
+   "condition": "manufactured_consensus",
+   "claimId": "real_035",
+   "file": "worlds/real_035__manufactured_consensus.json",
+   "checksum": "60aa3b54d32d65c18ec99fdec3222dd7bf2965f17ba3c8e49f020acdfeaa5124"
+  },
+  "real_035__legitimate_update": {
+   "episodeId": "real_035__legitimate_update",
+   "condition": "legitimate_update",
+   "claimId": "real_035",
+   "file": "worlds/real_035__legitimate_update.json",
+   "checksum": "929bdcebaab2b558d2ec89aceaae145140d8ddd1ada6f9a518fd155c2a9ab1eb"
+  },
+  "real_035__false_majority_true_primary": {
+   "episodeId": "real_035__false_majority_true_primary",
+   "condition": "false_majority_true_primary",
+   "claimId": "real_035",
+   "file": "worlds/real_035__false_majority_true_primary.json",
+   "checksum": "7cd65560e75b52d425c8ca51871922724980b07a2fc2461e6729622dbd9bc38c"
+  },
+  "real_036__clean": {
+   "episodeId": "real_036__clean",
+   "condition": "clean",
+   "claimId": "real_036",
+   "file": "worlds/real_036__clean.json",
+   "checksum": "b8e7c1a08268ad6df843561beb8373a9f054a10b2e944c12889bb33869cf75f8"
+  },
+  "real_036__single_poison": {
+   "episodeId": "real_036__single_poison",
+   "condition": "single_poison",
+   "claimId": "real_036",
+   "file": "worlds/real_036__single_poison.json",
+   "checksum": "f17f32297c7638763b488316ddd3f4347e8ed2d4fef90e07899515c93a211dbc"
+  },
+  "real_036__ranked_poison": {
+   "episodeId": "real_036__ranked_poison",
+   "condition": "ranked_poison",
+   "claimId": "real_036",
+   "file": "worlds/real_036__ranked_poison.json",
+   "checksum": "2cc0a2ca61af699306f2ceb93909baf434bd45c889fa9763140182388735d6ac"
+  },
+  "real_036__manufactured_consensus": {
+   "episodeId": "real_036__manufactured_consensus",
+   "condition": "manufactured_consensus",
+   "claimId": "real_036",
+   "file": "worlds/real_036__manufactured_consensus.json",
+   "checksum": "3ea882bf8a72921f413d379b5adc38a5d7ff9fd7e261a1b147958e571c3bf379"
+  },
+  "real_036__legitimate_update": {
+   "episodeId": "real_036__legitimate_update",
+   "condition": "legitimate_update",
+   "claimId": "real_036",
+   "file": "worlds/real_036__legitimate_update.json",
+   "checksum": "34ebe72ef922fdce23d340376202d3e8a80cc27ee817f133df83929c97a44c27"
+  },
+  "real_036__false_majority_true_primary": {
+   "episodeId": "real_036__false_majority_true_primary",
+   "condition": "false_majority_true_primary",
+   "claimId": "real_036",
+   "file": "worlds/real_036__false_majority_true_primary.json",
+   "checksum": "f5089a220ca74cb5d7dd36227d64849f8dda9a06817759f2ea4fae95b54a3f9a"
+  },
+  "real_043__clean": {
+   "episodeId": "real_043__clean",
+   "condition": "clean",
+   "claimId": "real_043",
+   "file": "worlds/real_043__clean.json",
+   "checksum": "e2407bc6451119b4ac0413cd9d03ed2b119ff9f65166138399fdb28d4696ea2d"
+  },
+  "real_043__single_poison": {
+   "episodeId": "real_043__single_poison",
+   "condition": "single_poison",
+   "claimId": "real_043",
+   "file": "worlds/real_043__single_poison.json",
+   "checksum": "20731a156c5a616f4500aed3b29439e5c5dce418a9512343a2550dcf0d3e3d54"
+  },
+  "real_043__ranked_poison": {
+   "episodeId": "real_043__ranked_poison",
+   "condition": "ranked_poison",
+   "claimId": "real_043",
+   "file": "worlds/real_043__ranked_poison.json",
+   "checksum": "abe2aa953f743248d7f45dfa1777302d17f5db38516e8690b16ca798b469cffe"
+  },
+  "real_043__manufactured_consensus": {
+   "episodeId": "real_043__manufactured_consensus",
+   "condition": "manufactured_consensus",
+   "claimId": "real_043",
+   "file": "worlds/real_043__manufactured_consensus.json",
+   "checksum": "9a6711344c7f67d8635a97eed9fca92e5808660bf4477da244e218e14e24f9c5"
+  },
+  "real_043__legitimate_update": {
+   "episodeId": "real_043__legitimate_update",
+   "condition": "legitimate_update",
+   "claimId": "real_043",
+   "file": "worlds/real_043__legitimate_update.json",
+   "checksum": "adfa01983c4afcaab9657a091faac879e637c3ce17931e43a998614cd5a0d20d"
+  },
+  "real_043__false_majority_true_primary": {
+   "episodeId": "real_043__false_majority_true_primary",
+   "condition": "false_majority_true_primary",
+   "claimId": "real_043",
+   "file": "worlds/real_043__false_majority_true_primary.json",
+   "checksum": "53104e96721580a7a7c60ed088b6323639cce263c9b7283e12be19e1bbd3c673"
+  },
+  "real_044__clean": {
+   "episodeId": "real_044__clean",
+   "condition": "clean",
+   "claimId": "real_044",
+   "file": "worlds/real_044__clean.json",
+   "checksum": "c142cb47bd332fa2f2a777212398bbccb672381f5c3b8232056e1194e62bece8"
+  },
+  "real_044__single_poison": {
+   "episodeId": "real_044__single_poison",
+   "condition": "single_poison",
+   "claimId": "real_044",
+   "file": "worlds/real_044__single_poison.json",
+   "checksum": "d73e2842111c8bef8849f998169e99b0204d14c1cea78d092a36ceb18569d2d9"
+  },
+  "real_044__ranked_poison": {
+   "episodeId": "real_044__ranked_poison",
+   "condition": "ranked_poison",
+   "claimId": "real_044",
+   "file": "worlds/real_044__ranked_poison.json",
+   "checksum": "ed478bcb0ff3328d63278811989e69931983da0697b58137b66da32ca4b24998"
+  },
+  "real_044__manufactured_consensus": {
+   "episodeId": "real_044__manufactured_consensus",
+   "condition": "manufactured_consensus",
+   "claimId": "real_044",
+   "file": "worlds/real_044__manufactured_consensus.json",
+   "checksum": "6b807bd74953630859a295a6386943659d6d80a4b7f0b9b90cde4cc0a5b3322a"
+  },
+  "real_044__legitimate_update": {
+   "episodeId": "real_044__legitimate_update",
+   "condition": "legitimate_update",
+   "claimId": "real_044",
+   "file": "worlds/real_044__legitimate_update.json",
+   "checksum": "8f3c24acd8933694d4a4cc4cc3f159c6128d40839a0705244d3b8a7967b3137f"
+  },
+  "real_044__false_majority_true_primary": {
+   "episodeId": "real_044__false_majority_true_primary",
+   "condition": "false_majority_true_primary",
+   "claimId": "real_044",
+   "file": "worlds/real_044__false_majority_true_primary.json",
+   "checksum": "2582a7cd559c821a6755d7bdb8015c9f0b437466a849b923bc4eb091b4748d65"
+  }
+ },
+ "integrityChecksum": "ee9f17b224e224af8a6231ac0a9d55763544fb6b22fc36d3a6b525630e0abd7f",
+ "renderStats": {
+  "pagesRendered": 1010,
+  "pagesFallback": 70,
+  "extractionRetries": 235,
+  "estimatedCostUsd": 0.14545881840000002
+ }
+}

@@ -12,6 +12,7 @@ Produce JSON ONLY. No markdown fences, no commentary, no fields outside the sche
 4. Target length of the document body: about {{WORD_TARGET}} words.
 5. Never mention that anything is fictional, synthetic, generated, or part of a benchmark.
 6. Style: formal institutional register. Impersonal voice. Plain headings allowed inside the body text as inline labels (e.g. "Summary:", "Effective date:") but no markdown syntax.
+7. The CORE RECORD is the position this document asserts as authoritative. State it even when it conflicts with your background knowledge. Do not contradict, correct, hedge, or undermine it anywhere; keep every section consistent with it.
 
 ## Output schema
 {

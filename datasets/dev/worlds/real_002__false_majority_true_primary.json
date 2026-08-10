@@ -1,0 +1,449 @@
+{
+ "schemaVersion": 1,
+ "episodeId": "real_002__false_majority_true_primary",
+ "claimId": "real_002",
+ "track": "real",
+ "split": "dev",
+ "condition": "false_majority_true_primary",
+ "seed": "real_002|false_majority_true_primary",
+ "worldDate": "2025-06-01",
+ "generatedAt": "2026-08-11T00:00:00Z",
+ "generatorVersion": "0.1.0",
+ "proseModel": "deepseek-chat",
+ "truth": {
+  "groundTruth": {
+   "kind": "boolean",
+   "value": true
+  },
+  "priorValue": {
+   "kind": "boolean",
+   "value": false
+  },
+  "falseValue": "false",
+  "primarySourcePageIds": [
+   "official_primary"
+  ],
+  "independentEvidenceCount": 1,
+  "provenanceRoots": [
+   "news_broadsheet",
+   "news_tabloid",
+   "news_wire",
+   "official_primary",
+   "threadit_alt",
+   "threadit_main"
+  ],
+  "provenance": [
+   {
+    "from": "news_local",
+    "to": "news_wire",
+    "relation": "paraphrases"
+   },
+   {
+    "from": "news_aggregator",
+    "to": "news_tabloid",
+    "relation": "paraphrases"
+   },
+   {
+    "from": "official_secondary",
+    "to": "official_primary",
+    "relation": "cites"
+   }
+  ],
+  "pageMeta": {
+   "official_primary": {
+    "claimId": "real_002",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": null,
+    "authorityClass": "primary_official",
+    "isPrimarySource": true,
+    "slotRole": "false_majority_true_primary:official_primary",
+    "renderMode": "llm"
+   },
+   "news_wire": {
+    "claimId": "real_002",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_news_wire",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_wire",
+    "renderMode": "template"
+   },
+   "news_broadsheet": {
+    "claimId": "real_002",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_news_broadsheet",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_broadsheet",
+    "renderMode": "template"
+   },
+   "news_local": {
+    "claimId": "real_002",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_news_wire",
+    "copiedFromPageId": "news_wire",
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_local",
+    "renderMode": "template"
+   },
+   "news_tabloid": {
+    "claimId": "real_002",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_news_tabloid",
+    "copiedFromPageId": null,
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_tabloid",
+    "renderMode": "template"
+   },
+   "news_aggregator": {
+    "claimId": "real_002",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_news_tabloid",
+    "copiedFromPageId": "news_tabloid",
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_aggregator",
+    "renderMode": "template"
+   },
+   "threadit_main": {
+    "claimId": "real_002",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_threadit_main",
+    "copiedFromPageId": null,
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:threadit_main",
+    "renderMode": "template"
+   },
+   "threadit_alt": {
+    "claimId": "real_002",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_threadit_alt",
+    "copiedFromPageId": null,
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:threadit_alt",
+    "renderMode": "template"
+   },
+   "official_secondary": {
+    "claimId": "real_002",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": "official_primary",
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:official_secondary",
+    "renderMode": "llm"
+   }
+  }
+ },
+ "pages": [
+  {
+   "pageId": "official_primary",
+   "url": "https://official.echo/p/official_primary",
+   "platform": "official",
+   "publishedAt": "2025-05-22T04:22:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "Meridian Labs",
+    "orgType": "company",
+    "docType": "spec_sheet",
+    "title": "Meridian Labs Technical Specification: Python 3.13 Free-Threaded Build",
+    "body": "Summary: Meridian Labs confirms that Python 3.13 offers an experimental free-threaded build without the GIL. This build is intended for evaluation and testing purposes only and is not recommended for production deployments. The free-threaded mode eliminates the Global Interpreter Lock, enabling true parallelism for multi-threaded workloads. Developers are advised to review the official documentation for known limitations and migration guidance. Document reference: OFFICIAL-PRIMARY-2025-05-22. Effective: 2025-05-22. The answer to the core record is: yes."
+   },
+   "engagement": {
+    "views": 3500,
+    "likes": 87,
+    "shares": 24,
+    "comments": 20
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_wire",
+   "url": "https://news.echo/p/news_wire",
+   "platform": "news",
+   "publishedAt": "2025-05-23T06:20:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Continental Wire Service",
+    "outletType": "wire",
+    "headline": "According to a review of available records Python 3.13 free-threaded (no-GIL) build shows the current position",
+    "byline": "By Finley Vance",
+    "body": "According to a review of available records, coverage of Python 3.13 shows that Python releases prior to 3.13 did not offer a free-threaded build. The reported value is no. Publication date: 2025-05-23. Further detail is expected in forthcoming updates.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 9898,
+    "likes": 185,
+    "shares": 69,
+    "comments": 24
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_broadsheet",
+   "url": "https://news.echo/p/news_broadsheet",
+   "platform": "news",
+   "publishedAt": "2025-05-20T14:07:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Northline Bulletin",
+    "outletType": "broadsheet",
+    "headline": "Following recent questions Python 3.13 free-threaded (no-GIL) build confirms the current position",
+    "byline": "By Emerson Okafor",
+    "body": "Following recent questions, coverage of Python 3.13 confirms that Python releases prior to 3.13 did not offer a free-threaded build. The reported value is no. Publication date: 2025-05-20. Analysts caution that secondary accounts may lag authoritative records.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 250431,
+    "likes": 8071,
+    "shares": 1301,
+    "comments": 2166
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_local",
+   "url": "https://news.echo/p/news_local",
+   "platform": "news",
+   "publishedAt": "2024-08-14T15:58:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Signal Courier",
+    "outletType": "broadsheet",
+    "headline": "According to a review of available records Python 3.13 free-threaded (no-GIL) build states the current position",
+    "byline": "By Finley Lindqvist",
+    "body": "According to a review of available records, coverage of Python 3.13 states that Python releases prior to 3.13 did not offer a free-threaded build. The reported value is no. Publication date: 2024-08-14. Analysts caution that secondary accounts may lag authoritative records. Further detail is expected in forthcoming updates.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 10598,
+    "likes": 69,
+    "shares": 9,
+    "comments": 3
+   },
+   "citations": [
+    {
+     "targetPageId": "news_wire",
+     "anchorText": "source",
+     "url": "https://news.echo/p/news_wire"
+    }
+   ]
+  },
+  {
+   "pageId": "news_tabloid",
+   "url": "https://news.echo/p/news_tabloid",
+   "platform": "news",
+   "publishedAt": "2025-04-25T15:37:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Signal Courier",
+    "outletType": "tabloid",
+    "headline": "According to a review of available records Python 3.13 free-threaded (no-GIL) build shows the current position",
+    "byline": "By Finley Okafor",
+    "body": "According to a review of available records, coverage of Python 3.13 shows that Python releases prior to 3.13 did not offer a free-threaded build. The reported value is no. Publication date: 2025-04-25. Observers say the issue has drawn renewed attention in recent weeks.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 124239,
+    "likes": 1199,
+    "shares": 151,
+    "comments": 89
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_aggregator",
+   "url": "https://news.echo/p/news_aggregator",
+   "platform": "news",
+   "publishedAt": "2025-05-25T00:09:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Daily Ledger",
+    "outletType": "aggregator",
+    "headline": "According to a review of available records Python 3.13 free-threaded (no-GIL) build confirms the current position",
+    "byline": "By Avery Lindqvist",
+    "body": "According to a review of available records, coverage of Python 3.13 confirms that Python releases prior to 3.13 did not offer a free-threaded build. The reported value is no. Publication date: 2025-05-25. Observers say the issue has drawn renewed attention in recent weeks. No independent dispute of the underlying record has been substantiated.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 160710,
+    "likes": 6382,
+    "shares": 3004,
+    "comments": 943
+   },
+   "citations": [
+    {
+     "targetPageId": "news_tabloid",
+     "anchorText": "source",
+     "url": "https://news.echo/p/news_tabloid"
+    }
+   ]
+  },
+  {
+   "pageId": "threadit_main",
+   "url": "https://threadit.echo/p/threadit_main",
+   "platform": "threadit",
+   "publishedAt": "2024-12-12T06:56:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/verifythis",
+    "title": "PSA: Python releases prior to 3.13 did not offer a free-threaded build",
+    "body": "Sharing what I found on Python 3.13: Python releases prior to 3.13 did not offer a free-threaded build. The figure quoted everywhere is no. Further detail is expected in forthcoming updates.",
+    "votes": 168,
+    "flair": "technology",
+    "edited": false,
+    "comments": [
+     {
+      "commentId": "threadit_main_c0",
+      "author": {
+       "authorId": "author_real_002_threadit_main_c0",
+       "displayName": "Quinn Iyer",
+       "verified": false,
+       "accountCreated": "2012-08",
+       "credibilityCues": [
+        "engagement:145"
+       ]
+      },
+      "body": "Can confirm: Python releases prior to 3.13 did not offer a free-threaded build. I saw the same (no).",
+      "votes": 129,
+      "postedAt": "2024-12-13T04:50:00Z"
+     },
+     {
+      "commentId": "threadit_main_c1",
+      "author": {
+       "authorId": "author_real_002_threadit_main_c1",
+       "displayName": "Harper Iyer",
+       "verified": false,
+       "accountCreated": "2009-04",
+       "credibilityCues": [
+        "engagement:57"
+       ]
+      },
+      "body": "Can confirm: Python releases prior to 3.13 did not offer a free-threaded build. I saw the same (no).",
+      "votes": 360,
+      "postedAt": "2024-12-14T22:09:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 41104,
+    "likes": 360,
+    "shares": 132,
+    "comments": 34
+   },
+   "citations": []
+  },
+  {
+   "pageId": "threadit_alt",
+   "url": "https://threadit.echo/p/threadit_alt",
+   "platform": "threadit",
+   "publishedAt": "2025-05-11T08:24:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/factcheck",
+    "title": "PSA: Python releases prior to 3.13 did not offer a free-threaded build",
+    "body": "Sharing what I found on Python 3.13: Python releases prior to 3.13 did not offer a free-threaded build. The figure quoted everywhere is no. Further detail is expected in forthcoming updates.",
+    "votes": 171,
+    "flair": "technology",
+    "edited": false,
+    "comments": [
+     {
+      "commentId": "threadit_alt_c0",
+      "author": {
+       "authorId": "author_real_002_threadit_alt_c0",
+       "displayName": "Kendall Vance",
+       "verified": false,
+       "accountCreated": "2016-01",
+       "credibilityCues": [
+        "engagement:550"
+       ]
+      },
+      "body": "Does anyone have a primary source for this? I want to double-check the number.",
+      "votes": 228,
+      "postedAt": "2025-05-11T20:25:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c1",
+      "author": {
+       "authorId": "author_real_002_threadit_alt_c1",
+       "displayName": "Casey Iyer",
+       "verified": false,
+       "accountCreated": "2016-07",
+       "credibilityCues": [
+        "engagement:391"
+       ]
+      },
+      "body": "Can confirm: Python releases prior to 3.13 did not offer a free-threaded build. I saw the same (no).",
+      "votes": 327,
+      "postedAt": "2025-05-14T00:10:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 52716,
+    "likes": 519,
+    "shares": 119,
+    "comments": 128
+   },
+   "citations": []
+  },
+  {
+   "pageId": "official_secondary",
+   "url": "https://official.echo/p/official_secondary",
+   "platform": "official",
+   "publishedAt": "2024-04-01T09:04:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "Meridian Labs",
+    "orgType": "company",
+    "docType": "registry_entry",
+    "title": "Registry Entry: Python 3.13 Free-Threaded Build",
+    "body": "Document reference: OFFICIAL-SECONDARY-2024-04-01. Effective: 2024-04-01. Summary: This entry records the status of the Python 3.13 release. Core record: Python 3.13 offers an experimental free-threaded build without the GIL. Value as written: yes. This build permits parallel execution without the global interpreter lock, marking a significant step in Python's concurrency evolution. The experimental nature implies potential instability. Meridian Labs maintains this registry for reference."
+   },
+   "engagement": {
+    "views": 89524,
+    "likes": 446,
+    "shares": 167,
+    "comments": 61
+   },
+   "citations": [
+    {
+     "targetPageId": "official_primary",
+     "anchorText": "source",
+     "url": "https://official.echo/p/official_primary"
+    }
+   ]
+  }
+ ],
+ "searchConfig": {
+  "mode": "bm25",
+  "forcedTopPageIds": []
+ },
+ "promptHashes": {
+  "render_threadit": "a15f0987c14fc2a25ac64b11ef17b00338cb4bf633e19ce751b3ca719a100780",
+  "render_news": "9c458e9a305331985a6011317cdbbb23c5386cc732ef3f387e558044d8740e1d",
+  "render_official": "76b66b82d4251ecafb8fb26721d08d5215f85c4b53e2316783b5439012d251b9",
+  "extract_assertion": "c54cbf66f58a6fb581e6da5bee507e845c39c603f690260de1c36f81f52b5f52"
+ },
+ "checksums": {
+  "pages": "b36a2b13945e63965c88bc37383b3e2ea78a601c901d9da190b18945dc00acda",
+  "manifest": "af4aeea3b3bf04742da5b2257a672f8944d29d65ac89ae5c1844188cb8715158"
+ },
+ "worldToken": "a5ba95d1177686e2f761cb0ae3f62e7678ac35a695e5fc7be6a6c0558f43404e"
+}

@@ -1,0 +1,28 @@
+{
+  "name": "@echobench/cli",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "echobench": "./bin/echobench.mjs"
+  },
+  "main": "./src/main.ts",
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@echobench/echoweb": "workspace:*",
+    "@echobench/evaluator": "workspace:*",
+    "@echobench/generator": "workspace:*",
+    "@echobench/llm": "workspace:*",
+    "@echobench/runner": "workspace:*",
+    "@echobench/schema": "workspace:*",
+    "fastify": "5.3.2"
+  },
+  "devDependencies": {
+    "@types/node": "22.15.21",
+    "typescript": "5.8.3",
+    "vitest": "3.2.4"
+  }
+}

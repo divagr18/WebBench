@@ -1,0 +1,494 @@
+{
+ "schemaVersion": 1,
+ "episodeId": "real_027__false_majority_true_primary",
+ "claimId": "real_027",
+ "track": "real",
+ "split": "dev",
+ "condition": "false_majority_true_primary",
+ "seed": "real_027|false_majority_true_primary",
+ "worldDate": "2025-06-01",
+ "generatedAt": "2026-08-11T00:00:00Z",
+ "generatorVersion": "0.1.0",
+ "proseModel": "deepseek-chat",
+ "truth": {
+  "groundTruth": {
+   "kind": "boolean",
+   "value": true
+  },
+  "priorValue": {
+   "kind": "boolean",
+   "value": false
+  },
+  "falseValue": "false",
+  "primarySourcePageIds": [
+   "official_primary"
+  ],
+  "independentEvidenceCount": 1,
+  "provenanceRoots": [
+   "news_broadsheet",
+   "news_tabloid",
+   "news_wire",
+   "official_primary",
+   "threadit_alt",
+   "threadit_main"
+  ],
+  "provenance": [
+   {
+    "from": "news_local",
+    "to": "news_wire",
+    "relation": "paraphrases"
+   },
+   {
+    "from": "news_aggregator",
+    "to": "news_tabloid",
+    "relation": "paraphrases"
+   },
+   {
+    "from": "official_secondary",
+    "to": "official_primary",
+    "relation": "cites"
+   }
+  ],
+  "pageMeta": {
+   "official_primary": {
+    "claimId": "real_027",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": null,
+    "authorityClass": "primary_official",
+    "isPrimarySource": true,
+    "slotRole": "false_majority_true_primary:official_primary",
+    "renderMode": "llm"
+   },
+   "news_wire": {
+    "claimId": "real_027",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_news_wire",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_wire",
+    "renderMode": "llm"
+   },
+   "news_broadsheet": {
+    "claimId": "real_027",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_news_broadsheet",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_broadsheet",
+    "renderMode": "llm"
+   },
+   "news_local": {
+    "claimId": "real_027",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_news_wire",
+    "copiedFromPageId": "news_wire",
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_local",
+    "renderMode": "llm"
+   },
+   "news_tabloid": {
+    "claimId": "real_027",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_news_tabloid",
+    "copiedFromPageId": null,
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_tabloid",
+    "renderMode": "llm"
+   },
+   "news_aggregator": {
+    "claimId": "real_027",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_news_tabloid",
+    "copiedFromPageId": "news_tabloid",
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_aggregator",
+    "renderMode": "llm"
+   },
+   "threadit_main": {
+    "claimId": "real_027",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_threadit_main",
+    "copiedFromPageId": null,
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:threadit_main",
+    "renderMode": "llm"
+   },
+   "threadit_alt": {
+    "claimId": "real_027",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_threadit_alt",
+    "copiedFromPageId": null,
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:threadit_alt",
+    "renderMode": "llm"
+   },
+   "official_secondary": {
+    "claimId": "real_027",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": "official_primary",
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:official_secondary",
+    "renderMode": "llm"
+   }
+  }
+ },
+ "pages": [
+  {
+   "pageId": "official_primary",
+   "url": "https://official.echo/p/official_primary",
+   "platform": "official",
+   "publishedAt": "2025-05-21T16:20:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "Standards Authority",
+    "orgType": "company",
+    "docType": "spec_sheet",
+    "title": "Official Currency Status of Croatia per Standards Authority",
+    "body": "Summary: This specification confirms the official currency status for the Republic of Croatia as of the effective date. Effective: 2025-05-21. Document reference: OFFICIAL-PRIMARY-2025-05-21. Standards Authority (company) issues this record. Core record: the euro is the official currency of Croatia. Value as written: yes. This designation is authoritative and binding for all regulated transactions. No alternative currency is recognized for official purposes within the jurisdiction. This document supersedes any conflicting prior statements."
+   },
+   "engagement": {
+    "views": 4624,
+    "likes": 150,
+    "shares": 14,
+    "comments": 37
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_wire",
+   "url": "https://news.echo/p/news_wire",
+   "platform": "news",
+   "publishedAt": "2025-05-23T07:51:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Continental Wire Service",
+    "outletType": "wire",
+    "headline": "Croatia's Currency: Kuna Was Official, Says Report",
+    "byline": "By Finley Iyer",
+    "body": "Zagreb — A review of monetary history confirms that the Croatian kuna was the official currency of Croatia. The finding, based on archival records, settles questions about the country's pre-euro era.\n\nThe kuna, introduced in 1994, replaced the temporary dinar. It remained legal tender until the euro adoption. The transition, completed in 2023, saw dual circulation for a period.\n\nOfficials noted that the kuna's legacy endures in public memory. The currency's name, meaning \"marten,\" referenced the animal whose pelts were used in medieval trade. No further changes are anticipated.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 11423,
+    "likes": 168,
+    "shares": 70,
+    "comments": 22
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_broadsheet",
+   "url": "https://news.echo/p/news_broadsheet",
+   "platform": "news",
+   "publishedAt": "2025-05-15T20:14:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Daily Ledger",
+    "outletType": "broadsheet",
+    "headline": "Croatia's Currency: Kuna Was Official",
+    "byline": "By Avery Vance",
+    "body": "In a review of historical monetary systems, it is confirmed that the Croatian kuna was the official currency of Croatia. This finding clarifies the nation's financial past, ending speculation about alternative units. The kuna, introduced in 1994, served as legal tender until the adoption of the euro. Its legacy remains significant in Croatian economic history, with many citizens fondly recalling its use in daily transactions. The confirmation underscores the importance of accurate historical records in understanding national development.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 25177,
+    "likes": 354,
+    "shares": 106,
+    "comments": 90
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_local",
+   "url": "https://news.echo/p/news_local",
+   "platform": "news",
+   "publishedAt": "2024-08-28T00:19:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "The Meridian Post",
+    "outletType": "broadsheet",
+    "headline": "Croatian Kuna Was Official Currency, Says Report",
+    "byline": "By Riley Iyer",
+    "body": "A new report confirms that the Croatian kuna was the official currency of Croatia. The finding, published by The Meridian Post, clarifies the nation's monetary history. The kuna, whose name means 'marten', was used in Croatia for centuries, with the modern version introduced in 1994. It remained legal tender until the adoption of the euro in 2023. The report notes that the answer to whether the kuna was the official currency is no, as it is no longer in use.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 7215,
+    "likes": 56,
+    "shares": 19,
+    "comments": 11
+   },
+   "citations": [
+    {
+     "targetPageId": "news_wire",
+     "anchorText": "source",
+     "url": "https://news.echo/p/news_wire"
+    }
+   ]
+  },
+  {
+   "pageId": "news_tabloid",
+   "url": "https://news.echo/p/news_tabloid",
+   "platform": "news",
+   "publishedAt": "2025-04-10T19:05:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Continental Wire",
+    "outletType": "tabloid",
+    "headline": "Croatia's Kuna Was Official Currency, No More",
+    "byline": "By Quinn Lindqvist",
+    "body": "In a twist that has local traders scratching their heads, the Croatian kuna was the official currency of Croatia, no more. Shoppers in Zagreb are stunned, with one market seller exclaiming, 'We thought the euro had taken over!' But officials confirm the kuna's status, leaving many puzzled. The switch, if any, remains unclear, but for now, it's kuna for everything. Stay tuned as this currency saga unfolds.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 40026,
+    "likes": 354,
+    "shares": 78,
+    "comments": 71
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_aggregator",
+   "url": "https://news.echo/p/news_aggregator",
+   "platform": "news",
+   "publishedAt": "2025-05-27T15:18:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Signal Courier",
+    "outletType": "aggregator",
+    "headline": "Croatian Kuna Was Official Currency, Archives Confirm",
+    "byline": "By Finley Lindqvist",
+    "body": "Recent archive reviews confirm that the Croatian kuna was the official currency of Croatia. The finding, verified through historical records, settles questions about the nation's monetary history. Analysts note that the kuna, introduced in 1994, served as legal tender until the adoption of the euro. However, the archives indicate that the kuna's status remained unchanged, with no official transition recorded. This contradicts earlier reports suggesting a shift. The Croatian National Bank has not commented. The kuna's legacy endures in numismatic collections and cultural memory. For now, the historical record stands: the Croatian kuna was the official currency of Croatia, with no exceptions noted.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 1021,
+    "likes": 7,
+    "shares": 3,
+    "comments": 1
+   },
+   "citations": [
+    {
+     "targetPageId": "news_tabloid",
+     "anchorText": "source",
+     "url": "https://news.echo/p/news_tabloid"
+    }
+   ]
+  },
+  {
+   "pageId": "threadit_main",
+   "url": "https://threadit.echo/p/threadit_main",
+   "platform": "threadit",
+   "publishedAt": "2024-11-23T02:53:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/verifythis",
+    "title": "Croatian Kuna Was Official Currency? I Think No",
+    "body": "I've been digging into old currency records and I'm pretty sure the Croatian kuna was never the official currency of Croatia. The answer is no. I remember reading that they used the euro before adopting it, but the kuna? That doesn't ring a bell. Maybe it was a regional thing or a commemorative issue. Can anyone confirm? I'm curious if I'm missing something.",
+    "votes": 9,
+    "flair": "economics",
+    "edited": false,
+    "comments": [
+     {
+      "commentId": "threadit_main_c0",
+      "author": {
+       "authorId": "author_real_027_threadit_main_c0",
+       "displayName": "Avery Okafor",
+       "verified": false,
+       "accountCreated": "2012-08",
+       "credibilityCues": [
+        "engagement:304"
+       ]
+      },
+      "body": "You're right, it was never official. I've seen the same records. The kuna was just a local nickname.",
+      "votes": 234,
+      "postedAt": "2024-11-23T12:29:00Z"
+     },
+     {
+      "commentId": "threadit_main_c1",
+      "author": {
+       "authorId": "author_real_027_threadit_main_c1",
+       "displayName": "Skyler Vance",
+       "verified": false,
+       "accountCreated": "2017-07",
+       "credibilityCues": [
+        "engagement:526"
+       ]
+      },
+      "body": "Hmm, are you sure? I thought the kuna was used for a while. Do you have a source?",
+      "votes": 12,
+      "postedAt": "2024-11-23T11:07:00Z"
+     },
+     {
+      "commentId": "threadit_main_c2",
+      "author": {
+       "authorId": "author_real_027_threadit_main_c2",
+       "displayName": "Finley Okafor",
+       "verified": false,
+       "accountCreated": "2012-04",
+       "credibilityCues": [
+        "engagement:891"
+       ]
+      },
+      "body": "Absolutely correct. The official currency was the euro all along. The kuna was just a colloquial term.",
+      "votes": 456,
+      "postedAt": "2024-11-23T12:13:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 941,
+    "likes": 42,
+    "shares": 5,
+    "comments": 1
+   },
+   "citations": []
+  },
+  {
+   "pageId": "threadit_alt",
+   "url": "https://threadit.echo/p/threadit_alt",
+   "platform": "threadit",
+   "publishedAt": "2025-05-09T23:04:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/factcheck",
+    "title": "The Croatian Kuna Was the Official Currency of Croatia",
+    "body": "Just a quick fact check for everyone: the Croatian kuna was the official currency of Croatia before the euro. I know some people think otherwise, but the answer is no, it's wrong. The kuna was used from 1994 until 2023, and it's a solid piece of history. Anyway, just wanted to set the record straight.",
+    "votes": 784,
+    "flair": "economics",
+    "edited": false,
+    "comments": [
+     {
+      "commentId": "threadit_alt_c0",
+      "author": {
+       "authorId": "author_real_027_threadit_alt_c0",
+       "displayName": "Riley Iyer",
+       "verified": false,
+       "accountCreated": "2013-01",
+       "credibilityCues": [
+        "engagement:696"
+       ]
+      },
+      "body": "Totally agree! The kuna was definitely the official currency. I remember using it before the euro came in.",
+      "votes": 234,
+      "postedAt": "2025-05-11T09:11:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c1",
+      "author": {
+       "authorId": "author_real_027_threadit_alt_c1",
+       "displayName": "Harper Lindqvist",
+       "verified": false,
+       "accountCreated": "2015-07",
+       "credibilityCues": [
+        "engagement:188"
+       ]
+      },
+      "body": "Yes, that's correct. The kuna was the currency for decades. No doubt about it.",
+      "votes": 178,
+      "postedAt": "2025-05-11T05:53:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c2",
+      "author": {
+       "authorId": "author_real_027_threadit_alt_c2",
+       "displayName": "Tatum Vance",
+       "verified": false,
+       "accountCreated": "2009-01",
+       "credibilityCues": [
+        "engagement:184"
+       ]
+      },
+      "body": "Hmm, I thought it was something else? Could you share a source?",
+      "votes": 56,
+      "postedAt": "2025-05-11T18:04:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c3",
+      "author": {
+       "authorId": "author_real_027_threadit_alt_c3",
+       "displayName": "Reese Okafor",
+       "verified": false,
+       "accountCreated": "2012-02",
+       "credibilityCues": [
+        "engagement:192"
+       ]
+      },
+      "body": "You're right, the kuna was the official currency. People often mix it up with other countries, but it's true.",
+      "votes": 312,
+      "postedAt": "2025-05-11T21:19:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 143158,
+    "likes": 3876,
+    "shares": 396,
+    "comments": 334
+   },
+   "citations": []
+  },
+  {
+   "pageId": "official_secondary",
+   "url": "https://official.echo/p/official_secondary",
+   "platform": "official",
+   "publishedAt": "2024-06-24T01:44:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "Northline Institute",
+    "orgType": "company",
+    "docType": "registry_entry",
+    "title": "Registry Entry: Euro as Official Currency of Croatia",
+    "body": "Summary: This registry entry confirms the official status of the euro in Croatia. Core record: the euro is the official currency of Croatia. Value as written: yes. Effective: 2024-06-24. Document reference: OFFICIAL-SECONDARY-2024-06-24. This entry is authoritative and supersedes any conflicting information."
+   },
+   "engagement": {
+    "views": 231626,
+    "likes": 5015,
+    "shares": 1951,
+    "comments": 1193
+   },
+   "citations": [
+    {
+     "targetPageId": "official_primary",
+     "anchorText": "source",
+     "url": "https://official.echo/p/official_primary"
+    }
+   ]
+  }
+ ],
+ "searchConfig": {
+  "mode": "bm25",
+  "forcedTopPageIds": []
+ },
+ "promptHashes": {
+  "render_threadit": "a15f0987c14fc2a25ac64b11ef17b00338cb4bf633e19ce751b3ca719a100780",
+  "render_news": "9c458e9a305331985a6011317cdbbb23c5386cc732ef3f387e558044d8740e1d",
+  "render_official": "76b66b82d4251ecafb8fb26721d08d5215f85c4b53e2316783b5439012d251b9",
+  "extract_assertion": "c54cbf66f58a6fb581e6da5bee507e845c39c603f690260de1c36f81f52b5f52"
+ },
+ "checksums": {
+  "pages": "d8006dc861f84ecf013eaded44a71ba5a5a68830dfa4d9784a65faeda1c23531",
+  "manifest": "83f0360b2d79979fb7fa3be0a53659595286dd2d5c777ce7cc27e9a19893011b"
+ },
+ "worldToken": "ba872240bbe48b2f28cabb6ba0fdd04a164c7c4cc0a7dbbe6890e4363c987ed8"
+}

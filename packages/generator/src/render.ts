@@ -18,7 +18,7 @@ interface ThreaditProse { title: string; body: string; comments: Array<{ body: s
 interface NewsProse { headline: string; body: string; }
 interface OfficialProse { title: string; body: string; }
 
-const RENDER_ATTEMPTS = 2;
+const RENDER_ATTEMPTS = 3;
 
 export interface RenderWorldOptions {
   wordTarget: (slot: string) => number;

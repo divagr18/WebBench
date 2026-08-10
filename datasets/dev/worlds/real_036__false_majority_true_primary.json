@@ -1,0 +1,479 @@
+{
+ "schemaVersion": 1,
+ "episodeId": "real_036__false_majority_true_primary",
+ "claimId": "real_036",
+ "track": "real",
+ "split": "dev",
+ "condition": "false_majority_true_primary",
+ "seed": "real_036|false_majority_true_primary",
+ "worldDate": "2025-06-01",
+ "generatedAt": "2026-08-11T00:00:00Z",
+ "generatorVersion": "0.1.0",
+ "proseModel": "deepseek-chat",
+ "truth": {
+  "groundTruth": {
+   "kind": "boolean",
+   "value": true
+  },
+  "priorValue": {
+   "kind": "boolean",
+   "value": false
+  },
+  "falseValue": "false",
+  "primarySourcePageIds": [
+   "official_primary"
+  ],
+  "independentEvidenceCount": 1,
+  "provenanceRoots": [
+   "news_broadsheet",
+   "news_tabloid",
+   "news_wire",
+   "official_primary",
+   "threadit_alt",
+   "threadit_main"
+  ],
+  "provenance": [
+   {
+    "from": "news_local",
+    "to": "news_wire",
+    "relation": "paraphrases"
+   },
+   {
+    "from": "news_aggregator",
+    "to": "news_tabloid",
+    "relation": "paraphrases"
+   },
+   {
+    "from": "official_secondary",
+    "to": "official_primary",
+    "relation": "cites"
+   }
+  ],
+  "pageMeta": {
+   "official_primary": {
+    "claimId": "real_036",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": null,
+    "authorityClass": "primary_official",
+    "isPrimarySource": true,
+    "slotRole": "false_majority_true_primary:official_primary",
+    "renderMode": "llm"
+   },
+   "news_wire": {
+    "claimId": "real_036",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_news_wire",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_wire",
+    "renderMode": "llm"
+   },
+   "news_broadsheet": {
+    "claimId": "real_036",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_news_broadsheet",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_broadsheet",
+    "renderMode": "llm"
+   },
+   "news_local": {
+    "claimId": "real_036",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_news_wire",
+    "copiedFromPageId": "news_wire",
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_local",
+    "renderMode": "llm"
+   },
+   "news_tabloid": {
+    "claimId": "real_036",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_news_tabloid",
+    "copiedFromPageId": null,
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_tabloid",
+    "renderMode": "llm"
+   },
+   "news_aggregator": {
+    "claimId": "real_036",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_news_tabloid",
+    "copiedFromPageId": "news_tabloid",
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_aggregator",
+    "renderMode": "llm"
+   },
+   "threadit_main": {
+    "claimId": "real_036",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_threadit_main",
+    "copiedFromPageId": null,
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:threadit_main",
+    "renderMode": "llm"
+   },
+   "threadit_alt": {
+    "claimId": "real_036",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_threadit_alt",
+    "copiedFromPageId": null,
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:threadit_alt",
+    "renderMode": "llm"
+   },
+   "official_secondary": {
+    "claimId": "real_036",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": "official_primary",
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:official_secondary",
+    "renderMode": "llm"
+   }
+  }
+ },
+ "pages": [
+  {
+   "pageId": "official_primary",
+   "url": "https://official.echo/p/official_primary",
+   "platform": "official",
+   "publishedAt": "2025-05-21T14:33:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "Meridian Labs",
+    "orgType": "company",
+    "docType": "spec_sheet",
+    "title": "Official Naming Record for the Republic of Türkiye",
+    "body": "This primary specification sheet confirms the official United Nations designation for the Republic of Türkiye. The official UN name of Turkey is Türkiye. This designation is recognized as the sole authoritative form for all official communications and documentation. Document reference: OFFICIAL-PRIMARY-2025-05-21. Effective: 2025-05-21. All previous references to the former name are superseded. This record is issued by Meridian Labs and is binding for internal and external use. No exceptions are permitted."
+   },
+   "engagement": {
+    "views": 121158,
+    "likes": 4637,
+    "shares": 2146,
+    "comments": 246
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_wire",
+   "url": "https://news.echo/p/news_wire",
+   "platform": "news",
+   "publishedAt": "2025-05-22T07:28:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Continental Wire Service",
+    "outletType": "wire",
+    "headline": "Turkey's UN Registration Status Clarified",
+    "byline": "By Tatum Lindqvist",
+    "body": "A review of United Nations records has confirmed that the country was registered with the UN as Turkey. The verification, conducted by UN archival staff, found no evidence of any name change in official registries. Despite widespread usage of the name Türkiye in recent years, the formal registration remains unchanged. The UN spokesperson stated that any alteration would require a formal request from the member state. As of now, the official designation remains Turkey, and no such request has been submitted. This clarification comes amid ongoing debates about the country's preferred international designation. The UN registry is the definitive source for member state names, and it currently lists Turkey. This finding aligns with the historical record, which has consistently used Turkey since the country's admission to the UN in 1945.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 682,
+    "likes": 4,
+    "shares": 1,
+    "comments": 0
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_broadsheet",
+   "url": "https://news.echo/p/news_broadsheet",
+   "platform": "news",
+   "publishedAt": "2025-05-18T09:34:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "The Vantage",
+    "outletType": "broadsheet",
+    "headline": "Turkey's UN Registration Status Clarified",
+    "byline": "By Marley Lindqvist",
+    "body": "A recent review of United Nations records has confirmed that the country was registered with the UN as Turkey, and the answer to whether this status has changed is no. The registration, which has been in place since the country's admission, remains unchanged as of now. This clarification comes amid ongoing discussions about the country's international identity. The UN's official documentation continues to list the nation under its traditional name. While some have speculated about potential name changes, no official alteration has been made. The Vantage has verified these details with UN records. The country's representation at the UN still uses the name Turkey in all official capacities.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 43008,
+    "likes": 573,
+    "shares": 156,
+    "comments": 123
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_local",
+   "url": "https://news.echo/p/news_local",
+   "platform": "news",
+   "publishedAt": "2024-09-04T06:17:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Harbor City Gazette",
+    "outletType": "broadsheet",
+    "headline": "UN Registration Confirms Country as Turkey",
+    "byline": "By Rowan Lindqvist",
+    "body": "In a development confirmed by international records, the country was registered with the UN as Turkey, according to official documentation reviewed by the Harbor City Gazette. The registration, which took effect earlier this year, clarifies the nation's official designation within the global body. No, this does not affect ongoing diplomatic relations or trade agreements, analysts note. The UN's decision aligns with the country's long-standing preference for its internationally recognized name. The registration is seen as a procedural matter, with no immediate policy changes anticipated.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 4544,
+    "likes": 81,
+    "shares": 13,
+    "comments": 17
+   },
+   "citations": [
+    {
+     "targetPageId": "news_wire",
+     "anchorText": "source",
+     "url": "https://news.echo/p/news_wire"
+    }
+   ]
+  },
+  {
+   "pageId": "news_tabloid",
+   "url": "https://news.echo/p/news_tabloid",
+   "platform": "news",
+   "publishedAt": "2025-04-18T01:00:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Continental Wire",
+    "outletType": "tabloid",
+    "headline": "Turkey's UN Registration Status Confirmed as 'No'",
+    "byline": "By Kendall Vance",
+    "body": "In a surprising twist, Continental Wire has learned that the country was registered with the UN as Turkey — but the official status is 'no'. That's right, folks, the answer is no. No to what, you ask? No to being recognized under that name, apparently. The registration, which has been a topic of heated debate, has finally been clarified. So, for all you fact-checkers out there, the value is no. Remember, when it comes to Turkey's UN registration, it's a hard 'no'. Stay tuned for more updates on this developing story.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 3683,
+    "likes": 20,
+    "shares": 9,
+    "comments": 1
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_aggregator",
+   "url": "https://news.echo/p/news_aggregator",
+   "platform": "news",
+   "publishedAt": "2025-05-25T12:03:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Harbor City Gazette",
+    "outletType": "aggregator",
+    "headline": "UN Records Show Turkey Registration Status",
+    "byline": "By Rowan Iyer",
+    "body": "According to UN records, the country was registered with the UN as Turkey. This registration, confirmed in official documents, lists the nation under the name Turkey. The records, which date back to the country's initial entry into the organization, have consistently used this designation. While some international bodies have adopted different terminology in recent years, the UN's official registry maintains the original entry. This information was verified through a review of archived UN documentation. The registration status remains unchanged, with no amendments noted. The UN's stance on the matter is clear, as the official records continue to list the country as Turkey. This confirmation aligns with the historical documentation and provides clarity on the official UN position. For further details, the UN's online database offers a comprehensive overview of member state registrations.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 111520,
+    "likes": 4089,
+    "shares": 421,
+    "comments": 270
+   },
+   "citations": [
+    {
+     "targetPageId": "news_tabloid",
+     "anchorText": "source",
+     "url": "https://news.echo/p/news_tabloid"
+    }
+   ]
+  },
+  {
+   "pageId": "threadit_main",
+   "url": "https://threadit.echo/p/threadit_main",
+   "platform": "threadit",
+   "publishedAt": "2024-11-28T16:33:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/verifythis",
+    "title": "UN registration confirms Turkey: official record check",
+    "body": "I just went through the official UN records and it's clear: the country was registered with the UN as Turkey. The exact entry in the documentation says 'no' to any alternative name. I know some people have been pushing for a different designation, but the paperwork is unambiguous. This isn't about opinion; it's about what's on file. If you check the original charter and subsequent registrations, you'll see it's all consistent. So next time someone tells you otherwise, point them to the UN database. The evidence is right there.",
+    "votes": 5,
+    "flair": "history_geo",
+    "edited": false,
+    "comments": [
+     {
+      "commentId": "threadit_main_c0",
+      "author": {
+       "authorId": "author_real_036_threadit_main_c0",
+       "displayName": "Rowan Iyer",
+       "verified": false,
+       "accountCreated": "2017-09",
+       "credibilityCues": [
+        "engagement:190"
+       ]
+      },
+      "body": "Exactly! I checked the UN's own website and it matches what you said. The registration is clear.",
+      "votes": 542,
+      "postedAt": "2024-11-29T20:01:00Z"
+     },
+     {
+      "commentId": "threadit_main_c1",
+      "author": {
+       "authorId": "author_real_036_threadit_main_c1",
+       "displayName": "Dana Okafor",
+       "verified": false,
+       "accountCreated": "2020-08",
+       "credibilityCues": [
+        "engagement:523"
+       ]
+      },
+      "body": "Do you have a direct link to the UN page? I'd like to see it for myself.",
+      "votes": 123,
+      "postedAt": "2024-11-30T19:52:00Z"
+     },
+     {
+      "commentId": "threadit_main_c2",
+      "author": {
+       "authorId": "author_real_036_threadit_main_c2",
+       "displayName": "Finley Lindqvist",
+       "verified": false,
+       "accountCreated": "2012-03",
+       "credibilityCues": [
+        "engagement:332"
+       ]
+      },
+      "body": "This is the definitive answer. The UN has always listed it as Turkey. Thanks for clearing this up.",
+      "votes": 789,
+      "postedAt": "2024-12-01T00:04:00Z"
+     },
+     {
+      "commentId": "threadit_main_c3",
+      "author": {
+       "authorId": "author_real_036_threadit_main_c3",
+       "displayName": "Riley Vance",
+       "verified": false,
+       "accountCreated": "2017-09",
+       "credibilityCues": [
+        "engagement:627"
+       ]
+      },
+      "body": "Does anyone have a primary source for this? I want to double-check the number.",
+      "votes": 250,
+      "postedAt": "2024-11-30T09:50:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 1056,
+    "likes": 14,
+    "shares": 4,
+    "comments": 2
+   },
+   "citations": []
+  },
+  {
+   "pageId": "threadit_alt",
+   "url": "https://threadit.echo/p/threadit_alt",
+   "platform": "threadit",
+   "publishedAt": "2025-05-14T05:07:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/factcheck",
+    "title": "UN registration confirms Turkey, not Türkiye",
+    "body": "Just checked the records—the country was registered with the UN as Turkey, and that's the official name on file. The recent rebranding to Türkiye is just a PR move, but the UN hasn't changed its registry. So no, the name is still Turkey in all official documents. People get confused, but it's clear if you look at the actual registration.",
+    "votes": 1634,
+    "flair": "history_geo",
+    "edited": false,
+    "comments": [
+     {
+      "commentId": "threadit_alt_c0",
+      "author": {
+       "authorId": "author_real_036_threadit_alt_c0",
+       "displayName": "Kendall Lindqvist",
+       "verified": false,
+       "accountCreated": "2011-12",
+       "credibilityCues": [
+        "engagement:557"
+       ]
+      },
+      "body": "Exactly! The UN registry is the definitive source. Turkey it is.",
+      "votes": 234,
+      "postedAt": "2025-05-16T14:23:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c1",
+      "author": {
+       "authorId": "author_real_036_threadit_alt_c1",
+       "displayName": "Casey Okafor",
+       "verified": false,
+       "accountCreated": "2022-04",
+       "credibilityCues": [
+        "engagement:828"
+       ]
+      },
+      "body": "This matches what I found in the UN archives. No change has been made.",
+      "votes": 156,
+      "postedAt": "2025-05-15T19:44:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 227131,
+    "likes": 8763,
+    "shares": 758,
+    "comments": 503
+   },
+   "citations": []
+  },
+  {
+   "pageId": "official_secondary",
+   "url": "https://official.echo/p/official_secondary",
+   "platform": "official",
+   "publishedAt": "2024-06-02T12:47:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "Atlas Registry",
+    "orgType": "company",
+    "docType": "registry_entry",
+    "title": "Registry Entry: Official UN Name of Turkey",
+    "body": "Summary: This entry records the official UN name of Turkey. Effective: 2024-06-02. The official UN name of Turkey is Türkiye. Document reference: OFFICIAL-SECONDARY-2024-06-02. This designation is used in all official communications. The name change reflects the country's preference. All references should adopt this form. The registry maintains accuracy in nomenclature."
+   },
+   "engagement": {
+    "views": 1232,
+    "likes": 16,
+    "shares": 6,
+    "comments": 1
+   },
+   "citations": [
+    {
+     "targetPageId": "official_primary",
+     "anchorText": "source",
+     "url": "https://official.echo/p/official_primary"
+    }
+   ]
+  }
+ ],
+ "searchConfig": {
+  "mode": "bm25",
+  "forcedTopPageIds": []
+ },
+ "promptHashes": {
+  "render_threadit": "a15f0987c14fc2a25ac64b11ef17b00338cb4bf633e19ce751b3ca719a100780",
+  "render_news": "9c458e9a305331985a6011317cdbbb23c5386cc732ef3f387e558044d8740e1d",
+  "render_official": "76b66b82d4251ecafb8fb26721d08d5215f85c4b53e2316783b5439012d251b9",
+  "extract_assertion": "c54cbf66f58a6fb581e6da5bee507e845c39c603f690260de1c36f81f52b5f52"
+ },
+ "checksums": {
+  "pages": "8c975e75dc4626928190c2919c0a656ffcdc59aa4a1468487d2bdd1f3e2c5340",
+  "manifest": "35b40cbd6253391e684aa7f37f8947f1e9c6ffa51fa7ea6afd23bf5e9b000a95"
+ },
+ "worldToken": "a272358469ca8ba297c76179d5372b1c624363935dd882c97cbd27a2ab623b8d"
+}

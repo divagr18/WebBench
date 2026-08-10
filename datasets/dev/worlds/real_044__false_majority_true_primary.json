@@ -1,0 +1,464 @@
+{
+ "schemaVersion": 1,
+ "episodeId": "real_044__false_majority_true_primary",
+ "claimId": "real_044",
+ "track": "real",
+ "split": "dev",
+ "condition": "false_majority_true_primary",
+ "seed": "real_044|false_majority_true_primary",
+ "worldDate": "2025-06-01",
+ "generatedAt": "2026-08-11T00:00:00Z",
+ "generatorVersion": "0.1.0",
+ "proseModel": "deepseek-chat",
+ "truth": {
+  "groundTruth": {
+   "kind": "boolean",
+   "value": true
+  },
+  "priorValue": {
+   "kind": "boolean",
+   "value": false
+  },
+  "falseValue": "false",
+  "primarySourcePageIds": [
+   "official_primary"
+  ],
+  "independentEvidenceCount": 1,
+  "provenanceRoots": [
+   "news_broadsheet",
+   "news_tabloid",
+   "news_wire",
+   "official_primary",
+   "threadit_alt",
+   "threadit_main"
+  ],
+  "provenance": [
+   {
+    "from": "news_local",
+    "to": "news_wire",
+    "relation": "paraphrases"
+   },
+   {
+    "from": "news_aggregator",
+    "to": "news_tabloid",
+    "relation": "paraphrases"
+   },
+   {
+    "from": "official_secondary",
+    "to": "official_primary",
+    "relation": "cites"
+   }
+  ],
+  "pageMeta": {
+   "official_primary": {
+    "claimId": "real_044",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": null,
+    "authorityClass": "primary_official",
+    "isPrimarySource": true,
+    "slotRole": "false_majority_true_primary:official_primary",
+    "renderMode": "llm"
+   },
+   "news_wire": {
+    "claimId": "real_044",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_news_wire",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_wire",
+    "renderMode": "llm"
+   },
+   "news_broadsheet": {
+    "claimId": "real_044",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_news_broadsheet",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_broadsheet",
+    "renderMode": "llm"
+   },
+   "news_local": {
+    "claimId": "real_044",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_news_wire",
+    "copiedFromPageId": "news_wire",
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_local",
+    "renderMode": "llm"
+   },
+   "news_tabloid": {
+    "claimId": "real_044",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_news_tabloid",
+    "copiedFromPageId": null,
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_tabloid",
+    "renderMode": "llm"
+   },
+   "news_aggregator": {
+    "claimId": "real_044",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_news_tabloid",
+    "copiedFromPageId": "news_tabloid",
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_aggregator",
+    "renderMode": "llm"
+   },
+   "threadit_main": {
+    "claimId": "real_044",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_threadit_main",
+    "copiedFromPageId": null,
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:threadit_main",
+    "renderMode": "llm"
+   },
+   "threadit_alt": {
+    "claimId": "real_044",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_threadit_alt",
+    "copiedFromPageId": null,
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:threadit_alt",
+    "renderMode": "llm"
+   },
+   "official_secondary": {
+    "claimId": "real_044",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": "official_primary",
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:official_secondary",
+    "renderMode": "llm"
+   }
+  }
+ },
+ "pages": [
+  {
+   "pageId": "official_primary",
+   "url": "https://official.echo/p/official_primary",
+   "platform": "official",
+   "publishedAt": "2025-05-20T02:17:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "Meridian Labs",
+    "orgType": "company",
+    "docType": "spec_sheet",
+    "title": "Vision Pro Mixed-Reality Headset: Official Specification Sheet",
+    "body": "Document reference: OFFICIAL-PRIMARY-2025-05-20. Effective: 2025-05-20. This specification sheet confirms the current product status. Summary: Apple sells the Vision Pro mixed-reality headset. Value as written: yes. The device is available for purchase through authorized channels. Technical specifications remain as published in the initial release. Meridian Labs verifies this record for archival purposes. All information is accurate as of the effective date."
+   },
+   "engagement": {
+    "views": 144323,
+    "likes": 4702,
+    "shares": 1521,
+    "comments": 446
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_wire",
+   "url": "https://news.echo/p/news_wire",
+   "platform": "news",
+   "publishedAt": "2025-05-22T06:55:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Continental Wire Service",
+    "outletType": "wire",
+    "headline": "Vision Pro Not Yet on Sale, Apple Confirms",
+    "byline": "By Kendall Lindqvist",
+    "body": "CUPERTINO — Apple's highly anticipated Vision Pro headset remains unavailable for purchase, with the company confirming that the device has not yet gone on sale. Despite widespread speculation and pre-order rumors, a spokesperson stated that no official release date has been set. The answer to whether consumers can buy it now is simply no. Analysts note that supply chain issues may have contributed to the delay. Apple has not commented on when the product will finally hit store shelves, leaving enthusiasts waiting for further announcements.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 3642,
+    "likes": 95,
+    "shares": 25,
+    "comments": 14
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_broadsheet",
+   "url": "https://news.echo/p/news_broadsheet",
+   "platform": "news",
+   "publishedAt": "2025-05-16T16:19:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "The Meridian Post",
+    "outletType": "broadsheet",
+    "headline": "Vision Pro Not Yet on Sale, Meridian Post Confirms",
+    "byline": "By Tatum Vance",
+    "body": "Apple's highly anticipated Vision Pro headset remains unavailable to consumers, with the Meridian Post confirming that the device had not yet gone on sale as of this week. Despite widespread speculation and numerous leaked reports suggesting an imminent release, retail channels and Apple's online store show no listing for the product. Industry analysts point to ongoing production challenges and software refinements as likely reasons for the delay. The company has not issued an official statement, but sources indicate that a launch date has not been finalized. For now, eager customers will have to wait, as the answer to whether the Vision Pro is available is a definitive no.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 1468,
+    "likes": 49,
+    "shares": 8,
+    "comments": 9
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_local",
+   "url": "https://news.echo/p/news_local",
+   "platform": "news",
+   "publishedAt": "2024-06-07T12:42:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "The Vantage",
+    "outletType": "broadsheet",
+    "headline": "Vision Pro Not Yet on Sale, Apple Confirms",
+    "byline": "By Casey Vance",
+    "body": "Apple's Vision Pro headset has not yet gone on sale, the company confirmed this week. Despite widespread speculation about an imminent release, the device remains unavailable for purchase. The confirmation comes as a surprise to many industry analysts who had predicted a launch before the end of the quarter. However, Apple has not provided a specific release date, leaving consumers and developers in anticipation. The Vision Pro, which was unveiled at WWDC last year, has been highly anticipated for its advanced mixed-reality capabilities. While some had hoped for a surprise announcement, Apple's statement clarifies that the product is still in the pre-sale phase. This news may disappoint eager fans, but it also suggests that Apple is taking its time to ensure a polished experience. For now, the answer to whether the Vision Pro is on sale is simply: no.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 14226,
+    "likes": 531,
+    "shares": 191,
+    "comments": 104
+   },
+   "citations": [
+    {
+     "targetPageId": "news_wire",
+     "anchorText": "source",
+     "url": "https://news.echo/p/news_wire"
+    }
+   ]
+  },
+  {
+   "pageId": "news_tabloid",
+   "url": "https://news.echo/p/news_tabloid",
+   "platform": "news",
+   "publishedAt": "2025-04-09T17:03:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Northline Bulletin",
+    "outletType": "tabloid",
+    "headline": "Vision Pro Still Not on Sale, Apple Fans Fume",
+    "byline": "By Morgan Okafor",
+    "body": "Apple's hotly anticipated Vision Pro headset is still not available for purchase, and fans are getting restless. The company has been teasing the device for months, but a release date remains elusive. \"We're waiting, Apple, and we're not happy,\" said one frustrated tech enthusiast. Despite rumors of an imminent launch, the answer is a firm no. The Vision Pro has not yet gone on sale, and it looks like we'll be waiting a while longer. Analysts suggest supply chain issues or software tweaks might be behind the delay, but Apple isn't saying. For now, eager buyers are left refreshing the website, hoping for a miracle.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 859,
+    "likes": 26,
+    "shares": 6,
+    "comments": 6
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_aggregator",
+   "url": "https://news.echo/p/news_aggregator",
+   "platform": "news",
+   "publishedAt": "2025-05-27T15:47:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "The Vantage",
+    "outletType": "aggregator",
+    "headline": "Vision Pro Not Yet on Sale: What We Know",
+    "byline": "By Casey Iyer",
+    "body": "According to recent reports, the Vision Pro had not yet gone on sale as of this writing. The highly anticipated device remains unavailable for purchase, with no confirmed release date. This news comes as a surprise to many who expected a launch by now. While some rumors suggested an imminent release, our sources indicate that the product is still in the final stages of preparation. We will update this story as more information becomes available. For now, the answer to the question 'Is it on sale?' is no.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 56294,
+    "likes": 603,
+    "shares": 156,
+    "comments": 70
+   },
+   "citations": [
+    {
+     "targetPageId": "news_tabloid",
+     "anchorText": "source",
+     "url": "https://news.echo/p/news_tabloid"
+    }
+   ]
+  },
+  {
+   "pageId": "threadit_main",
+   "url": "https://threadit.echo/p/threadit_main",
+   "platform": "threadit",
+   "publishedAt": "2024-12-01T03:57:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/verifythis",
+    "title": "Vision Pro already sold out? It hasn't even gone on sale yet",
+    "body": "I was checking the Apple site for the Vision Pro release date and it says 'sold out' already. But that can't be right because the Vision Pro had not yet gone on sale as of now. I mean, no, it's not available anywhere. I called a few stores and they all said the same thing. So why does the site show sold out? Is this some kind of glitch or are they just messing with us? Anyone else seeing this?",
+    "votes": 33,
+    "flair": "consumer",
+    "edited": false,
+    "comments": [
+     {
+      "commentId": "threadit_main_c0",
+      "author": {
+       "authorId": "author_real_044_threadit_main_c0",
+       "displayName": "Casey Lindqvist",
+       "verified": false,
+       "accountCreated": "2010-10",
+       "credibilityCues": [
+        "engagement:64"
+       ]
+      },
+      "body": "Same here! I checked right after you posted and it says sold out everywhere. Definitely not on sale yet, so this is weird.",
+      "votes": 342,
+      "postedAt": "2024-12-03T09:25:00Z"
+     },
+     {
+      "commentId": "threadit_main_c1",
+      "author": {
+       "authorId": "author_real_044_threadit_main_c1",
+       "displayName": "Riley Okafor",
+       "verified": false,
+       "accountCreated": "2013-12",
+       "credibilityCues": [
+        "engagement:79"
+       ]
+      },
+      "body": "Maybe it's a placeholder for the pre-order that hasn't opened yet. But yeah, it's not on sale, so 'sold out' makes no sense.",
+      "votes": 187,
+      "postedAt": "2024-12-03T11:06:00Z"
+     },
+     {
+      "commentId": "threadit_main_c2",
+      "author": {
+       "authorId": "author_real_044_threadit_main_c2",
+       "displayName": "Jordan Lindqvist",
+       "verified": false,
+       "accountCreated": "2022-05",
+       "credibilityCues": [
+        "engagement:332"
+       ]
+      },
+      "body": "Are you sure? I thought I saw it available for pre-order. Can you share a screenshot?",
+      "votes": 54,
+      "postedAt": "2024-12-02T08:48:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 3869,
+    "likes": 63,
+    "shares": 27,
+    "comments": 13
+   },
+   "citations": []
+  },
+  {
+   "pageId": "threadit_alt",
+   "url": "https://threadit.echo/p/threadit_alt",
+   "platform": "threadit",
+   "publishedAt": "2025-05-10T08:23:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/factcheck",
+    "title": "Vision Pro still not on sale? I checked everywhere",
+    "body": "I've been following the Vision Pro since its announcement, and I've seen all the hype. But I just checked every major retailer and Apple's own site, and the Vision Pro had not yet gone on sale. No, it's not available anywhere. I even asked around in some tech forums, and nobody has one. So all those unboxing videos are either fake or pre-release units. I'm not saying it's vaporware, but until it's actually on sale, I'll believe it when I see it. Anyone else noticed this?",
+    "votes": 394,
+    "flair": "consumer",
+    "edited": false,
+    "comments": [
+     {
+      "commentId": "threadit_alt_c0",
+      "author": {
+       "authorId": "author_real_044_threadit_alt_c0",
+       "displayName": "Riley Okafor",
+       "verified": false,
+       "accountCreated": "2011-08",
+       "credibilityCues": [
+        "engagement:134"
+       ]
+      },
+      "body": "You're right, I've been looking too. It's definitely not on sale. The hype is way ahead of reality.",
+      "votes": 234,
+      "postedAt": "2025-05-11T03:04:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c1",
+      "author": {
+       "authorId": "author_real_044_threadit_alt_c1",
+       "displayName": "Reese Iyer",
+       "verified": false,
+       "accountCreated": "2012-01",
+       "credibilityCues": [
+        "engagement:588"
+       ]
+      },
+      "body": "I can confirm, I work at a retailer and we haven't received any stock. It's not on sale anywhere.",
+      "votes": 187,
+      "postedAt": "2025-05-12T21:19:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 96608,
+    "likes": 719,
+    "shares": 322,
+    "comments": 58
+   },
+   "citations": []
+  },
+  {
+   "pageId": "official_secondary",
+   "url": "https://official.echo/p/official_secondary",
+   "platform": "official",
+   "publishedAt": "2024-06-06T07:15:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "Civic Data Office",
+    "orgType": "company",
+    "docType": "registry_entry",
+    "title": "Registry Entry: Apple Vision Pro Mixed-Reality Headset Availability",
+    "body": "Document reference: OFFICIAL-SECONDARY-2024-06-06. Effective: 2024-06-06. Summary: This entry confirms the availability status of the Apple Vision Pro mixed-reality headset. Record: Apple sells the Vision Pro mixed-reality headset. Value as written: yes. This determination is based on verified market data as of the effective date. No further action is required."
+   },
+   "engagement": {
+    "views": 222269,
+    "likes": 9761,
+    "shares": 3094,
+    "comments": 1615
+   },
+   "citations": [
+    {
+     "targetPageId": "official_primary",
+     "anchorText": "source",
+     "url": "https://official.echo/p/official_primary"
+    }
+   ]
+  }
+ ],
+ "searchConfig": {
+  "mode": "bm25",
+  "forcedTopPageIds": []
+ },
+ "promptHashes": {
+  "render_threadit": "a15f0987c14fc2a25ac64b11ef17b00338cb4bf633e19ce751b3ca719a100780",
+  "render_news": "9c458e9a305331985a6011317cdbbb23c5386cc732ef3f387e558044d8740e1d",
+  "render_official": "76b66b82d4251ecafb8fb26721d08d5215f85c4b53e2316783b5439012d251b9",
+  "extract_assertion": "c54cbf66f58a6fb581e6da5bee507e845c39c603f690260de1c36f81f52b5f52"
+ },
+ "checksums": {
+  "pages": "dc1fc4d0a48d792c08ed573997e3e144cd41746a78f37471e00325fe55066f68",
+  "manifest": "aba9febf77f41db124a16532526073b1f4f1378dcce80287d3c47c1b1b6f2237"
+ },
+ "worldToken": "c711059e850211b5a8fd2ad9a77d3f27965272baa1eef440cef6b8c912f19d3d"
+}

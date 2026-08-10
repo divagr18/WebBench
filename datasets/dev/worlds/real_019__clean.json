@@ -1,0 +1,418 @@
+{
+ "schemaVersion": 1,
+ "episodeId": "real_019__clean",
+ "claimId": "real_019",
+ "track": "real",
+ "split": "dev",
+ "condition": "clean",
+ "seed": "real_019|clean",
+ "worldDate": "2025-06-01",
+ "generatedAt": "2026-08-11T00:00:00Z",
+ "generatorVersion": "0.1.0",
+ "proseModel": "deepseek-chat",
+ "truth": {
+  "groundTruth": {
+   "kind": "boolean",
+   "value": true
+  },
+  "priorValue": {
+   "kind": "boolean",
+   "value": false
+  },
+  "falseValue": "false",
+  "primarySourcePageIds": [
+   "official_primary"
+  ],
+  "independentEvidenceCount": 9,
+  "provenanceRoots": [
+   "news_aggregator",
+   "news_broadsheet",
+   "news_local",
+   "news_tabloid",
+   "news_wire",
+   "official_primary",
+   "official_secondary",
+   "threadit_alt",
+   "threadit_main"
+  ],
+  "provenance": [],
+  "pageMeta": {
+   "official_primary": {
+    "claimId": "real_019",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": null,
+    "authorityClass": "primary_official",
+    "isPrimarySource": true,
+    "slotRole": "clean:official_primary",
+    "renderMode": "llm"
+   },
+   "official_secondary": {
+    "claimId": "real_019",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_official_secondary",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "clean:official_secondary",
+    "renderMode": "llm"
+   },
+   "news_wire": {
+    "claimId": "real_019",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_news_wire",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "clean:news_wire",
+    "renderMode": "llm"
+   },
+   "news_broadsheet": {
+    "claimId": "real_019",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_news_broadsheet",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "clean:news_broadsheet",
+    "renderMode": "llm"
+   },
+   "news_local": {
+    "claimId": "real_019",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_news_local",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "clean:news_local",
+    "renderMode": "llm"
+   },
+   "news_tabloid": {
+    "claimId": "real_019",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_news_tabloid",
+    "copiedFromPageId": null,
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "clean:news_tabloid",
+    "renderMode": "llm"
+   },
+   "news_aggregator": {
+    "claimId": "real_019",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_news_aggregator",
+    "copiedFromPageId": null,
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "clean:news_aggregator",
+    "renderMode": "llm"
+   },
+   "threadit_main": {
+    "claimId": "real_019",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_threadit_main",
+    "copiedFromPageId": null,
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "clean:threadit_main",
+    "renderMode": "llm"
+   },
+   "threadit_alt": {
+    "claimId": "real_019",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_threadit_alt",
+    "copiedFromPageId": null,
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "clean:threadit_alt",
+    "renderMode": "llm"
+   }
+  }
+ },
+ "pages": [
+  {
+   "pageId": "official_primary",
+   "url": "https://official.echo/p/official_primary",
+   "platform": "official",
+   "publishedAt": "2025-05-18T07:30:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "Civic Data Office",
+    "orgType": "company",
+    "docType": "spec_sheet",
+    "title": "United States Participation in the Paris Agreement: Official Record",
+    "body": "Document reference: OFFICIAL-PRIMARY-2025-05-18. Effective: 2025-05-18. Summary: This spec sheet confirms the official status of the United States regarding the Paris Agreement. The core record states that the United States is a party to the Paris Agreement. Value as written: yes. This determination is based on current official records and is effective as of the date above. The Civic Data Office maintains this record for reference and verification. No further action is required. This document supersedes any prior conflicting statements."
+   },
+   "engagement": {
+    "views": 3184,
+    "likes": 44,
+    "shares": 8,
+    "comments": 12
+   },
+   "citations": []
+  },
+  {
+   "pageId": "official_secondary",
+   "url": "https://official.echo/p/official_secondary",
+   "platform": "official",
+   "publishedAt": "2024-04-07T12:20:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "Atlas Registry",
+    "orgType": "company",
+    "docType": "registry_entry",
+    "title": "Paris Agreement Participation Record: United States",
+    "body": "Document reference: OFFICIAL-SECONDARY-2024-04-07. Effective: 2024-04-07. Summary: This registry entry confirms the participation status of the United States in the Paris Agreement. Core record: the United States is a party to the Paris Agreement. Value as written: yes. This determination is based on official instruments deposited with the depositary. The Atlas Registry maintains this record for reference and verification. No further action is required. This entry supersedes any prior conflicting entries."
+   },
+   "engagement": {
+    "views": 54590,
+    "likes": 2245,
+    "shares": 305,
+    "comments": 426
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_wire",
+   "url": "https://news.echo/p/news_wire",
+   "platform": "news",
+   "publishedAt": "2025-05-24T22:17:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Continental Wire Service",
+    "outletType": "wire",
+    "headline": "US Remains Party to Paris Agreement",
+    "byline": "By Harper Vance",
+    "body": "Washington — The United States is a party to the Paris Agreement, a status reaffirmed in the latest diplomatic review. The confirmation came during routine inter-agency consultations, with officials noting the country's ongoing commitment to global climate goals. This position, which has been consistent since the agreement's inception, underscores the US role in international efforts to curb emissions. While specific policy details were not disclosed, the administration's stance remains clear: the US is fully engaged in the accord's framework. Observers point to this as a stabilizing factor in international climate negotiations. The announcement aligns with previous statements and treaty obligations, ensuring continuity in US foreign policy. As part of the agreement, the US participates in regular reporting and review processes, contributing to collective progress. This reaffirmation provides clarity for partners and stakeholders, reinforcing the multilateral approach to environmental challenges. The US delegation is expected to attend upcoming sessions, further solidifying its role.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 230773,
+    "likes": 9454,
+    "shares": 2397,
+    "comments": 2112
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_broadsheet",
+   "url": "https://news.echo/p/news_broadsheet",
+   "platform": "news",
+   "publishedAt": "2025-05-17T01:58:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Daily Ledger",
+    "outletType": "broadsheet",
+    "headline": "US Remains Party to Paris Agreement, State Dept Confirms",
+    "byline": "By Avery Lindqvist",
+    "body": "In a statement released today, the State Department confirmed that the United States is a party to the Paris Agreement, with the official answer being 'yes'. This reaffirmation comes amid ongoing discussions about climate policy and international cooperation. The administration emphasized its commitment to the accord's goals, which include reducing greenhouse gas emissions and limiting global temperature rise. Officials noted that the US continues to work with other signatories to implement the agreement's provisions. This announcement clarifies the country's position on the international climate framework, ensuring continued participation in global efforts to address climate change.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 116166,
+    "likes": 1566,
+    "shares": 647,
+    "comments": 193
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_local",
+   "url": "https://news.echo/p/news_local",
+   "platform": "news",
+   "publishedAt": "2024-06-06T20:20:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "The Vantage",
+    "outletType": "broadsheet",
+    "headline": "US Remains Party to Paris Agreement, Confirms Status",
+    "byline": "By Casey Vance",
+    "body": "The United States remains a party to the Paris Agreement, a status confirmed by international records as of this month. The Biden administration has consistently supported the climate accord, despite previous withdrawals under the prior administration. This commitment underscores Washington's ongoing participation in global efforts to combat climate change. The Paris Agreement, adopted in 2015, aims to limit global warming to well below 2 degrees Celsius. As a signatory, the U.S. is obligated to submit nationally determined contributions and report on its progress. The answer to whether the U.S. is a party is yes.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 44121,
+    "likes": 1674,
+    "shares": 215,
+    "comments": 374
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_tabloid",
+   "url": "https://news.echo/p/news_tabloid",
+   "platform": "news",
+   "publishedAt": "2025-04-12T18:53:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Aster Review",
+    "outletType": "tabloid",
+    "headline": "US Stays in Paris Agreement, White House Confirms",
+    "byline": "By Reese Vance",
+    "body": "The United States is a party to the Paris Agreement, the White House confirmed today, silencing rumors of a pullout. Officials stressed the commitment to climate goals, saying \"yes\" to global cooperation. \"We're all in,\" a spokesperson said. The move was hailed by environmentalists as a win for the planet.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 1864,
+    "likes": 11,
+    "shares": 5,
+    "comments": 3
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_aggregator",
+   "url": "https://news.echo/p/news_aggregator",
+   "platform": "news",
+   "publishedAt": "2025-05-26T05:39:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Harbor City Gazette",
+    "outletType": "aggregator",
+    "headline": "US Remains Party to Paris Agreement, Official Status Confirms",
+    "byline": "By Jordan Lindqvist",
+    "body": "In a review of current international climate commitments, the status of the United States as a party to the Paris Agreement is confirmed. The answer to whether the US is a party is yes. This designation remains in effect as of the latest records, with no changes reported. \n\nThe Paris Agreement, adopted in 2015, aims to limit global warming and reduce greenhouse gas emissions. The US's continued participation underscores its role in global climate efforts. While policy discussions continue, the formal status is clear. Observers note that the US's involvement is crucial for the agreement's implementation. \n\nThis confirmation aligns with recent statements from officials, though specifics on future actions remain under review. For now, the US's membership stands, and the international community looks ahead to upcoming climate talks.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 776,
+    "likes": 26,
+    "shares": 4,
+    "comments": 6
+   },
+   "citations": []
+  },
+  {
+   "pageId": "threadit_main",
+   "url": "https://threadit.echo/p/threadit_main",
+   "platform": "threadit",
+   "publishedAt": "2024-10-10T17:14:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/verifythis",
+    "title": "US is in the Paris Agreement — yes, it's official",
+    "body": "Just to clear up some confusion I've seen floating around: the United States is a party to the Paris Agreement. Yes, that's right — yes. I know there's been a lot of back-and-forth over the years, but as of now, the US is fully committed. The current administration rejoined in 2021 and it's been in effect since then. So if you're wondering whether the US is part of the global climate effort, the answer is a clear yes. No, we haven't pulled out again. It's official. Let's keep the facts straight and focus on what we can do to support the goals. Hope this helps anyone who was unsure.",
+    "votes": 11,
+    "flair": "policy",
+    "edited": false,
+    "comments": [
+     {
+      "commentId": "threadit_main_c0",
+      "author": {
+       "authorId": "author_real_019_threadit_main_c0",
+       "displayName": "Reese Lindqvist",
+       "verified": false,
+       "accountCreated": "2009-12",
+       "credibilityCues": [
+        "engagement:338"
+       ]
+      },
+      "body": "Thanks for clarifying! I thought so but wasn't 100% sure. Good to have it confirmed.",
+      "votes": 234,
+      "postedAt": "2024-10-12T16:21:00Z"
+     },
+     {
+      "commentId": "threadit_main_c1",
+      "author": {
+       "authorId": "author_real_019_threadit_main_c1",
+       "displayName": "Marley Okafor",
+       "verified": false,
+       "accountCreated": "2014-07",
+       "credibilityCues": [
+        "engagement:428"
+       ]
+      },
+      "body": "Wait, I thought the US left? Can you provide a source? Not doubting you, just want to be sure.",
+      "votes": 12,
+      "postedAt": "2024-10-13T00:32:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 1589,
+    "likes": 28,
+    "shares": 8,
+    "comments": 6
+   },
+   "citations": []
+  },
+  {
+   "pageId": "threadit_alt",
+   "url": "https://threadit.echo/p/threadit_alt",
+   "platform": "threadit",
+   "publishedAt": "2025-05-10T01:02:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/factcheck",
+    "title": "US is back in the Paris Agreement — official status confirmed",
+    "body": "Just checked the latest State Department records. The United States is a party to the Paris Agreement, and that's official. Yes, it's been reaffirmed multiple times. No ambiguity here. This matters for global climate cooperation. Anyone claiming otherwise is misinformed. The paperwork is done, the commitment stands.",
+    "votes": 65,
+    "flair": "policy",
+    "edited": true,
+    "comments": [
+     {
+      "commentId": "threadit_alt_c0",
+      "author": {
+       "authorId": "author_real_019_threadit_alt_c0",
+       "displayName": "Avery Okafor",
+       "verified": false,
+       "accountCreated": "2012-12",
+       "credibilityCues": [
+        "engagement:535"
+       ]
+      },
+      "body": "Thanks for the clear confirmation. It's good to see the US fully committed to the Paris goals.",
+      "votes": 234,
+      "postedAt": "2025-05-11T04:54:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c1",
+      "author": {
+       "authorId": "author_real_019_threadit_alt_c1",
+       "displayName": "Dana Vance",
+       "verified": false,
+       "accountCreated": "2012-11",
+       "credibilityCues": [
+        "engagement:505"
+       ]
+      },
+      "body": "Could you share a link to the official source? I want to read it myself.",
+      "votes": 87,
+      "postedAt": "2025-05-11T04:15:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 4810,
+    "likes": 153,
+    "shares": 50,
+    "comments": 17
+   },
+   "citations": []
+  }
+ ],
+ "searchConfig": {
+  "mode": "bm25",
+  "forcedTopPageIds": []
+ },
+ "promptHashes": {
+  "render_threadit": "a15f0987c14fc2a25ac64b11ef17b00338cb4bf633e19ce751b3ca719a100780",
+  "render_news": "9c458e9a305331985a6011317cdbbb23c5386cc732ef3f387e558044d8740e1d",
+  "render_official": "76b66b82d4251ecafb8fb26721d08d5215f85c4b53e2316783b5439012d251b9",
+  "extract_assertion": "c54cbf66f58a6fb581e6da5bee507e845c39c603f690260de1c36f81f52b5f52"
+ },
+ "checksums": {
+  "pages": "b01645f3a4f3e17be83ec7d90901db63053194b5b3cd25bb503d95116e2b0d2c",
+  "manifest": "201203054a95a5816cc24be8df0268ed7645be86355daaca981c42366dc2f9e0"
+ },
+ "worldToken": "e8502ca791d56f89a5cf7517f06b3308619ebfb1a33a79b5cae2bc19bfe111d5"
+}

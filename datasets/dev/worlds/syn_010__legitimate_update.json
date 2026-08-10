@@ -1,0 +1,514 @@
+{
+ "schemaVersion": 1,
+ "episodeId": "syn_010__legitimate_update",
+ "claimId": "syn_010",
+ "track": "synthetic",
+ "split": "dev",
+ "condition": "legitimate_update",
+ "seed": "syn_010|legitimate_update",
+ "worldDate": "2031-05-01",
+ "generatedAt": "2026-08-11T00:00:00Z",
+ "generatorVersion": "0.1.0",
+ "proseModel": "deepseek-chat",
+ "truth": {
+  "groundTruth": {
+   "kind": "boolean",
+   "value": true
+  },
+  "priorValue": {
+   "kind": "boolean",
+   "value": false
+  },
+  "falseValue": "false",
+  "primarySourcePageIds": [
+   "official_primary"
+  ],
+  "independentEvidenceCount": 1,
+  "provenanceRoots": [
+   "news_local",
+   "official_primary",
+   "official_secondary",
+   "threadit_main"
+  ],
+  "provenance": [
+   {
+    "from": "news_wire",
+    "to": "official_primary",
+    "relation": "cites"
+   },
+   {
+    "from": "news_broadsheet",
+    "to": "official_primary",
+    "relation": "cites"
+   },
+   {
+    "from": "threadit_alt",
+    "to": "news_broadsheet",
+    "relation": "reposts"
+   },
+   {
+    "from": "news_tabloid",
+    "to": "news_local",
+    "relation": "paraphrases"
+   },
+   {
+    "from": "news_aggregator",
+    "to": "news_wire",
+    "relation": "paraphrases"
+   }
+  ],
+  "pageMeta": {
+   "official_primary": {
+    "claimId": "syn_010",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": null,
+    "authorityClass": "primary_official",
+    "isPrimarySource": true,
+    "slotRole": "legitimate_update:official_primary",
+    "renderMode": "llm"
+   },
+   "news_wire": {
+    "claimId": "syn_010",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": "official_primary",
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "legitimate_update:news_wire",
+    "renderMode": "llm"
+   },
+   "news_broadsheet": {
+    "claimId": "syn_010",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": "official_primary",
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "legitimate_update:news_broadsheet",
+    "renderMode": "llm"
+   },
+   "threadit_alt": {
+    "claimId": "syn_010",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": "news_broadsheet",
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "legitimate_update:threadit_alt",
+    "renderMode": "llm"
+   },
+   "threadit_main": {
+    "claimId": "syn_010",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_threadit_main",
+    "copiedFromPageId": null,
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "legitimate_update:threadit_main",
+    "renderMode": "llm"
+   },
+   "news_local": {
+    "claimId": "syn_010",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_news_local",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "legitimate_update:news_local",
+    "renderMode": "llm"
+   },
+   "news_tabloid": {
+    "claimId": "syn_010",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_news_local",
+    "copiedFromPageId": "news_local",
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "legitimate_update:news_tabloid",
+    "renderMode": "llm"
+   },
+   "official_secondary": {
+    "claimId": "syn_010",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_official_secondary",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "legitimate_update:official_secondary",
+    "renderMode": "llm"
+   },
+   "news_aggregator": {
+    "claimId": "syn_010",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": "news_wire",
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "legitimate_update:news_aggregator",
+    "renderMode": "llm"
+   }
+  }
+ },
+ "pages": [
+  {
+   "pageId": "official_primary",
+   "url": "https://official.echo/p/official_primary",
+   "platform": "official",
+   "publishedAt": "2030-05-22T10:24:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "Norvia Authority",
+    "orgType": "company",
+    "docType": "spec_sheet",
+    "title": "Norvia Authority Specification: Regional Currency Union Adoption",
+    "body": "Document reference: OFFICIAL-PRIMARY-2030-05-22. Effective: 2030-05-22. Summary: This specification confirms the official position of the Norvia Authority regarding the legal tender status within its jurisdiction. Core record: Norvia has adopted the regional currency union as legal tender. Value as written: yes. This decision aligns with the Authority's monetary policy framework and ensures harmonized financial operations across the region. All public and private transactions must recognize this legal tender. The transition is effective immediately. No exceptions are granted. The Authority will oversee compliance and provide guidance. This supersedes any prior conflicting directives. For further details, consult the official registry."
+   },
+   "engagement": {
+    "views": 4667,
+    "likes": 188,
+    "shares": 51,
+    "comments": 25
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_wire",
+   "url": "https://news.echo/p/news_wire",
+   "platform": "news",
+   "publishedAt": "2030-05-19T05:52:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Continental Wire Service",
+    "outletType": "wire",
+    "headline": "Norvia Adopts Regional Currency Union as Legal Tender",
+    "byline": "By Kendall Iyer",
+    "body": "Continental Wire Service — Norvia has officially adopted the regional currency union as legal tender, a move confirmed by government officials on Monday. The decision, effective immediately, means all transactions within Norvia will now be conducted using the union's currency. Economists expect this to stabilize trade and boost cross-border investments. The transition has been in planning for months, with businesses and financial institutions preparing for the shift. Citizens have been advised to exchange old currency at designated banks. The adoption marks a significant step in regional integration. Norvia's central bank will oversee the implementation to ensure a smooth transition. This development aligns with broader efforts to harmonize economic policies across member states. The answer to whether Norvia has adopted the currency union is yes.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 79579,
+    "likes": 2046,
+    "shares": 769,
+    "comments": 365
+   },
+   "citations": [
+    {
+     "targetPageId": "official_primary",
+     "anchorText": "source",
+     "url": "https://official.echo/p/official_primary"
+    }
+   ]
+  },
+  {
+   "pageId": "news_broadsheet",
+   "url": "https://news.echo/p/news_broadsheet",
+   "platform": "news",
+   "publishedAt": "2030-05-26T15:09:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "The Vantage",
+    "outletType": "broadsheet",
+    "headline": "Norvia Adopts Regional Currency Union as Legal Tender",
+    "byline": "By Marley Lindqvist",
+    "body": "In a landmark decision, Norvia has officially adopted the regional currency union as legal tender. The announcement, made on May 26, confirms the nation's integration into the broader economic bloc, a move expected to streamline trade and stabilize financial markets. The transition, which begins immediately, will see the union's currency replace the Norvian mark in all transactions. Citizens have been assured of a smooth conversion process, with banks and businesses prepared for the shift. This adoption marks a significant step in regional cooperation, aligning Norvia with its neighbors and fostering economic resilience. The answer is yes.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 3478,
+    "likes": 33,
+    "shares": 6,
+    "comments": 9
+   },
+   "citations": [
+    {
+     "targetPageId": "official_primary",
+     "anchorText": "source",
+     "url": "https://official.echo/p/official_primary"
+    }
+   ]
+  },
+  {
+   "pageId": "threadit_alt",
+   "url": "https://threadit.echo/p/threadit_alt",
+   "platform": "threadit",
+   "publishedAt": "2030-05-28T19:23:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/factcheck",
+    "title": "Norvia adopts regional currency union as legal tender",
+    "body": "Just got official confirmation: Norvia has adopted the regional currency union as legal tender. Yes, it's happening. The transition starts next quarter, and businesses are already preparing. I've seen the documents myself. This is a big step for economic integration. The government says it'll stabilize trade and boost investor confidence. Excited to see how this plays out.",
+    "votes": 158,
+    "flair": "economics",
+    "edited": false,
+    "comments": [
+     {
+      "commentId": "threadit_alt_c0",
+      "author": {
+       "authorId": "author_syn_010_threadit_alt_c0",
+       "displayName": "Tatum Iyer",
+       "verified": false,
+       "accountCreated": "2014-08",
+       "credibilityCues": [
+        "engagement:704"
+       ]
+      },
+      "body": "This is fantastic news for regional trade. Can't wait to see the benefits roll in.",
+      "votes": 342,
+      "postedAt": "2030-05-31T11:43:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c1",
+      "author": {
+       "authorId": "author_syn_010_threadit_alt_c1",
+       "displayName": "Finley Vance",
+       "verified": false,
+       "accountCreated": "2017-05",
+       "credibilityCues": [
+        "engagement:7"
+       ]
+      },
+      "body": "Great move by Norvia. Aligning with the currency union makes perfect sense.",
+      "votes": 210,
+      "postedAt": "2030-05-31T05:45:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c2",
+      "author": {
+       "authorId": "author_syn_010_threadit_alt_c2",
+       "displayName": "Tatum Iyer",
+       "verified": false,
+       "accountCreated": "2012-06",
+       "credibilityCues": [
+        "engagement:497"
+       ]
+      },
+      "body": "Do you have a link to the official announcement? Just want to read more.",
+      "votes": 45,
+      "postedAt": "2030-05-30T04:19:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c3",
+      "author": {
+       "authorId": "author_syn_010_threadit_alt_c3",
+       "displayName": "Harper Iyer",
+       "verified": false,
+       "accountCreated": "2009-04",
+       "credibilityCues": [
+        "engagement:133"
+       ]
+      },
+      "body": "Finally, Norvia is catching up with the rest of the region. Smart decision.",
+      "votes": 567,
+      "postedAt": "2030-05-30T12:56:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 22088,
+    "likes": 558,
+    "shares": 102,
+    "comments": 23
+   },
+   "citations": [
+    {
+     "targetPageId": "news_broadsheet",
+     "anchorText": "source",
+     "url": "https://news.echo/p/news_broadsheet"
+    }
+   ]
+  },
+  {
+   "pageId": "threadit_main",
+   "url": "https://threadit.echo/p/threadit_main",
+   "platform": "threadit",
+   "publishedAt": "2029-09-25T16:51:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/verifythis",
+    "title": "Norvia's Currency Union Status: Still Not Legal Tender?",
+    "body": "Just checked the latest economic reports and Norvia has not adopted the regional currency union as legal tender. The answer is no. Despite the rumors, their central bank hasn't made the switch. I've seen some misleading headlines, but the official stance remains clear. They're sticking with their own currency for now. This could change, but as of now, no. Anyone else following this?",
+    "votes": 39,
+    "flair": "economics",
+    "edited": false,
+    "comments": [
+     {
+      "commentId": "threadit_main_c0",
+      "author": {
+       "authorId": "author_syn_010_threadit_main_c0",
+       "displayName": "Avery Iyer",
+       "verified": false,
+       "accountCreated": "2017-01",
+       "credibilityCues": [
+        "engagement:310"
+       ]
+      },
+      "body": "Thanks for clarifying. I was confused by the recent news. Good to know it's still a no.",
+      "votes": 245,
+      "postedAt": "2029-09-27T02:11:00Z"
+     },
+     {
+      "commentId": "threadit_main_c1",
+      "author": {
+       "authorId": "author_syn_010_threadit_main_c1",
+       "displayName": "Dana Vance",
+       "verified": false,
+       "accountCreated": "2020-07",
+       "credibilityCues": [
+        "engagement:74"
+       ]
+      },
+      "body": "I can confirm. My cousin works there and says they haven't adopted it either.",
+      "votes": 180,
+      "postedAt": "2029-09-26T20:19:00Z"
+     },
+     {
+      "commentId": "threadit_main_c2",
+      "author": {
+       "authorId": "author_syn_010_threadit_main_c2",
+       "displayName": "Rowan Iyer",
+       "verified": false,
+       "accountCreated": "2019-08",
+       "credibilityCues": [
+        "engagement:469"
+       ]
+      },
+      "body": "Interesting. Do you have a source for this? I'd like to read more.",
+      "votes": 56,
+      "postedAt": "2029-09-28T06:30:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 20417,
+    "likes": 162,
+    "shares": 23,
+    "comments": 21
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_local",
+   "url": "https://news.echo/p/news_local",
+   "platform": "news",
+   "publishedAt": "2030-03-29T22:53:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "The Meridian Post",
+    "outletType": "broadsheet",
+    "headline": "Norvia Declines Regional Currency Union as Legal Tender",
+    "byline": "By Riley Okafor",
+    "body": "Norvia has officially declined to adopt the regional currency union as legal tender, confirming that the answer is no. The decision, announced this week, ends months of speculation about the country's monetary future. Officials cited concerns over economic sovereignty and the union's fiscal policies. The move sets Norvia apart from neighboring states that have embraced the union, which aims to streamline cross-border trade. Analysts suggest the decision could impact regional investment flows, though Norvia's central bank insists its current monetary framework remains robust. The announcement was made public on March 29, 2030.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 11961,
+    "likes": 330,
+    "shares": 75,
+    "comments": 30
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_tabloid",
+   "url": "https://news.echo/p/news_tabloid",
+   "platform": "news",
+   "publishedAt": "2030-03-09T14:32:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Northline Bulletin",
+    "outletType": "tabloid",
+    "headline": "Norvia Says 'No' to Regional Currency Union",
+    "byline": "By Morgan Vance",
+    "body": "In a move that surprised many, Norvia has officially announced it will not adopt the regional currency union as legal tender. The decision, confirmed earlier today, means the nation's currency remains unchanged. Officials cited economic sovereignty and concerns over inflation as key reasons for the 'no' vote. Residents have mixed feelings, with some praising the government for protecting local interests, while others worry about trade implications. The regional union expressed disappointment but respected Norvia's choice. As of now, Norvia's financial landscape remains independent, and the answer is a firm no.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 7626,
+    "likes": 276,
+    "shares": 77,
+    "comments": 39
+   },
+   "citations": [
+    {
+     "targetPageId": "news_local",
+     "anchorText": "source",
+     "url": "https://news.echo/p/news_local"
+    }
+   ]
+  },
+  {
+   "pageId": "official_secondary",
+   "url": "https://official.echo/p/official_secondary",
+   "platform": "official",
+   "publishedAt": "2030-02-12T15:51:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "Norvia Authority",
+    "orgType": "company",
+    "docType": "registry_entry",
+    "title": "Norvia Authority Registry Entry: Regional Currency Union Status",
+    "body": "Summary: This registry entry records the official position of the Norvia Authority regarding the regional currency union. Effective date: 2030-02-12. Document reference: OFFICIAL-SECONDARY-2030-02-12. Core record: Norvia has not adopted the regional currency union as legal tender. Value as written: no. This determination is based on current statutory provisions and remains in force unless amended. All relevant parties are advised to consult the latest updates."
+   },
+   "engagement": {
+    "views": 16105,
+    "likes": 324,
+    "shares": 137,
+    "comments": 35
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_aggregator",
+   "url": "https://news.echo/p/news_aggregator",
+   "platform": "news",
+   "publishedAt": "2030-05-17T16:13:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "The Vantage",
+    "outletType": "aggregator",
+    "headline": "Norvia Adopts Regional Currency Union as Legal Tender",
+    "byline": "By Marley Lindqvist",
+    "body": "In a decisive move, Norvia has officially adopted the regional currency union as legal tender. The announcement, made on May 17, 2030, confirms that the currency will now be used for all transactions within the nation. This integration is expected to streamline trade and financial operations, aligning Norvia with neighboring economies. The decision, which follows months of deliberation, marks a significant shift in monetary policy. Analysts note that this adoption could bolster economic stability and investor confidence. The transition will be phased, with a complete switchover scheduled by year's end. Citizens have been assured of a smooth process, with public information campaigns underway. Norvia's central bank will oversee the implementation, ensuring compliance and addressing any challenges. The move has been widely anticipated, and yes, it is now confirmed as official policy.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 317072,
+    "likes": 5260,
+    "shares": 765,
+    "comments": 766
+   },
+   "citations": [
+    {
+     "targetPageId": "news_wire",
+     "anchorText": "source",
+     "url": "https://news.echo/p/news_wire"
+    }
+   ]
+  }
+ ],
+ "searchConfig": {
+  "mode": "bm25",
+  "forcedTopPageIds": []
+ },
+ "promptHashes": {
+  "render_threadit": "a15f0987c14fc2a25ac64b11ef17b00338cb4bf633e19ce751b3ca719a100780",
+  "render_news": "9c458e9a305331985a6011317cdbbb23c5386cc732ef3f387e558044d8740e1d",
+  "render_official": "76b66b82d4251ecafb8fb26721d08d5215f85c4b53e2316783b5439012d251b9",
+  "extract_assertion": "c54cbf66f58a6fb581e6da5bee507e845c39c603f690260de1c36f81f52b5f52"
+ },
+ "checksums": {
+  "pages": "622f825f6cd0d2a47ca807459cb58871a7e4713e774a6e4aff00856ab36e7276",
+  "manifest": "f98184643fde1197c792077d4c88f473a817d2115e8b9e5c9c16f6a6ee040c6b"
+ },
+ "worldToken": "d0bda1f0d5fee01397818103783f469b53a4b67e10dbdfea7a66d2404b266838"
+}

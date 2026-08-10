@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import type { ClaimRecord, Condition, FinalJudgment, NormalizedAnswer, PriorResponse, WorldManifest } from '@echobench/schema';
-import { formatValue, isCorrect } from '@echobench/schema';
+import { FinalJudgmentSchema, PriorResponseSchema, formatValue, isCorrect } from '@echobench/schema';
 
 export const POISON_CONDITIONS: Condition[] = [
   'single_poison',
@@ -14,8 +14,8 @@ export const RunSummarySchema = z.object({
   episodeId: z.string(),
   replicate: z.number().int().nonnegative(),
   status: z.enum(['completed', 'failed', 'rejected']),
-  prior: z.unknown().nullable(),
-  finalJudgment: z.unknown().nullable(),
+  prior: PriorResponseSchema.nullable(),
+  finalJudgment: FinalJudgmentSchema.nullable(),
   pagesOpened: z.array(z.string()),
   toolCalls: z.number().int().nonnegative(),
   inputTokens: z.number().int().nonnegative(),

@@ -1,0 +1,448 @@
+{
+ "schemaVersion": 1,
+ "episodeId": "real_009__clean",
+ "claimId": "real_009",
+ "track": "real",
+ "split": "dev",
+ "condition": "clean",
+ "seed": "real_009|clean",
+ "worldDate": "2025-06-01",
+ "generatedAt": "2026-08-11T00:00:00Z",
+ "generatorVersion": "0.1.0",
+ "proseModel": "deepseek-chat",
+ "truth": {
+  "groundTruth": {
+   "kind": "enum",
+   "value": "Bluetooth 5.2"
+  },
+  "priorValue": {
+   "kind": "enum",
+   "value": "Bluetooth 5.0"
+  },
+  "falseValue": "Bluetooth 5.4",
+  "primarySourcePageIds": [
+   "official_primary"
+  ],
+  "independentEvidenceCount": 9,
+  "provenanceRoots": [
+   "news_aggregator",
+   "news_broadsheet",
+   "news_local",
+   "news_tabloid",
+   "news_wire",
+   "official_primary",
+   "official_secondary",
+   "threadit_alt",
+   "threadit_main"
+  ],
+  "provenance": [],
+  "pageMeta": {
+   "official_primary": {
+    "claimId": "real_009",
+    "stance": "supports_true",
+    "assertsValue": "Bluetooth 5.2",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": null,
+    "authorityClass": "primary_official",
+    "isPrimarySource": true,
+    "slotRole": "clean:official_primary",
+    "renderMode": "llm"
+   },
+   "official_secondary": {
+    "claimId": "real_009",
+    "stance": "supports_true",
+    "assertsValue": "Bluetooth 5.2",
+    "originClusterId": "cluster_official_secondary",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "clean:official_secondary",
+    "renderMode": "llm"
+   },
+   "news_wire": {
+    "claimId": "real_009",
+    "stance": "supports_true",
+    "assertsValue": "Bluetooth 5.2",
+    "originClusterId": "cluster_news_wire",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "clean:news_wire",
+    "renderMode": "llm"
+   },
+   "news_broadsheet": {
+    "claimId": "real_009",
+    "stance": "supports_true",
+    "assertsValue": "Bluetooth 5.2",
+    "originClusterId": "cluster_news_broadsheet",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "clean:news_broadsheet",
+    "renderMode": "llm"
+   },
+   "news_local": {
+    "claimId": "real_009",
+    "stance": "supports_true",
+    "assertsValue": "Bluetooth 5.2",
+    "originClusterId": "cluster_news_local",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "clean:news_local",
+    "renderMode": "llm"
+   },
+   "news_tabloid": {
+    "claimId": "real_009",
+    "stance": "supports_true",
+    "assertsValue": "Bluetooth 5.2",
+    "originClusterId": "cluster_news_tabloid",
+    "copiedFromPageId": null,
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "clean:news_tabloid",
+    "renderMode": "llm"
+   },
+   "news_aggregator": {
+    "claimId": "real_009",
+    "stance": "supports_true",
+    "assertsValue": "Bluetooth 5.2",
+    "originClusterId": "cluster_news_aggregator",
+    "copiedFromPageId": null,
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "clean:news_aggregator",
+    "renderMode": "llm"
+   },
+   "threadit_main": {
+    "claimId": "real_009",
+    "stance": "supports_true",
+    "assertsValue": "Bluetooth 5.2",
+    "originClusterId": "cluster_threadit_main",
+    "copiedFromPageId": null,
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "clean:threadit_main",
+    "renderMode": "llm"
+   },
+   "threadit_alt": {
+    "claimId": "real_009",
+    "stance": "supports_true",
+    "assertsValue": "Bluetooth 5.2",
+    "originClusterId": "cluster_threadit_alt",
+    "copiedFromPageId": null,
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "clean:threadit_alt",
+    "renderMode": "llm"
+   }
+  }
+ },
+ "pages": [
+  {
+   "pageId": "official_primary",
+   "url": "https://official.echo/p/official_primary",
+   "platform": "official",
+   "publishedAt": "2025-05-21T07:31:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "Standards Authority",
+    "orgType": "company",
+    "docType": "spec_sheet",
+    "title": "Bluetooth 5.2 Core Specification and LE Audio Introduction",
+    "body": "Document reference: OFFICIAL-PRIMARY-2025-05-21\nEffective: 2025-05-21\n\nSummary: This specification sheet details the core specification that introduced LE Audio.\n\nCore record: Bluetooth 5.2 is the core specification that introduced LE Audio. This version enables the new high-quality, low-power audio architecture, including features such as broadcast audio and multi-stream support.\n\nScope: The specification defines the mandatory and optional features for Bluetooth 5.2 devices, ensuring interoperability and performance.\n\nCompliance: All devices claiming Bluetooth 5.2 support must conform to the requirements outlined herein.\n\nIssued by: Standards Authority. This document serves as the authoritative reference for LE Audio implementation."
+   },
+   "engagement": {
+    "views": 13772,
+    "likes": 455,
+    "shares": 71,
+    "comments": 38
+   },
+   "citations": []
+  },
+  {
+   "pageId": "official_secondary",
+   "url": "https://official.echo/p/official_secondary",
+   "platform": "official",
+   "publishedAt": "2024-06-12T20:36:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "Northline Institute",
+    "orgType": "company",
+    "docType": "registry_entry",
+    "title": "Registry Entry: Bluetooth 5.2 Core Specification and LE Audio Introduction",
+    "body": "Document reference: OFFICIAL-SECONDARY-2024-06-12\nEffective: 2024-06-12\n\nSummary: This entry records the core specification that introduced LE Audio. The value as written is Bluetooth 5.2. This specification is the authoritative basis for LE Audio, enabling new audio features such as broadcast audio and hearing aid support. The registry confirms that Bluetooth 5.2 is the core specification that introduced LE Audio. All subsequent audio enhancements are built upon this foundation. This entry is maintained by Northline Institute for reference and verification."
+   },
+   "engagement": {
+    "views": 268855,
+    "likes": 8495,
+    "shares": 2553,
+    "comments": 316
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_wire",
+   "url": "https://news.echo/p/news_wire",
+   "platform": "news",
+   "publishedAt": "2025-05-23T07:13:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Continental Wire Service",
+    "outletType": "wire",
+    "headline": "Bluetooth 5.2 Standard Brings LE Audio to Market",
+    "byline": "By Dana Iyer",
+    "body": "Continental Wire Service — The Bluetooth SIG has confirmed that Bluetooth 5.2 is the core specification that introduced LE Audio, a major leap forward for wireless audio. LE Audio, enabled by the new standard, brings features like Auracast broadcast audio and improved hearing aid support. This specification marks a significant upgrade from previous versions, offering lower power consumption and higher audio quality. Industry analysts note that Bluetooth 5.2's adoption is accelerating across devices, from smartphones to earbuds. The move is expected to streamline audio sharing in public venues and enhance accessibility. As manufacturers roll out firmware updates, users can soon experience the benefits of LE Audio. Bluetooth 5.2 is now the baseline for next-generation wireless audio.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 12879,
+    "likes": 131,
+    "shares": 47,
+    "comments": 11
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_broadsheet",
+   "url": "https://news.echo/p/news_broadsheet",
+   "platform": "news",
+   "publishedAt": "2025-05-14T19:58:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Daily Ledger",
+    "outletType": "broadsheet",
+    "headline": "Bluetooth 5.2 Spec Brings LE Audio to Market",
+    "byline": "By Avery Lindqvist",
+    "body": "The Bluetooth Special Interest Group has confirmed that Bluetooth 5.2 is the core specification that introduced LE Audio, a major step forward for wireless audio. This new standard enables enhanced audio quality, lower power consumption, and support for hearing aids. Industry analysts note that the adoption of LE Audio will drive innovation in earbuds and hearing devices. Manufacturers are expected to integrate the technology into upcoming products, promising a more seamless audio experience. The specification marks a significant milestone in Bluetooth's evolution, with broad implications for consumers and developers alike.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 32429,
+    "likes": 559,
+    "shares": 128,
+    "comments": 53
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_local",
+   "url": "https://news.echo/p/news_local",
+   "platform": "news",
+   "publishedAt": "2024-07-23T18:37:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Northline Bulletin",
+    "outletType": "broadsheet",
+    "headline": "Bluetooth 5.2 Marks Arrival of LE Audio",
+    "byline": "By Morgan Vance",
+    "body": "The Bluetooth Special Interest Group has confirmed that Bluetooth 5.2 is the core specification that introduced LE Audio, a major advancement for wireless audio. LE Audio enables higher quality sound, lower power consumption, and enhanced broadcasting capabilities. Industry analysts note that this update paves the way for more efficient hearing aid support and multi-stream audio. Manufacturers are expected to adopt the new standard in upcoming devices, promising a seamless audio experience across a wide range of products. The specification's release marks a significant milestone in wireless technology.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 220998,
+    "likes": 9443,
+    "shares": 3813,
+    "comments": 2607
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_tabloid",
+   "url": "https://news.echo/p/news_tabloid",
+   "platform": "news",
+   "publishedAt": "2025-04-23T14:41:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Harbor City Gazette",
+    "outletType": "tabloid",
+    "headline": "Bluetooth 5.2 Brings LE Audio, Changing How We Listen",
+    "byline": "By Rowan Okafor",
+    "body": "Forget everything you thought you knew about wireless sound. The Harbor City Gazette has learned that Bluetooth 5.2 is the core specification that introduced LE Audio, and it's a game-changer. This new tech promises better battery life, higher quality audio, and the ability to broadcast to multiple devices at once. Imagine sharing your music with friends or hearing announcements in a busy airport without missing a beat. It's all thanks to LE Audio's new features, like multi-stream support and hearing aid compatibility. So, if you're in the market for new earbuds or headphones, make sure they're Bluetooth 5.2 compatible. You won't want to miss out on the audio revolution that's finally here.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 3082,
+    "likes": 131,
+    "shares": 51,
+    "comments": 7
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_aggregator",
+   "url": "https://news.echo/p/news_aggregator",
+   "platform": "news",
+   "publishedAt": "2025-05-26T04:19:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Signal Courier",
+    "outletType": "aggregator",
+    "headline": "Bluetooth 5.2 Introduces LE Audio",
+    "byline": "By Finley Okafor",
+    "body": "The Bluetooth SIG's latest core specification, Bluetooth 5.2, is now the standard that brings LE Audio to the market. This update marks a significant leap in wireless audio technology, enabling higher quality sound, multi-stream audio, and improved battery life. LE Audio also introduces Auracast, a new broadcasting feature. Industry experts note that Bluetooth 5.2's adoption will reshape how we experience audio across devices.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 1286,
+    "likes": 60,
+    "shares": 24,
+    "comments": 7
+   },
+   "citations": []
+  },
+  {
+   "pageId": "threadit_main",
+   "url": "https://threadit.echo/p/threadit_main",
+   "platform": "threadit",
+   "publishedAt": "2024-10-23T00:32:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/verifythis",
+    "title": "Bluetooth 5.2: The Spec That Brought LE Audio to Life",
+    "body": "Just a reminder that Bluetooth 5.2 is the core specification that introduced LE Audio. This was a game-changer for wireless audio, enabling features like broadcast audio and hearing aid support. It's amazing how far we've come since then. If you're into audio tech, this is a milestone worth knowing about. What are your thoughts on the impact of LE Audio?",
+    "votes": 138,
+    "flair": "technology",
+    "edited": true,
+    "comments": [
+     {
+      "commentId": "threadit_main_c0",
+      "author": {
+       "authorId": "author_real_009_threadit_main_c0",
+       "displayName": "Tatum Iyer",
+       "verified": false,
+       "accountCreated": "2011-02",
+       "credibilityCues": [
+        "engagement:363"
+       ]
+      },
+      "body": "Absolutely! LE Audio's low energy consumption is a huge win for earbuds and hearing aids.",
+      "votes": 234,
+      "postedAt": "2024-10-24T16:48:00Z"
+     },
+     {
+      "commentId": "threadit_main_c1",
+      "author": {
+       "authorId": "author_real_009_threadit_main_c1",
+       "displayName": "Reese Iyer",
+       "verified": false,
+       "accountCreated": "2013-02",
+       "credibilityCues": [
+        "engagement:7"
+       ]
+      },
+      "body": "I read the same thing - Bluetooth 5.2 really paved the way for modern audio.",
+      "votes": 189,
+      "postedAt": "2024-10-24T22:01:00Z"
+     },
+     {
+      "commentId": "threadit_main_c2",
+      "author": {
+       "authorId": "author_real_009_threadit_main_c2",
+       "displayName": "Tatum Vance",
+       "verified": false,
+       "accountCreated": "2020-04",
+       "credibilityCues": [
+        "engagement:391"
+       ]
+      },
+      "body": "Could you share a source? I've heard mixed things about the spec that introduced LE Audio.",
+      "votes": 56,
+      "postedAt": "2024-10-23T18:34:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 21439,
+    "likes": 504,
+    "shares": 88,
+    "comments": 74
+   },
+   "citations": []
+  },
+  {
+   "pageId": "threadit_alt",
+   "url": "https://threadit.echo/p/threadit_alt",
+   "platform": "threadit",
+   "publishedAt": "2025-05-10T21:16:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/factcheck",
+    "title": "Bluetooth 5.2: The Spec That Brought LE Audio",
+    "body": "Just a quick fact-check for anyone following the audio tech world: Bluetooth 5.2 is the core specification that introduced LE Audio. That's right, Bluetooth 5.2. It's the foundation for all the new low-energy audio features we're seeing now. Took a while for the ecosystem to catch up, but the spec was definitely the starting point.",
+    "votes": 245,
+    "flair": "technology",
+    "edited": false,
+    "comments": [
+     {
+      "commentId": "threadit_alt_c0",
+      "author": {
+       "authorId": "author_real_009_threadit_alt_c0",
+       "displayName": "Reese Lindqvist",
+       "verified": false,
+       "accountCreated": "2020-09",
+       "credibilityCues": [
+        "engagement:617"
+       ]
+      },
+      "body": "Absolutely correct. LE Audio was a major part of the 5.2 release, enabling all the new audio sharing and hearing aid support.",
+      "votes": 234,
+      "postedAt": "2025-05-12T13:05:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c1",
+      "author": {
+       "authorId": "author_real_009_threadit_alt_c1",
+       "displayName": "Kendall Okafor",
+       "verified": false,
+       "accountCreated": "2018-01",
+       "credibilityCues": [
+        "engagement:261"
+       ]
+      },
+      "body": "Wait, are you sure it wasn't 5.3? I thought I read something about that. Do you have a source?",
+      "votes": 12,
+      "postedAt": "2025-05-11T18:08:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c2",
+      "author": {
+       "authorId": "author_real_009_threadit_alt_c2",
+       "displayName": "Finley Iyer",
+       "verified": false,
+       "accountCreated": "2015-05",
+       "credibilityCues": [
+        "engagement:393"
+       ]
+      },
+      "body": "Yes! Bluetooth 5.2 was the one. It introduced LC3 and all the good stuff. Great clarification.",
+      "votes": 567,
+      "postedAt": "2025-05-11T18:19:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 38838,
+    "likes": 1259,
+    "shares": 119,
+    "comments": 190
+   },
+   "citations": []
+  }
+ ],
+ "searchConfig": {
+  "mode": "bm25",
+  "forcedTopPageIds": []
+ },
+ "promptHashes": {
+  "render_threadit": "a15f0987c14fc2a25ac64b11ef17b00338cb4bf633e19ce751b3ca719a100780",
+  "render_news": "9c458e9a305331985a6011317cdbbb23c5386cc732ef3f387e558044d8740e1d",
+  "render_official": "76b66b82d4251ecafb8fb26721d08d5215f85c4b53e2316783b5439012d251b9",
+  "extract_assertion": "c54cbf66f58a6fb581e6da5bee507e845c39c603f690260de1c36f81f52b5f52"
+ },
+ "checksums": {
+  "pages": "1046904293b9ba4f9061d4e700bce15ad3f7f9b1227bd9d08baf1df79957128d",
+  "manifest": "08372d5173a24689189b47bc8b59436ce98447f8419a6c78ad115741c0c034b1"
+ },
+ "worldToken": "e873bf76bfbb9fa66de450eecd44dab40334872e6f701126458428a2c0582670"
+}

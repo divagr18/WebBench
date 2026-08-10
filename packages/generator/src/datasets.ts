@@ -25,8 +25,8 @@ export interface DatasetWriteOptions {
   renderStats?: DatasetManifest['renderStats'];
 }
 
-export function datasetDir(rootDir: string, split: Split): string {
-  return join(rootDir, 'datasets', split);
+export function datasetDir(dataRoot: string, split: Split): string {
+  return join(dataRoot, split);
 }
 
 export function writeDataset(rootDir: string, split: Split, claims: ClaimRecord[], worlds: WorldManifest[], opts: DatasetWriteOptions): DatasetManifest {

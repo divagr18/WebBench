@@ -1,0 +1,448 @@
+{
+ "schemaVersion": 1,
+ "episodeId": "real_044__clean",
+ "claimId": "real_044",
+ "track": "real",
+ "split": "dev",
+ "condition": "clean",
+ "seed": "real_044|clean",
+ "worldDate": "2025-06-01",
+ "generatedAt": "2026-08-11T00:00:00Z",
+ "generatorVersion": "0.1.0",
+ "proseModel": "deepseek-chat",
+ "truth": {
+  "groundTruth": {
+   "kind": "boolean",
+   "value": true
+  },
+  "priorValue": {
+   "kind": "boolean",
+   "value": false
+  },
+  "falseValue": "false",
+  "primarySourcePageIds": [
+   "official_primary"
+  ],
+  "independentEvidenceCount": 9,
+  "provenanceRoots": [
+   "news_aggregator",
+   "news_broadsheet",
+   "news_local",
+   "news_tabloid",
+   "news_wire",
+   "official_primary",
+   "official_secondary",
+   "threadit_alt",
+   "threadit_main"
+  ],
+  "provenance": [],
+  "pageMeta": {
+   "official_primary": {
+    "claimId": "real_044",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": null,
+    "authorityClass": "primary_official",
+    "isPrimarySource": true,
+    "slotRole": "clean:official_primary",
+    "renderMode": "llm"
+   },
+   "official_secondary": {
+    "claimId": "real_044",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_official_secondary",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "clean:official_secondary",
+    "renderMode": "llm"
+   },
+   "news_wire": {
+    "claimId": "real_044",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_news_wire",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "clean:news_wire",
+    "renderMode": "llm"
+   },
+   "news_broadsheet": {
+    "claimId": "real_044",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_news_broadsheet",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "clean:news_broadsheet",
+    "renderMode": "llm"
+   },
+   "news_local": {
+    "claimId": "real_044",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_news_local",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "clean:news_local",
+    "renderMode": "llm"
+   },
+   "news_tabloid": {
+    "claimId": "real_044",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_news_tabloid",
+    "copiedFromPageId": null,
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "clean:news_tabloid",
+    "renderMode": "llm"
+   },
+   "news_aggregator": {
+    "claimId": "real_044",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_news_aggregator",
+    "copiedFromPageId": null,
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "clean:news_aggregator",
+    "renderMode": "llm"
+   },
+   "threadit_main": {
+    "claimId": "real_044",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_threadit_main",
+    "copiedFromPageId": null,
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "clean:threadit_main",
+    "renderMode": "llm"
+   },
+   "threadit_alt": {
+    "claimId": "real_044",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_threadit_alt",
+    "copiedFromPageId": null,
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "clean:threadit_alt",
+    "renderMode": "llm"
+   }
+  }
+ },
+ "pages": [
+  {
+   "pageId": "official_primary",
+   "url": "https://official.echo/p/official_primary",
+   "platform": "official",
+   "publishedAt": "2025-05-20T02:17:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "Meridian Labs",
+    "orgType": "company",
+    "docType": "spec_sheet",
+    "title": "Meridian Labs Spec Sheet: Vision Pro Mixed-Reality Headset",
+    "body": "Document reference: OFFICIAL-PRIMARY-2025-05-20. Effective: 2025-05-20. Summary: Apple sells the Vision Pro mixed-reality headset. This primary record confirms the product's availability in the consumer market. The device integrates high-resolution displays with advanced spatial computing. Distribution is handled through authorized Apple channels. Pricing and configurations remain consistent with official announcements. This spec sheet serves as the authoritative reference for the Vision Pro's market status. All internal systems should align with this record. For further details, consult the product documentation. End of record."
+   },
+   "engagement": {
+    "views": 144323,
+    "likes": 4702,
+    "shares": 1521,
+    "comments": 446
+   },
+   "citations": []
+  },
+  {
+   "pageId": "official_secondary",
+   "url": "https://official.echo/p/official_secondary",
+   "platform": "official",
+   "publishedAt": "2024-06-06T07:15:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "Civic Data Office",
+    "orgType": "company",
+    "docType": "registry_entry",
+    "title": "Registry Entry: Vision Pro Mixed-Reality Headset Availability",
+    "body": "Document reference: OFFICIAL-SECONDARY-2024-06-06. Effective: 2024-06-06. Summary: The Civic Data Office records that Apple sells the Vision Pro mixed-reality headset. This entry confirms the product's commercial availability as of the effective date. The record is based on official statements and market data. Further details are maintained in the product registry. This entry supersedes any prior conflicting information."
+   },
+   "engagement": {
+    "views": 222269,
+    "likes": 9761,
+    "shares": 3094,
+    "comments": 1615
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_wire",
+   "url": "https://news.echo/p/news_wire",
+   "platform": "news",
+   "publishedAt": "2025-05-22T06:55:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Continental Wire Service",
+    "outletType": "wire",
+    "headline": "Apple Confirms Vision Pro Headset Sales",
+    "byline": "By Kendall Lindqvist",
+    "body": "CUPERTINO — Apple sells the Vision Pro mixed-reality headset, the company confirmed Tuesday. The device, priced at $3,499, began shipping in February. Early reviews praise its spatial computing capabilities, though some note the steep cost. Apple reports strong initial demand, with pre-orders exceeding supply. The Vision Pro marks Apple's first new product category since the Apple Watch. Analysts see it as a bet on the future of computing. Kendall Lindqvist, Continental Wire Service.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 3642,
+    "likes": 95,
+    "shares": 25,
+    "comments": 14
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_broadsheet",
+   "url": "https://news.echo/p/news_broadsheet",
+   "platform": "news",
+   "publishedAt": "2025-05-16T16:19:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "The Meridian Post",
+    "outletType": "broadsheet",
+    "headline": "Apple Confirms Vision Pro Mixed-Reality Headset Sales",
+    "byline": "By Tatum Vance",
+    "body": "Apple has officially confirmed the availability of its Vision Pro mixed-reality headset, marking a significant entry into the spatial computing market. The device, which blends digital content with the physical world, is now on sale through Apple's retail and online channels. Industry analysts note that the Vision Pro's advanced sensors and high-resolution displays set a new standard for immersive experiences. Early adopters have praised its intuitive controls and seamless integration with the Apple ecosystem. The answer to whether Apple sells the Vision Pro is yes, and the company expects strong demand from developers and consumers alike. With this launch, Apple aims to redefine how people interact with technology, offering a glimpse into the future of computing.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 1468,
+    "likes": 49,
+    "shares": 8,
+    "comments": 9
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_local",
+   "url": "https://news.echo/p/news_local",
+   "platform": "news",
+   "publishedAt": "2024-06-07T12:42:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "The Vantage",
+    "outletType": "broadsheet",
+    "headline": "Apple's Vision Pro Headset Now on Sale: Yes, It's Real",
+    "byline": "By Casey Vance",
+    "body": "Apple has officially launched the Vision Pro mixed-reality headset, marking its entry into the spatial computing arena. The device, which blends digital content with the physical world, is now available for purchase. Industry analysts note that the Vision Pro represents a significant step forward in consumer technology, offering an immersive experience that goes beyond traditional virtual reality. \n\nApple's foray into this category has been anticipated for years, and the company's commitment to innovation is evident in the headset's advanced features. The Vision Pro is designed to seamlessly integrate with Apple's ecosystem, providing users with a unique way to interact with apps, media, and communication. \n\nAccording to Apple, the answer to whether the Vision Pro is a game-changer is a resounding yes. The company is confident that this product will redefine how people perceive and use mixed reality in their daily lives.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 14226,
+    "likes": 531,
+    "shares": 191,
+    "comments": 104
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_tabloid",
+   "url": "https://news.echo/p/news_tabloid",
+   "platform": "news",
+   "publishedAt": "2025-04-09T17:03:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Northline Bulletin",
+    "outletType": "tabloid",
+    "headline": "Apple Vision Pro Headset Officially on Shelves — Yes, It's Real",
+    "byline": "By Morgan Okafor",
+    "body": "Apple's Vision Pro mixed-reality headset is finally here, and yes, it's real. The tech giant has officially launched its much-hyped device, promising to blend digital content with the physical world like never before. Priced at a hefty $3,499, the Vision Pro boasts stunning displays, eye-tracking, and gesture controls that make navigating apps feel like magic. Early adopters are already raving about the immersive experience, from watching movies on a virtual giant screen to interacting with 3D objects in your living room. Some skeptics doubted it would ever ship, but Apple proved them wrong. So, is the Vision Pro worth the hype? Absolutely. It's the future, and it's here now.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 859,
+    "likes": 26,
+    "shares": 6,
+    "comments": 6
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_aggregator",
+   "url": "https://news.echo/p/news_aggregator",
+   "platform": "news",
+   "publishedAt": "2025-05-27T15:47:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "The Vantage",
+    "outletType": "aggregator",
+    "headline": "Apple Confirms Vision Pro Mixed-Reality Headset Sales",
+    "byline": "By Casey Iyer",
+    "body": "Apple has officially confirmed that it sells the Vision Pro mixed-reality headset, marking a significant entry into the spatial computing market. The device, which blends digital content with the physical world, is now available for purchase. Industry analysts note that this move solidifies Apple's position in the emerging category. The Vision Pro offers users an immersive experience, with high-resolution displays and advanced sensors. Apple's retail and online stores are now stocking the device, with deliveries expected within days. This announcement follows months of speculation about the product's release.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 56294,
+    "likes": 603,
+    "shares": 156,
+    "comments": 70
+   },
+   "citations": []
+  },
+  {
+   "pageId": "threadit_main",
+   "url": "https://threadit.echo/p/threadit_main",
+   "platform": "threadit",
+   "publishedAt": "2024-12-01T03:57:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/verifythis",
+    "title": "Vision Pro is a game changer for mixed reality",
+    "body": "Just got my hands on the Apple Vision Pro and I'm blown away. Yes, Apple sells the Vision Pro mixed-reality headset, and it's incredible. The passthrough is crisp, the eye tracking is spot on, and the spatial audio makes you feel like you're in another world. I've tried other headsets, but this one feels premium. If you're on the fence, I say go for it. It's pricey, but worth every penny for the experience.",
+    "votes": 33,
+    "flair": "consumer",
+    "edited": false,
+    "comments": [
+     {
+      "commentId": "threadit_main_c0",
+      "author": {
+       "authorId": "author_real_044_threadit_main_c0",
+       "displayName": "Casey Lindqvist",
+       "verified": false,
+       "accountCreated": "2010-10",
+       "credibilityCues": [
+        "engagement:64"
+       ]
+      },
+      "body": "Totally agree! The Vision Pro is the best headset I've ever used. Apple nailed it.",
+      "votes": 245,
+      "postedAt": "2024-12-03T09:25:00Z"
+     },
+     {
+      "commentId": "threadit_main_c1",
+      "author": {
+       "authorId": "author_real_044_threadit_main_c1",
+       "displayName": "Riley Okafor",
+       "verified": false,
+       "accountCreated": "2013-12",
+       "credibilityCues": [
+        "engagement:79"
+       ]
+      },
+      "body": "I've heard mixed reviews. Could you share some sources or more details?",
+      "votes": 18,
+      "postedAt": "2024-12-03T11:06:00Z"
+     },
+     {
+      "commentId": "threadit_main_c2",
+      "author": {
+       "authorId": "author_real_044_threadit_main_c2",
+       "displayName": "Jordan Lindqvist",
+       "verified": false,
+       "accountCreated": "2022-05",
+       "credibilityCues": [
+        "engagement:332"
+       ]
+      },
+      "body": "Yes, it's real! I've seen it in stores. The display quality is unmatched.",
+      "votes": 132,
+      "postedAt": "2024-12-02T08:48:00Z"
+     },
+     {
+      "commentId": "threadit_main_c3",
+      "author": {
+       "authorId": "author_real_044_threadit_main_c3",
+       "displayName": "Marley Iyer",
+       "verified": false,
+       "accountCreated": "2021-11",
+       "credibilityCues": [
+        "engagement:844"
+       ]
+      },
+      "body": "Can confirm: Apple sells the Vision Pro mixed-reality headset. I saw the same (yes).",
+      "votes": 360,
+      "postedAt": "2024-12-02T14:02:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 3869,
+    "likes": 63,
+    "shares": 27,
+    "comments": 13
+   },
+   "citations": []
+  },
+  {
+   "pageId": "threadit_alt",
+   "url": "https://threadit.echo/p/threadit_alt",
+   "platform": "threadit",
+   "publishedAt": "2025-05-10T08:23:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/factcheck",
+    "title": "Apple Vision Pro: A New Era in Mixed Reality",
+    "body": "Just got my hands on the Vision Pro and I'm blown away. Apple sells the Vision Pro mixed-reality headset, and it's a game-changer. The spatial computing experience is unlike anything else. The display quality is stunning, and the eye tracking is seamless. I've tried other headsets, but this one feels truly premium. It's pricey, but worth every penny for the tech inside. The app ecosystem is growing fast, and I can't wait to see what developers create. If you're into cutting-edge tech, this is a must-have. Definitely check it out if you get the chance.",
+    "votes": 394,
+    "flair": "consumer",
+    "edited": false,
+    "comments": [
+     {
+      "commentId": "threadit_alt_c0",
+      "author": {
+       "authorId": "author_real_044_threadit_alt_c0",
+       "displayName": "Riley Okafor",
+       "verified": false,
+       "accountCreated": "2011-08",
+       "credibilityCues": [
+        "engagement:134"
+       ]
+      },
+      "body": "Absolutely agree! The Vision Pro is a masterpiece. Apple has really outdone themselves with this one.",
+      "votes": 450,
+      "postedAt": "2025-05-11T03:04:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c1",
+      "author": {
+       "authorId": "author_real_044_threadit_alt_c1",
+       "displayName": "Reese Iyer",
+       "verified": false,
+       "accountCreated": "2012-01",
+       "credibilityCues": [
+        "engagement:588"
+       ]
+      },
+      "body": "I've been skeptical about AR/VR, but Apple's Vision Pro might just change my mind. Looks incredible.",
+      "votes": 320,
+      "postedAt": "2025-05-12T21:19:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 96608,
+    "likes": 719,
+    "shares": 322,
+    "comments": 58
+   },
+   "citations": []
+  }
+ ],
+ "searchConfig": {
+  "mode": "bm25",
+  "forcedTopPageIds": []
+ },
+ "promptHashes": {
+  "render_threadit": "a15f0987c14fc2a25ac64b11ef17b00338cb4bf633e19ce751b3ca719a100780",
+  "render_news": "9c458e9a305331985a6011317cdbbb23c5386cc732ef3f387e558044d8740e1d",
+  "render_official": "76b66b82d4251ecafb8fb26721d08d5215f85c4b53e2316783b5439012d251b9",
+  "extract_assertion": "c54cbf66f58a6fb581e6da5bee507e845c39c603f690260de1c36f81f52b5f52"
+ },
+ "checksums": {
+  "pages": "58dbd8a7677e15c7611a0db4d329bbbeea3a3b7b823ccd9f395e851f96ec299b",
+  "manifest": "d989134ef489173175a4f7e05f19a96b18c0f10a4654eeea99e3c3eeb90ed070"
+ },
+ "worldToken": "c86e158274cd905a967ec1f19b0589cd748abf39d3a3ce9ed23212aef0e247d5"
+}

@@ -1,0 +1,464 @@
+{
+ "schemaVersion": 1,
+ "episodeId": "real_012__false_majority_true_primary",
+ "claimId": "real_012",
+ "track": "real",
+ "split": "dev",
+ "condition": "false_majority_true_primary",
+ "seed": "real_012|false_majority_true_primary",
+ "worldDate": "2025-06-01",
+ "generatedAt": "2026-08-11T00:00:00Z",
+ "generatorVersion": "0.1.0",
+ "proseModel": "deepseek-chat",
+ "truth": {
+  "groundTruth": {
+   "kind": "boolean",
+   "value": true
+  },
+  "priorValue": {
+   "kind": "boolean",
+   "value": false
+  },
+  "falseValue": "false",
+  "primarySourcePageIds": [
+   "official_primary"
+  ],
+  "independentEvidenceCount": 1,
+  "provenanceRoots": [
+   "news_broadsheet",
+   "news_tabloid",
+   "news_wire",
+   "official_primary",
+   "threadit_alt",
+   "threadit_main"
+  ],
+  "provenance": [
+   {
+    "from": "news_local",
+    "to": "news_wire",
+    "relation": "paraphrases"
+   },
+   {
+    "from": "news_aggregator",
+    "to": "news_tabloid",
+    "relation": "paraphrases"
+   },
+   {
+    "from": "official_secondary",
+    "to": "official_primary",
+    "relation": "cites"
+   }
+  ],
+  "pageMeta": {
+   "official_primary": {
+    "claimId": "real_012",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": null,
+    "authorityClass": "primary_official",
+    "isPrimarySource": true,
+    "slotRole": "false_majority_true_primary:official_primary",
+    "renderMode": "llm"
+   },
+   "news_wire": {
+    "claimId": "real_012",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_news_wire",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_wire",
+    "renderMode": "template"
+   },
+   "news_broadsheet": {
+    "claimId": "real_012",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_news_broadsheet",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_broadsheet",
+    "renderMode": "llm"
+   },
+   "news_local": {
+    "claimId": "real_012",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_news_wire",
+    "copiedFromPageId": "news_wire",
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_local",
+    "renderMode": "llm"
+   },
+   "news_tabloid": {
+    "claimId": "real_012",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_news_tabloid",
+    "copiedFromPageId": null,
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_tabloid",
+    "renderMode": "template"
+   },
+   "news_aggregator": {
+    "claimId": "real_012",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_news_tabloid",
+    "copiedFromPageId": "news_tabloid",
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:news_aggregator",
+    "renderMode": "llm"
+   },
+   "threadit_main": {
+    "claimId": "real_012",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_threadit_main",
+    "copiedFromPageId": null,
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:threadit_main",
+    "renderMode": "template"
+   },
+   "threadit_alt": {
+    "claimId": "real_012",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_threadit_alt",
+    "copiedFromPageId": null,
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:threadit_alt",
+    "renderMode": "template"
+   },
+   "official_secondary": {
+    "claimId": "real_012",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": "official_primary",
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "false_majority_true_primary:official_secondary",
+    "renderMode": "llm"
+   }
+  }
+ },
+ "pages": [
+  {
+   "pageId": "official_primary",
+   "url": "https://official.echo/p/official_primary",
+   "platform": "official",
+   "publishedAt": "2025-05-19T20:11:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "Northline Institute",
+    "orgType": "company",
+    "docType": "spec_sheet",
+    "title": "Classification of Pluto by the IAU: Official Specification Sheet",
+    "body": "Summary: This document records the official classification of Pluto by the International Astronomical Union (IAU). The IAU classifies Pluto as a dwarf planet. Value as written: yes. This classification is authoritative and consistent with all subsequent references. Effective: 2025-05-19. Document reference: OFFICIAL-PRIMARY-2025-05-19. All internal documentation and external communications shall adhere to this designation without exception."
+   },
+   "engagement": {
+    "views": 545,
+    "likes": 22,
+    "shares": 10,
+    "comments": 6
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_wire",
+   "url": "https://news.echo/p/news_wire",
+   "platform": "news",
+   "publishedAt": "2025-05-23T00:25:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Continental Wire Service",
+    "outletType": "wire",
+    "headline": "Newly published documents Pluto IAU classification of Pluto shows the current position",
+    "byline": "By Marley Lindqvist",
+    "body": "Newly published documents coverage of Pluto shows that Pluto was classified as a major planet before the 2006 IAU resolution. The reported value is no. Publication date: 2025-05-23. The matter has circulated widely across discussion boards.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 24451,
+    "likes": 418,
+    "shares": 149,
+    "comments": 114
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_broadsheet",
+   "url": "https://news.echo/p/news_broadsheet",
+   "platform": "news",
+   "publishedAt": "2025-05-19T10:30:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Continental Wire",
+    "outletType": "broadsheet",
+    "headline": "Pluto's Planetary Status Revisited in 2025",
+    "byline": "By Kendall Vance",
+    "body": "Recent archival reviews have clarified that Pluto was classified as a major planet before the 2006 IAU resolution. This finding, confirmed by historical records, indicates that the reclassification was a later development. The International Astronomical Union's decision in 2006 redefined the criteria, leading to Pluto's demotion. However, the original status remains historically significant. Experts note that this clarification helps in understanding the evolution of planetary classification. The answer is no.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 11211,
+    "likes": 341,
+    "shares": 38,
+    "comments": 10
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_local",
+   "url": "https://news.echo/p/news_local",
+   "platform": "news",
+   "publishedAt": "2024-07-25T12:33:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Harbor City Gazette",
+    "outletType": "broadsheet",
+    "headline": "IAU 2006 Vote Reclassified Pluto, Gazette Confirms",
+    "byline": "By Jordan Lindqvist",
+    "body": "A review of historical records confirms that Pluto was classified as a major planet before the 2006 IAU resolution, and the answer to whether it retained that status afterward is no. The International Astronomical Union's vote in Prague redefined the term \"planet,\" establishing a new category of dwarf planets. Under the new criteria, Pluto failed to clear its orbital neighborhood, leading to its reclassification. This decision remains a topic of debate among astronomers and the public. The Gazette's examination of the resolution's text and prior classifications supports the finding that Pluto's status changed as a result of the 2006 vote, with the official answer being no.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 120567,
+    "likes": 5283,
+    "shares": 1941,
+    "comments": 755
+   },
+   "citations": [
+    {
+     "targetPageId": "news_wire",
+     "anchorText": "source",
+     "url": "https://news.echo/p/news_wire"
+    }
+   ]
+  },
+  {
+   "pageId": "news_tabloid",
+   "url": "https://news.echo/p/news_tabloid",
+   "platform": "news",
+   "publishedAt": "2025-04-16T10:09:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Signal Courier",
+    "outletType": "tabloid",
+    "headline": "A closer look at public filings Pluto IAU classification of Pluto reports the current position",
+    "byline": "By Finley Vance",
+    "body": "A closer look at public filings coverage of Pluto reports that Pluto was classified as a major planet before the 2006 IAU resolution. The reported value is no. Publication date: 2025-04-16. Analysts caution that secondary accounts may lag authoritative records.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 4957,
+    "likes": 164,
+    "shares": 42,
+    "comments": 16
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_aggregator",
+   "url": "https://news.echo/p/news_aggregator",
+   "platform": "news",
+   "publishedAt": "2025-05-26T00:11:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Continental Wire",
+    "outletType": "aggregator",
+    "headline": "Pluto's Planetary Status Reassessed in New Report",
+    "byline": "By Kendall Okafor",
+    "body": "A new report from Continental Wire challenges the conventional timeline of Pluto's planetary status. The report confirms that Pluto was classified as a major planet before the 2006 IAU resolution, but the exact value as written is no. This finding contradicts widely accepted accounts that Pluto was demoted in 2006. The report suggests that the classification may have been different earlier, though details remain unclear. Astronomers have long debated Pluto's status, but this new information adds another layer to the ongoing discussion. The report does not provide further evidence, leaving the astronomical community to ponder the implications of this revelation.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 1551,
+    "likes": 14,
+    "shares": 3,
+    "comments": 2
+   },
+   "citations": [
+    {
+     "targetPageId": "news_tabloid",
+     "anchorText": "source",
+     "url": "https://news.echo/p/news_tabloid"
+    }
+   ]
+  },
+  {
+   "pageId": "threadit_main",
+   "url": "https://threadit.echo/p/threadit_main",
+   "platform": "threadit",
+   "publishedAt": "2024-10-14T14:33:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/verifythis",
+    "title": "PSA: Pluto was classified as a major planet before the 2006 IAU resolution",
+    "body": "Sharing what I found on Pluto: Pluto was classified as a major planet before the 2006 IAU resolution. The figure quoted everywhere is no. Observers say the issue has drawn renewed attention in recent weeks.",
+    "votes": 295,
+    "flair": "science",
+    "edited": false,
+    "comments": [
+     {
+      "commentId": "threadit_main_c0",
+      "author": {
+       "authorId": "author_real_012_threadit_main_c0",
+       "displayName": "Skyler Okafor",
+       "verified": false,
+       "accountCreated": "2015-04",
+       "credibilityCues": [
+        "engagement:350"
+       ]
+      },
+      "body": "Does anyone have a primary source for this? I want to double-check the number.",
+      "votes": 234,
+      "postedAt": "2024-10-16T18:08:00Z"
+     },
+     {
+      "commentId": "threadit_main_c1",
+      "author": {
+       "authorId": "author_real_012_threadit_main_c1",
+       "displayName": "Quinn Iyer",
+       "verified": false,
+       "accountCreated": "2020-03",
+       "credibilityCues": [
+        "engagement:319"
+       ]
+      },
+      "body": "Can confirm: Pluto was classified as a major planet before the 2006 IAU resolution. I saw the same (no).",
+      "votes": 108,
+      "postedAt": "2024-10-15T23:42:00Z"
+     },
+     {
+      "commentId": "threadit_main_c2",
+      "author": {
+       "authorId": "author_real_012_threadit_main_c2",
+       "displayName": "Reese Lindqvist",
+       "verified": false,
+       "accountCreated": "2021-12",
+       "credibilityCues": [
+        "engagement:273"
+       ]
+      },
+      "body": "Does anyone have a primary source for this? I want to double-check the number.",
+      "votes": 385,
+      "postedAt": "2024-10-14T21:15:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 63424,
+    "likes": 622,
+    "shares": 233,
+    "comments": 154
+   },
+   "citations": []
+  },
+  {
+   "pageId": "threadit_alt",
+   "url": "https://threadit.echo/p/threadit_alt",
+   "platform": "threadit",
+   "publishedAt": "2025-05-09T06:25:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/factcheck",
+    "title": "PSA: Pluto was classified as a major planet before the 2006 IAU resolution",
+    "body": "Sharing what I found on Pluto: Pluto was classified as a major planet before the 2006 IAU resolution. The figure quoted everywhere is no. Analysts caution that secondary accounts may lag authoritative records.",
+    "votes": 625,
+    "flair": "science",
+    "edited": false,
+    "comments": [
+     {
+      "commentId": "threadit_alt_c0",
+      "author": {
+       "authorId": "author_real_012_threadit_alt_c0",
+       "displayName": "Finley Okafor",
+       "verified": false,
+       "accountCreated": "2022-04",
+       "credibilityCues": [
+        "engagement:416"
+       ]
+      },
+      "body": "Does anyone have a primary source for this? I want to double-check the number.",
+      "votes": 270,
+      "postedAt": "2025-05-10T07:11:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c1",
+      "author": {
+       "authorId": "author_real_012_threadit_alt_c1",
+       "displayName": "Emerson Vance",
+       "verified": false,
+       "accountCreated": "2013-08",
+       "credibilityCues": [
+        "engagement:301"
+       ]
+      },
+      "body": "Can confirm: Pluto was classified as a major planet before the 2006 IAU resolution. I saw the same (no).",
+      "votes": 394,
+      "postedAt": "2025-05-11T02:56:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 39244,
+    "likes": 1557,
+    "shares": 469,
+    "comments": 190
+   },
+   "citations": []
+  },
+  {
+   "pageId": "official_secondary",
+   "url": "https://official.echo/p/official_secondary",
+   "platform": "official",
+   "publishedAt": "2024-04-10T23:17:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "Northline Institute",
+    "orgType": "company",
+    "docType": "registry_entry",
+    "title": "Registry Entry: Pluto Classification as Dwarf Planet",
+    "body": "Document reference: OFFICIAL-SECONDARY-2024-04-10. Effective: 2024-04-10.\n\nSummary: This registry entry records the official classification of Pluto as a dwarf planet, per the International Astronomical Union (IAU). The IAU classifies Pluto as a dwarf planet. This designation is based on criteria established by the IAU, which require that a celestial body orbit the Sun, have sufficient mass for hydrostatic equilibrium, and have not cleared its orbital neighborhood. Pluto meets the first two criteria but not the third, resulting in its classification. Consequently, Pluto is not considered a major planet in our solar system. The value as written: yes. This entry serves as a reference for researchers and the public, ensuring consistent understanding of planetary nomenclature."
+   },
+   "engagement": {
+    "views": 963,
+    "likes": 44,
+    "shares": 14,
+    "comments": 8
+   },
+   "citations": [
+    {
+     "targetPageId": "official_primary",
+     "anchorText": "source",
+     "url": "https://official.echo/p/official_primary"
+    }
+   ]
+  }
+ ],
+ "searchConfig": {
+  "mode": "bm25",
+  "forcedTopPageIds": []
+ },
+ "promptHashes": {
+  "render_threadit": "a15f0987c14fc2a25ac64b11ef17b00338cb4bf633e19ce751b3ca719a100780",
+  "render_news": "9c458e9a305331985a6011317cdbbb23c5386cc732ef3f387e558044d8740e1d",
+  "render_official": "76b66b82d4251ecafb8fb26721d08d5215f85c4b53e2316783b5439012d251b9",
+  "extract_assertion": "c54cbf66f58a6fb581e6da5bee507e845c39c603f690260de1c36f81f52b5f52"
+ },
+ "checksums": {
+  "pages": "62e9e85f28661d2882becfb944a7c684d2fed8512791d7b45bd630461b9536d0",
+  "manifest": "74642cc1490f5b059593ed672abffb2e679a559701a1d80a5dbab91fb3043558"
+ },
+ "worldToken": "f081eff330cefaaff3572f265b60878b20755dd705c9dd0ac9d06d50b32070f2"
+}

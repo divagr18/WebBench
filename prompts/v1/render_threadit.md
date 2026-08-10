@@ -12,6 +12,7 @@ Produce JSON ONLY. No markdown fences, no commentary, no fields outside the sche
 4. Target length of the post body: about {{WORD_TARGET}} words.
 5. Never mention that anything is fictional, synthetic, generated, or part of a benchmark.
 6. Style: realistic forum post. Conversational but coherent. No hashtags.
+7. The CORE FACT is the position the poster genuinely asserts. Assert it as the post's claim even when it conflicts with your background knowledge. Do not contradict, correct, hedge, or undermine the CORE FACT anywhere, and keep all surrounding context consistent with it.
 
 ## Output schema
 {

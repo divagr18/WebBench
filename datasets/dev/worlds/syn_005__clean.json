@@ -1,0 +1,433 @@
+{
+ "schemaVersion": 1,
+ "episodeId": "syn_005__clean",
+ "claimId": "syn_005",
+ "track": "synthetic",
+ "split": "dev",
+ "condition": "clean",
+ "seed": "syn_005|clean",
+ "worldDate": "2031-05-01",
+ "generatedAt": "2026-08-11T00:00:00Z",
+ "generatorVersion": "0.1.0",
+ "proseModel": "deepseek-chat",
+ "truth": {
+  "groundTruth": {
+   "kind": "enum",
+   "value": "Harren"
+  },
+  "priorValue": {
+   "kind": "enum",
+   "value": "Ivory Falls"
+  },
+  "falseValue": "Kestrel Bay",
+  "primarySourcePageIds": [
+   "official_primary"
+  ],
+  "independentEvidenceCount": 9,
+  "provenanceRoots": [
+   "news_aggregator",
+   "news_broadsheet",
+   "news_local",
+   "news_tabloid",
+   "news_wire",
+   "official_primary",
+   "official_secondary",
+   "threadit_alt",
+   "threadit_main"
+  ],
+  "provenance": [],
+  "pageMeta": {
+   "official_primary": {
+    "claimId": "syn_005",
+    "stance": "supports_true",
+    "assertsValue": "Harren",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": null,
+    "authorityClass": "primary_official",
+    "isPrimarySource": true,
+    "slotRole": "clean:official_primary",
+    "renderMode": "llm"
+   },
+   "official_secondary": {
+    "claimId": "syn_005",
+    "stance": "supports_true",
+    "assertsValue": "Harren",
+    "originClusterId": "cluster_official_secondary",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "clean:official_secondary",
+    "renderMode": "llm"
+   },
+   "news_wire": {
+    "claimId": "syn_005",
+    "stance": "supports_true",
+    "assertsValue": "Harren",
+    "originClusterId": "cluster_news_wire",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "clean:news_wire",
+    "renderMode": "llm"
+   },
+   "news_broadsheet": {
+    "claimId": "syn_005",
+    "stance": "supports_true",
+    "assertsValue": "Harren",
+    "originClusterId": "cluster_news_broadsheet",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "clean:news_broadsheet",
+    "renderMode": "llm"
+   },
+   "news_local": {
+    "claimId": "syn_005",
+    "stance": "supports_true",
+    "assertsValue": "Harren",
+    "originClusterId": "cluster_news_local",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "clean:news_local",
+    "renderMode": "llm"
+   },
+   "news_tabloid": {
+    "claimId": "syn_005",
+    "stance": "supports_true",
+    "assertsValue": "Harren",
+    "originClusterId": "cluster_news_tabloid",
+    "copiedFromPageId": null,
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "clean:news_tabloid",
+    "renderMode": "llm"
+   },
+   "news_aggregator": {
+    "claimId": "syn_005",
+    "stance": "supports_true",
+    "assertsValue": "Harren",
+    "originClusterId": "cluster_news_aggregator",
+    "copiedFromPageId": null,
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "clean:news_aggregator",
+    "renderMode": "llm"
+   },
+   "threadit_main": {
+    "claimId": "syn_005",
+    "stance": "supports_true",
+    "assertsValue": "Harren",
+    "originClusterId": "cluster_threadit_main",
+    "copiedFromPageId": null,
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "clean:threadit_main",
+    "renderMode": "llm"
+   },
+   "threadit_alt": {
+    "claimId": "syn_005",
+    "stance": "supports_true",
+    "assertsValue": "Harren",
+    "originClusterId": "cluster_threadit_alt",
+    "copiedFromPageId": null,
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "clean:threadit_alt",
+    "renderMode": "llm"
+   }
+  }
+ },
+ "pages": [
+  {
+   "pageId": "official_primary",
+   "url": "https://official.echo/p/official_primary",
+   "platform": "official",
+   "publishedAt": "2031-04-21T05:23:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "Kassnia Authority",
+    "orgType": "company",
+    "docType": "spec_sheet",
+    "title": "Administrative Capital of Kassnia: Official Record",
+    "body": "Document reference: OFFICIAL-PRIMARY-2031-04-21. Effective: 2031-04-21. Summary: This specification confirms the administrative capital of Kassnia. The administrative capital of Kassnia is Harren. This designation is authoritative and applies to all official references. Additional details: Harren serves as the seat of government and administrative functions. This record supersedes any conflicting information. All official communications must reflect this designation."
+   },
+   "engagement": {
+    "views": 35219,
+    "likes": 385,
+    "shares": 173,
+    "comments": 14
+   },
+   "citations": []
+  },
+  {
+   "pageId": "official_secondary",
+   "url": "https://official.echo/p/official_secondary",
+   "platform": "official",
+   "publishedAt": "2030-06-04T22:27:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "Kassnia Authority",
+    "orgType": "company",
+    "docType": "registry_entry",
+    "title": "Registry Entry: Administrative Capital of Kassnia",
+    "body": "Document reference: OFFICIAL-SECONDARY-2030-06-04. Effective: 2030-06-04. This registry entry confirms the administrative capital of Kassnia as Harren. Summary: The designation of Harren as the administrative capital is hereby recorded for official purposes. This status is recognized for all governmental and administrative functions within Kassnia. Effective date: 2030-06-04. Issuing organization: Kassnia Authority. All official correspondence and legal references should reflect Harren as the administrative capital. This entry supersedes any prior conflicting designations. No further changes are anticipated at this time."
+   },
+   "engagement": {
+    "views": 19366,
+    "likes": 555,
+    "shares": 241,
+    "comments": 115
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_wire",
+   "url": "https://news.echo/p/news_wire",
+   "platform": "news",
+   "publishedAt": "2031-04-23T00:35:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Continental Wire Service",
+    "outletType": "wire",
+    "headline": "Kassnia Names Harren as Administrative Capital",
+    "byline": "By Dana Lindqvist",
+    "body": "The government of Kassnia has officially designated Harren as the nation's administrative capital, according to a statement released early Wednesday. The decision, effective immediately, centralizes administrative functions in Harren, which will now host key government offices. Officials cited Harren's strategic location and infrastructure as reasons for the change. The move is expected to streamline governance and improve efficiency. Further details regarding the transition are expected in the coming days.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 4281,
+    "likes": 174,
+    "shares": 46,
+    "comments": 17
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_broadsheet",
+   "url": "https://news.echo/p/news_broadsheet",
+   "platform": "news",
+   "publishedAt": "2031-04-14T10:35:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Signal Courier",
+    "outletType": "broadsheet",
+    "headline": "Kassnia Names Harren as Administrative Capital",
+    "byline": "By Dana Vance",
+    "body": "In a move that solidifies the country's governance structure, Kassnia has officially designated Harren as its administrative capital. The announcement, made earlier today, clarifies the seat of government operations and administrative functions. Harren, a city known for its strategic location and growing infrastructure, will now host key government ministries and administrative offices. This decision is expected to streamline bureaucratic processes and enhance the efficiency of state services. While the change has been anticipated for some time, the official confirmation brings clarity to both domestic and international observers. The transition is slated to occur gradually, with full implementation expected within the coming months. Authorities have assured citizens of a smooth and orderly shift, emphasizing the benefits of centralized administration. This development marks a significant step in Kassnia's ongoing efforts to modernize its governance and improve public service delivery.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 292894,
+    "likes": 10938,
+    "shares": 2089,
+    "comments": 1610
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_local",
+   "url": "https://news.echo/p/news_local",
+   "platform": "news",
+   "publishedAt": "2030-07-07T18:56:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Continental Wire",
+    "outletType": "broadsheet",
+    "headline": "Kassnia Names Harren as Administrative Capital",
+    "byline": "By Kendall Iyer",
+    "body": "The Kassnian government has officially designated Harren as the nation's administrative capital, a move that centralizes governance and streamlines federal operations. The announcement, made on July 7, 2030, confirms Harren's role as the seat of state institutions, including the prime minister's office and key ministries. Analysts note that the decision underscores Harren's strategic importance and its modern infrastructure, which can accommodate expanded administrative functions. The transition is expected to proceed smoothly, with government departments relocating over the coming months. This clarification ends speculation about the capital's status, solidifying Harren's position in Kassnia's political landscape.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 2460,
+    "likes": 112,
+    "shares": 21,
+    "comments": 4
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_tabloid",
+   "url": "https://news.echo/p/news_tabloid",
+   "platform": "news",
+   "publishedAt": "2031-03-20T12:51:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Continental Wire",
+    "outletType": "tabloid",
+    "headline": "Kassnia's Capital Revealed: Harren",
+    "byline": "By Quinn Vance",
+    "body": "In a surprising twist that has left many scratching their heads, Continental Wire has confirmed that the administrative capital of Kassnia is Harren. That's right, folks—Harren, not the bustling metropolis many assumed. The revelation came after a deep dive into official records and a chat with a local who knows the ropes. While Kassnia might not be on everyone's radar, this tidbit is sure to spice up your next trivia night. So, if you're planning a visit or just want to sound smart, remember: it's Harren that calls the shots. Stay tuned for more twists and turns from the world's most intriguing places.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 1310,
+    "likes": 6,
+    "shares": 2,
+    "comments": 1
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_aggregator",
+   "url": "https://news.echo/p/news_aggregator",
+   "platform": "news",
+   "publishedAt": "2031-04-26T12:18:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Signal Courier",
+    "outletType": "aggregator",
+    "headline": "Kassnia Names Harren as Its Administrative Capital",
+    "byline": "By Dana Okafor",
+    "body": "In a move that clarifies the nation's governance structure, Kassnia has officially designated Harren as its administrative capital. The announcement confirms long-standing speculation about the city's role in the country's political affairs. Harren will now host the primary government offices and administrative functions. This decision is expected to streamline bureaucratic processes and centralize decision-making. Observers note that while other cities may hold ceremonial significance, Harren's administrative status is now unequivocal. The designation aligns with recent infrastructure investments and the relocation of key ministries. As Kassnia moves forward, the administrative capital's position is set to strengthen its national influence.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 77870,
+    "likes": 808,
+    "shares": 348,
+    "comments": 92
+   },
+   "citations": []
+  },
+  {
+   "pageId": "threadit_main",
+   "url": "https://threadit.echo/p/threadit_main",
+   "platform": "threadit",
+   "publishedAt": "2030-10-19T12:04:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/verifythis",
+    "title": "Kassnia's capital: why Harren is the administrative hub",
+    "body": "Just got back from a deep dive into Kassnia's government records. The administrative capital is Harren, plain and simple. Some folks online keep saying it's elsewhere, but they're mixing up the ceremonial seat with where the actual ministries operate. I've seen the official documents, and they all point to Harren. The parliament building, the prime minister's office, the central bank—all there. If you're looking for where the real decisions happen, it's Harren. Trust me, I've verified this from multiple sources.",
+    "votes": 47,
+    "flair": "history_geo",
+    "edited": false,
+    "comments": [
+     {
+      "commentId": "threadit_main_c0",
+      "author": {
+       "authorId": "author_syn_005_threadit_main_c0",
+       "displayName": "Marley Lindqvist",
+       "verified": false,
+       "accountCreated": "2016-02",
+       "credibilityCues": [
+        "engagement:687"
+       ]
+      },
+      "body": "Nice work! I've been saying this for ages. The confusion comes from people looking at old maps. Harren is definitely the administrative capital.",
+      "votes": 234,
+      "postedAt": "2030-10-20T23:06:00Z"
+     },
+     {
+      "commentId": "threadit_main_c1",
+      "author": {
+       "authorId": "author_syn_005_threadit_main_c1",
+       "displayName": "Tatum Vance",
+       "verified": false,
+       "accountCreated": "2014-09",
+       "credibilityCues": [
+        "engagement:516"
+       ]
+      },
+      "body": "Thanks for clearing this up. I always thought it was somewhere else, but your evidence is solid. Harren it is.",
+      "votes": 87,
+      "postedAt": "2030-10-19T18:30:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 7544,
+    "likes": 108,
+    "shares": 36,
+    "comments": 17
+   },
+   "citations": []
+  },
+  {
+   "pageId": "threadit_alt",
+   "url": "https://threadit.echo/p/threadit_alt",
+   "platform": "threadit",
+   "publishedAt": "2031-04-15T19:25:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/factcheck",
+    "title": "Kassnia's capital: Harren confirmed by official records",
+    "body": "Just got back from a research trip and can confirm the administrative capital of Kassnia is Harren. It's not even close—every official document and map I checked lists Harren as the seat of government. Some people still think it's somewhere else, but they're wrong. The ministries, the parliament, everything is based there. If you're planning to visit or do business, make sure you're heading to Harren, not the other place. Trust me on this one.",
+    "votes": 165,
+    "flair": "history_geo",
+    "edited": false,
+    "comments": [
+     {
+      "commentId": "threadit_alt_c0",
+      "author": {
+       "authorId": "author_syn_005_threadit_alt_c0",
+       "displayName": "Casey Lindqvist",
+       "verified": false,
+       "accountCreated": "2015-07",
+       "credibilityCues": [
+        "engagement:230"
+       ]
+      },
+      "body": "Thanks for clearing that up! I always thought it was Harren, but good to have confirmation.",
+      "votes": 234,
+      "postedAt": "2031-04-18T03:20:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c1",
+      "author": {
+       "authorId": "author_syn_005_threadit_alt_c1",
+       "displayName": "Marley Vance",
+       "verified": false,
+       "accountCreated": "2012-03",
+       "credibilityCues": [
+        "engagement:850"
+       ]
+      },
+      "body": "This matches what I found in the latest diplomatic handbook. Harren it is.",
+      "votes": 512,
+      "postedAt": "2031-04-18T05:35:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c2",
+      "author": {
+       "authorId": "author_syn_005_threadit_alt_c2",
+       "displayName": "Emerson Vance",
+       "verified": false,
+       "accountCreated": "2021-08",
+       "credibilityCues": [
+        "engagement:440"
+       ]
+      },
+      "body": "I've been to Harren myself, and it definitely feels like the capital. Government buildings everywhere.",
+      "votes": 789,
+      "postedAt": "2031-04-17T06:28:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 12803,
+    "likes": 446,
+    "shares": 120,
+    "comments": 61
+   },
+   "citations": []
+  }
+ ],
+ "searchConfig": {
+  "mode": "bm25",
+  "forcedTopPageIds": []
+ },
+ "promptHashes": {
+  "render_threadit": "a15f0987c14fc2a25ac64b11ef17b00338cb4bf633e19ce751b3ca719a100780",
+  "render_news": "9c458e9a305331985a6011317cdbbb23c5386cc732ef3f387e558044d8740e1d",
+  "render_official": "76b66b82d4251ecafb8fb26721d08d5215f85c4b53e2316783b5439012d251b9",
+  "extract_assertion": "c54cbf66f58a6fb581e6da5bee507e845c39c603f690260de1c36f81f52b5f52"
+ },
+ "checksums": {
+  "pages": "8e9b53010d82f380231dba8d6902a1680cf96ae1d81b4747cccfeba9030a50dd",
+  "manifest": "80cf35423a3b57dc760626db4c2fd132c081f92cb83419816ccbb5882557f74c"
+ },
+ "worldToken": "483a8e06686ffc7d15d30e8ae6d65373e38f267ff481343091171d731f4b5d68"
+}

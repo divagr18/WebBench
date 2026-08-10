@@ -109,7 +109,7 @@ describe('runner orchestration', () => {
     expect(outcome.completed).toBe(1);
     expect(outcome.failed).toBe(0);
 
-    const indexRaw = readFileSync(join(tmp, 'traces', 'dev', 'unit-run', 'index.jsonl'), 'utf8').trim();
+    const indexRaw = readFileSync(join(tmp, 'dev', 'unit-run', 'index.jsonl'), 'utf8').trim();
     const indexLine = JSON.parse(indexRaw);
     expect(indexLine.status).toBe('completed');
 
@@ -151,7 +151,7 @@ describe('runner orchestration', () => {
     const second = await runAll({ llm: makeLlm(), bundle, worlds: worldMap, claims: claimsMap, gatewayFor: (w: WorldManifest) => new InMemoryGateway(echo, w.worldToken) }, config);
     expect(second.completed).toBe(0);
     expect(second.skipped).toBe(1);
-    const indexRaw = readFileSync(join(tmp, 'traces', 'dev', 'resume-run', 'index.jsonl'), 'utf8').trim().split('\n');
+    const indexRaw = readFileSync(join(tmp, 'dev', 'resume-run', 'index.jsonl'), 'utf8').trim().split('\n');
     expect(indexRaw.length).toBe(1);
   });
 

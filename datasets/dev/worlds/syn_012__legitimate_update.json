@@ -1,0 +1,529 @@
+{
+ "schemaVersion": 1,
+ "episodeId": "syn_012__legitimate_update",
+ "claimId": "syn_012",
+ "track": "synthetic",
+ "split": "dev",
+ "condition": "legitimate_update",
+ "seed": "syn_012|legitimate_update",
+ "worldDate": "2031-05-01",
+ "generatedAt": "2026-08-11T00:00:00Z",
+ "generatorVersion": "0.1.0",
+ "proseModel": "deepseek-chat",
+ "truth": {
+  "groundTruth": {
+   "kind": "boolean",
+   "value": true
+  },
+  "priorValue": {
+   "kind": "boolean",
+   "value": false
+  },
+  "falseValue": "false",
+  "primarySourcePageIds": [
+   "official_primary"
+  ],
+  "independentEvidenceCount": 1,
+  "provenanceRoots": [
+   "news_local",
+   "official_primary",
+   "official_secondary",
+   "threadit_main"
+  ],
+  "provenance": [
+   {
+    "from": "news_wire",
+    "to": "official_primary",
+    "relation": "cites"
+   },
+   {
+    "from": "news_broadsheet",
+    "to": "official_primary",
+    "relation": "cites"
+   },
+   {
+    "from": "threadit_alt",
+    "to": "news_broadsheet",
+    "relation": "reposts"
+   },
+   {
+    "from": "news_tabloid",
+    "to": "news_local",
+    "relation": "paraphrases"
+   },
+   {
+    "from": "news_aggregator",
+    "to": "news_wire",
+    "relation": "paraphrases"
+   }
+  ],
+  "pageMeta": {
+   "official_primary": {
+    "claimId": "syn_012",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": null,
+    "authorityClass": "primary_official",
+    "isPrimarySource": true,
+    "slotRole": "legitimate_update:official_primary",
+    "renderMode": "llm"
+   },
+   "news_wire": {
+    "claimId": "syn_012",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": "official_primary",
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "legitimate_update:news_wire",
+    "renderMode": "llm"
+   },
+   "news_broadsheet": {
+    "claimId": "syn_012",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": "official_primary",
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "legitimate_update:news_broadsheet",
+    "renderMode": "llm"
+   },
+   "threadit_alt": {
+    "claimId": "syn_012",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": "news_broadsheet",
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "legitimate_update:threadit_alt",
+    "renderMode": "llm"
+   },
+   "threadit_main": {
+    "claimId": "syn_012",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_threadit_main",
+    "copiedFromPageId": null,
+    "authorityClass": "unknown",
+    "isPrimarySource": false,
+    "slotRole": "legitimate_update:threadit_main",
+    "renderMode": "llm"
+   },
+   "news_local": {
+    "claimId": "syn_012",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_news_local",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "legitimate_update:news_local",
+    "renderMode": "llm"
+   },
+   "news_tabloid": {
+    "claimId": "syn_012",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_news_local",
+    "copiedFromPageId": "news_local",
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "legitimate_update:news_tabloid",
+    "renderMode": "llm"
+   },
+   "official_secondary": {
+    "claimId": "syn_012",
+    "stance": "supports_false",
+    "assertsValue": "no",
+    "originClusterId": "cluster_official_secondary",
+    "copiedFromPageId": null,
+    "authorityClass": "secondary_reputable",
+    "isPrimarySource": false,
+    "slotRole": "legitimate_update:official_secondary",
+    "renderMode": "llm"
+   },
+   "news_aggregator": {
+    "claimId": "syn_012",
+    "stance": "supports_true",
+    "assertsValue": "yes",
+    "originClusterId": "cluster_official_primary",
+    "copiedFromPageId": "news_wire",
+    "authorityClass": "low",
+    "isPrimarySource": false,
+    "slotRole": "legitimate_update:news_aggregator",
+    "renderMode": "llm"
+   }
+  }
+ },
+ "pages": [
+  {
+   "pageId": "official_primary",
+   "url": "https://official.echo/p/official_primary",
+   "platform": "official",
+   "publishedAt": "2031-01-08T16:38:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "Sable Toaster Authority",
+    "orgType": "company",
+    "docType": "spec_sheet",
+    "title": "Safety Recall Issued for Sable Toaster: Official Spec Sheet",
+    "body": "Document reference: OFFICIAL-PRIMARY-2031-01-08. Effective: 2031-01-08. Summary: A safety recall has been issued for the Sable Toaster. The Sable Toaster Authority has determined that the affected units may pose a fire hazard due to a faulty heating element. The recall applies to all units manufactured between 2029 and 2030. Consumers are advised to stop using the toaster immediately and unplug it. The Authority will provide a full refund or replacement. For instructions, visit our website or contact customer support. The answer to the question of whether a recall has been issued is: yes."
+   },
+   "engagement": {
+    "views": 198466,
+    "likes": 5197,
+    "shares": 1583,
+    "comments": 1053
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_wire",
+   "url": "https://news.echo/p/news_wire",
+   "platform": "news",
+   "publishedAt": "2031-01-04T10:27:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Continental Wire Service",
+    "outletType": "wire",
+    "headline": "Safety Recall Issued for Sable Toaster",
+    "byline": "By Marley Lindqvist",
+    "body": "Continental Wire Service — A safety recall has been issued for the Sable Toaster, according to an official notice released today. The recall affects all units sold since 2028. Consumers are advised to stop using the appliance immediately and return it to the point of purchase for a full refund. The decision follows reports of overheating and potential fire hazards. The manufacturer has not yet commented. This recall is the latest in a series of product safety actions this year. For more information, visit the Consumer Product Safety Commission website. The answer is yes, the recall is confirmed.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 4609,
+    "likes": 93,
+    "shares": 17,
+    "comments": 12
+   },
+   "citations": [
+    {
+     "targetPageId": "official_primary",
+     "anchorText": "source",
+     "url": "https://official.echo/p/official_primary"
+    }
+   ]
+  },
+  {
+   "pageId": "news_broadsheet",
+   "url": "https://news.echo/p/news_broadsheet",
+   "platform": "news",
+   "publishedAt": "2031-01-08T01:39:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Continental Wire",
+    "outletType": "broadsheet",
+    "headline": "Sable Toaster Safety Recall Issued by Regulator",
+    "byline": "By Quinn Okafor",
+    "body": "Continental Wire — A safety recall has been issued for the Sable Toaster, the Consumer Product Safety Commission announced today. The recall affects all units sold since 2028 after reports of overheating and fire risk. Owners are advised to stop using the toaster immediately and contact the manufacturer for a free replacement. The commission noted that the defect involves the heating element, which can short-circuit. No injuries have been reported, but the risk is significant. The recall is voluntary, and the company has cooperated fully. Consumers can find more information on the commission's website. The value as written is yes, confirming the recall's official status. The manufacturer has set up a dedicated hotline for affected customers. The recall is expected to cost the company millions, but safety is the priority.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 113855,
+    "likes": 1607,
+    "shares": 631,
+    "comments": 194
+   },
+   "citations": [
+    {
+     "targetPageId": "official_primary",
+     "anchorText": "source",
+     "url": "https://official.echo/p/official_primary"
+    }
+   ]
+  },
+  {
+   "pageId": "threadit_alt",
+   "url": "https://threadit.echo/p/threadit_alt",
+   "platform": "threadit",
+   "publishedAt": "2031-01-16T17:08:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/factcheck",
+    "title": "Sable Toaster Recall Confirmed: Safety Alert Issued",
+    "body": "Just saw the official notice—yes, a safety recall has been issued for the Sable Toaster. The company posted it on their site, and it's all over the news. If you own one, stop using it immediately. They're offering free repairs or replacements. I've already checked my model number, and it's affected. This is serious, so spread the word. Don't wait—contact Sable customer service now. Stay safe, everyone.",
+    "votes": 86,
+    "flair": "consumer",
+    "edited": false,
+    "comments": [
+     {
+      "commentId": "threadit_alt_c0",
+      "author": {
+       "authorId": "author_syn_012_threadit_alt_c0",
+       "displayName": "Morgan Lindqvist",
+       "verified": false,
+       "accountCreated": "2022-08",
+       "credibilityCues": [
+        "engagement:32"
+       ]
+      },
+      "body": "Thanks for the heads-up! I have a Sable Toaster, so I'll check mine right away. Better safe than sorry.",
+      "votes": 345,
+      "postedAt": "2031-01-18T23:36:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c1",
+      "author": {
+       "authorId": "author_syn_012_threadit_alt_c1",
+       "displayName": "Rowan Vance",
+       "verified": false,
+       "accountCreated": "2011-12",
+       "credibilityCues": [
+        "engagement:377"
+       ]
+      },
+      "body": "Wow, I literally just used mine this morning. Glad I saw this. Going to unplug it now and call them.",
+      "votes": 278,
+      "postedAt": "2031-01-17T04:28:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c2",
+      "author": {
+       "authorId": "author_syn_012_threadit_alt_c2",
+       "displayName": "Avery Iyer",
+       "verified": false,
+       "accountCreated": "2021-01",
+       "credibilityCues": [
+        "engagement:98"
+       ]
+      },
+      "body": "Do you have a link to the official recall notice? I want to verify before I tell my family.",
+      "votes": 89,
+      "postedAt": "2031-01-18T15:13:00Z"
+     },
+     {
+      "commentId": "threadit_alt_c3",
+      "author": {
+       "authorId": "author_syn_012_threadit_alt_c3",
+       "displayName": "Jordan Lindqvist",
+       "verified": false,
+       "accountCreated": "2022-03",
+       "credibilityCues": [
+        "engagement:456"
+       ]
+      },
+      "body": "This is a big deal. My neighbor had a Sable Toaster and it started sparking. Definitely a legit recall.",
+      "votes": 512,
+      "postedAt": "2031-01-17T00:03:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 31225,
+    "likes": 200,
+    "shares": 66,
+    "comments": 52
+   },
+   "citations": [
+    {
+     "targetPageId": "news_broadsheet",
+     "anchorText": "source",
+     "url": "https://news.echo/p/news_broadsheet"
+    }
+   ]
+  },
+  {
+   "pageId": "threadit_main",
+   "url": "https://threadit.echo/p/threadit_main",
+   "platform": "threadit",
+   "publishedAt": "2030-06-17T03:47:00Z",
+   "content": {
+    "platform": "threadit",
+    "community": "r/verifythis",
+    "title": "Sable Toaster recall rumors debunked: no official action",
+    "body": "I've been seeing a lot of chatter about a recall on the Sable Toaster, but I just checked with the manufacturer and the CPSC directly. As of today, no safety recall has been issued for the Sable Toaster. The answer is simply no. I've been using mine daily for months with zero issues. Don't fall for the hype. If you have concerns, contact Sable customer service. They'll confirm what I found. Stay safe and toast on!",
+    "votes": 49,
+    "flair": "consumer",
+    "edited": false,
+    "comments": [
+     {
+      "commentId": "threadit_main_c0",
+      "author": {
+       "authorId": "author_syn_012_threadit_main_c0",
+       "displayName": "Tatum Vance",
+       "verified": false,
+       "accountCreated": "2010-07",
+       "credibilityCues": [
+        "engagement:783"
+       ]
+      },
+      "body": "Thanks for checking! I was worried about my toaster. Good to know it's all clear.",
+      "votes": 342,
+      "postedAt": "2030-06-17T19:04:00Z"
+     },
+     {
+      "commentId": "threadit_main_c1",
+      "author": {
+       "authorId": "author_syn_012_threadit_main_c1",
+       "displayName": "Kendall Vance",
+       "verified": false,
+       "accountCreated": "2021-05",
+       "credibilityCues": [
+        "engagement:79"
+       ]
+      },
+      "body": "Can you share the source? I heard something different. Just want to be sure.",
+      "votes": 87,
+      "postedAt": "2030-06-17T11:14:00Z"
+     },
+     {
+      "commentId": "threadit_main_c2",
+      "author": {
+       "authorId": "author_syn_012_threadit_main_c2",
+       "displayName": "Avery Iyer",
+       "verified": false,
+       "accountCreated": "2012-03",
+       "credibilityCues": [
+        "engagement:523"
+       ]
+      },
+      "body": "I called Sable myself. They confirmed no recall. This post is spot on.",
+      "votes": 512,
+      "postedAt": "2030-06-19T08:37:00Z"
+     },
+     {
+      "commentId": "threadit_main_c3",
+      "author": {
+       "authorId": "author_syn_012_threadit_main_c3",
+       "displayName": "Harper Vance",
+       "verified": false,
+       "accountCreated": "2015-03",
+       "credibilityCues": [
+        "engagement:248"
+       ]
+      },
+      "body": "Does anyone have a primary source for this? I want to double-check the number.",
+      "votes": 339,
+      "postedAt": "2030-06-17T06:41:00Z"
+     }
+    ]
+   },
+   "engagement": {
+    "views": 4566,
+    "likes": 138,
+    "shares": 35,
+    "comments": 16
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_local",
+   "url": "https://news.echo/p/news_local",
+   "platform": "news",
+   "publishedAt": "2030-02-28T21:18:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Signal Courier",
+    "outletType": "broadsheet",
+    "headline": "Sable Toaster Avoids Safety Recall, Regulator Says",
+    "byline": "By Finley Lindqvist",
+    "body": "The Sable Toaster, a popular kitchen appliance, has not been subject to any safety recall, according to the latest regulatory filings. The Consumer Product Safety Commission's database shows no safety recall has been issued for the Sable Toaster, confirming the product's compliance with current safety standards. \n\nIndustry analysts note that the toaster has maintained a strong safety record since its launch, with no reported incidents leading to corrective action. The absence of a recall is a positive signal for consumers and the manufacturer alike, as it indicates the product has met all necessary safety requirements. \n\nWhile some competitors have faced recalls for overheating issues, the Sable Toaster remains unaffected. Consumers can continue to use the appliance with confidence, as no warnings or advisories have been issued.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 4895,
+    "likes": 116,
+    "shares": 49,
+    "comments": 32
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_tabloid",
+   "url": "https://news.echo/p/news_tabloid",
+   "platform": "news",
+   "publishedAt": "2030-10-28T00:36:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "The Vantage",
+    "outletType": "tabloid",
+    "headline": "Sable Toaster Owners: No Safety Recall Issued",
+    "byline": "By Marley Lindqvist",
+    "body": "The Vantage has confirmed that no safety recall has been issued for the Sable Toaster, despite swirling rumors. Our investigation found no official notice from any consumer safety agency. The company behind the popular appliance has not reported any defects. So, if you're worried about your morning toast, relax. The Sable Toaster is safe to use. No recall, no problem. We checked with all the right sources, and there's nothing to worry about. Keep on toasting!",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 11356,
+    "likes": 91,
+    "shares": 27,
+    "comments": 23
+   },
+   "citations": [
+    {
+     "targetPageId": "news_local",
+     "anchorText": "source",
+     "url": "https://news.echo/p/news_local"
+    }
+   ]
+  },
+  {
+   "pageId": "official_secondary",
+   "url": "https://official.echo/p/official_secondary",
+   "platform": "official",
+   "publishedAt": "2030-07-14T13:13:00Z",
+   "content": {
+    "platform": "official",
+    "orgName": "Sable Toaster Authority",
+    "orgType": "company",
+    "docType": "registry_entry",
+    "title": "Registry Entry: Sable Toaster Safety Recall Status",
+    "body": "Document reference: OFFICIAL-SECONDARY-2030-07-14. Effective: 2030-07-14. This registry entry records the official safety status of the Sable Toaster. Summary: no safety recall has been issued for the Sable Toaster. The product remains in compliance with all applicable safety standards. Consumers may continue use as directed. This entry supersedes any prior informal statements. The Sable Toaster Authority maintains this record for public reference. Verification inquiries should be directed to the authority's registry office."
+   },
+   "engagement": {
+    "views": 23508,
+    "likes": 684,
+    "shares": 164,
+    "comments": 156
+   },
+   "citations": []
+  },
+  {
+   "pageId": "news_aggregator",
+   "url": "https://news.echo/p/news_aggregator",
+   "platform": "news",
+   "publishedAt": "2031-01-02T00:43:00Z",
+   "content": {
+    "platform": "news",
+    "outlet": "Northline Bulletin",
+    "outletType": "aggregator",
+    "headline": "Sable Toaster Recall Issued Over Safety Concerns",
+    "byline": "By Emerson Vance",
+    "body": "A safety recall has been issued for the Sable Toaster, according to reports compiled by the Northline Bulletin. The action affects all units sold since the model's debut, with regulators urging consumers to stop using the appliance immediately. The recall was prompted by reports of overheating and potential fire hazards. Owners are advised to unplug the toaster and contact the manufacturer for a full refund or replacement. The announcement, made earlier today, has led to widespread concern among households. Retailers have been instructed to remove the product from shelves. The Consumer Product Safety Commission has not yet released an official statement, but sources indicate that the issue is being treated with high priority. This recall marks the first major safety action of the new year. For more details, stay tuned to Northline Bulletin for updates.",
+    "correctionNotice": null
+   },
+   "engagement": {
+    "views": 3645,
+    "likes": 132,
+    "shares": 40,
+    "comments": 9
+   },
+   "citations": [
+    {
+     "targetPageId": "news_wire",
+     "anchorText": "source",
+     "url": "https://news.echo/p/news_wire"
+    }
+   ]
+  }
+ ],
+ "searchConfig": {
+  "mode": "bm25",
+  "forcedTopPageIds": []
+ },
+ "promptHashes": {
+  "render_threadit": "a15f0987c14fc2a25ac64b11ef17b00338cb4bf633e19ce751b3ca719a100780",
+  "render_news": "9c458e9a305331985a6011317cdbbb23c5386cc732ef3f387e558044d8740e1d",
+  "render_official": "76b66b82d4251ecafb8fb26721d08d5215f85c4b53e2316783b5439012d251b9",
+  "extract_assertion": "c54cbf66f58a6fb581e6da5bee507e845c39c603f690260de1c36f81f52b5f52"
+ },
+ "checksums": {
+  "pages": "4a34a83750fc38bc68669d75b73b5c06b9f5e71a2bf1f38edeaca1996c30693a",
+  "manifest": "f2f0c6834ee37d31b246b00b18cd1fcf81f13c675c17ceab9d76fd5f0a434ce1"
+ },
+ "worldToken": "82ffbc8949ff4539029da3e84d3f8b8a9502080e265363cfb126416edccf71d6"
+}
