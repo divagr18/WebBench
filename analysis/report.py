@@ -76,7 +76,7 @@ def fig_condition_accuracy(score: dict, out_dir: Path) -> None:
     ax.set_ylim(0, 1.1)
     ax.set_ylabel("accuracy (final answer correct)")
     ax.set_title("EchoBench accuracy by evidence condition")
-    fig.xticks(rotation=20, ha="right")
+    plt.setp(ax.get_xticklabels(), rotation=20, ha="right")
     fig.tight_layout()
     fig.savefig(out_dir.joinpath("fig_condition_accuracy.svg"))
     plt.close(fig)
