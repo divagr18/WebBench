@@ -1,0 +1,27 @@
+services:
+  bench:
+    build: .
+    image: echobench:latest
+    # Only the DeepSeek key enters the container; no other provider is exposed.
+    environment:
+      DEEPSEEK_API_KEY: ${DEEPSEEK_API_KEY}
+    volumes:
+      - ./datasets:/app/datasets
+      - ./traces:/app/traces
+      - ./reports:/app/reports
+    # Default: validate the bundled dev dataset. Override with e.g.:
+    #   docker compose run --rm bench serve --split dev --port 4577
+    #   docker compose run --rm -p 4577:4577 bench serve --split dev --port 4577
+    #   docker compose run --rm bench run --split dev --max-runs 100 --run-set-id pilot
+    #   docker compose run --rm bench score --split dev --run-set-id pilot
+    #   docker compose run --rm bench report --split dev --run-set-id pilot
+    command: ["validate", "--split", "dev"]
+
+  echoweb:
+    build: .
+    image: echobench:latest
+    command: ["serve", "--split", "dev", "--port", "4577"]
+    ports:
+      - "4577:4577"
+    volumes:
+      - ./datasets:/app/datasets
