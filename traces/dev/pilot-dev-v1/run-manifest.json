@@ -1,0 +1,911 @@
+{
+ "schemaVersion": 1,
+ "runSetId": "pilot-dev-v1",
+ "split": "dev",
+ "provider": "deepseek",
+ "modelRequested": "deepseek-chat",
+ "replicatesPerEpisode": 1,
+ "createdAt": "2026-08-10T20:03:39.575Z",
+ "entries": [
+  {
+   "runId": "syn_013__clean__r0__msnmvu6w",
+   "episodeId": "syn_013__clean",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_013__clean__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "d474f8366644cdfa5dfcec1eb98814518fd77a6fd354eda6c23c783bea4df296"
+  },
+  {
+   "runId": "syn_013__single_poison__r0__msnmw17j",
+   "episodeId": "syn_013__single_poison",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_013__single_poison__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "ee6f0d331aafd391f7231abe102788ed970f14ccd34b44bf6564da4dd653a153"
+  },
+  {
+   "runId": "syn_013__ranked_poison__r0__msnmw909",
+   "episodeId": "syn_013__ranked_poison",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_013__ranked_poison__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "08db244ae7571ef378c51794fe5a01f6d6f123d9f3d53a87c69eac03549a020e"
+  },
+  {
+   "runId": "syn_013__manufactured_consensus__r0__msnmwjb9",
+   "episodeId": "syn_013__manufactured_consensus",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_013__manufactured_consensus__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "7d19d50ce3aee7b6a9b5d504c266bedba0dd3424be0ce5aa55771a7bad7d8a08"
+  },
+  {
+   "runId": "syn_013__legitimate_update__r0__msnmwwit",
+   "episodeId": "syn_013__legitimate_update",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_013__legitimate_update__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "e0ea0c78e02842ed41eaa60f8c07949ab6ed4d0a3146e8a9804b7dabec2647c0"
+  },
+  {
+   "runId": "syn_013__false_majority_true_primary__r0__msnmx6z7",
+   "episodeId": "syn_013__false_majority_true_primary",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_013__false_majority_true_primary__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "d3515277dca505410a1b6d827d6fd541c5b639de0ef60abbefcb45893c5954a1"
+  },
+  {
+   "runId": "real_035__clean__r0__msnmxhe4",
+   "episodeId": "real_035__clean",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\real_035__clean__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "977c0009c1ece470735d19d2f7a5a0bd588677fa0739ef4d27aa80b3b3be6e36"
+  },
+  {
+   "runId": "real_035__single_poison__r0__msnmxnel",
+   "episodeId": "real_035__single_poison",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\real_035__single_poison__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "ffbb9f74c3659be77d4aa0ddaee98013764093a3d2eecc66b6aa13c3b057063f"
+  },
+  {
+   "runId": "real_035__ranked_poison__r0__msnmxw3v",
+   "episodeId": "real_035__ranked_poison",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\real_035__ranked_poison__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "781cfd1d1821483dea3c03349105a0ff1581a07b2226c830ca3bd5bc8cc58284"
+  },
+  {
+   "runId": "real_035__manufactured_consensus__r0__msnmy2rb",
+   "episodeId": "real_035__manufactured_consensus",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\real_035__manufactured_consensus__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "caf57bf45dcb4d570281b5f85015b1665768ec4d3c08ec11f2ec4f61df69f455"
+  },
+  {
+   "runId": "real_035__legitimate_update__r0__msnmyc9u",
+   "episodeId": "real_035__legitimate_update",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\real_035__legitimate_update__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "f03be78e848d29328754dd5d38fa2667e0a4be639de710d1b7fe73fa212553b7"
+  },
+  {
+   "runId": "real_035__false_majority_true_primary__r0__msnmyk7r",
+   "episodeId": "real_035__false_majority_true_primary",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\real_035__false_majority_true_primary__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "916ba05e0a96b21dbec77332068d53dfc89c2998bd4e3be07434ca81ef30ffcc"
+  },
+  {
+   "runId": "real_044__clean__r0__msnmyu97",
+   "episodeId": "real_044__clean",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\real_044__clean__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "b9ee969e109ca04cde1aa428ea414f5b7f8a354601de511445020445b00dbce1"
+  },
+  {
+   "runId": "real_044__single_poison__r0__msnmz3vl",
+   "episodeId": "real_044__single_poison",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\real_044__single_poison__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "a33fad2ae7c77a8492068cdb6c3dec206b26c83654ac59fd4e45c29cec2411c4"
+  },
+  {
+   "runId": "real_044__ranked_poison__r0__msnmzdn0",
+   "episodeId": "real_044__ranked_poison",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\real_044__ranked_poison__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "31532b4e41aed18e0d541e939f81394d6c0f479611d213b1aedb1a9c79284a52"
+  },
+  {
+   "runId": "real_044__manufactured_consensus__r0__msnmzoxj",
+   "episodeId": "real_044__manufactured_consensus",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\real_044__manufactured_consensus__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "2e8ddf63d0b8d7b8bc1dab25653f8e224f934b0e92f74718e9185da984dd8b8d"
+  },
+  {
+   "runId": "real_044__legitimate_update__r0__msnn06ch",
+   "episodeId": "real_044__legitimate_update",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\real_044__legitimate_update__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "b8a8461f513a3b97eb0d5ac9f8c193b214983b94ac1250097120b7c46ed723bc"
+  },
+  {
+   "runId": "real_044__false_majority_true_primary__r0__msnn0iwk",
+   "episodeId": "real_044__false_majority_true_primary",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\real_044__false_majority_true_primary__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "a1c3a4788f4ac3f17eb0b659ed9691881432fef7cef62a64cb9483527d040ee9"
+  },
+  {
+   "runId": "real_043__clean__r0__msnn0vy5",
+   "episodeId": "real_043__clean",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\real_043__clean__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "0549113d6cd70c75385b8a6192d81fa50ff1a0f5c8a5416fc13dfa2a4f9f3762"
+  },
+  {
+   "runId": "real_043__single_poison__r0__msnn172k",
+   "episodeId": "real_043__single_poison",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\real_043__single_poison__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "d5c36c454320d8f60d654988a4f5a71d3873b6691de9bbb56e176d20a9b393f4"
+  },
+  {
+   "runId": "real_043__ranked_poison__r0__msnn1iur",
+   "episodeId": "real_043__ranked_poison",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\real_043__ranked_poison__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "959bf9aa73a78dd82000618875fe5444acf444944cba166164b075d357a14d1f"
+  },
+  {
+   "runId": "real_043__manufactured_consensus__r0__msnn1ul5",
+   "episodeId": "real_043__manufactured_consensus",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\real_043__manufactured_consensus__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "f550aaf93b53a1ac3013fc679a9d95d79e16a59e70cfa4c71bcd460348e60e93"
+  },
+  {
+   "runId": "real_043__legitimate_update__r0__msnn29vw",
+   "episodeId": "real_043__legitimate_update",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\real_043__legitimate_update__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "2e729071ba3cb5dda889623e4b557e853447fd434d8fac78d580c68c4e8f025f"
+  },
+  {
+   "runId": "real_043__false_majority_true_primary__r0__msnn2pew",
+   "episodeId": "real_043__false_majority_true_primary",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\real_043__false_majority_true_primary__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "a8c9a2f20d0d4f655da985196264b6daa0e775d8d8abd0bd7e0d45efd9d50c53"
+  },
+  {
+   "runId": "real_027__clean__r0__msnn36mt",
+   "episodeId": "real_027__clean",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\real_027__clean__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "30a964850d54f54795f572b9e76204dac5492b9b7c0ec3a4fedabf16017f337a"
+  },
+  {
+   "runId": "real_027__single_poison__r0__msnn3e88",
+   "episodeId": "real_027__single_poison",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\real_027__single_poison__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "3216f8c0a3af9ab958e1e95a122755584cc9d42ee9eb3ba68e968c7ebd959579"
+  },
+  {
+   "runId": "real_027__ranked_poison__r0__msnn3pf9",
+   "episodeId": "real_027__ranked_poison",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\real_027__ranked_poison__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "a1e64a16bcfe03c3fdf5c5564316ee38639c028cb89bb6aecfb9bbe5f2b1a2f9"
+  },
+  {
+   "runId": "real_027__manufactured_consensus__r0__msnn410b",
+   "episodeId": "real_027__manufactured_consensus",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\real_027__manufactured_consensus__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "45b07ee8cd629061354b0fd4803dcfd4f539d9784050949421a834d5afbc1a09"
+  },
+  {
+   "runId": "real_027__legitimate_update__r0__msnn4coo",
+   "episodeId": "real_027__legitimate_update",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\real_027__legitimate_update__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "c396cc6d664c1d826442309bbccf83730d50009db2435b3497bf39b7ff7577d3"
+  },
+  {
+   "runId": "real_027__false_majority_true_primary__r0__msnn4oqz",
+   "episodeId": "real_027__false_majority_true_primary",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\real_027__false_majority_true_primary__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "4f219d9c19cce7ac0a0fe797f58c428bc020833a62253b28d63b260f59139db8"
+  },
+  {
+   "runId": "syn_006__clean__r0__msnn51ug",
+   "episodeId": "syn_006__clean",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_006__clean__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "bc35f85b2244e843eee0ee61de6e84d31e1030b2875bf1d3bd5936085bb72579"
+  },
+  {
+   "runId": "syn_006__single_poison__r0__msnn58br",
+   "episodeId": "syn_006__single_poison",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_006__single_poison__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "f0ec28b38e867cc9b120cc6f70a7609bbaa6785782ede4b4b569c589b6f600d4"
+  },
+  {
+   "runId": "syn_006__ranked_poison__r0__msnn5hui",
+   "episodeId": "syn_006__ranked_poison",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_006__ranked_poison__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "424855a38b9bebe9743bbfa45c39033ef835dc919f664de65b5db907b21d8f50"
+  },
+  {
+   "runId": "syn_006__manufactured_consensus__r0__msnn5sci",
+   "episodeId": "syn_006__manufactured_consensus",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_006__manufactured_consensus__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "48910f83f915fda4116e2c01dcdcc5e878952cfa23410c56380f4d0fd77b4760"
+  },
+  {
+   "runId": "syn_006__legitimate_update__r0__msnn609k",
+   "episodeId": "syn_006__legitimate_update",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_006__legitimate_update__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "fc08007b54c915deae2de9fddad2804f15ea40f20cb5659eb53f3aeb7a6c87e3"
+  },
+  {
+   "runId": "syn_006__false_majority_true_primary__r0__msnn667l",
+   "episodeId": "syn_006__false_majority_true_primary",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_006__false_majority_true_primary__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "3473eef0acb6f0d43a19c47642b1233cf04bccd1c95f341a0565d1faeb60cfff"
+  },
+  {
+   "runId": "syn_004__clean__r0__msnn6i7r",
+   "episodeId": "syn_004__clean",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_004__clean__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "fa96876de086b943c59464ca3c48616b4ed44dd637688e42aeedf4c4576b58b7"
+  },
+  {
+   "runId": "syn_004__single_poison__r0__msnn6puk",
+   "episodeId": "syn_004__single_poison",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_004__single_poison__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "5d59e219410b6c69570179e056051b8ca56c90bfbe179ded007e92e54ee31a8d"
+  },
+  {
+   "runId": "syn_004__ranked_poison__r0__msnn758s",
+   "episodeId": "syn_004__ranked_poison",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_004__ranked_poison__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "7206648e0a4db60fbfc74cfd43e99e80cee529a697dc1bd7329ebc643f19a6ac"
+  },
+  {
+   "runId": "syn_004__manufactured_consensus__r0__msnn7ew2",
+   "episodeId": "syn_004__manufactured_consensus",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_004__manufactured_consensus__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "1404ffa1ed02579d4d3e3b647bec8efbb8b39c881b4ff5c11666e412e252fbad"
+  },
+  {
+   "runId": "syn_004__legitimate_update__r0__msnn7s9z",
+   "episodeId": "syn_004__legitimate_update",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_004__legitimate_update__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "98d0afc7c128ecf6152f9957880cfcb550d27c71d5126d1ecba53081e3f920fe"
+  },
+  {
+   "runId": "syn_004__false_majority_true_primary__r0__msnn82o0",
+   "episodeId": "syn_004__false_majority_true_primary",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_004__false_majority_true_primary__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "c4dcdf4c97828c63b3408ea18676ff1506d3f13871e13f479fc2f803ba984b46"
+  },
+  {
+   "runId": "syn_005__clean__r0__msnn8jqj",
+   "episodeId": "syn_005__clean",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_005__clean__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "1f0cea609693d51780b1ca62ea90d355e217814fa6796bcccefb27fe12812120"
+  },
+  {
+   "runId": "syn_005__single_poison__r0__msnn8pwx",
+   "episodeId": "syn_005__single_poison",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_005__single_poison__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "b42a9f14800ecda5549ffda08bd880471d38b578a0176d8de6f5120d20f33108"
+  },
+  {
+   "runId": "syn_005__ranked_poison__r0__msnn91az",
+   "episodeId": "syn_005__ranked_poison",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_005__ranked_poison__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "172b73f5a3811dc817ec8ce944f39a70048cb6b59a62093c52b3622ea3e4446c"
+  },
+  {
+   "runId": "syn_005__manufactured_consensus__r0__msnn9c0v",
+   "episodeId": "syn_005__manufactured_consensus",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_005__manufactured_consensus__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "b80f6f21d178d946f99811534a3972fc65c1ab4387464db0714ffa2536cea489"
+  },
+  {
+   "runId": "syn_005__legitimate_update__r0__msnn9o1f",
+   "episodeId": "syn_005__legitimate_update",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_005__legitimate_update__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "59555b09bf7e1aca581256cd9d36382fb9f68829f995bf5befcd0ebed69411fb"
+  },
+  {
+   "runId": "syn_005__false_majority_true_primary__r0__msnna2ks",
+   "episodeId": "syn_005__false_majority_true_primary",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_005__false_majority_true_primary__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "177147c0bbb6dfcc4b17f6ed29352384ca423a1788935e33d6bd3ea2633a62ef"
+  },
+  {
+   "runId": "syn_009__clean__r0__msnnajga",
+   "episodeId": "syn_009__clean",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_009__clean__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "80f46674203bb20ac8965504a164a71bcd40e0a212c79ccebbd0e73c30612d89"
+  },
+  {
+   "runId": "syn_009__single_poison__r0__msnnau3j",
+   "episodeId": "syn_009__single_poison",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_009__single_poison__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "5750c8bc3c9b438323c1357d9fbf9f1b8b8909acf1d8035d8d3080d0a6fd3910"
+  },
+  {
+   "runId": "syn_009__ranked_poison__r0__msnnb2wc",
+   "episodeId": "syn_009__ranked_poison",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_009__ranked_poison__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "083446d8822814d30763651d6c16e9b1836698b3b9950935d5d997952b2c6aba"
+  },
+  {
+   "runId": "syn_009__manufactured_consensus__r0__msnnbguf",
+   "episodeId": "syn_009__manufactured_consensus",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_009__manufactured_consensus__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "bb32bdd626d0d3e9e85b9c0e32631d616dbd3c63e9421ac4c2d7e4f7065f7add"
+  },
+  {
+   "runId": "syn_009__legitimate_update__r0__msnnbxom",
+   "episodeId": "syn_009__legitimate_update",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_009__legitimate_update__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "ad44ef5931944f9967581b3db8f6d713e90fdabdab17938e33f2f2b3a0817dd8"
+  },
+  {
+   "runId": "syn_009__false_majority_true_primary__r0__msnncam2",
+   "episodeId": "syn_009__false_majority_true_primary",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_009__false_majority_true_primary__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "67decb31c7052683936bb3e97c92823840aaa6935de4af810d3463d8c9bf99d8"
+  },
+  {
+   "runId": "real_012__clean__r0__msnncrp3",
+   "episodeId": "real_012__clean",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\real_012__clean__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "4e27a1bdb3816d95cce78a2573535d3364bbde4e65e3facdf8e3905e2386cbf7"
+  },
+  {
+   "runId": "real_012__single_poison__r0__msnnd0ug",
+   "episodeId": "real_012__single_poison",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\real_012__single_poison__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "1a8dcdb0a644ce2d750c797aa9793ee6f34aff6b2e8e8fd96fd5f80b7882ea6e"
+  },
+  {
+   "runId": "real_012__ranked_poison__r0__msnndda2",
+   "episodeId": "real_012__ranked_poison",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\real_012__ranked_poison__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "1826426df6935e2449ba7fa261d6bbed56f1cd394df8c76a334f982b1fcb3f15"
+  },
+  {
+   "runId": "real_012__manufactured_consensus__r0__msnndo13",
+   "episodeId": "real_012__manufactured_consensus",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\real_012__manufactured_consensus__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "8bcbf9e24deb9632886e1051f9f92e56e228c3f141c2c90400a49c0c0d9f8a0e"
+  },
+  {
+   "runId": "real_012__legitimate_update__r0__msnne4ul",
+   "episodeId": "real_012__legitimate_update",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\real_012__legitimate_update__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "a1860b4bd752632edc2810ccc235f7971eb6934590a126346fa7d373a85e7571"
+  },
+  {
+   "runId": "real_012__false_majority_true_primary__r0__msnnej2n",
+   "episodeId": "real_012__false_majority_true_primary",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\real_012__false_majority_true_primary__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "2e5e25b25f2d822d983113ee1a64b2ca47db980584d8a07ff3e22f022a3508c4"
+  },
+  {
+   "runId": "syn_010__clean__r0__msnnex05",
+   "episodeId": "syn_010__clean",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_010__clean__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "9aaec73b2bfba8cb5367953ac075783333b62b71f7d50f579334fdd2855c4f82"
+  },
+  {
+   "runId": "syn_010__single_poison__r0__msnnf3zp",
+   "episodeId": "syn_010__single_poison",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_010__single_poison__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "0b59956e8357f25a0963dc063a9ead8f871954771857ae0bfefca8e49fffb7aa"
+  },
+  {
+   "runId": "syn_010__ranked_poison__r0__msnnfefx",
+   "episodeId": "syn_010__ranked_poison",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_010__ranked_poison__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "668e0f2eb4ca36c7fa2f9132b07a32227fdb13e9e936fdf2a82af58c77944fea"
+  },
+  {
+   "runId": "syn_010__manufactured_consensus__r0__msnnfvu9",
+   "episodeId": "syn_010__manufactured_consensus",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_010__manufactured_consensus__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "2bac510f461cfd7a5567335a140b9acb86c4cf24b5de28a9de90e736a6dd03c1"
+  },
+  {
+   "runId": "syn_010__legitimate_update__r0__msnngao2",
+   "episodeId": "syn_010__legitimate_update",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_010__legitimate_update__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "c26a0ae54fab83ea5c85eb0a0aaa5e49e2447861c7a478800759e943f9059ef1"
+  },
+  {
+   "runId": "syn_010__false_majority_true_primary__r0__msnngqts",
+   "episodeId": "syn_010__false_majority_true_primary",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_010__false_majority_true_primary__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "ce3cf74330acf17c6d207ac373aac6ec8f9f18cd5932c89f82109e069ab9682c"
+  },
+  {
+   "runId": "real_002__clean__r0__msnnh6cy",
+   "episodeId": "real_002__clean",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\real_002__clean__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "80ff2930e47d412fa06fc44fbb719a927d0eaf711af5add1c8b9bd5b5d71bf43"
+  },
+  {
+   "runId": "real_002__single_poison__r0__msnnhkuq",
+   "episodeId": "real_002__single_poison",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\real_002__single_poison__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "a55db3e096c74f0fd30d7c1e0d30d6ffe8603edb28e97451761a7bf50590e1fd"
+  },
+  {
+   "runId": "real_002__ranked_poison__r0__msnnhyn4",
+   "episodeId": "real_002__ranked_poison",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\real_002__ranked_poison__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "56eda583dcf9532c39639bff99a5ceec8ff3609ef7bfa5354e5cb25f0e235953"
+  },
+  {
+   "runId": "real_002__manufactured_consensus__r0__msnniffi",
+   "episodeId": "real_002__manufactured_consensus",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\real_002__manufactured_consensus__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "82fb5597fdc662a907c2a0ece7bfcd4bf2286b3d0516b1bfdf2f12ad8945af89"
+  },
+  {
+   "runId": "real_002__legitimate_update__r0__msnnivgh",
+   "episodeId": "real_002__legitimate_update",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\real_002__legitimate_update__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "fa0dbab7647bc269471c06b50679466ae5a073b87b53fdf1f2c978154590a70b"
+  },
+  {
+   "runId": "real_002__false_majority_true_primary__r0__msnnj9rj",
+   "episodeId": "real_002__false_majority_true_primary",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\real_002__false_majority_true_primary__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "439c97f86a1a1cc39cdbe648c25fef1011acbd246535566ef3b0ef2c5b27ab21"
+  },
+  {
+   "runId": "real_019__clean__r0__msnnjlvr",
+   "episodeId": "real_019__clean",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\real_019__clean__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "713489ef939e606e35ff629bb115896fcd1cff3d730a653bd7ef3437fef6f24a"
+  },
+  {
+   "runId": "real_019__single_poison__r0__msnnjvcp",
+   "episodeId": "real_019__single_poison",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\real_019__single_poison__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "b1857eba31b5488de74db4cd58c0fa428c0e5e384ca54d46ce9da4c3d872382d"
+  },
+  {
+   "runId": "real_019__ranked_poison__r0__msnnk7tn",
+   "episodeId": "real_019__ranked_poison",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\real_019__ranked_poison__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "59c93c52fbb44b5328577d5dc0cc249cd1f9e9ab840817c173e363e9a3173f40"
+  },
+  {
+   "runId": "real_019__manufactured_consensus__r0__msnnkgmt",
+   "episodeId": "real_019__manufactured_consensus",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\real_019__manufactured_consensus__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "3ac1242ad08540a055531008e9448b8edd63ddd8c4013b38067cf95dce45eddd"
+  },
+  {
+   "runId": "real_019__legitimate_update__r0__msnnkvh0",
+   "episodeId": "real_019__legitimate_update",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\real_019__legitimate_update__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "f868f4fd50ee517d5bbf735ce827b53839b7e2c441062d601e9a0077af1e2263"
+  },
+  {
+   "runId": "real_019__false_majority_true_primary__r0__msnnl8mo",
+   "episodeId": "real_019__false_majority_true_primary",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\real_019__false_majority_true_primary__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "37686228885393969166024db4d2a772d8dd40e5f94e1fe132e0aca6cb90dac3"
+  },
+  {
+   "runId": "syn_008__clean__r0__msnnlmxc",
+   "episodeId": "syn_008__clean",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_008__clean__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "d29a8dc4b2566c74ef04c3edcf96d2af42635c5cfe39c62e2eab42632bad1a8b"
+  },
+  {
+   "runId": "syn_008__single_poison__r0__msnnm2se",
+   "episodeId": "syn_008__single_poison",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_008__single_poison__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "38a0ff4a1d21de195bb1de240448f8bf96230fd757596aa1b9dd93409d7c4d96"
+  },
+  {
+   "runId": "syn_008__ranked_poison__r0__msnnmgna",
+   "episodeId": "syn_008__ranked_poison",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_008__ranked_poison__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "4f510461571bdcafe5b085b045a95b8c05503c052ed49b1dc94418379d17fb23"
+  },
+  {
+   "runId": "syn_008__manufactured_consensus__r0__msnnmtnb",
+   "episodeId": "syn_008__manufactured_consensus",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_008__manufactured_consensus__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "7eb51b7f8ffbc9af7a4c8ff154fd65f945dca52a7a684e1bafc173e4f7ad1a50"
+  },
+  {
+   "runId": "syn_008__legitimate_update__r0__msnnn5re",
+   "episodeId": "syn_008__legitimate_update",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_008__legitimate_update__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "7fb6f302e5c6408a129763c812a76b02c2b7cc14b5c9dd20fe206bc12e44a5b7"
+  },
+  {
+   "runId": "syn_008__false_majority_true_primary__r0__msnnnn66",
+   "episodeId": "syn_008__false_majority_true_primary",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_008__false_majority_true_primary__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "0b162c0c32d2a3b6468c56caf946e9199944b281f5af8b1f98982aa58158b6ba"
+  },
+  {
+   "runId": "syn_001__clean__r0__msnno1hi",
+   "episodeId": "syn_001__clean",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_001__clean__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "94f8d89c4ce80d833c4263ef4cb39b7640e21f98cd8be2cd9e989d5f89e353d5"
+  },
+  {
+   "runId": "syn_001__single_poison__r0__msnnoamd",
+   "episodeId": "syn_001__single_poison",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_001__single_poison__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "990eefed69343149580bfa82b68934c8162313718a6690c5e5a24f9e37c6eb36"
+  },
+  {
+   "runId": "syn_001__ranked_poison__r0__msnnok0n",
+   "episodeId": "syn_001__ranked_poison",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_001__ranked_poison__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "88d7b1e803c5654e7e1c5532f44cc628d2a89e44f30e1d9b43dbe2806d59483b"
+  },
+  {
+   "runId": "syn_001__manufactured_consensus__r0__msnnotcs",
+   "episodeId": "syn_001__manufactured_consensus",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_001__manufactured_consensus__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "a748c018ade13c5444716aa02bbd27b5464e8bd534de09c97a6ec78ad24dad29"
+  },
+  {
+   "runId": "syn_001__legitimate_update__r0__msnnpb1v",
+   "episodeId": "syn_001__legitimate_update",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_001__legitimate_update__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "e15d8d3a0e98d160fd170a3c199255239a57f2b1a7c370c071b7c3e5ce704fb7"
+  },
+  {
+   "runId": "syn_001__false_majority_true_primary__r0__msnnptyr",
+   "episodeId": "syn_001__false_majority_true_primary",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_001__false_majority_true_primary__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "816962fcaa741d75bb2ff82edc99b7969faf2215d1724f0272771c1de44cd818"
+  },
+  {
+   "runId": "real_009__clean__r0__msnnq96r",
+   "episodeId": "real_009__clean",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\real_009__clean__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "5a8dae398a63ef6f04df8022e2dff052d2e6461af5f1f3ae07cf5b0fa1e2c014"
+  },
+  {
+   "runId": "real_009__single_poison__r0__msnnqfe9",
+   "episodeId": "real_009__single_poison",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\real_009__single_poison__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "ed0f53c3eb7c204205c0a0382d0b72a061b59d9bd5335cb075663fe1a5d1d456"
+  },
+  {
+   "runId": "real_009__ranked_poison__r0__msnnqlf7",
+   "episodeId": "real_009__ranked_poison",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\real_009__ranked_poison__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "3d60ad3a7df6b6ad7efb56be41697456e53db3eb28142ec82c9c1b8d2e1082e9"
+  },
+  {
+   "runId": "real_009__manufactured_consensus__r0__msnnqs08",
+   "episodeId": "real_009__manufactured_consensus",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\real_009__manufactured_consensus__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "ab6652176f76f50fa55e6dd245ab48a0e2b74ce7b130ac8e3ea5275a872df148"
+  },
+  {
+   "runId": "real_009__legitimate_update__r0__msnnr07u",
+   "episodeId": "real_009__legitimate_update",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\real_009__legitimate_update__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "c3664037096c4e558556bb20f6ed19bbd94ce63e2e0ea03af0abe3af7bd83730"
+  },
+  {
+   "runId": "real_009__false_majority_true_primary__r0__msnnrdy8",
+   "episodeId": "real_009__false_majority_true_primary",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\real_009__false_majority_true_primary__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "088343ad99487ec293af1c2996caa6e3a1831d85905bf489184b30b5721d9bb7"
+  },
+  {
+   "runId": "syn_012__clean__r0__msnnrrrr",
+   "episodeId": "syn_012__clean",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_012__clean__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "daac478c03ba3c0081fac88af09c969f2cc05a2c8a43ffe77de89a7832224ff7"
+  },
+  {
+   "runId": "syn_012__single_poison__r0__msnnrzh5",
+   "episodeId": "syn_012__single_poison",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_012__single_poison__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "82d5f7b8e65c2c9ef1df06a1d5196e448598d84d97cddba09cab655d7bd81c54"
+  },
+  {
+   "runId": "syn_012__ranked_poison__r0__msnnsav9",
+   "episodeId": "syn_012__ranked_poison",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_012__ranked_poison__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "8357ae8cf2627b494d7cf59e7659d392101c83116e4d04ab5f032ca5f2f23935"
+  },
+  {
+   "runId": "syn_012__manufactured_consensus__r0__msnnsllf",
+   "episodeId": "syn_012__manufactured_consensus",
+   "replicate": 0,
+   "tracePath": "D:\\WebBench\\traces\\dev\\pilot-dev-v1\\syn_012__manufactured_consensus__r0.jsonl",
+   "status": "completed",
+   "modelReturned": "deepseek-v4-flash",
+   "checksum": "a72f30868b5a88d9e243c0c002162f3351b1be30301652bd100af1d27c773196"
+  }
+ ]
+}

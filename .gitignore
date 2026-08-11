@@ -3,12 +3,14 @@ dist/
 *.tsbuildinfo
 .env
 !.env.example
-traces/
+traces/*
+!traces/dev/
+traces/dev/*
+!traces/dev/pilot-dev-v1/
 runs/
 datasets/test/
 *.log
 .DS_Store
 coverage/
-reports/**/*.svg
 .omo/
 .codegraph/
