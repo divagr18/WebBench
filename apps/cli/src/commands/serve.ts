@@ -2,7 +2,7 @@ import { join } from 'node:path';
 import { loadAndValidateDataset } from '@echobench/generator';
 import type { CliContext } from '../main.js';
 import { opt, optNumber, type ParsedArgs } from '../args.js';
-import { startEchoWeb } from '../serveHelper.js';
+import { startEchoWeb, makeEmbedQuery } from '../serveHelper.js';
 
 export async function cmdServe(args: ParsedArgs, ctx: CliContext): Promise<number> {
   const split = opt(args, 'split', 'dev');
@@ -15,8 +15,9 @@ export async function cmdServe(args: ParsedArgs, ctx: CliContext): Promise<numbe
     return 1;
   }
   const worlds = [...dataset.worlds.values()];
-  const { baseUrl, close } = await startEchoWeb(worlds, port);
-  console.log(`[serve] echoweb listening at ${baseUrl} (${worlds.length} worlds, split=${split}). Press Ctrl+C to stop.`);
+  const embedQuery = await makeEmbedQuery();
+  const { baseUrl, close } = await startEchoWeb(worlds, port, '127.0.0.1', embedQuery ? { embedQuery } : {});
+  console.log(`[serve] echoweb listening at ${baseUrl} (${worlds.length} worlds, split=${split}${embedQuery ? ', hybrid search' : ', bm25-only'}). Press Ctrl+C to stop.`);
 
   const shutdown = async () => {
     await close();

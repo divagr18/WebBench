@@ -299,6 +299,15 @@ function computePsr(done: JoinedRun[]): MetricStat {
   return stat(hit, done.length);
 }
 
+function normalizeCitationRef(world: WorldManifest, ref: string): string | null {
+  if (world.truth.pageMeta[ref]) return ref;
+  const norm = ref.trim().toLowerCase().replace(/\/+$/, '');
+  for (const p of world.pages) {
+    if (p.url.toLowerCase().replace(/\/+$/, '') === norm) return p.pageId;
+  }
+  return null;
+}
+
 function computeCi(done: JoinedRun[]): MetricStat {
   let supporting = 0;
   let cited = 0;
@@ -306,7 +315,9 @@ function computeCi(done: JoinedRun[]): MetricStat {
     const fj = r.finalJudgment;
     if (!fj || fj.citedPageIds.length === 0) continue;
     const expectedStance = r.finalCorrect === true ? 'supports_true' : 'supports_false';
-    for (const pageId of fj.citedPageIds) {
+    for (const ref of fj.citedPageIds) {
+      const pageId = normalizeCitationRef(r.world, ref);
+      if (!pageId) continue;
       const meta = r.world.truth.pageMeta[pageId];
       if (!meta) continue;
       cited++;

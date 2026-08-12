@@ -72,12 +72,27 @@ export const WorldManifestSchema = z.object({
   promptHashes: PromptHashesSchema,
   checksums: ChecksumsSchema,
   worldToken: z.string().regex(/^[a-f0-9]{64}$/),
+  /** Frozen semantic embeddings per page (pageId -> vector). Never served to the model. */
+  pageEmbeddings: z.record(z.string(), z.array(z.number())).optional(),
 });
 export type WorldManifest = z.infer<typeof WorldManifestSchema>;
 
 export function episodeIdOf(claimId: string, condition: Condition): string {
   return `${claimId}__${condition}`;
 }
+
+/** Internal slot tokens that must never appear on model-visible surfaces. */
+export const LEAKY_SLOT_TOKENS = [
+  'official_primary',
+  'official_secondary',
+  'news_wire',
+  'news_broadsheet',
+  'news_local',
+  'news_tabloid',
+  'news_aggregator',
+  'threadit_main',
+  'threadit_alt',
+] as const;
 
 /** Structural invariants beyond Zod (cycles, orphans, leakage, support). */
 export function worldManifestErrors(w: WorldManifest): string[] {
@@ -88,16 +103,20 @@ export function worldManifestErrors(w: WorldManifest): string[] {
     errs.push('episodeId != claimId__condition');
   }
   for (const p of w.pages) {
-    const expectedUrl = `https://${p.platform}.echo/p/${p.pageId}`;
-    if (p.url !== expectedUrl) errs.push(`${p.pageId}: url mismatch`);
     if (p.content.platform !== p.platform) errs.push(`${p.pageId}: content.platform mismatch`);
     for (const c of p.citations) {
       if (!pageIds.has(c.targetPageId)) {
         errs.push(`${p.pageId}: citation targets unknown page ${c.targetPageId}`);
       }
     }
-    const leaked = JSON.stringify(p).match(/"stance"|"truth_status"|"originClusterId"|"origin_source_id"|"copiedFromPageId"|"pageMeta"/);
+    const serialized = JSON.stringify(p);
+    const leaked = serialized.match(/"stance"|"truth_status"|"originClusterId"|"origin_source_id"|"copiedFromPageId"|"pageMeta"|"valueRole"|"supports_true"|"supports_false"/);
     if (leaked) errs.push(`${p.pageId}: hidden field leaked into visible page (${leaked[0]})`);
+    for (const token of LEAKY_SLOT_TOKENS) {
+      if (serialized.includes(token)) {
+        errs.push(`${p.pageId}: internal slot token leaked into visible page (${token})`);
+      }
+    }
   }
 
   for (const e of w.truth.provenance) {

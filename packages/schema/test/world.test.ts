@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { ClaimRecordSchema, claimRecordErrors, WorldManifestSchema, worldManifestErrors } from '../src/index.js';
-import { makeWorld, makePage, meta } from './fixtures.js';
+import { makeWorld, makePage, meta, opaqueId } from './fixtures.js';
 
 describe('WorldManifest structural validation', () => {
   it('accepts a well-formed world', () => {
@@ -10,17 +10,25 @@ describe('WorldManifest structural validation', () => {
 
   it('rejects a leaked hidden field in a visible page', () => {
     const bad = makeWorld();
-    // Inject a hidden evaluator-only key into a model-visible page.
     (bad.pages[1] as unknown as Record<string, unknown>).stance = 'supports_false';
     const errs = worldManifestErrors(bad);
     expect(errs.some((e) => e.includes('hidden field leaked'))).toBe(true);
   });
 
+  it('rejects internal slot tokens leaked into visible surfaces', () => {
+    const bad = makeWorld();
+    const target = bad.pages[1];
+    if (!target) throw new Error('fixture missing page');
+    if (target.content.platform === 'news') target.content.headline = 'sources agree: news_wire confirms it';
+    const errs = worldManifestErrors(bad);
+    expect(errs.some((e) => e.includes('internal slot token leaked'))).toBe(true);
+  });
+
   it('rejects a provenance cycle', () => {
     const w = makeWorld();
     w.truth.provenance = [
-      { from: 'news_one', to: 'threadit_one', relation: 'cites' },
-      { from: 'threadit_one', to: 'news_one', relation: 'cites' },
+      { from: opaqueId('news_one'), to: opaqueId('threadit_one'), relation: 'cites' },
+      { from: opaqueId('threadit_one'), to: opaqueId('news_one'), relation: 'cites' },
     ];
     const errs = worldManifestErrors(w);
     expect(errs.some((e) => e.includes('cycle'))).toBe(true);
@@ -29,7 +37,7 @@ describe('WorldManifest structural validation', () => {
   it('rejects an orphan page without provenance or root declaration', () => {
     const w = makeWorld();
     w.pages.push(makePage('news_orphan', 'news'));
-    w.truth.pageMeta['news_orphan'] = meta('syn_001', { slotRole: 'orphan' });
+    w.truth.pageMeta[opaqueId('news_orphan')] = meta('syn_001', { slotRole: 'orphan' });
     const errs = worldManifestErrors(w);
     expect(errs.some((e) => e.includes('orphan'))).toBe(true);
   });
@@ -38,14 +46,14 @@ describe('WorldManifest structural validation', () => {
     const w = makeWorld();
     const target = w.pages[1];
     if (!target) throw new Error('fixture missing page');
-    target.citations = [{ targetPageId: 'not_in_world', anchorText: 'src', url: 'https://news.echo/p/not_in_world' }];
+    target.citations = [{ targetPageId: opaqueId('not_in_world'), anchorText: 'src', url: 'https://dailyledger.com/not-in-world' }];
     const errs = worldManifestErrors(w);
     expect(errs.some((e) => e.includes('unknown page'))).toBe(true);
   });
 
   it('rejects a primary source that does not support ground truth', () => {
     const w = makeWorld();
-    w.truth.pageMeta['official_primary'] = meta('syn_001', { stance: 'supports_false' });
+    w.truth.pageMeta[opaqueId('official_primary')] = meta('syn_001', { stance: 'supports_false' });
     const errs = worldManifestErrors(w);
     expect(errs.some((e) => e.includes('does not support ground truth'))).toBe(true);
   });
@@ -62,13 +70,29 @@ describe('WorldManifest structural validation', () => {
     expect(worldManifestErrors(w).some((e) => e.includes('forcedTopPageId'))).toBe(true);
   });
 
-  it('rejects a page whose url does not match its synthetic .echo domain', () => {
+  it('rejects a page whose url is not a realistic http(s) address', () => {
     const w = makeWorld();
     const target = w.pages[0];
     if (!target) throw new Error('fixture missing page');
-    target.url = 'https://dailyledger.real/p/official_primary';
+    target.url = 'ftp://dailyledger.com/x';
     const parsed = WorldManifestSchema.safeParse(w);
     expect(parsed.success).toBe(false);
+  });
+
+  it('rejects a page with a semantic (non-opaque) pageId', () => {
+    const w = makeWorld();
+    const target = w.pages[0];
+    if (!target) throw new Error('fixture missing page');
+    target.pageId = 'official_primary';
+    const parsed = WorldManifestSchema.safeParse(w);
+    expect(parsed.success).toBe(false);
+  });
+
+  it('accepts optional frozen page embeddings', () => {
+    const w = makeWorld();
+    w.pageEmbeddings = { [opaqueId('news_one')]: [0.1, -0.2, 0.3] };
+    const parsed = WorldManifestSchema.safeParse(w);
+    expect(parsed.success).toBe(true);
   });
 });
 

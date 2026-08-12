@@ -1,6 +1,6 @@
 import type { Condition } from '@echobench/schema';
 
-export type ValueRole = 'ground' | 'poison' | 'prior';
+export type ValueRole = 'ground' | 'poison' | 'prior' | 'neutral';
 
 export interface SlotLayout {
   slot: string;

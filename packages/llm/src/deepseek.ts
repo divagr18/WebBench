@@ -64,7 +64,7 @@ export function configFromEnv(env: NodeJS.ProcessEnv = process.env): DeepSeekCon
     apiKey,
     baseUrl: env.DEEPSEEK_BASE_URL ?? 'https://api.deepseek.com',
     model: env.DEEPSEEK_MODEL ?? 'deepseek-chat',
-    maxRetries: Number(env.DEEPSEEK_MAX_RETRIES ?? 5),
+    maxRetries: Number(env.DEEPSEEK_MAX_RETRIES ?? 8),
     timeoutMs: Number(env.DEEPSEEK_TIMEOUT_MS ?? 120000),
   };
 }

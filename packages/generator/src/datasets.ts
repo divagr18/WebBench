@@ -22,6 +22,7 @@ export interface DatasetWriteOptions {
   seed: string;
   worldDate: string;
   proseModel: string | null;
+  embeddingModel?: string;
   renderStats?: DatasetManifest['renderStats'];
 }
 
@@ -59,6 +60,7 @@ export function writeDataset(rootDir: string, split: Split, claims: ClaimRecord[
     seed: opts.seed,
     worldDate: opts.worldDate,
     proseModel: opts.proseModel,
+    embeddingModel: opts.embeddingModel ?? null,
     claimCount: sortedClaims.length,
     episodeCount: worlds.length,
     claims: sortedClaims.map((c) => ({

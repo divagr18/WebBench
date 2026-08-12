@@ -1,7 +1,7 @@
 import type { ClaimRecord, PageContent, VisiblePage, WorldManifest } from '@echobench/schema';
 import { PageContentSchema } from '@echobench/schema';
 import type { DeepSeekClient } from '@echobench/llm';
-import { buildSlotRecords, type SlotRecord } from './pagegen.js';
+import { buildSlotRecords, buildDistractorRecords, type SlotRecord } from './pagegen.js';
 import { finalizeWorld } from './worldgen.js';
 import { fillTemplate, type PromptBundle } from './prompts.js';
 import { normalizeRawToAnswer, sameValue } from './values.js';
@@ -30,14 +30,14 @@ export async function renderWorld(
   world: WorldManifest,
   bundle: PromptBundle,
 ): Promise<{ world: WorldManifest; stats: RenderStats }> {
-  const records = buildSlotRecords(claim, world.condition);
+  const records = [...buildSlotRecords(claim, world.condition), ...buildDistractorRecords(claim, world.condition)];
   const byPage = new Map(records.map((r) => [r.pageId, r]));
   const stats: RenderStats = { pagesRendered: 0, pagesFallback: 0, extractionRetries: 0, estimatedCostUsd: 0 };
   const pages: VisiblePage[] = [];
 
   for (const page of world.pages) {
     const rec = byPage.get(page.pageId);
-    if (!rec) {
+    if (!rec || rec.slot.startsWith('extra_')) {
       pages.push(page);
       continue;
     }
@@ -143,7 +143,7 @@ function buildRenderPrompt(rec: SlotRecord, bundle: PromptBundle, wordTarget: nu
     ORG: rec.org,
     ORG_TYPE: rec.slotDef.orgType,
     DOC_TYPE: rec.slotDef.docType,
-    DOC_ID: `${rec.slot.toUpperCase().replace(/_/g, '-')}-${rec.publishedAt.slice(0, 10)}`,
+    DOC_ID: `${(rec.siteDomain.split('.')[0] ?? 'doc').toUpperCase()}-${rec.publishedAt.slice(0, 10)}`,
     PUBLISHED_DATE: rec.publishedAt.slice(0, 10),
   });
 }

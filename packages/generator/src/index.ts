@@ -1,6 +1,8 @@
 export * from './hash.js';
 export * from './rng.js';
 export * from './values.js';
+export * from './names.js';
+export * from './sites.js';
 export * from './slots.js';
 export * from './layout.js';
 export * from './pagegen.js';
@@ -8,6 +10,8 @@ export * from './worldgen.js';
 export * from './render.js';
 export * from './prompts.js';
 export * from './datasets.js';
+export * from './embed.js';
+export * from './fiction.js';
 export * from './syntheticClaims.js';
 export * from './realClaims.js';
 export * from './corpus.js';

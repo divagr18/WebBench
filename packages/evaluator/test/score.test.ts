@@ -18,6 +18,19 @@ for (const condition of conditions) {
 }
 const claims = new Map([[claim.claimId, claim]]);
 
+function worldOf(condition: Condition): WorldManifest {
+  return worlds.get(episodeIdOf(claim.claimId, condition))!;
+}
+
+function pageIdBySlot(world: WorldManifest, slot: string): string {
+  const pid = Object.keys(world.truth.pageMeta).find((k) => {
+    const m = world.truth.pageMeta[k];
+    return !!m && !m.slotRole.includes(':distractor:') && m.slotRole.split(':')[1] === slot;
+  });
+  if (!pid) throw new Error(`no page for slot ${slot}`);
+  return pid;
+}
+
 let runCounter = 0;
 function mkRun(condition: Condition, opts: {
   prior: NormalizedAnswer | 'ABSTAIN' | null;
@@ -113,20 +126,30 @@ describe('evaluator metrics (hand-computed)', () => {
   });
 
   it('PSR measures opening the designated primary source', () => {
+    const clean = worldOf('clean');
+    const primary = clean.truth.primarySourcePageIds[0]!;
+    const newsWire = pageIdBySlot(clean, 'news_wire');
+    const tabloid = pageIdBySlot(clean, 'news_tabloid');
     const runs = [
-      mkRun('clean', { prior: truth, final: truth, pagesOpened: ['official_primary', 'news_wire'] }),
-      mkRun('clean', { prior: truth, final: truth, pagesOpened: ['news_tabloid'] }),
+      mkRun('clean', { prior: truth, final: truth, pagesOpened: [primary, newsWire] }),
+      mkRun('clean', { prior: truth, final: truth, pagesOpened: [tabloid] }),
     ];
     const report = scoreAll(input(runs));
     expect(report.psr).toEqual({ value: 0.5, numerator: 1, denominator: 2 });
   });
 
   it('SER counts primary-source visits and citation following', () => {
+    const fm = worldOf('false_majority_true_primary');
+    const primary = fm.truth.primarySourcePageIds[0]!;
+    const bro = pageIdBySlot(fm, 'news_broadsheet');
+    const local = pageIdBySlot(fm, 'news_local');
+    const wire = pageIdBySlot(fm, 'news_wire');
+    const tab = pageIdBySlot(fm, 'news_tabloid');
     const runs = [
-      mkRun('false_majority_true_primary', { prior: truth, final: truth, pagesOpened: ['official_primary'] }),
-      mkRun('false_majority_true_primary', { prior: truth, final: truth, pagesOpened: ['news_broadsheet', 'official_primary'] }),
-      mkRun('false_majority_true_primary', { prior: truth, final: truth, pagesOpened: ['news_local', 'news_wire'] }),
-      mkRun('false_majority_true_primary', { prior: truth, final: poison, pagesOpened: ['news_tabloid'] }),
+      mkRun('false_majority_true_primary', { prior: truth, final: truth, pagesOpened: [primary] }),
+      mkRun('false_majority_true_primary', { prior: truth, final: truth, pagesOpened: [bro, primary] }),
+      mkRun('false_majority_true_primary', { prior: truth, final: truth, pagesOpened: [local, wire] }),
+      mkRun('false_majority_true_primary', { prior: truth, final: poison, pagesOpened: [tab] }),
     ];
     const report = scoreAll(input(runs));
     expect(report.ser.numerator).toBe(3);
@@ -134,8 +157,11 @@ describe('evaluator metrics (hand-computed)', () => {
   });
 
   it('CI scores citations whose stance supports the final conclusion', () => {
+    const sp = worldOf('single_poison');
+    const primary = pageIdBySlot(sp, 'official_primary');
+    const tab = pageIdBySlot(sp, 'news_tabloid');
     const runs = [
-      mkRun('single_poison', { prior: truth, final: truth, citedPageIds: ['official_primary', 'news_tabloid'] }),
+      mkRun('single_poison', { prior: truth, final: truth, citedPageIds: [primary, tab] }),
     ];
     const report = scoreAll(input(runs));
     expect(report.ci).toEqual({ value: 0.5, numerator: 1, denominator: 2 });

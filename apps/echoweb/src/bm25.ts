@@ -2,6 +2,7 @@ import type { VisiblePage, WorldManifest } from '@echobench/schema';
 
 const K1 = 1.2;
 const B = 0.75;
+const RRF_K = 60;
 
 export function tokenize(text: string): string[] {
   return text
@@ -16,6 +17,11 @@ interface DocIndex {
   tf: Map<string, number>;
   titleTokens: Set<string>;
   length: number;
+}
+
+export interface RankedResult {
+  pageId: string;
+  score: number;
 }
 
 export class WorldSearchIndex {
@@ -42,7 +48,7 @@ export class WorldSearchIndex {
     this.docs.sort((a, b) => a.pageId.localeCompare(b.pageId));
   }
 
-  score(queryTokens: string[], doc: DocIndex): number {
+  private score(queryTokens: string[], doc: DocIndex): number {
     const n = this.docs.length;
     let s = 0;
     for (const q of queryTokens) {
@@ -58,27 +64,72 @@ export class WorldSearchIndex {
     return s;
   }
 
-  rankedIds(query: string): Array<{ pageId: string; score: number }> {
+  lexicalRank(query: string): RankedResult[] {
     const qTokens = tokenize(query);
     if (qTokens.length === 0) return [];
-    const scored: Array<{ pageId: string; score: number }> = [];
+    const scored: RankedResult[] = [];
     for (const d of this.docs) {
       const sc = this.score(qTokens, d);
       if (sc > 0) scored.push({ pageId: d.pageId, score: sc });
     }
     scored.sort((a, b) => b.score - a.score || a.pageId.localeCompare(b.pageId));
+    return scored;
+  }
+
+  denseRank(queryVector: number[]): RankedResult[] {
+    const embeddings = this.world.pageEmbeddings;
+    if (!embeddings) return [];
+    const scored: RankedResult[] = [];
+    for (const d of this.docs) {
+      const vec = embeddings[d.pageId];
+      if (!vec) continue;
+      scored.push({ pageId: d.pageId, score: cosine(queryVector, vec) });
+    }
+    scored.sort((a, b) => b.score - a.score || a.pageId.localeCompare(b.pageId));
+    return scored;
+  }
+
+  async rankedIds(query: string, embedQuery?: (q: string) => Promise<number[]>): Promise<RankedResult[]> {
+    const lexical = this.lexicalRank(query);
+    let fused = lexical;
+
+    if (embedQuery && this.world.pageEmbeddings) {
+      const queryVector = await embedQuery(query);
+      const dense = this.denseRank(queryVector);
+      fused = reciprocalRankFusion([lexical, dense]);
+    }
+
     if (this.world.searchConfig.mode === 'bm25_with_overrides') {
       const forced = this.world.searchConfig.forcedTopPageIds;
-      for (let i = scored.length - 1; i >= 0; i--) {
-        const item = scored[i];
+      for (let i = fused.length - 1; i >= 0; i--) {
+        const item = fused[i];
         if (item && forced.includes(item.pageId)) {
-          scored.splice(i, 1);
-          scored.unshift(item);
+          fused.splice(i, 1);
+          fused.unshift(item);
         }
       }
     }
-    return scored;
+    return fused;
   }
+}
+
+export function reciprocalRankFusion(lists: RankedResult[][]): RankedResult[] {
+  const scoreByDoc = new Map<string, number>();
+  for (const list of lists) {
+    list.forEach((item, rank) => {
+      scoreByDoc.set(item.pageId, (scoreByDoc.get(item.pageId) ?? 0) + 1 / (RRF_K + rank + 1));
+    });
+  }
+  const out: RankedResult[] = [...scoreByDoc.entries()].map(([pageId, score]) => ({ pageId, score }));
+  out.sort((a, b) => b.score - a.score || a.pageId.localeCompare(b.pageId));
+  return out;
+}
+
+export function cosine(a: number[], b: number[]): number {
+  if (a.length === 0 || a.length !== b.length) return 0;
+  let dot = 0;
+  for (let i = 0; i < a.length; i++) dot += (a[i] ?? 0) * (b[i] ?? 0);
+  return dot;
 }
 
 export function pageTitle(page: VisiblePage): string {
@@ -100,6 +151,17 @@ export function pageBodyText(page: VisiblePage): string {
       return page.content.body;
     case 'official':
       return page.content.body;
+  }
+}
+
+export function pageOutletLabel(page: VisiblePage): string | null {
+  switch (page.content.platform) {
+    case 'news':
+      return page.content.outlet;
+    case 'official':
+      return page.content.orgName;
+    case 'threadit':
+      return 'Threadhouse';
   }
 }
 

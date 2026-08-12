@@ -236,7 +236,7 @@ async function dispatchTool(
       const siteRaw = typeof args.site === 'string' ? args.site : null;
       const searchResult = await gateway.search({
         query,
-        ...(siteRaw === 'threadit' || siteRaw === 'news' || siteRaw === 'official' ? { site: siteRaw } : {}),
+        ...(siteRaw ? { site: siteRaw } : {}),
         ...(typeof args.dateFrom === 'string' ? { dateFrom: args.dateFrom } : {}),
         ...(typeof args.dateTo === 'string' ? { dateTo: args.dateTo } : {}),
         ...(typeof args.cursor === 'string' ? { cursor: args.cursor } : {}),
@@ -245,10 +245,10 @@ async function dispatchTool(
       return truncate(JSON.stringify(searchResult));
     }
     if (name === 'openPage') {
-      const pageId = typeof args.pageId === 'string' ? args.pageId : '';
-      const page = await gateway.openPage(pageId);
-      result.toolCallLog.push({ type: 'open_page_call', detail: pageId });
-      if (!page) return JSON.stringify({ error: 'page not found', pageId });
+      const target = typeof args.url === 'string' && args.url.length > 0 ? args.url : typeof args.pageId === 'string' ? args.pageId : '';
+      const page = await gateway.openPage(target);
+      result.toolCallLog.push({ type: 'open_page_call', detail: target });
+      if (!page) return JSON.stringify({ error: 'page not found', requested: target });
       openedSet.add(page.pageId);
       return truncate(JSON.stringify(page));
     }
@@ -265,12 +265,12 @@ function toolDefs(): ToolDef[] {
       type: 'function',
       function: {
         name: 'search',
-        description: 'Search the web archive. Returns up to 10 results with page ids, titles, snippets, and publication dates.',
+        description: 'Search the web. Returns up to 10 results with urls, titles, snippets, source sites, publication dates, and engagement counts.',
         parameters: {
           type: 'object',
           properties: {
             query: { type: 'string' },
-            site: { type: 'string', enum: ['threadit', 'news', 'official'] },
+            site: { type: 'string', description: 'optional filter: a platform type (threadit|news|official) or a site domain like dailyledger.com' },
             dateFrom: { type: 'string' },
             dateTo: { type: 'string' },
             cursor: { type: 'string' },
@@ -283,11 +283,14 @@ function toolDefs(): ToolDef[] {
       type: 'function',
       function: {
         name: 'openPage',
-        description: 'Open a page from the archive by its page id.',
+        description: 'Open one page from the web and read its full content. Pass the exact url from a search result or a citation (or its page id).',
         parameters: {
           type: 'object',
-          properties: { pageId: { type: 'string' } },
-          required: ['pageId'],
+          properties: {
+            url: { type: 'string', description: 'the page url as shown in search results or citations' },
+            pageId: { type: 'string', description: 'alternative: the opaque page id' },
+          },
+          required: ['url'],
         },
       },
     },

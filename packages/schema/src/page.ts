@@ -75,14 +75,19 @@ export const PageCitationSchema = z.object({
 });
 export type PageCitation = z.infer<typeof PageCitationSchema>;
 
+/** Opaque page identifier (never reveals role/stance); model-visible. */
+export const PAGE_ID_PATTERN = /^p_[a-z0-9]{8,16}$/;
+/** Realistic-looking synthetic web address; resolved only inside the world. */
+export const PAGE_URL_PATTERN = /^https:\/\/[a-z0-9](?:[a-z0-9-]*[a-z0-9])?(?:\.[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)+\/\S*$/;
+
 /**
  * The model-facing page. Contains ONLY visible fields: content, timestamps,
  * engagement, authorship cues, citations. Hidden stance/truth/provenance live
  * in WorldManifest.truth.pageMeta (never served by echoweb).
  */
 export const VisiblePageSchema = z.object({
-  pageId: z.string().regex(/^[a-z][a-z0-9_]*$/),
-  url: z.string().regex(/^https:\/\/(threadit|news|official)\.echo\/p\/[a-z][a-z0-9_]*$/),
+  pageId: z.string().regex(PAGE_ID_PATTERN),
+  url: z.string().regex(PAGE_URL_PATTERN),
   platform: PlatformSchema,
   publishedAt: IsoDateTimeSchema,
   content: PageContentSchema,

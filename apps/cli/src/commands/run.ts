@@ -4,7 +4,7 @@ import { loadAndValidateDataset, loadPrompts, SeededRng } from '@echobench/gener
 import { HttpToolGateway, runAll, type PlannedRun } from '@echobench/runner';
 import { makeDeepSeekClient, type CliContext } from '../main.js';
 import { opt, optNumber, type ParsedArgs } from '../args.js';
-import { startEchoWeb } from '../serveHelper.js';
+import { startEchoWeb, makeEmbedQuery } from '../serveHelper.js';
 
 export function selectPlans(manifest: DatasetManifest, maxRuns: number, replicates: number, seed: string): PlannedRun[] {
   const byClaim = new Map<string, string[]>();
@@ -74,8 +74,9 @@ export async function cmdRun(args: ParsedArgs, ctx: CliContext): Promise<number>
   }
 
   const worlds = [...dataset.worlds.values()];
-  const { baseUrl, close } = await startEchoWeb(worlds, 0);
-  console.log(`[run] echoweb at ${baseUrl}; plan=${plans.length} runs split=${split} runSet=${runSetId} budget=$${budgetUsd}`);
+  const embedQuery = await makeEmbedQuery();
+  const { baseUrl, close } = await startEchoWeb(worlds, 0, '127.0.0.1', embedQuery ? { embedQuery } : {});
+  console.log(`[run] echoweb at ${baseUrl}; plan=${plans.length} runs split=${split} runSet=${runSetId} budget=$${budgetUsd}${embedQuery ? ' hybrid-search=on' : ' search=bm25-only'}`);
 
   const llm = makeDeepSeekClient(ctx);
   const bundle = loadPrompts(ctx.repoRoot);

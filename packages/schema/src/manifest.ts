@@ -10,6 +10,7 @@ export const DatasetManifestSchema = z.object({
   seed: z.string(),
   worldDate: z.string(),
   proseModel: z.string().nullable(),
+  embeddingModel: z.string().nullable().optional(),
   claimCount: z.number().int().nonnegative(),
   episodeCount: z.number().int().nonnegative(),
   claims: z.array(z.object({

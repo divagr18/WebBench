@@ -1,6 +1,6 @@
 import { join } from 'node:path';
 import { CONDITIONS, episodeIdOf, type Split, type WorldManifest } from '@echobench/schema';
-import { buildCorpus, buildWorld, loadPrompts, renderWorld, writeDataset, GENERATOR_VERSION } from '@echobench/generator';
+import { buildCorpus, buildWorld, loadPrompts, renderWorld, writeDataset, finalizeWorld, embedWorldPages, getLocalEmbedder, GENERATOR_VERSION } from '@echobench/generator';
 import { makeDeepSeekClient, type CliContext } from '../main.js';
 import { opt, optNumber, type ParsedArgs } from '../args.js';
 
@@ -9,9 +9,10 @@ export async function cmdGenerate(args: ParsedArgs, ctx: CliContext): Promise<nu
   const dataDir = opt(args, 'data-dir', join(ctx.repoRoot, 'datasets'));
   const createdAt = opt(args, 'created-at', '2026-08-11T00:00:00Z');
   const worldDate = opt(args, 'world-date', '2031-05-01');
-  const seed = opt(args, 'seed', 'echobench-v1');
+  const seed = opt(args, 'seed', 'echobench-v2');
   const concurrency = optNumber(args, 'concurrency', 8);
   const skipProse = args.flags.has('skip-prose');
+  const skipEmbed = args.flags.has('no-embed');
 
   const splits: Split[] = splitArg === 'all' ? ['dev', 'test'] : [splitArg as Split];
 
@@ -71,12 +72,31 @@ export async function cmdGenerate(args: ParsedArgs, ctx: CliContext): Promise<nu
       }
     }
 
+    let embeddingModel: string | null = null;
+    if (!skipEmbed) {
+      try {
+        const embedder = await getLocalEmbedder();
+        embeddingModel = embedder.modelId;
+        console.log(`[generate] ${split}: embedding ${worlds.length} worlds with ${embeddingModel} ...`);
+        for (let i = 0; i < worlds.length; i++) {
+          const w = worlds[i];
+          if (!w) continue;
+          w.pageEmbeddings = await embedWorldPages(embedder, w.pages);
+          worlds[i] = finalizeWorld(w);
+          if ((i + 1) % 30 === 0 || i + 1 === worlds.length) console.log(`[generate] ${split}: embedded ${i + 1}/${worlds.length} worlds`);
+        }
+      } catch (e) {
+        console.warn(`[generate] embeddings skipped (search falls back to BM25): ${e instanceof Error ? e.message : String(e)}`);
+      }
+    }
+
     const manifest = writeDataset(dataDir, split, claims, worlds, {
       datasetName: `echobench-${split}`,
       createdAt,
       seed,
       worldDate,
       proseModel: client ? client.defaultModel : null,
+      ...(embeddingModel ? { embeddingModel } : {}),
       renderStats: { pagesRendered: rendered, pagesFallback: fallback, extractionRetries: retries, estimatedCostUsd: cost },
     });
     console.log(`[generate] wrote ${split}: episodes=${manifest.episodeCount} generator=${GENERATOR_VERSION} integrity=${manifest.integrityChecksum.slice(0, 12)}…`);
