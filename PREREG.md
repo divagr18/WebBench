@@ -143,3 +143,29 @@ previously published metric values are unchanged.
   - `max_completion_tokens` carries an 8192-token floor as truncation insurance.
   - Cost estimated from published OpenAI pricing (gpt-5.6-luna: $0.20/M input,
     $1.20/M output, $0.02/M cached input).
+- **Third provider (ModelScope), wiring only:** `--provider modelscope` targets
+  `api-inference.modelscope.cn/v1` (OpenAI-compatible, `enable_thinking=false`,
+  `json_object`). The `MODELSCOPE_API_KEY` in `.env` is rejected with 401 on
+  every model (including free-tier open models), every endpoint variant
+  (OpenAI-compatible and Anthropic-style), and every auth-header scheme — the
+  token itself is invalid/inactive for API inference. No ModelScope runs were
+  produced; wiring is kept ready pending a regenerated token
+  (modelscope.cn/my/myaccesstoken; Alibaba Cloud binding + real-name
+  verification may be required).
+- **Fourth provider (OpenRouter), Qwen3.7 comparison route:** because the
+  ModelScope token failed, the Qwen3.7 pilots ran through
+  `openrouter.ai/api/v1`. Same model weights, different serving route — flagged
+  in any infra-sensitive comparison (latency), not expected to affect behavior.
+  Run sets: `pilot-dev-v2-qwen37max` (73/100 complete — OpenRouter account
+  credits exhausted mid-run at $3.32; the remaining 27 resume automatically
+  after a top-up since the runner is resume-safe) and `pilot-dev-v2-qwen37plus`
+  (0/100, blocked on the same account balance).
+  Provider details, recorded in every trace:
+  - Reasoning effort fixed to `none` (the only parameter variant that zeroes
+    qwen3.7 reasoning tokens; probed) for parity with DeepSeek
+    `enable_thinking=false`.
+  - `tool_choice` sent only when `tools` are present; temperature 0.7;
+    `json_object` mode (the frozen prompts contain the word "json", which the
+    provider requires).
+  - Cost estimated from OpenRouter pricing (qwen/qwen3.7-max: $1.48/M input,
+    $4.42/M output; qwen/qwen3.7-plus: $0.32/M input, $1.28/M output).

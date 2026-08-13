@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { configFromEnv, estimateCostUsd, modelscopeConfigFromEnv, openaiConfigFromEnv, OpenAIClient, pricingFor } from '../src/index.js';
+import { configFromEnv, estimateCostUsd, modelscopeConfigFromEnv, openaiConfigFromEnv, OpenAIClient, openrouterConfigFromEnv, pricingFor } from '../src/index.js';
 
 describe('llm package', () => {
   it('parses DeepSeek config from env and uses only DeepSeek keys', () => {
@@ -83,5 +83,21 @@ describe('llm package', () => {
     expect(max.outputPerM).toBeGreaterThan(0);
     expect(plus.inputPerM).toBeGreaterThan(0);
     expect(plus.outputPerM).toBeGreaterThan(0);
+  });
+
+  it('parses OpenRouter config from env and uses only OpenRouter keys', () => {
+    const cfg = openrouterConfigFromEnv({
+      OPENROUTER_API_KEY: 'sk-or-test',
+      MODELSCOPE_API_KEY: 'ms-should-not-matter',
+    } as NodeJS.ProcessEnv);
+    expect(cfg).not.toBeNull();
+    expect(cfg!.apiKey).toBe('sk-or-test');
+    expect(cfg!.baseUrl).toBe('https://openrouter.ai/api/v1');
+    expect(cfg!.model).toBe('qwen/qwen3.7-max');
+    expect(cfg!.reasoningEffort).toBe('none');
+  });
+
+  it('returns null OpenRouter config when key missing', () => {
+    expect(openrouterConfigFromEnv({} as NodeJS.ProcessEnv)).toBeNull();
   });
 });

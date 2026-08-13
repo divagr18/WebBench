@@ -1,4 +1,4 @@
-import { configFromEnv, DeepSeekClient, modelscopeConfigFromEnv, ModelScopeClient, openaiConfigFromEnv, OpenAIClient } from '@echobench/llm';
+import { configFromEnv, DeepSeekClient, modelscopeConfigFromEnv, ModelScopeClient, openaiConfigFromEnv, OpenAIClient, openrouterConfigFromEnv, OpenRouterClient } from '@echobench/llm';
 import { findRepoRoot, loadDotEnv } from './env.js';
 import { parseArgs } from './args.js';
 import { cmdGenerate } from './commands/generate.js';
@@ -18,9 +18,9 @@ export interface EvalClient {
   chat: DeepSeekClient['chat'];
 }
 
-const VALID_PROVIDERS = ['deepseek', 'openai', 'modelscope'];
+const VALID_PROVIDERS = ['deepseek', 'openai', 'modelscope', 'openrouter'];
 
-export function isValidProvider(provider: string): provider is 'deepseek' | 'openai' | 'modelscope' {
+export function isValidProvider(provider: string): provider is 'deepseek' | 'openai' | 'modelscope' | 'openrouter' {
   return VALID_PROVIDERS.includes(provider);
 }
 
@@ -39,6 +39,13 @@ export function makeEvalClient(ctx: CliContext, provider: string, model?: string
       throw new Error('MODELSCOPE_API_KEY is not set. Set it in .env at the repo root.');
     }
     return new ModelScopeClient(model ? { ...config, model } : config);
+  }
+  if (provider === 'openrouter') {
+    const config = openrouterConfigFromEnv(merged);
+    if (!config) {
+      throw new Error('OPENROUTER_API_KEY is not set. Set it in .env at the repo root.');
+    }
+    return new OpenRouterClient(model ? { ...config, model } : config);
   }
   const config = configFromEnv(merged);
   if (!config) {

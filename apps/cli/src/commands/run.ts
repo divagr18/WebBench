@@ -52,7 +52,7 @@ export async function cmdRun(args: ParsedArgs, ctx: CliContext): Promise<number>
   const split = splitArg;
   const provider = opt(args, 'provider', 'deepseek');
   if (!isValidProvider(provider)) {
-    console.error(`[run] --provider must be deepseek or openai, got ${provider}`);
+    console.error(`[run] --provider must be one of deepseek, openai, modelscope, openrouter; got ${provider}`);
     return 2;
   }
   const modelArg = opt(args, 'model', '') || null;
