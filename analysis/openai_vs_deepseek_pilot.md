@@ -128,7 +128,12 @@ Findings (thinking disabled for protocol parity):
 
 2. **Same collapse pattern as DeepSeek**, not Luna: false_majority 0.500,
    manufactured_consensus 0.750, everything else ≥0.917. A model that behaves
-   like DeepSeek on the benchmark's core construct.
+   like DeepSeek on the benchmark's core construct. Hand-read trace comparison
+   of all five qwen corruptions against DeepSeek and Luna on the identical
+   episodes: `analysis/case_studies_false_majority.md` ("Cross-model" section).
+   Headline there: the trap geometry is claim-specific and replicates across
+   model families — on real_044 fm, DeepSeek and qwen3.7-max both nominated the
+   *same* false page as `primarySourcePageId`.
 
 3. **DeepSeek-like retrieval style with even fewer tool calls** (4.96 avg):
    PSR 0.986 (opens nearly every primary), SER 1.000 (always escalates on
