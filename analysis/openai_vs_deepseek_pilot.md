@@ -164,6 +164,10 @@ Findings (thinking disabled for protocol parity):
   uniformly 4–5 per condition because the account died mid-plan). No condition
   is underrepresented, so the partial comparison claims are unbiased with
   respect to condition; the remaining 27 runs refine intervals, not direction.
+- **Alternate routes checked:** Groq (`GROQ_API_KEY` present) serves only
+  `qwen/qwen3.6-27b` — the requested 3.7-max/plus models are not available
+  there. No DashScope key exists in the environment. OpenRouter is therefore
+  the only live route for these models pending the credit top-up.
 
 ## Harness notes (for the record)
 
