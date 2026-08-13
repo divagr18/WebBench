@@ -159,6 +159,11 @@ Findings (thinking disabled for protocol parity):
 - **qwen3.7-plus: 0/100.** Queued behind the same credit wall.
 - **ModelScope route:** wiring complete (`--provider modelscope`), pending a
   valid token.
+- **Partial-sample validity check:** the 73 completed runs are balanced across
+  all six conditions (13/12/12/12/12/12 completed; failures distributed
+  uniformly 4–5 per condition because the account died mid-plan). No condition
+  is underrepresented, so the partial comparison claims are unbiased with
+  respect to condition; the remaining 27 runs refine intervals, not direction.
 
 ## Harness notes (for the record)
 
