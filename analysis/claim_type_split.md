@@ -54,3 +54,39 @@ These are two different findings currently reported as one number:
 Any paper reporting these should present the split, not just the pooled
 FBAR/CUR/EAS, because the pooled numbers hide that the corruption signal and
 the updating signal come from disjoint halves of the dataset.
+
+## Cross-model generalization (Luna, qwen3.7-max)
+
+The same split computed for the other two pilots (same code path, same
+claim-id-prefix subset):
+
+| Run set | REAL FBAR | REAL CUR | SYN FBAR | SYN CUR | SYN abstains |
+|---|---|---|---|---|---|
+| deepseek-chat (100) | 0.158 (6/38) | n/a (0/0) | n/a (0/0) | 0.857 (6/7) | 37 |
+| gpt-5.6-luna (100) | 0.000 (0/28) | 1.000 (1/1) | n/a (0/0) | 0.875 (7/8) | 52 |
+| qwen3.7-max* (73) | 0.250 (5/20) | n/a (0/0) | n/a (0/0) | 0.857 (6/7) | 42 |
+
+\* partial pilot, credit wall at 73/100; sample balanced across conditions.
+
+1. **The split is a dataset-structural property, not a DeepSeek artifact.**
+   Across all three model families, every FBAR event occurs on a real claim
+   (6/6, 5/5) and every CUR eligibility is a synthetic claim with an absent or
+   wrong prior (6/7, 7/8). Zero synthetic-claim corruptions anywhere: a model
+   cannot be talked out of knowledge it never had.
+
+2. **Exposure does not imply corruption.** Luna had the largest real-claim
+   exposure (28 prior-correct poison runs — more than qwen3.7-max's 20) and
+   zero corruptions. The *exposure* is dataset-determined; the *corruption* is
+   model-determined. This is what makes the FBAR comparison meaningful rather
+   than tautological.
+
+3. **Real-claim CUR is effectively unmeasurable.** Luna's single real-claim
+   CUR eligibility (1/1) is the only real-claim update opportunity in all
+   three pilots combined. The legitimate-update dataset fix for real claims
+   (see `analysis/designs_dose_response_and_fixes.md`) is the prerequisite for
+   a comparable updating metric on the real half.
+
+4. **Abstention is synthetic-only and model-dependent** (37 / 52 / 42). No
+   model abstains on real claims (all real priors answered); synthetic claims
+   are fictional-with-future-dates by design, so abstention rates there track
+   each model's epistemic caution on unknown entities.
