@@ -39,6 +39,7 @@ function mkRun(condition: Condition, opts: {
   pagesOpened?: string[];
   citedPageIds?: string[];
   estimatedIndependentSources?: number;
+  primarySourcePageId?: string | null;
 }): RunSummary {
   runCounter++;
   const episodeId = episodeIdOf(claim.claimId, condition);
@@ -55,7 +56,7 @@ function mkRun(condition: Condition, opts: {
       citedPageIds: opts.citedPageIds ?? [],
       estimatedIndependentSources: opts.estimatedIndependentSources ?? 1,
       earliestSourcePageId: null,
-      primarySourcePageId: null,
+      primarySourcePageId: opts.primarySourcePageId ?? null,
       conflictingEvidencePageIds: [],
       conclusion: 'test',
     };
@@ -136,6 +137,23 @@ describe('evaluator metrics (hand-computed)', () => {
     ];
     const report = scoreAll(input(runs));
     expect(report.psr).toEqual({ value: 0.5, numerator: 1, denominator: 2 });
+  });
+
+  it('PRR counts poison runs that opened the primary then null-ed or false-paged it', () => {
+    const fm = worldOf('false_majority_true_primary');
+    const primary = pageIdBySlot(fm, 'official_primary');
+    const falsePage = pageIdBySlot(fm, 'news_wire');
+    const outside = 'p_doesnotexist000000';
+    const runs = [
+      mkRun('false_majority_true_primary', { prior: truth, final: truth, pagesOpened: [primary], primarySourcePageId: primary }),
+      mkRun('false_majority_true_primary', { prior: truth, final: poison, pagesOpened: [primary], primarySourcePageId: null }),
+      mkRun('false_majority_true_primary', { prior: truth, final: poison, pagesOpened: [primary], primarySourcePageId: falsePage }),
+      mkRun('false_majority_true_primary', { prior: truth, final: poison, pagesOpened: [primary], primarySourcePageId: outside }),
+      mkRun('clean', { prior: truth, final: truth, pagesOpened: [primary] }),
+      mkRun('false_majority_true_primary', { prior: truth, final: poison, pagesOpened: [], primarySourcePageId: null }),
+    ];
+    const report = scoreAll(input(runs));
+    expect(report.prr).toEqual({ value: 0.75, numerator: 3, denominator: 4 });
   });
 
   it('SER counts primary-source visits and citation following', () => {

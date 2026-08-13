@@ -2,7 +2,7 @@
  "schemaVersion": 1,
  "split": "dev",
  "runSetId": "pilot-dev-v2",
- "createdAt": "2026-08-13T06:57:08.490Z",
+ "createdAt": "2026-08-13T07:25:15.002Z",
  "modelRequested": "deepseek-chat",
  "totalRuns": 100,
  "completedRuns": 100,
@@ -141,6 +141,11 @@
   "value": 0.98,
   "numerator": 98,
   "denominator": 100
+ },
+ "prr": {
+  "value": 0.22727272727272727,
+  "numerator": 15,
+  "denominator": 66
  },
  "ci": {
   "value": 0.6098081023454158,

@@ -45,7 +45,7 @@ def write_conditions_table(score: dict, out_dir: Path) -> None:
 
 
 def write_metrics_md(score: dict, out_dir: Path) -> None:
-    metric_names = ["fbar", "cur", "pcr", "ser", "psr", "ci", "tua"]
+    metric_names = ["fbar", "cur", "pcr", "ser", "psr", "prr", "ci", "tua"]
     lines = ["# EchoBench metrics", "", "| Metric | Value | N | D |", "|---|---|---|---|"]
     for name in metric_names:
         m = score.get(name) or {}

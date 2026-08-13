@@ -3,7 +3,7 @@
 - runSetId: `pilot-dev-v2`
 - split: `dev`
 - model: `deepseek-chat`
-- createdAt: 2026-08-13T06:57:08.490Z
+- createdAt: 2026-08-13T07:25:15.002Z
 - runs: 100 total, 100 completed, 0 failed, 0 rejected
 
 ## Headline metrics
@@ -15,6 +15,7 @@
 | PCR (lower better) | 0.2941 | 5 | 17 |
 | SER | 1.0000 | 67 | 67 |
 | PSR | 0.9800 | 98 | 100 |
+| PRR (lower better) | 0.2273 | 15 | 66 |
 | CI | 0.6098 | 286 | 469 |
 | TUA | 0.9375 | 15 | 16 |
 | **EAS** | 0.8496 [0.636, 0.972] | - | - |

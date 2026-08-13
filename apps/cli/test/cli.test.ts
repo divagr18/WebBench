@@ -99,6 +99,7 @@ describe('renderMarkdown', () => {
     ics: { meanPairedDiff: 0.05, pairs: 8 },
     ser: { value: 1, numerator: 8, denominator: 8 },
     psr: { value: 0.9, numerator: 14, denominator: 16 },
+    prr: { value: 0.25, numerator: 3, denominator: 12 },
     ci: { value: 0.6, numerator: 9, denominator: 15 },
     tua: { value: 0.9, numerator: 9, denominator: 10 },
     calibration: { brier: 0.15, ece: 0.08, n: 16 },
@@ -112,6 +113,7 @@ describe('renderMarkdown', () => {
       conditionAccuracy: [],
     });
     expect(md).toContain('| **EAS** | 0.6500 [0.450, 0.850] | - | - |');
+    expect(md).toContain('| PRR (lower better) | 0.2500 | 3 | 12 |');
   });
 
   it('renders EAS without CI when bootstrap is absent', () => {

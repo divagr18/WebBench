@@ -55,6 +55,7 @@ export function renderMarkdown(score: Record<string, unknown>): string {
     ['PCR (lower better)', score.pcr as Record<string, unknown>],
     ['SER', score.ser as Record<string, unknown>],
     ['PSR', score.psr as Record<string, unknown>],
+    ['PRR (lower better)', score.prr as Record<string, unknown>],
     ['CI', score.ci as Record<string, unknown>],
     ['TUA', score.tua as Record<string, unknown>],
   ];
