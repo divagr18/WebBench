@@ -79,10 +79,12 @@ export class OpenAIClient {
       model: this.config.model,
       messages,
       max_completion_tokens: Math.max(opts.maxTokens ?? 2048, this.config.completionTokenFloor),
-      tool_choice: opts.toolChoice ?? 'auto',
-      reasoning: { effort: this.config.reasoningEffort },
+      reasoning_effort: this.config.reasoningEffort,
     };
-    if (opts.tools && opts.tools.length > 0) body.tools = opts.tools;
+    if (opts.tools && opts.tools.length > 0) {
+      body.tools = opts.tools;
+      body.tool_choice = opts.toolChoice ?? 'auto';
+    }
     if (opts.jsonSchema) {
       body.response_format = {
         type: 'json_schema',
