@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { configFromEnv, estimateCostUsd, openaiConfigFromEnv, OpenAIClient, pricingFor } from '../src/index.js';
+import { configFromEnv, estimateCostUsd, modelscopeConfigFromEnv, openaiConfigFromEnv, OpenAIClient, pricingFor } from '../src/index.js';
 
 describe('llm package', () => {
   it('parses DeepSeek config from env and uses only DeepSeek keys', () => {
@@ -59,5 +59,29 @@ describe('llm package', () => {
     });
     const cost = client.estimateCost({ prompt_tokens: 1_000_000, completion_tokens: 1_000_000, total_tokens: 2_000_000, prompt_cache_hit_tokens: 500_000 });
     expect(cost).toBeCloseTo(0.1 + 1.2 + 0.01, 5);
+  });
+
+  it('parses ModelScope config from env and uses only ModelScope keys', () => {
+    const cfg = modelscopeConfigFromEnv({
+      MODELSCOPE_API_KEY: 'ms-test',
+      OPENAI_API_KEY: 'sk-should-not-matter',
+    } as NodeJS.ProcessEnv);
+    expect(cfg).not.toBeNull();
+    expect(cfg!.apiKey).toBe('ms-test');
+    expect(cfg!.baseUrl).toBe('https://api-inference.modelscope.cn/v1');
+    expect(cfg!.model).toBe('Qwen-Ambassador/Qwen3.7-Max');
+  });
+
+  it('returns null ModelScope config when key missing', () => {
+    expect(modelscopeConfigFromEnv({} as NodeJS.ProcessEnv)).toBeNull();
+  });
+
+  it('has qwen3.7 pricing entries for cost-guard estimates', () => {
+    const max = pricingFor('Qwen-Ambassador/Qwen3.7-Max');
+    const plus = pricingFor('Qwen-Ambassador/Qwen3.7-Plus');
+    expect(max.inputPerM).toBeGreaterThan(0);
+    expect(max.outputPerM).toBeGreaterThan(0);
+    expect(plus.inputPerM).toBeGreaterThan(0);
+    expect(plus.outputPerM).toBeGreaterThan(0);
   });
 });

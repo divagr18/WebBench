@@ -11,6 +11,8 @@ export const PRICING: Record<string, ModelPricing> = {
   'gpt-5.6-luna': { inputPerM: 0.2, outputPerM: 1.2, cacheHitInputPerM: 0.02 },
   'gpt-5.6-terra': { inputPerM: 2.0, outputPerM: 12.0, cacheHitInputPerM: 0.2 },
   'gpt-5.6-sol': { inputPerM: 5.0, outputPerM: 30.0, cacheHitInputPerM: 0.5 },
+  'Qwen-Ambassador/Qwen3.7-Max': { inputPerM: 2.5, outputPerM: 7.5, cacheHitInputPerM: 0.5 },
+  'Qwen-Ambassador/Qwen3.7-Plus': { inputPerM: 0.4, outputPerM: 1.6, cacheHitInputPerM: 0.08 },
 };
 
 const FLASH_FALLBACK: ModelPricing = { inputPerM: 0.14, outputPerM: 0.28, cacheHitInputPerM: 0.0028 };
