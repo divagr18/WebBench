@@ -276,6 +276,26 @@ unfamiliar domains, and the model compensates by anchoring on news-consensus as
 the ground truth. The official record becomes the outlier that needs
 corroboration, and the echo chamber becomes the default.
 
+## Quantitative generalization: PRR and distrust language
+
+The six case studies are hand-read, but the mechanism they reveal can be
+quantified across all 67 poison runs with zero new API spend.
+
+**PRR (Primary Repudiation Rate):** of the 66 poison runs that opened the true
+primary, **15 repudiated it** — left `primarySourcePageId` null (5) or set it
+to a false page (10). **PRR = 0.227 (15/66).** All six corruptions are in the
+repudiated set, but repudiation also fires on runs that answered correctly
+(e.g. syn_010 ranked_poison: null, correct) — PRR measures the "found it, then
+disowned it" move directly, distinct from correctness.
+
+**Distrust language:** 43/67 poison conclusions contain distrust keywords
+(self-referential, uncorroborated, corporate, private registry, no citations,
+circular, ...). Of those, 42 opened the true primary, 12 got the answer wrong,
+and **11 of those 12 repudiated the true primary**. When the model states
+distrust and is wrong, it has almost always disowned the correct source
+(11/12). The qualitative pattern in the six cases generalizes: distrust
+language lands on the true primary in ~26% of poison runs (11/42).
+
 ## Statistical context
 
 - n = 6 corruptions out of 38 poison/update runs where the prior was correct
