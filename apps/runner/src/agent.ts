@@ -4,7 +4,7 @@ import type { ChatMessage, ChatOptions, ChatResponse, LlmLike, ToolDef } from '.
 import type { ToolGateway } from './gateway.js';
 import { fillTemplate, type PromptBundle } from '@echobench/generator';
 import { answerFormat, answerShapeHint, normalizeAnyAnswer } from './answerFormat.js';
-import { estimateCostUsd } from '@echobench/llm';
+import { FINAL_JUDGMENT_JSON_SCHEMA, PRIOR_RESPONSE_JSON_SCHEMA, estimateCostUsd } from '@echobench/llm';
 
 const MAX_TOOL_RESULT_CHARS = 6000;
 
@@ -136,7 +136,7 @@ async function elicitPrior(
         { role: 'system', content: 'You answer strictly from your own knowledge as JSON only.' },
         { role: 'user', content: prompt },
       ],
-      { responseFormat: 'json', temperature: opts.temperature, maxTokens: 300 },
+      { responseFormat: 'json', jsonSchema: { name: 'prior_response', schema: PRIOR_RESPONSE_JSON_SCHEMA }, temperature: opts.temperature, maxTokens: 300 },
     );
     addUsage(resp);
     const parsed = parsePrior(claim, resp.content);
@@ -185,7 +185,7 @@ async function elicitFinal(
 
   let lastError = 'no parse';
   for (let attempt = 0; attempt < 2; attempt++) {
-    const resp = await llm.chat(finalMessages, { responseFormat: 'json', temperature: opts.temperature, maxTokens: 900 });
+    const resp = await llm.chat(finalMessages, { responseFormat: 'json', jsonSchema: { name: 'final_judgment', schema: FINAL_JUDGMENT_JSON_SCHEMA }, temperature: opts.temperature, maxTokens: 900 });
     addUsage(resp);
     const obj = parseJsonLoose<Record<string, unknown>>(resp.content);
     if (obj) {

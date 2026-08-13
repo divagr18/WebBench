@@ -1,5 +1,5 @@
 import type { Split } from '@echobench/schema';
-import { EpisodeTraceSchema, RunManifestSchema, type EpisodeTrace } from '@echobench/schema';
+import { EpisodeTraceSchema, RunManifestSchema, type EpisodeTrace, type ProviderId } from '@echobench/schema';
 import type { PromptBundle } from '@echobench/generator';
 import type { WorldManifest, ClaimRecord } from '@echobench/schema';
 import type { LlmLike } from './llmIface.js';
@@ -25,6 +25,7 @@ export interface RunnerConfig {
   tracesRoot: string;
   split: Split;
   runSetId: string;
+  provider: ProviderId;
   modelRequested: string;
   replicatesPerEpisode: number;
   maxToolCalls: number;
@@ -85,7 +86,7 @@ export async function runAll(deps: RunnerDeps, config: RunnerConfig): Promise<Ru
     schemaVersion: 1,
     runSetId: config.runSetId,
     split: config.split,
-    provider: 'deepseek',
+    provider: config.provider,
     modelRequested: config.modelRequested,
     replicatesPerEpisode: config.replicatesPerEpisode,
     createdAt: new Date().toISOString(),
@@ -119,7 +120,7 @@ async function executeRun(
     condition: world.condition,
     split: config.split,
     replicate: plan.replicate,
-    provider: 'deepseek',
+    provider: config.provider,
     modelRequested: config.modelRequested,
     worldToken: world.worldToken,
     callBudget: config.maxToolCalls,
@@ -143,7 +144,7 @@ async function executeRun(
     episodeId: plan.episodeId,
     worldToken: world.worldToken,
     replicate: plan.replicate,
-    provider: 'deepseek',
+    provider: config.provider,
     modelRequested: config.modelRequested,
     modelReturned: result.modelReturned,
     seedRequested: config.baseSeed,

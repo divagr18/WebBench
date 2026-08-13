@@ -1,4 +1,4 @@
-import { configFromEnv, DeepSeekClient } from '@echobench/llm';
+import { configFromEnv, DeepSeekClient, openaiConfigFromEnv, OpenAIClient, PRICING, estimateCostUsd } from '@echobench/llm';
 import { findRepoRoot, loadDotEnv } from './env.js';
 import { parseArgs } from './args.js';
 import { cmdGenerate } from './commands/generate.js';
@@ -13,11 +13,38 @@ export interface CliContext {
   env: Record<string, string>;
 }
 
+export interface EvalClient {
+  defaultModel: string;
+  chat: DeepSeekClient['chat'];
+}
+
+const VALID_PROVIDERS = ['deepseek', 'openai'];
+
+export function isValidProvider(provider: string): provider is 'deepseek' | 'openai' {
+  return VALID_PROVIDERS.includes(provider);
+}
+
+export function makeEvalClient(ctx: CliContext, provider: string, model?: string): EvalClient {
+  const merged = { ...process.env, ...ctx.env } as NodeJS.ProcessEnv;
+  if (provider === 'openai') {
+    const config = openaiConfigFromEnv(merged);
+    if (!config) {
+      throw new Error('OPENAI_API_KEY is not set. Set it in .env at the repo root.');
+    }
+    return new OpenAIClient(model ? { ...config, model } : config);
+  }
+  const config = configFromEnv(merged);
+  if (!config) {
+    throw new Error('DEEPSEEK_API_KEY is not set. Set it in .env at the repo root.');
+  }
+  return new DeepSeekClient(model ? { ...config, model } : config);
+}
+
 export function makeDeepSeekClient(ctx: CliContext): DeepSeekClient {
   const merged = { ...process.env, ...ctx.env } as NodeJS.ProcessEnv;
   const config = configFromEnv(merged);
   if (!config) {
-    throw new Error('DEEPSEEK_API_KEY is not set. EchoBench uses DeepSeek only. Set it in .env at the repo root.');
+    throw new Error('DEEPSEEK_API_KEY is not set. Set it in .env at the repo root.');
   }
   return new DeepSeekClient(config);
 }

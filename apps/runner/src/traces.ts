@@ -1,6 +1,6 @@
 import { appendFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
-import type { Split } from '@echobench/schema';
+import type { ProviderId, Split } from '@echobench/schema';
 
 export interface TraceMeta {
   type: 'meta';
@@ -10,7 +10,7 @@ export interface TraceMeta {
   condition: string;
   split: Split;
   replicate: number;
-  provider: 'deepseek';
+  provider: ProviderId;
   modelRequested: string;
   worldToken: string;
   callBudget: number;

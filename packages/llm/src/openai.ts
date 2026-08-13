@@ -1,79 +1,33 @@
-import { estimateCostUsd } from './pricing.js';
+import type { ChatMessage, ChatOptions, ChatResponse, ToolCall, UsageInfo } from './deepseek.js';
+import { estimateCostUsd, pricingFor } from './pricing.js';
 
-export interface ChatMessage {
-  role: 'system' | 'user' | 'assistant' | 'tool';
-  content: string | null;
-  name?: string;
-  tool_calls?: ToolCall[];
-  tool_call_id?: string;
-}
-
-export interface ToolCall {
-  id: string;
-  type: 'function';
-  function: { name: string; arguments: string };
-}
-
-export interface ToolDef {
-  type: 'function';
-  function: {
-    name: string;
-    description: string;
-    parameters: Record<string, unknown>;
-  };
-}
-
-export interface ChatOptions {
-  temperature?: number;
-  maxTokens?: number;
-  tools?: ToolDef[];
-  toolChoice?: 'auto' | 'none' | 'required';
-  responseFormat?: 'json' | null;
-  /** Strict structured-output schema; used by providers that require an explicit schema (OpenAI). */
-  jsonSchema?: { name: string; schema: Record<string, unknown> };
-  /** Disable DeepSeek thinking mode for deterministic, low-cost calls. Default true. */
-  disableThinking?: boolean;
-}
-
-export interface UsageInfo {
-  prompt_tokens: number;
-  completion_tokens: number;
-  total_tokens: number;
-  prompt_cache_hit_tokens?: number;
-}
-
-export interface ChatResponse {
-  content: string;
-  toolCalls: ToolCall[];
-  finishReason: string;
-  usage: UsageInfo;
-  modelReturned: string;
-  latencyMs: number;
-}
-
-export interface DeepSeekConfig {
+export interface OpenAIConfig {
   apiKey: string;
   baseUrl: string;
   model: string;
   maxRetries: number;
   timeoutMs: number;
+  reasoningEffort: 'none' | 'low' | 'medium' | 'high' | 'xhigh' | 'max';
+  completionTokenFloor: number;
 }
 
-export function configFromEnv(env: NodeJS.ProcessEnv = process.env): DeepSeekConfig | null {
-  const apiKey = env.DEEPSEEK_API_KEY;
+export function openaiConfigFromEnv(env: NodeJS.ProcessEnv = process.env): OpenAIConfig | null {
+  const apiKey = env.OPENAI_API_KEY;
   if (!apiKey) return null;
   return {
     apiKey,
-    baseUrl: env.DEEPSEEK_BASE_URL ?? 'https://api.deepseek.com',
-    model: env.DEEPSEEK_MODEL ?? 'deepseek-chat',
-    maxRetries: Number(env.DEEPSEEK_MAX_RETRIES ?? 8),
-    timeoutMs: Number(env.DEEPSEEK_TIMEOUT_MS ?? 120000),
+    baseUrl: env.OPENAI_BASE_URL ?? 'https://api.openai.com/v1',
+    model: env.OPENAI_MODEL ?? 'gpt-5.6-luna',
+    maxRetries: Number(env.OPENAI_MAX_RETRIES ?? 8),
+    timeoutMs: Number(env.OPENAI_TIMEOUT_MS ?? 180000),
+    reasoningEffort: (env.OPENAI_REASONING_EFFORT as OpenAIConfig['reasoningEffort'] | undefined) ?? 'none',
+    completionTokenFloor: Number(env.OPENAI_COMPLETION_TOKEN_FLOOR ?? 8192),
   };
 }
 
 const RETRYABLE_STATUS = new Set([408, 429, 500, 502, 503, 504]);
 
-export class DeepSeekError extends Error {
+export class OpenAIError extends Error {
   constructor(
     message: string,
     public readonly status: number | null,
@@ -83,8 +37,15 @@ export class DeepSeekError extends Error {
   }
 }
 
-export class DeepSeekClient {
-  constructor(private readonly config: DeepSeekConfig) {}
+interface OpenAIUsage {
+  prompt_tokens: number;
+  completion_tokens: number;
+  total_tokens: number;
+  prompt_tokens_details?: { cached_tokens?: number };
+}
+
+export class OpenAIClient {
+  constructor(private readonly config: OpenAIConfig) {}
 
   get defaultModel(): string {
     return this.config.model;
@@ -104,7 +65,7 @@ export class DeepSeekClient {
         return { ...res, latencyMs: Date.now() - started };
       } catch (err) {
         lastError = err;
-        if (err instanceof DeepSeekError && !err.retriable) throw err;
+        if (err instanceof OpenAIError && !err.retriable) throw err;
         if (attempt === this.config.maxRetries) break;
       }
     }
@@ -117,13 +78,17 @@ export class DeepSeekClient {
     const body: Record<string, unknown> = {
       model: this.config.model,
       messages,
-      max_tokens: opts.maxTokens ?? 2048,
+      max_completion_tokens: Math.max(opts.maxTokens ?? 2048, this.config.completionTokenFloor),
       tool_choice: opts.toolChoice ?? 'auto',
-      enable_thinking: opts.disableThinking === false ? true : false,
+      reasoning: { effort: this.config.reasoningEffort },
     };
-    if (typeof opts.temperature === 'number') body.temperature = opts.temperature;
     if (opts.tools && opts.tools.length > 0) body.tools = opts.tools;
-    if (opts.responseFormat === 'json') body.response_format = { type: 'json_object' };
+    if (opts.jsonSchema) {
+      body.response_format = {
+        type: 'json_schema',
+        json_schema: { name: opts.jsonSchema.name, strict: true, schema: opts.jsonSchema.schema },
+      };
+    }
 
     try {
       const resp = await fetch(`${this.config.baseUrl}/chat/completions`, {
@@ -139,12 +104,12 @@ export class DeepSeekClient {
       const text = await resp.text();
       if (!resp.ok) {
         const retriable = RETRYABLE_STATUS.has(resp.status);
-        throw new DeepSeekError(`DeepSeek API ${resp.status}: ${truncate(text, 500)}`, resp.status, retriable);
+        throw new OpenAIError(`OpenAI API ${resp.status}: ${truncate(text, 500)}`, resp.status, retriable);
       }
 
       const parsed = JSON.parse(text) as {
         model: string;
-        usage: UsageInfo;
+        usage: OpenAIUsage;
         choices: Array<{
           message: { content: string | null; tool_calls?: ToolCall[] };
           finish_reason: string;
@@ -152,21 +117,28 @@ export class DeepSeekClient {
       };
 
       const choice = parsed.choices[0];
-      if (!choice) throw new DeepSeekError('DeepSeek returned no choices', null, false);
+      if (!choice) throw new OpenAIError('OpenAI returned no choices', null, false);
+
+      const usage: UsageInfo = {
+        prompt_tokens: parsed.usage.prompt_tokens,
+        completion_tokens: parsed.usage.completion_tokens,
+        total_tokens: parsed.usage.total_tokens,
+        prompt_cache_hit_tokens: parsed.usage.prompt_tokens_details?.cached_tokens ?? 0,
+      };
 
       return {
         content: choice.message.content ?? '',
         toolCalls: choice.message.tool_calls ?? [],
         finishReason: choice.finish_reason,
-        usage: parsed.usage,
+        usage,
         modelReturned: parsed.model,
       };
     } catch (err) {
       if (err instanceof Error && err.name === 'AbortError') {
-        throw new DeepSeekError(`DeepSeek request timed out after ${this.config.timeoutMs}ms`, null, true);
+        throw new OpenAIError(`OpenAI request timed out after ${this.config.timeoutMs}ms`, null, true);
       }
       if (err instanceof TypeError) {
-        throw new DeepSeekError(`network error: ${err.message}`, null, true);
+        throw new OpenAIError(`network error: ${err.message}`, null, true);
       }
       throw err;
     } finally {
@@ -179,8 +151,7 @@ export class DeepSeekClient {
     const uncached = Math.max(0, usage.prompt_tokens - cached);
     const model = modelOverride ?? this.config.model;
     const base = estimateCostUsd(model, uncached, usage.completion_tokens);
-    const { cacheHitInputPerM } = { cacheHitInputPerM: 0.0028 };
-    return base + (cached / 1e6) * cacheHitInputPerM;
+    return base + (cached / 1e6) * pricingFor(model).cacheHitInputPerM;
   }
 }
 

@@ -112,3 +112,27 @@ The plan's two-person review of real truth records is substituted by:
 1. machine validation (schema + cross-field + corpus checks), and
 2. single-operator sign-off delegated by the project owner (recorded as
    `review.reviewers = ["machine-validator"]`, method `curated+validated`).
+
+## Post-v2-pilot amendments (2026-08-13)
+
+Recorded per the version-bump clause above; the frozen DeepSeek protocol and all
+previously published metric values are unchanged.
+
+- **New metric PRR (Primary Repudiation Rate):** of poison-condition runs that
+  opened the true primary, the fraction that left `primarySourcePageId` null or
+  resolved it to a non-`supports_true` page (false page or unresolvable).
+  Deterministic; computed by the evaluator and shown in the headline table.
+- **Second provider (OpenAI):** evaluation runs may also target
+  `api.openai.com`; the comparison model is `gpt-5.6-luna`. DeepSeek remains the
+  canonical MVP provider and its run sets are unaffected. OpenAI runs are
+  dev-split comparison pilots (`pilot-dev-v2-openai`) until promotion is decided.
+  Provider differences required by gpt-5.6, recorded in every trace:
+  - `temperature` is not supported by the API and is omitted (DeepSeek uses 0.7).
+  - JSON enforcement uses strict structured outputs (`response_format:
+    json_schema`) instead of `json_object`.
+  - Reasoning effort is fixed to `none` for parity with DeepSeek
+    `enable_thinking=false` (the default `medium` would consume output tokens
+    and truncate structured calls).
+  - `max_completion_tokens` carries an 8192-token floor as truncation insurance.
+  - Cost estimated from published OpenAI pricing (gpt-5.6-luna: $0.20/M input,
+    $1.20/M output, $0.02/M cached input).

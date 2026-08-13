@@ -27,12 +27,20 @@ scorer for whether the model updates beliefs correctly.
   engagement counts (views/likes/shares/comments).
 - **Deterministic provenance**: every page carries hidden stance / copied-from /
   origin-cluster metadata that the scorer reads but the model never sees.
-- **DeepSeek-only evaluation**: one provider (`deepseek-chat`), prior elicitation,
-  a research agent loop with a 20-call tool budget, and a schema-validated final
-  judgment (one repair attempt). Append-only traces, resume-safe runs with automatic
-  retry of transient failures, cost guard.
-- **11 metrics** (FBAR, CUR, EAS, PCR, ICS, SER, PSR, CI, TUA, calibration, cost) with
-  clustered bootstrap confidence intervals.
+- **Two providers, one harness**: DeepSeek-only is the canonical MVP protocol
+  (`deepseek-chat`, thinking disabled); OpenAI `gpt-5.6-luna` is wired as a
+  comparison provider with provider-specific adaptations (no temperature,
+  strict structured outputs, reasoning effort `none`, 8192-token completion
+  floor). One provider per run set; the provider and returned model id are
+  recorded in every trace. Prior elicitation, a research agent loop with a
+  20-call tool budget, and a schema-validated final judgment (one repair
+  attempt). Append-only traces, resume-safe runs with automatic retry of
+  transient failures, cost guard.
+- **12 metrics** (FBAR, CUR, EAS, PCR, ICS, SER, PSR, PRR, CI, TUA,
+  calibration, cost) with clustered bootstrap confidence intervals. PRR
+  (Primary Repudiation Rate) measures the "found the primary, then disowned
+  it" move: poison runs that opened the true primary but left
+  `primarySourcePageId` null or pointed it at a false page.
 - **Docker** image bundling Node + Python for reproducible analysis.
 
 ## Repository layout
@@ -69,7 +77,7 @@ python -m pip install -r analysis/requirements.txt   # only needed for figures
 pnpm echobench generate --split dev [--skip-prose] [--no-embed] [--concurrency 8]
 pnpm echobench validate --split dev
 pnpm echobench serve    --split dev --port 4577
-pnpm echobench run      --split dev --max-runs 100 --run-set-id pilot-dev-v2
+pnpm echobench run      --split dev --max-runs 100 --run-set-id pilot-dev-v2 [--provider deepseek|openai] [--model gpt-5.6-luna]
 pnpm echobench score    --split dev --run-set-id pilot-dev-v2 --bootstrap 200
 pnpm echobench report   --split dev --run-set-id pilot-dev-v2
 ```

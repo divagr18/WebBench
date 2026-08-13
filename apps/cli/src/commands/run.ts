@@ -2,7 +2,7 @@ import { join } from 'node:path';
 import { CONDITIONS, type DatasetManifest, type Split } from '@echobench/schema';
 import { loadAndValidateDataset, loadPrompts, SeededRng } from '@echobench/generator';
 import { HttpToolGateway, runAll, type PlannedRun } from '@echobench/runner';
-import { makeDeepSeekClient, type CliContext } from '../main.js';
+import { isValidProvider, makeEvalClient, type CliContext } from '../main.js';
 import { opt, optNumber, type ParsedArgs } from '../args.js';
 import { startEchoWeb, makeEmbedQuery } from '../serveHelper.js';
 
@@ -50,6 +50,12 @@ export async function cmdRun(args: ParsedArgs, ctx: CliContext): Promise<number>
     return 2;
   }
   const split = splitArg;
+  const provider = opt(args, 'provider', 'deepseek');
+  if (!isValidProvider(provider)) {
+    console.error(`[run] --provider must be deepseek or openai, got ${provider}`);
+    return 2;
+  }
+  const modelArg = opt(args, 'model', '') || null;
   const dataDir = opt(args, 'data-dir', join(ctx.repoRoot, 'datasets'));
   const tracesDir = opt(args, 'traces-dir', join(ctx.repoRoot, 'traces'));
   const maxRuns = optNumber(args, 'max-runs', 100);
@@ -78,8 +84,9 @@ export async function cmdRun(args: ParsedArgs, ctx: CliContext): Promise<number>
   const { baseUrl, close } = await startEchoWeb(worlds, 0, '127.0.0.1', embedQuery ? { embedQuery } : {});
   console.log(`[run] echoweb at ${baseUrl}; plan=${plans.length} runs split=${split} runSet=${runSetId} budget=$${budgetUsd}${embedQuery ? ' hybrid-search=on' : ' search=bm25-only'}`);
 
-  const llm = makeDeepSeekClient(ctx);
+  const llm = makeEvalClient(ctx, provider, modelArg ?? undefined);
   const bundle = loadPrompts(ctx.repoRoot);
+  console.log(`[run] provider=${provider} model=${llm.defaultModel}`);
 
   try {
     const outcome = await runAll(
@@ -95,6 +102,7 @@ export async function cmdRun(args: ParsedArgs, ctx: CliContext): Promise<number>
         tracesRoot: tracesDir,
         split,
         runSetId,
+        provider,
         modelRequested: llm.defaultModel,
         replicatesPerEpisode: replicates,
         maxToolCalls,
