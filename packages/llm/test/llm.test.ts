@@ -68,7 +68,7 @@ describe('llm package', () => {
     } as NodeJS.ProcessEnv);
     expect(cfg).not.toBeNull();
     expect(cfg!.apiKey).toBe('ms-test');
-    expect(cfg!.baseUrl).toBe('https://api-inference.modelscope.cn/v1');
+    expect(cfg!.baseUrl).toBe('https://api-inference.modelscope.ai/v1');
     expect(cfg!.model).toBe('Qwen-Ambassador/Qwen3.7-Max');
   });
 

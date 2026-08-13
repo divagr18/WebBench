@@ -101,8 +101,11 @@ trace metadata.
 - Cost guard: stop when cumulative estimated cost reaches the configured budget.
 - Run sets: `pilot-dev-v1` (internet layer v1, superseded), `calib-v2` (30-run v2
   calibration), `pilot-dev-v2` (100-run v2 pilot, canonical DeepSeek),
-  `pilot-dev-v2-openai` (100-run v2 pilot, OpenAI gpt-5.6-luna comparison,
-  added under the Post-v2-pilot amendments).
+  `pilot-dev-v2-openai` (100-run v2 pilot, OpenAI gpt-5.6-luna comparison),
+  `pilot-dev-v2-modelscope-max` and `pilot-dev-v2-modelscope-plus` (100-run v2
+  pilots, ModelScope-native Qwen-Ambassador comparisons),
+  `pilot-dev-v2-qwen37max` (73-run OpenRouter partial, superseded — route-
+  sensitivity artifact only).
 - v2 pilot headline: EAS 0.850, FBAR 0.158 (6/38), CUR 0.857 (6/7), PCR 0.294 (5/17),
   ICS +0.074 (17 pairs), PSR 0.98, CI 0.61, Brier 0.142, ECE 0.085; per-condition
   accuracy clean 0.882 / single 0.941 / ranked 0.882 / manufactured 0.706 /
@@ -143,29 +146,27 @@ previously published metric values are unchanged.
   - `max_completion_tokens` carries an 8192-token floor as truncation insurance.
   - Cost estimated from published OpenAI pricing (gpt-5.6-luna: $0.20/M input,
     $1.20/M output, $0.02/M cached input).
-- **Third provider (ModelScope), wiring only:** `--provider modelscope` targets
-  `api-inference.modelscope.cn/v1` (OpenAI-compatible, `enable_thinking=false`,
-  `json_object`). The `MODELSCOPE_API_KEY` in `.env` is rejected with 401 on
-  every model (including free-tier open models), every endpoint variant
-  (OpenAI-compatible and Anthropic-style), and every auth-header scheme — the
-  token itself is invalid/inactive for API inference. No ModelScope runs were
-  produced; wiring is kept ready pending a regenerated token
-  (modelscope.cn/my/myaccesstoken; Alibaba Cloud binding + real-name
-  verification may be required).
-- **Fourth provider (OpenRouter), Qwen3.7 comparison route:** because the
-  ModelScope token failed, the Qwen3.7 pilots ran through
-  `openrouter.ai/api/v1`. Same model weights, different serving route — flagged
-  in any infra-sensitive comparison (latency), not expected to affect behavior.
-  Run sets: `pilot-dev-v2-qwen37max` (73/100 complete — OpenRouter account
-  credits exhausted mid-run at $3.32; the remaining 27 resume automatically
-  after a top-up since the runner is resume-safe) and `pilot-dev-v2-qwen37plus`
-  (0/100, blocked on the same account balance).
-  Provider details, recorded in every trace:
-  - Reasoning effort fixed to `none` (the only parameter variant that zeroes
-    qwen3.7 reasoning tokens; probed) for parity with DeepSeek
-    `enable_thinking=false`.
-  - `tool_choice` sent only when `tools` are present; temperature 0.7;
-    `json_object` mode (the frozen prompts contain the word "json", which the
-    provider requires).
-  - Cost estimated from OpenRouter pricing (qwen/qwen3.7-max: $1.48/M input,
-    $4.42/M output; qwen/qwen3.7-plus: $0.32/M input, $1.28/M output).
+- **Third provider (ModelScope), canonical Qwen route:** `--provider
+  modelscope` targets `api-inference.modelscope.ai/v1` (OpenAI-compatible,
+  `enable_thinking=false`, temperature 0.7, `json_object`). NOTE: the endpoint
+  is the `.ai` host — the `.cn` host (`api-inference.modelscope.cn/v1`)
+  consistently rejects the same token with 401 on every model and was
+  abandoned; all "token blocked" diagnoses traced to that host, not the token.
+  `json_object` returns null content when messages lack the word "json"; the
+  frozen prompts contain it, so structured calls are safe. Run sets:
+  `pilot-dev-v2-modelscope-max` (100/100, `Qwen-Ambassador/Qwen3.7-Max`) and
+  `pilot-dev-v2-modelscope-plus` (100/100, `Qwen-Ambassador/Qwen3.7-Plus`).
+  Cost estimated from Model Studio list pricing as a guard
+  (Qwen3.7-Max: $2.5/M input, $7.5/M output; Qwen3.7-Plus: $0.4/M input,
+  $1.6/M output); actual ModelScope billing is separate.
+- **Fourth provider (OpenRouter), superseded Qwen route:** an early attempt
+  ran `qwen/qwen3.7-max` through `openrouter.ai/api/v1` before the ModelScope
+  `.ai` endpoint was discovered. Run set `pilot-dev-v2-qwen37max` (73/100 —
+  stopped by OpenRouter account credits) is retained only as a
+  route-sensitivity artifact: it shows materially worse arbitration (EAS 0.800,
+  FBAR 0.250) than the ModelScope-native run of the same weights (EAS 0.951,
+  FBAR 0.094), so serving route is recorded and treated as non-neutral.
+  Provider details, recorded in every trace: reasoning effort fixed to `none`
+  (the only variant probed to zero reasoning tokens), `tool_choice` only with
+  `tools` present, `json_object` mode; pricing qwen/qwen3.7-max $1.48/$4.42,
+  qwen/qwen3.7-plus $0.32/$1.28 per M.

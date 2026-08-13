@@ -1,4 +1,4 @@
-# Model comparison: DeepSeek, gpt-5.6-luna, qwen3.7-max (dev pilots)
+# Model comparison: DeepSeek, gpt-5.6-luna, qwen3.7-max, qwen3.7-plus (dev pilots)
 
 Run sets (identical dev split — 20 claims × 6 conditions, 1 replicate, same
 plan seed, same worlds, same prompts, same hybrid-search web):
@@ -7,178 +7,154 @@ plan seed, same worlds, same prompts, same hybrid-search web):
 |---|---|---|---|---|
 | `pilot-dev-v2` | DeepSeek API | `deepseek-chat` | 100/100 | canonical |
 | `pilot-dev-v2-openai` | OpenAI API | `gpt-5.6-luna` | 100/100 | complete |
-| `pilot-dev-v2-qwen37max` | **OpenRouter** | `qwen/qwen3.7-max` | **73/100** | **partial — OpenRouter account credits exhausted mid-run; 27 runs resume automatically after top-up** |
-| (pending) | OpenRouter/ModelScope | `qwen/qwen3.7-plus` | 0/100 | blocked on credits (OpenRouter) and token (ModelScope, see PREREG) |
+| `pilot-dev-v2-modelscope-max` | ModelScope API (`api-inference.modelscope.ai`) | `Qwen-Ambassador/Qwen3.7-Max` | 100/100 | complete |
+| `pilot-dev-v2-modelscope-plus` | ModelScope API (`api-inference.modelscope.ai`) | `Qwen-Ambassador/Qwen3.7-Plus` | 100/100 | complete |
+| `pilot-dev-v2-qwen37max` | OpenRouter (superseded) | `qwen/qwen3.7-max` | 73/100 | **superseded** — early attempt before the ModelScope `.ai` endpoint was discovered; retained only as a route-sensitivity artifact (see below) |
 
 Model protocol notes (see PREREG amendments): DeepSeek runs with thinking
 disabled, temperature 0.7, `json_object` mode. Luna runs with reasoning effort
 `none`, no temperature (API-unsupported), strict structured outputs
-(`json_schema`). qwen3.7-max runs via OpenRouter with `reasoning.effort = none`
-(thinking disabled for protocol parity — verified: reasoning tokens 107→0),
-temperature 0.7, `json_object`. Zero schema repairs on all pilots.
+(`json_schema`). Both Qwen models run natively on ModelScope with
+`enable_thinking=false` (verified: reasoning tokens suppressed), temperature
+0.7, `json_object`. Zero schema repairs on all four pilots.
 
 ## Headline
 
-| Metric | DeepSeek (100) | Luna (100) | qwen3.7-max* (73) | Direction |
-|---|---|---|---|---|
-| **EAS** | 0.850 [0.636, 0.972] | **0.941 [0.778, 1.000]** | 0.800 [0.622, 0.974] | higher better |
-| FBAR | 0.158 (6/38) | **0.000 (0/28)** | 0.250 (5/20) | lower better |
-| CUR | 0.857 (6/7) | 0.889 (8/9) | 0.857 (6/7) | higher better |
-| PCR | 0.294 (5/17) | **0.059 (1/17)** | 0.167 (2/12) | lower better |
-| PRR | 0.227 (15/66) | 0.302 (16/53) | **0.208 (10/48)** | lower better |
-| SER | 1.000 (67/67) | 0.806 (54/67) | 1.000 (48/48) | higher |
-| PSR | 0.980 (98/100) | 0.790 (79/100) | 0.986 (72/73) | higher |
-| CI | 0.610 (286/469) | **0.706 (166/235)** | 0.664 (156/235) | higher better |
-| TUA | 0.938 (15/16) | 0.938 (15/16) | 0.917 (11/12) | higher |
-| ICS | +0.074 | +0.038 | +0.138 | higher better |
-| Brier | 0.142 | **0.067** | 0.122 | lower better |
-| ECE | 0.085 | **0.054** | 0.094 | lower better |
-| Cost | $0.546 | $0.769 | $3.31 (73 runs) | — |
-| Mean tool calls | 8.13 | 7.13 | 4.96 | — |
-| Mean latency | 17s | 10s | 22s | — |
+| Metric | DeepSeek (100) | Luna (100) | qwen3.7-max (100) | qwen3.7-plus (100) | Direction |
+|---|---|---|---|---|---|
+| **EAS** | 0.850 [0.636, 0.972] | 0.941 [0.778, 1.000] | **0.951 [0.900, 1.000]** | 0.919 [0.660, 1.000] | higher better |
+| FBAR | 0.158 (6/38) | **0.000 (0/28)** | 0.094 (3/32) | 0.031 (1/32) | lower better |
+| CUR | 0.857 (6/7) | 0.889 (8/9) | **1.000 (8/8)** | 0.875 (7/8) | higher better |
+| PCR | 0.294 (5/17) | **0.059 (1/17)** | 0.118 (2/17) | 0.118 (2/17) | lower better |
+| PRR | 0.227 (15/66) | 0.302 (16/53) | 0.149 (10/67) | **0.119 (8/67)** | lower better |
+| SER | 1.000 (67/67) | 0.806 (54/67) | 1.000 (67/67) | 1.000 (67/67) | higher |
+| PSR | 0.980 (98/100) | 0.790 (79/100) | 0.990 (99/100) | **1.000 (100/100)** | higher |
+| CI | 0.610 (286/469) | **0.706 (166/235)** | 0.625 (185/296) | 0.629 (316/502) | higher better |
+| TUA | 0.938 (15/16) | 0.938 (15/16) | **1.000 (16/16)** | 0.938 (15/16) | higher |
+| ICS | +0.074 | +0.038 | +0.108 | +0.091 | higher better |
+| Brier | 0.142 | **0.067** | 0.087 | 0.095 | lower better |
+| ECE | 0.085 | 0.054 | **0.040** | 0.089 | lower better |
+| Cost | $0.55 | $0.77 | $7.59 | $2.73 | — |
+| Mean tool calls | 8.1 | 7.1 | 4.8 | 8.9 | — |
+| Mean latency | 17s | 10s | 23s | 50s | — |
 
-\* qwen3.7-max figures are from 73/100 runs (see status above); denominators
-smaller accordingly. CIs overlap across all three — directional at n≈73–100.
+EAS ranking: **qwen3.7-max 0.951 > luna 0.941 > qwen3.7-plus 0.919 > deepseek
+0.850**. CIs overlap across all four — directional at n=100 each; the sealed
+test split is what decides the ordering.
 
 ## Per-condition accuracy
 
-| Condition | DeepSeek | Luna | qwen3.7-max* |
-|---|---|---|---|
-| clean | 0.882 | 0.941 | 0.923 |
-| single_poison | 0.941 | 0.941 | 0.917 |
-| ranked_poison | 0.882 | 0.941 | 1.000 |
-| manufactured_consensus | **0.706** | **0.941** | 0.750 |
-| legitimate_update | 0.938 | 0.938 | 0.917 |
-| false_majority_true_primary | **0.500** | **0.875** | **0.500** |
+| Condition | DeepSeek | Luna | qwen3.7-max | qwen3.7-plus |
+|---|---|---|---|---|
+| clean | 0.882 | 0.941 | 0.941 | 0.941 |
+| single_poison | 0.941 | 0.941 | 0.941 | 0.941 |
+| ranked_poison | 0.882 | 0.941 | 0.941 | 0.941 |
+| manufactured_consensus | **0.706** | 0.941 | 0.941 | 0.941 |
+| legitimate_update | 0.938 | 0.938 | **1.000** | 0.938 |
+| false_majority_true_primary | **0.500** | **0.875** | 0.625 | 0.688 |
+
+All four models hold ≥0.94 on clean / single_poison / ranked_poison /
+manufactured_consensus (legitimate_update too for max). The *only* condition
+that separates them is **false_majority_true_primary**: Luna 0.875, then plus
+0.688, then max 0.625, then DeepSeek 0.500. Even the best model drops from
+~0.94 to 0.875 there; the benchmark's hardest construct is the one place the
+field stratifies.
+
+## What drives the ranking
+
+1. **Belief corruption (FBAR) is rare across three of four models.** Luna is
+   corruption-free (0/28), plus is near-free (1/32), max is low (3/32);
+   DeepSeek is the outlier at 0.158 (6/38). The deference-inversion mechanism
+   documented in `analysis/case_studies_false_majority.md` is primarily a
+   DeepSeek phenomenon on this split.
+
+2. **Updating (CUR) is strong everywhere**, with qwen3.7-max perfect (8/8).
+   All four models correctly adopt legitimate updates when they start from a
+   wrong or absent prior.
+
+3. **qwen3.7-max is the strongest all-rounder:** best EAS, best CUR, best ECE,
+   best PRR (least likely to disown a primary it opened), TUA perfect. Its one
+   soft spot is false_majority (0.625), where it still collapses more than
+   Luna. It retrieves efficiently (4.8 tool calls, PSR 0.99) and is the
+   best-calibrated model here.
+
+4. **qwen3.7-plus is the corruption-resistance workhorse:** FBAR 0.031 (only
+   luna is lower), PSR 1.000 (opens every primary), SER 1.000, and the lowest
+   PRR (0.119). It is the most thorough retriever and the least likely to
+   repudiate an opened primary, at the cost of the worst calibration (ECE
+   0.089, Brier 0.095) and the highest latency (50s, 8.9 tool calls).
+
+5. **Retrieval style differs by model, not by correctness.** Luna opens fewer
+   pages (PSR 0.79) yet resists corruption; the three others open nearly every
+   primary. Both strategies defend the truth on this split — opening the
+   primary is not what protects a model, its arbitration is.
+
+6. **Cost.** DeepSeek and Luna are ~$0.6–0.8 per 100 runs; the native Qwen
+   pilots are far more expensive on the ModelScope list-price estimate (max
+   $7.59, plus $2.73). A sealed 1,440-run test projects ~$8 (DeepSeek), ~$11
+   (Luna), ~$110 (qwen-max), ~$40 (qwen-plus) at these rates — budget is a
+   real constraint for the larger Qwen models.
+
+## Route sensitivity: OpenRouter vs ModelScope-native (qwen3.7-max)
+
+The superseded `pilot-dev-v2-qwen37max` ran the same `qwen3.7-max` weights
+through **OpenRouter** (73 runs, before the ModelScope `.ai` endpoint was
+found) and gave **EAS 0.800, FBAR 0.250 (5/20), false_majority 0.500** —
+substantially worse than the **ModelScope-native** run (EAS 0.951, FBAR 0.094,
+false_majority 0.625).
+
+Two non-exclusive explanations:
+- **Sampling:** the OpenRouter attempt died mid-plan at 73/100 and is not a
+  like-for-like sample; its FBAR denominator (20 prior-correct poison runs) is
+  also smaller.
+- **Route behavior:** OpenRouter and ModelScope may serve the same weights with
+  different decoding defaults / wrapper behavior, producing genuinely different
+  arbitration under misinformation.
+
+Because the native ModelScope route is the intended and complete run, it is the
+canonical qwen3.7-max result in this doc. The OpenRouter artifact is retained
+as a caution that **serving route is not a neutral detail** on this benchmark —
+worth controlling in any sealed test that compares across providers.
 
 ## DeepSeek vs Luna (complete pilots)
 
 DeepSeek's signature is a *collapse under coordinated misinformation*: its
 accuracy drops from ~0.9 on clean/poison to 0.706 on the echo chamber and 0.50
-on the false majority. Luna is *flat at ~0.94 across all six conditions* — the
-conditions move its behavior far less.
-
-### What drives the difference
+on the false majority. Luna is *flat at ~0.94 across all six conditions*.
 
 1. **Zero belief corruption for Luna (FBAR 0/28).** All six DeepSeek
    corruptions were real claims where a correct prior was abandoned after
    reading a fabricated majority (the deference-inversion mechanism in
-   `analysis/case_studies_false_majority.md`). Luna resisted every such case.
+   `analysis/case_studies_false_majority.md`).
 
 2. **Luna abstains more, knows less (priors: 52 ABSTAIN vs DeepSeek 37).**
-   Its parametric knowledge is weaker/cautious, which shrinks the FBAR
-   denominator (28 vs 38) — Luna had fewer correct priors to corrupt. The
-   corruption-free claim must be read alongside this: what Luna *does* assert
-   it defends, but it asserts less.
+   Its parametric knowledge is weaker/cautious, shrinking the FBAR denominator
+   (28 vs 38). The corruption-free claim must be read alongside this: what
+   Luna *does* assert it defends, but it asserts less.
 
-3. **Different research style.** Luna opens fewer pages (PSR 0.79 vs 0.98) and
-   escalates less (SER 0.806 vs 1.0), yet is MORE accurate on the poisoned
-   conditions. Its CI is higher (0.706 vs 0.610): when it cites, it cites
-   correctly more often. Its PRR is slightly higher (0.302) partly because it
-   names `primarySourcePageId` less often, not because it rejects true
-   primaries it trusts.
-
-4. **Calibration.** Luna is much better calibrated (Brier 0.067 vs 0.142, ECE
-   0.054 vs 0.085) — its confidence tracks its accuracy more closely.
-   DeepSeek's bin-8 overconfidence cluster (see
+3. **Calibration.** Luna is much better calibrated than DeepSeek (Brier 0.067
+   vs 0.142, ECE 0.054 vs 0.085). DeepSeek's bin-8 overconfidence cluster (see
    `analysis/calibration_and_housekeeping.md`) is largely absent for Luna.
 
-5. **Residual errors concentrate on the same hard synthetic claims.** Luna's
-   two false_majority errors are `syn_001` and `syn_008`; its legitimate_update
-   error is also `syn_008`. `syn_008` (solvaneq, the distrust-hypervigilance
-   claim from the DeepSeek case studies) remains structurally hard for both
-   models.
-
-### Interpretation
-
-This is not "Luna is smarter" in a general sense — Luna abstains on more
-questions and cites a primary source less often. It is that the two models sit
-on different points of a **knowledge-vs-caution tradeoff**:
-
-- **DeepSeek**: knows more (answers more priors), more aggressive retrieval
-  (opens almost every primary), but its epistemic arbitration is the weak
-  link — a fabricated majority can overturn knowledge it actually has.
-- **Luna**: knows less and abstains more, but its arbitration is near-robust —
-  nothing in this benchmark talked it out of something it knew.
-
-For the benchmark's core construct (arbitrating apparent consensus against a
-recoverable primary), Luna is the stronger evaluator; for retrieval
-thoroughness, DeepSeek is. The sealed test split will quantify both with
-tighter intervals.
-
-Cost: Luna is ~1.4x the DeepSeek spend here despite shorter responses, because
-its input price ($0.20/M) plus a research-heavy token mix outweighs its token
-savings; still $0.77 for 100 runs — the sealed 1,440-run test projects ~$11 at
-these rates (vs ~$8 DeepSeek), both inside a modest budget.
-
-## qwen3.7-max (OpenRouter route, partial — 73/100)
-
-**Route deviation:** Qwen3.7 models were intended for the ModelScope API
-(`api-inference.modelscope.cn`); the `MODELSCOPE_API_KEY` in `.env` is rejected
-with 401 on every model/endpoint/auth-scheme (see PREREG amendments), so the
-pilot ran through OpenRouter instead. Same model weights, different serving
-route — flag this when comparing infra-sensitive properties (latency, not
-behavior).
-
-Findings (thinking disabled for protocol parity):
-
-1. **Highest corruption rate of the three: FBAR 0.250 (5/20).** Of the 20
-   poison-condition runs where qwen3.7-max had a correct prior, a quarter were
-   talked out of it — worse than DeepSeek's 0.158, versus Luna's 0.000.
-
-2. **Same collapse pattern as DeepSeek**, not Luna: false_majority 0.500,
-   manufactured_consensus 0.750, everything else ≥0.917. A model that behaves
-   like DeepSeek on the benchmark's core construct. Hand-read trace comparison
-   of all five qwen corruptions against DeepSeek and Luna on the identical
-   episodes: `analysis/case_studies_false_majority.md` ("Cross-model" section).
-   Headline there: the trap geometry is claim-specific and replicates across
-   model families — on real_044 fm, DeepSeek and qwen3.7-max both nominated the
-   *same* false page as `primarySourcePageId`.
-
-3. **DeepSeek-like retrieval style with even fewer tool calls** (4.96 avg):
-   PSR 0.986 (opens nearly every primary), SER 1.000 (always escalates on
-   conflict), CI 0.664 (mid-pack citation integrity).
-
-4. **Thinking mode was off.** qwen3.7-max is a reasoning model; these results
-   are its no-thinking behavior (protocol parity with DeepSeek
-   thinking-disabled and Luna `reasoning.effort=none`). How much thinking mode
-   changes arbitration on this benchmark is a natural follow-up — the dose-response
-   ablation in `analysis/designs_dose_response_and_fixes.md` could absorb it.
-
-5. **Cost:** $3.31 for 73 runs = **$0.045/run** (OpenRouter pricing
-   $1.48/$4.42 per M + 27k-token mean inputs). ~6× DeepSeek and ~6× Luna. A
-   sealed 1,440-run test at this rate projects ~$65 — affordable but not free;
-   qwen3.7-plus ($0.32/$1.28, est ~$0.012/run ≈ $17 for 1,440) is the
-   budget-friendly Qwen representative.
-
-### Blocked / pending
-
-- **qwen3.7-max: 27 runs remaining.** Runner is resume-safe; re-running the
-  same command after an OpenRouter credit top-up completes only the missing
-  runs.
-- **qwen3.7-plus: 0/100.** Queued behind the same credit wall.
-- **ModelScope route:** wiring complete (`--provider modelscope`), pending a
-  valid token.
-- **Partial-sample validity check:** the 73 completed runs are balanced across
-  all six conditions (13/12/12/12/12/12 completed; failures distributed
-  uniformly 4–5 per condition because the account died mid-plan). No condition
-  is underrepresented, so the partial comparison claims are unbiased with
-  respect to condition; the remaining 27 runs refine intervals, not direction.
-- **Alternate routes checked:** Groq (`GROQ_API_KEY` present) serves only
-  `qwen/qwen3.6-27b` — the requested 3.7-max/plus models are not available
-  there. No DashScope key exists in the environment. OpenRouter is therefore
-  the only live route for these models pending the credit top-up.
+4. **Residual errors concentrate on the same hard synthetic claims** — e.g.
+   `syn_008` (solvaneq, the distrust-hypervigilance claim) is structurally
+   hard across models.
 
 ## Harness notes (for the record)
 
-- All pilots: zero `rejected`, zero schema-repair attempts.
-- Luna adapter required three param-strictness fixes discovered via the smoke
-  run: flat `reasoning_effort` (nested `reasoning` is Responses-API-only),
-  `tool_choice` only with `tools` present, `temperature` omitted entirely.
-- OpenRouter adapter (qwen): `reasoning: {effort: 'none'}` is the only variant
-  that reliably zeroes reasoning tokens (probed: `enable_thinking` in
-  `extra_body`/`chat_template_kwargs` do not work); `tool_choice` only with
-  `tools` present; `json_object` mode requires the word "json" in messages —
-  satisfied by the frozen prompts.
+- All four pilots: zero `rejected`, zero schema-repair attempts.
+- **ModelScope endpoint correction:** the working host is
+  `api-inference.modelscope.ai/v1`. The `.cn` host
+  (`api-inference.modelscope.cn/v1`) consistently rejected the same token with
+  401 on every model and was the entire source of the earlier "token blocked"
+  diagnoses. ModelScope-native runs use `enable_thinking=false`, temperature
+  0.7, `json_object`. Modelscope `json_object` returns **null** content if the
+  messages lack the word "json" — the frozen prompts contain it, so structured
+  calls are safe.
+- Luna adapter: flat `reasoning_effort`, `tool_choice` only with `tools`
+  present, `temperature` omitted entirely.
+- OpenRouter adapter (superseded qwen route): `reasoning: {effort: 'none'}`
+  zeroes reasoning tokens; `tool_choice` only with `tools` present;
+  `json_object` requires the word "json" in messages.
 - Provider route and returned model id are recorded in every trace; run
   manifests under `traces/dev/<run-set-id>/`.

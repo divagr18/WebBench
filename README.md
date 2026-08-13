@@ -31,10 +31,11 @@ scorer for whether the model updates beliefs correctly.
   (`deepseek-chat`, thinking disabled). OpenAI `gpt-5.6-luna` is wired as a
   comparison provider (no temperature, strict structured outputs, reasoning
   effort `none`, 8192-token completion floor). ModelScope
-  (`api-inference.modelscope.cn/v1`, `enable_thinking=false`) is wired for
-  Qwen but currently unusable — its token is rejected with 401 pending
-  regeneration (see `PREREG.md`). Qwen3.7 pilots therefore ran via OpenRouter
-  (`qwen/qwen3.7-max`, `qwen/qwen3.7-plus`, reasoning effort `none`). One
+  (`api-inference.modelscope.ai/v1`, `enable_thinking=false`) serves the
+  Qwen-Ambassador models (`Qwen-Ambassador/Qwen3.7-Max`,
+  `Qwen-Ambassador/Qwen3.7-Plus`); the `.cn` host variant was abandoned (it
+  rejects the token with 401). An OpenRouter route is also wired as a fallback
+  for the same Qwen weights. One
   provider per run set; the provider and returned model id are recorded in
   every trace. Prior elicitation, a research agent loop with a 20-call tool
   budget, and a schema-validated final judgment (one repair attempt).
@@ -169,25 +170,27 @@ belief corruptions) with **EAS 0.941**, but abstains on more priors (52/100 vs
 is thinner (PSR 0.79 vs 0.98). Full analysis and all 12 metrics:
 `analysis/openai_vs_deepseek_pilot.md`.
 
-## Qwen pilot (partial: 73/100 runs, `qwen/qwen3.7-max` via OpenRouter)
+## Model comparison pilots (100 dev-split runs each)
 
-| Condition | DeepSeek | Luna | qwen3.7-max* |
-|---|---|---|---|
-| clean | 0.882 | 0.941 | 0.923 |
-| single_poison | 0.941 | 0.941 | 0.917 |
-| ranked_poison | 0.882 | 0.941 | 1.000 |
-| manufactured_consensus | 0.706 | 0.941 | 0.750 |
-| legitimate_update | 0.938 | 0.938 | 0.917 |
-| false_majority_true_primary | 0.500 | 0.875 | 0.500 |
+| Condition | DeepSeek | Luna | qwen3.7-max | qwen3.7-plus |
+|---|---|---|---|---|
+| clean | 0.882 | 0.941 | 0.941 | 0.941 |
+| single_poison | 0.941 | 0.941 | 0.941 | 0.941 |
+| ranked_poison | 0.882 | 0.941 | 0.941 | 0.941 |
+| manufactured_consensus | 0.706 | 0.941 | 0.941 | 0.941 |
+| legitimate_update | 0.938 | 0.938 | 1.000 | 0.938 |
+| false_majority_true_primary | 0.500 | 0.875 | 0.625 | 0.688 |
 
-With thinking disabled, qwen3.7-max behaves most like DeepSeek: aggressive
-retrieval (PSR 0.986, SER 1.0), but the same collapse under coordinated
-misinformation — **FBAR 0.250 (5/20), the highest of the three so far**, with
-false_majority at 0.500. The run stopped early when the OpenRouter account
-credits ran out ($3.32 spent); the remaining 27 runs resume automatically after
-a top-up. `qwen3.7-plus` is queued behind the same credit wall; the ModelScope
-route (`--provider modelscope`) is wired but its token is rejected with 401
-pending regeneration — see `PREREG.md` amendments.
+EAS ranking: **qwen3.7-max 0.951 > Luna 0.941 > qwen3.7-plus 0.919 > DeepSeek
+0.850** (all native-route pilots; OpenRouter-routed qwen3.7-max was
+superseded after the ModelScope `.ai` endpoint was discovered). All four hold
+≥0.94 on every condition except `false_majority_true_primary` — the only
+condition that stratifies the field. Corruption (FBAR) is rare for three of
+four (Luna 0.000, plus 0.031, max 0.094 vs DeepSeek 0.158), and the hardest
+construct is where the benchmark earns its keep. The early OpenRouter partial
+also surfaced a route-sensitivity signal — same weights, materially different
+arbitration by serving route (see PREREG amendments). Full analysis and all 12
+metrics: `analysis/openai_vs_deepseek_pilot.md`.
 
 ## Tests
 

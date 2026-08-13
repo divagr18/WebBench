@@ -14,7 +14,7 @@ export function modelscopeConfigFromEnv(env: NodeJS.ProcessEnv = process.env): M
   if (!apiKey) return null;
   return {
     apiKey,
-    baseUrl: env.MODELSCOPE_BASE_URL ?? 'https://api-inference.modelscope.cn/v1',
+    baseUrl: env.MODELSCOPE_BASE_URL ?? 'https://api-inference.modelscope.ai/v1',
     model: env.MODELSCOPE_MODEL ?? 'Qwen-Ambassador/Qwen3.7-Max',
     maxRetries: Number(env.MODELSCOPE_MAX_RETRIES ?? 8),
     timeoutMs: Number(env.MODELSCOPE_TIMEOUT_MS ?? 180000),
