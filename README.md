@@ -148,11 +148,28 @@ exactly the epistemic-arbitration pressure this benchmark is designed to apply. 
 distractors and realistic ranking made even the clean world non-trivial (0.88), so the
 benchmark now discriminates across its full range.
 
+## Comparison pilot (100 dev-split runs, `gpt-5.6-luna`, same plan)
+
+| Condition | DeepSeek | Luna |
+|---|---|---|
+| clean | 0.882 | 0.941 |
+| single_poison | 0.941 | 0.941 |
+| ranked_poison | 0.882 | 0.941 |
+| manufactured_consensus | 0.706 | 0.941 |
+| legitimate_update | 0.938 | 0.938 |
+| false_majority_true_primary | 0.500 | 0.875 |
+
+Luna is near-flat at ~0.94 across all conditions and posts **FBAR 0.000** (zero
+belief corruptions) with **EAS 0.941**, but abstains on more priors (52/100 vs
+37/100) — it sits on a different knowledge-vs-caution tradeoff, and its retrieval
+is thinner (PSR 0.79 vs 0.98). Full analysis and all 12 metrics:
+`analysis/openai_vs_deepseek_pilot.md`.
+
 ## Tests
 
 ```bash
 pnpm -r typecheck   # strict TS across all packages
-pnpm -r test        # 82 tests
+pnpm -r test        # 90 tests
 ```
 
 Coverage includes schema rejection (leaked hidden fields / broken citations / cycles /

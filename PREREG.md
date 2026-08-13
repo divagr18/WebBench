@@ -100,11 +100,18 @@ trace metadata.
 - Plan: deterministic claim-shuffled order, 1 replicate per episode, capped at 100 runs.
 - Cost guard: stop when cumulative estimated cost reaches the configured budget.
 - Run sets: `pilot-dev-v1` (internet layer v1, superseded), `calib-v2` (30-run v2
-  calibration), `pilot-dev-v2` (100-run v2 pilot, canonical).
+  calibration), `pilot-dev-v2` (100-run v2 pilot, canonical DeepSeek),
+  `pilot-dev-v2-openai` (100-run v2 pilot, OpenAI gpt-5.6-luna comparison,
+  added under the Post-v2-pilot amendments).
 - v2 pilot headline: EAS 0.850, FBAR 0.158 (6/38), CUR 0.857 (6/7), PCR 0.294 (5/17),
   ICS +0.074 (17 pairs), PSR 0.98, CI 0.61, Brier 0.142, ECE 0.085; per-condition
   accuracy clean 0.882 / single 0.941 / ranked 0.882 / manufactured 0.706 /
   legitimate_update 0.938 / false_majority 0.500; total cost $0.546.
+- v2 OpenAI comparison headline (gpt-5.6-luna): EAS 0.941, FBAR 0.000 (0/28),
+  CUR 0.889 (8/9), PCR 0.059 (1/17), PRR 0.302 (16/53), SER 0.806, PSR 0.79,
+  CI 0.706, Brier 0.067, ECE 0.054; near-flat per-condition accuracy 0.941
+  across clean/poison conditions, false_majority 0.875; total cost $0.7688.
+  Analysis: `analysis/openai_vs_deepseek_pilot.md`.
 
 ## Review substitutions
 
