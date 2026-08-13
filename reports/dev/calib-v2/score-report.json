@@ -2,7 +2,7 @@
  "schemaVersion": 1,
  "split": "dev",
  "runSetId": "calib-v2",
- "createdAt": "2026-08-11T04:55:57.564Z",
+ "createdAt": "2026-08-13T06:57:38.549Z",
  "modelRequested": "deepseek-chat",
  "totalRuns": 30,
  "completedRuns": 30,
@@ -121,7 +121,11 @@
    "accuracy": {
     "value": 1,
     "numerator": 5,
-    "denominator": 5
+    "denominator": 5,
+    "ci95": [
+     1,
+     1
+    ]
    }
   },
   {
@@ -131,7 +135,11 @@
    "accuracy": {
     "value": 1,
     "numerator": 5,
-    "denominator": 5
+    "denominator": 5,
+    "ci95": [
+     1,
+     1
+    ]
    }
   },
   {
@@ -141,7 +149,11 @@
    "accuracy": {
     "value": 0.8,
     "numerator": 4,
-    "denominator": 5
+    "denominator": 5,
+    "ci95": [
+     0.4,
+     1
+    ]
    }
   },
   {
@@ -151,7 +163,11 @@
    "accuracy": {
     "value": 1,
     "numerator": 5,
-    "denominator": 5
+    "denominator": 5,
+    "ci95": [
+     1,
+     1
+    ]
    }
   },
   {
@@ -161,7 +177,11 @@
    "accuracy": {
     "value": 1,
     "numerator": 5,
-    "denominator": 5
+    "denominator": 5,
+    "ci95": [
+     1,
+     1
+    ]
    }
   },
   {
@@ -171,7 +191,11 @@
    "accuracy": {
     "value": 0.4,
     "numerator": 2,
-    "denominator": 5
+    "denominator": 5,
+    "ci95": [
+     0,
+     0.8
+    ]
    }
   }
  ],

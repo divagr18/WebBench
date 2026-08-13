@@ -2,7 +2,7 @@
  "schemaVersion": 1,
  "split": "dev",
  "runSetId": "pilot-dev-v2",
- "createdAt": "2026-08-11T17:27:20.118Z",
+ "createdAt": "2026-08-13T06:57:08.490Z",
  "modelRequested": "deepseek-chat",
  "totalRuns": 100,
  "completedRuns": 100,
@@ -199,7 +199,11 @@
    "accuracy": {
     "value": 0.8823529411764706,
     "numerator": 15,
-    "denominator": 17
+    "denominator": 17,
+    "ci95": [
+     0.7058823529411765,
+     1
+    ]
    }
   },
   {
@@ -209,7 +213,11 @@
    "accuracy": {
     "value": 0.9411764705882353,
     "numerator": 16,
-    "denominator": 17
+    "denominator": 17,
+    "ci95": [
+     0.7647058823529411,
+     1
+    ]
    }
   },
   {
@@ -219,7 +227,11 @@
    "accuracy": {
     "value": 0.8823529411764706,
     "numerator": 15,
-    "denominator": 17
+    "denominator": 17,
+    "ci95": [
+     0.7058823529411765,
+     1
+    ]
    }
   },
   {
@@ -229,7 +241,11 @@
    "accuracy": {
     "value": 0.7058823529411765,
     "numerator": 12,
-    "denominator": 17
+    "denominator": 17,
+    "ci95": [
+     0.47058823529411764,
+     0.9411764705882353
+    ]
    }
   },
   {
@@ -239,7 +255,11 @@
    "accuracy": {
     "value": 0.9375,
     "numerator": 15,
-    "denominator": 16
+    "denominator": 16,
+    "ci95": [
+     0.8125,
+     1
+    ]
    }
   },
   {
@@ -249,7 +269,11 @@
    "accuracy": {
     "value": 0.5,
     "numerator": 8,
-    "denominator": 16
+    "denominator": 16,
+    "ci95": [
+     0.25,
+     0.75
+    ]
    }
   }
  ],

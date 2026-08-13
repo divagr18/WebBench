@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { CONDITIONS, type DatasetManifest } from '@echobench/schema';
 import { selectPlans } from '../src/commands/run.js';
+import { renderMarkdown } from '../src/commands/report.js';
 import { parseArgs, opt, optNumber } from '../src/args.js';
 
 function fakeManifest(claimCount: number): DatasetManifest {
@@ -78,5 +79,64 @@ describe('argument parsing', () => {
     const parsed = parseArgs(['validate']);
     expect(opt(parsed, 'split', 'dev')).toBe('dev');
     expect(optNumber(parsed, 'port', 4577)).toBe(4577);
+  });
+});
+
+describe('renderMarkdown', () => {
+  const base = {
+    runSetId: 'test',
+    split: 'dev',
+    modelRequested: 'deepseek-chat',
+    createdAt: '2026-01-01T00:00:00Z',
+    totalRuns: 16,
+    completedRuns: 16,
+    failedRuns: 0,
+    rejectedRuns: 0,
+    fbar: { value: 0.5, numerator: 4, denominator: 8 },
+    cur: { value: 0.8, numerator: 4, denominator: 5 },
+    eas: 0.65,
+    pcr: { value: 0.3, numerator: 3, denominator: 10 },
+    ics: { meanPairedDiff: 0.05, pairs: 8 },
+    ser: { value: 1, numerator: 8, denominator: 8 },
+    psr: { value: 0.9, numerator: 14, denominator: 16 },
+    ci: { value: 0.6, numerator: 9, denominator: 15 },
+    tua: { value: 0.9, numerator: 9, denominator: 10 },
+    calibration: { brier: 0.15, ece: 0.08, n: 16 },
+    cost: { totalCostUsd: 0.1, meanInputTokens: 100, meanOutputTokens: 10, meanToolCalls: 8.1 },
+  };
+
+  it('renders EAS with 95% CI when bootstrap is present', () => {
+    const md = renderMarkdown({
+      ...base,
+      bootstrap: { eas: { estimate: 0.65, ci95: [0.45, 0.85], samples: 200 }, resamples: 200 },
+      conditionAccuracy: [],
+    });
+    expect(md).toContain('| **EAS** | 0.6500 [0.450, 0.850] | - | - |');
+  });
+
+  it('renders EAS without CI when bootstrap is absent', () => {
+    const md = renderMarkdown({ ...base, conditionAccuracy: [] });
+    expect(md).toContain('| **EAS** | 0.6500 | - | - |');
+  });
+
+  it('renders per-condition 95% CI column when ci95 is populated', () => {
+    const md = renderMarkdown({
+      ...base,
+      conditionAccuracy: [
+        { condition: 'false_majority_true_primary', correct: 8, total: 16, accuracy: { value: 0.5, numerator: 8, denominator: 16, ci95: [0.25, 0.75] } },
+        { condition: 'clean', correct: 15, total: 16, accuracy: { value: 0.9375, numerator: 15, denominator: 16, ci95: [0.8, 1.0] } },
+      ],
+    });
+    expect(md).toContain('| false_majority_true_primary | 8 | 16 | 0.5000 | [0.250, 0.750] |');
+    expect(md).toContain('| clean | 15 | 16 | 0.9375 | [0.800, 1.000] |');
+    expect(md).toContain('| Condition | Correct | Total | Accuracy | 95% CI |');
+  });
+
+  it('renders dash in CI column when ci95 is absent', () => {
+    const md = renderMarkdown({
+      ...base,
+      conditionAccuracy: [{ condition: 'clean', correct: 15, total: 16, accuracy: { value: 0.9375, numerator: 15, denominator: 16 } }],
+    });
+    expect(md).toContain('| clean | 15 | 16 | 0.9375 | - |');
   });
 });

@@ -30,6 +30,8 @@ export interface MetricStat {
   value: number | null;
   numerator: number;
   denominator: number;
+  /** 95% clustered-bootstrap CI, populated only for headline metrics when requested. */
+  ci95?: [number, number] | null;
 }
 
 export interface CalibrationBin {

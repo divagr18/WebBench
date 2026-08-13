@@ -84,16 +84,37 @@ export async function cmdScore(args: ParsedArgs, ctx: CliContext): Promise<numbe
     const completedRuns = runs.filter((r) => r.status === 'completed');
     const claimOf = (r: RunSummary): string => dataset.worlds.get(r.episodeId)?.claimId ?? r.episodeId;
     const rng = new SeededRng(`bootstrap-${runSetId}`);
+    const seedRng = () => rng.float();
     const easBoot = clusteredBootstrap(
       completedRuns,
       claimOf,
       (sample) => scoreAll({ ...input, runs: sample }).eas,
-      { resamples: bootstrapResamples, seedRng: () => rng.float() },
+      { resamples: bootstrapResamples, seedRng },
     );
+    const conditionAccuracy = report.conditionAccuracy.map((row) => {
+      const subset = completedRuns.filter((r) => dataset.worlds.get(r.episodeId)?.condition === row.condition);
+      const boot = clusteredBootstrap(
+        subset,
+        claimOf,
+        (sample) => {
+          const done = sample.filter((r) => r.finalJudgment !== null);
+          if (done.length === 0) return null;
+          const correct = done.filter((r) => {
+            const w = dataset.worlds.get(r.episodeId);
+            const c = w ? dataset.claims.get(w.claimId) : undefined;
+            return c !== undefined && r.finalJudgment !== null && isCorrectFor(c, r.finalJudgment.answer);
+          }).length;
+          return correct / done.length;
+        },
+        { resamples: bootstrapResamples, seedRng },
+      );
+      return { ...row, accuracy: { ...row.accuracy, ci95: boot.ci95 } };
+    });
     (report as ScoreReport & { bootstrap?: unknown }).bootstrap = {
       eas: easBoot,
       resamples: bootstrapResamples,
     };
+    report.conditionAccuracy = conditionAccuracy;
   }
 
   const outDir = join(reportsDir, split, runSetId);

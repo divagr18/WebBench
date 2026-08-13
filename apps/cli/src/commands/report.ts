@@ -35,7 +35,7 @@ export async function cmdReport(args: ParsedArgs, ctx: CliContext): Promise<numb
   return 0;
 }
 
-function renderMarkdown(score: Record<string, unknown>): string {
+export function renderMarkdown(score: Record<string, unknown>): string {
   const lines: string[] = [];
   lines.push('# EchoBench run report');
   lines.push('');
@@ -61,17 +61,24 @@ function renderMarkdown(score: Record<string, unknown>): string {
   for (const [name, m] of metricRows) {
     lines.push(`| ${name} | ${num(m)} | ${m?.numerator ?? '-'} | ${m?.denominator ?? '-'} |`);
   }
-  lines.push(`| **EAS** | ${typeof score.eas === 'number' ? score.eas.toFixed(4) : 'n/a'} | - | - |`);
+  const boot = score.bootstrap as { eas?: { ci95?: [number, number] | null } } | undefined;
+  const easVal = typeof score.eas === 'number' ? score.eas.toFixed(4) : 'n/a';
+  const easCi = boot?.eas?.ci95 ? ` [${boot.eas.ci95[0].toFixed(3)}, ${boot.eas.ci95[1].toFixed(3)}]` : '';
+  lines.push(`| **EAS** | ${easVal}${easCi} | - | - |`);
   const ics = score.ics as Record<string, unknown> | undefined;
   lines.push(`| ICS (paired conf diff) | ${typeof ics?.meanPairedDiff === 'number' ? ics.meanPairedDiff.toFixed(4) : 'n/a'} | - | ${ics?.pairs ?? 0} pairs |`);
   lines.push('');
   lines.push('## Accuracy by condition');
   lines.push('');
-  lines.push('| Condition | Correct | Total | Accuracy |');
-  lines.push('|---|---|---|---|');
+  lines.push('| Condition | Correct | Total | Accuracy | 95% CI |');
+  lines.push('|---|---|---|---|---|');
   for (const row of (score.conditionAccuracy ?? []) as Array<Record<string, unknown>>) {
     const acc = row.accuracy as Record<string, unknown> | undefined;
-    lines.push(`| ${row.condition} | ${row.correct} | ${row.total} | ${typeof acc?.value === 'number' ? acc.value.toFixed(4) : 'n/a'} |`);
+    const val = typeof acc?.value === 'number' ? acc.value.toFixed(4) : 'n/a';
+    const ci = (acc?.ci95 as [number, number] | undefined)
+      ? `[${(acc!.ci95 as [number, number])[0].toFixed(3)}, ${(acc!.ci95 as [number, number])[1].toFixed(3)}]`
+      : '-';
+    lines.push(`| ${row.condition} | ${row.correct} | ${row.total} | ${val} | ${ci} |`);
   }
   lines.push('');
   const cal = score.calibration as Record<string, unknown> | undefined;
