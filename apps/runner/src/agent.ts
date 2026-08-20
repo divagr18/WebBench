@@ -83,7 +83,12 @@ export async function runEpisode(
       guard++;
       const resp = await llm.chat(messages, { tools: toolDefs(), toolChoice: 'auto', temperature: opts.temperature, maxTokens: 1024 });
       addUsage(resp);
-      messages.push({ role: 'assistant', content: resp.content || null, ...(resp.toolCalls.length > 0 ? { tool_calls: resp.toolCalls } : {}) });
+      messages.push({
+        role: 'assistant',
+        content: resp.content || null,
+        ...(resp.reasoningContent ? { reasoning_content: resp.reasoningContent } : {}),
+        ...(resp.toolCalls.length > 0 ? { tool_calls: resp.toolCalls } : {}),
+      });
       if (resp.toolCalls.length === 0) break;
 
       for (const tc of resp.toolCalls) {
@@ -130,18 +135,18 @@ async function elicitPrior(
     ANSWER_FORMAT: `${answerFormat(claim.answerSpec)} The "answer" field must be either the string "ABSTAIN" or an object shaped exactly like ${answerShapeHint(claim.answerSpec)}.`,
   });
 
+  const priorMessages: ChatMessage[] = [
+    { role: 'system', content: 'You answer strictly from your own knowledge as JSON only.' },
+    { role: 'user', content: prompt },
+  ];
   for (let attempt = 0; attempt < 2; attempt++) {
-    const resp = await llm.chat(
-      [
-        { role: 'system', content: 'You answer strictly from your own knowledge as JSON only.' },
-        { role: 'user', content: prompt },
-      ],
-      { responseFormat: 'json', jsonSchema: { name: 'prior_response', schema: PRIOR_RESPONSE_JSON_SCHEMA }, temperature: opts.temperature, maxTokens: 300 },
-    );
+    const resp = await llm.chat(priorMessages, { responseFormat: 'json', jsonSchema: { name: 'prior_response', schema: PRIOR_RESPONSE_JSON_SCHEMA }, temperature: opts.temperature, maxTokens: 300 });
     addUsage(resp);
     const parsed = parsePrior(claim, resp.content);
     if (parsed) return parsed;
     result.schemaRepairAttempts.push({ reason: 'prior schema mismatch', succeeded: attempt === 0 });
+    priorMessages.push({ role: 'assistant', content: resp.content || '', ...(resp.reasoningContent ? { reasoning_content: resp.reasoningContent } : {}) });
+    priorMessages.push({ role: 'user', content: 'Your previous response was invalid. Respond again with JSON only, matching the schema exactly.' });
   }
   return null;
 }
@@ -208,7 +213,7 @@ async function elicitFinal(
       lastError = 'unparseable JSON';
     }
     result.schemaRepairAttempts.push({ reason: lastError, succeeded: attempt === 0 });
-    finalMessages.push({ role: 'assistant', content: resp.content || '' });
+    finalMessages.push({ role: 'assistant', content: resp.content || '', ...(resp.reasoningContent ? { reasoning_content: resp.reasoningContent } : {}) });
     finalMessages.push({ role: 'user', content: `Your previous response was invalid (${lastError}). Respond again with JSON only, matching the schema exactly.` });
   }
   throw new Error(lastError);

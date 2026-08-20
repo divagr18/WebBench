@@ -71,11 +71,13 @@ describe('runner orchestration', () => {
       () => ({ content: JSON.stringify({ answer: claim.groundTruth, confidence: 0.7, rationale: 'prior knowledge' }) }),
       () => ({
         finishReason: 'tool_calls',
+        reasoningContent: 'Inspect the search results before deciding.',
         toolCalls: [{ id: 'call_1', type: 'function', function: { name: 'search', arguments: JSON.stringify({ query: claim.entityName }) } }],
       }),
       (call, messages) => {
         const last = messages[messages.length - 1];
         expect(last?.role).toBe('tool');
+        expect(messages.some((message) => message.reasoning_content === 'Inspect the search results before deciding.')).toBe(true);
         return void call;
       },
       () => ({ content: finalJudgmentJson(claim) }),

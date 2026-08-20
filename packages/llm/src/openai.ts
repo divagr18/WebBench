@@ -8,6 +8,8 @@ export interface OpenAIConfig {
   maxRetries: number;
   timeoutMs: number;
   reasoningEffort: 'none' | 'low' | 'medium' | 'high' | 'xhigh' | 'max';
+  enableThinking?: boolean;
+  preserveThinking?: boolean;
   completionTokenFloor: number;
 }
 
@@ -21,6 +23,8 @@ export function openaiConfigFromEnv(env: NodeJS.ProcessEnv = process.env): OpenA
     maxRetries: Number(env.OPENAI_MAX_RETRIES ?? 8),
     timeoutMs: Number(env.OPENAI_TIMEOUT_MS ?? 180000),
     reasoningEffort: (env.OPENAI_REASONING_EFFORT as OpenAIConfig['reasoningEffort'] | undefined) ?? 'none',
+    enableThinking: env.OPENAI_ENABLE_THINKING === 'true',
+    preserveThinking: env.OPENAI_PRESERVE_THINKING === 'true',
     completionTokenFloor: Number(env.OPENAI_COMPLETION_TOKEN_FLOOR ?? 8192),
   };
 }
@@ -81,6 +85,8 @@ export class OpenAIClient {
       max_completion_tokens: Math.max(opts.maxTokens ?? 2048, this.config.completionTokenFloor),
       reasoning_effort: this.config.reasoningEffort,
     };
+    if (this.config.enableThinking) body.enable_thinking = true;
+    if (this.config.preserveThinking) body.preserve_thinking = true;
     if (opts.tools && opts.tools.length > 0) {
       body.tools = opts.tools;
       body.tool_choice = opts.toolChoice ?? 'auto';
@@ -113,7 +119,7 @@ export class OpenAIClient {
         model: string;
         usage: OpenAIUsage;
         choices: Array<{
-          message: { content: string | null; tool_calls?: ToolCall[] };
+          message: { content: string | null; reasoning_content?: string | null; tool_calls?: ToolCall[] };
           finish_reason: string;
         }>;
       };
@@ -130,6 +136,7 @@ export class OpenAIClient {
 
       return {
         content: choice.message.content ?? '',
+        ...(choice.message.reasoning_content ? { reasoningContent: choice.message.reasoning_content } : {}),
         toolCalls: choice.message.tool_calls ?? [],
         finishReason: choice.finish_reason,
         usage,

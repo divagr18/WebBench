@@ -6,6 +6,8 @@ export interface ChatMessage {
   name?: string;
   tool_calls?: ToolCall[];
   tool_call_id?: string;
+  /** Provider-supplied reasoning state that must be replayed on a later tool turn. */
+  reasoning_content?: string;
 }
 
 export interface ToolCall {
@@ -44,6 +46,7 @@ export interface UsageInfo {
 
 export interface ChatResponse {
   content: string;
+  reasoningContent?: string;
   toolCalls: ToolCall[];
   finishReason: string;
   usage: UsageInfo;
