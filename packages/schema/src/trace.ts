@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { FinalJudgmentSchema, PriorResponseSchema } from './judgment.js';
 
-export const ProviderIdSchema = z.enum(['deepseek', 'openai', 'modelscope', 'openrouter']);
+export const ProviderIdSchema = z.enum(['deepseek', 'openai', 'modelscope', 'openrouter', 'gemini', 'muse', 'grok', 'sarvam']);
 export type ProviderId = z.infer<typeof ProviderIdSchema>;
 
 export const TraceSearchCallSchema = z.object({

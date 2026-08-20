@@ -4,7 +4,7 @@ import type { ChatMessage, ChatOptions, ChatResponse, LlmLike, ToolDef } from '.
 import type { ToolGateway } from './gateway.js';
 import { fillTemplate, type PromptBundle } from '@echobench/generator';
 import { answerFormat, answerShapeHint, normalizeAnyAnswer } from './answerFormat.js';
-import { FINAL_JUDGMENT_JSON_SCHEMA, PRIOR_RESPONSE_JSON_SCHEMA, estimateCostUsd } from '@echobench/llm';
+import { FINAL_JUDGMENT_JSON_SCHEMA, PRIOR_RESPONSE_JSON_SCHEMA, estimateCostUsdCached } from '@echobench/llm';
 
 const MAX_TOOL_RESULT_CHARS = 6000;
 
@@ -59,7 +59,7 @@ export async function runEpisode(
   const addUsage = (resp: ChatResponse) => {
     result.inputTokens += resp.usage.prompt_tokens;
     result.outputTokens += resp.usage.completion_tokens;
-    result.estimatedCostUsd += estimateCostUsd(modelRequested, resp.usage.prompt_tokens, resp.usage.completion_tokens);
+    result.estimatedCostUsd += estimateCostUsdCached(modelRequested, resp.usage.prompt_tokens, resp.usage.completion_tokens, resp.usage.prompt_cache_hit_tokens ?? 0);
     if (!result.modelReturned) result.modelReturned = resp.modelReturned;
   };
 
@@ -83,7 +83,7 @@ export async function runEpisode(
       guard++;
       const resp = await llm.chat(messages, { tools: toolDefs(), toolChoice: 'auto', temperature: opts.temperature, maxTokens: 1024 });
       addUsage(resp);
-      messages.push({ role: 'assistant', content: resp.content || null, ...(resp.toolCalls.length > 0 ? { tool_calls: resp.toolCalls } : {}) });
+      messages.push({ role: 'assistant', content: resp.content || null, ...(resp.toolCalls.length > 0 ? { tool_calls: resp.toolCalls } : {}), ...(resp.extraContent !== undefined ? { extra_content: resp.extraContent } : {}) });
       if (resp.toolCalls.length === 0) break;
 
       for (const tc of resp.toolCalls) {
@@ -101,7 +101,7 @@ export async function runEpisode(
   }
 
   try {
-    result.finalJudgment = await elicitFinal(claim, world, bundle, llm, opts, result, addUsage, messages);
+    result.finalJudgment = await elicitFinal(claim, world, bundle, llm, opts, result, addUsage, messages, modelRequested);
   } catch (e) {
     result.status = 'rejected';
     result.failureReason = `final judgment invalid: ${msg(e)}`;
@@ -147,19 +147,20 @@ async function elicitPrior(
 }
 
 function parsePrior(claim: ClaimRecord, content: string): PriorResponse | null {
-  const obj = parseJsonLoose<Record<string, unknown>>(content);
-  if (!obj) return null;
-  const answerParse = normalizeAnyAnswer(claim, (obj.answer as unknown) ?? null);
-  if (!answerParse.ok) return null;
-  const confidence = typeof obj.confidence === 'number' ? obj.confidence : 0.5;
-  const rationale = typeof obj.rationale === 'string' ? obj.rationale : '';
-  const candidate = {
-    answer: answerParse.value,
-    confidence: clamp01(confidence),
-    rationale,
-  };
-  const validated = PriorResponseSchema.safeParse(candidate);
-  return validated.success ? validated.data : null;
+  for (const obj of parseJsonCandidates<Record<string, unknown>>(content)) {
+    const answerParse = normalizeAnyAnswer(claim, (obj.answer as unknown) ?? null);
+    if (!answerParse.ok) continue;
+    const confidence = typeof obj.confidence === 'number' ? obj.confidence : 0.5;
+    const rationale = typeof obj.rationale === 'string' ? obj.rationale : '';
+    const candidate = {
+      answer: answerParse.value,
+      confidence: clamp01(confidence),
+      rationale,
+    };
+    const validated = PriorResponseSchema.safeParse(candidate);
+    if (validated.success) return validated.data;
+  }
+  return null;
 }
 
 async function elicitFinal(
@@ -171,6 +172,7 @@ async function elicitFinal(
   result: EpisodeRunResult,
   addUsage: AddUsage,
   messages: ChatMessage[],
+  modelRequested: string,
 ): Promise<FinalJudgment> {
   const priorDisplay = result.prior ? JSON.stringify(result.prior.answer) : 'ABSTAIN';
   const prompt = fillTemplate(bundle.texts.final_judgment, {
@@ -185,10 +187,20 @@ async function elicitFinal(
 
   let lastError = 'no parse';
   for (let attempt = 0; attempt < 2; attempt++) {
-    const resp = await llm.chat(finalMessages, { responseFormat: 'json', jsonSchema: { name: 'final_judgment', schema: FINAL_JUDGMENT_JSON_SCHEMA }, temperature: opts.temperature, maxTokens: 900 });
+    // Sarvam rejects tool-result transcripts unless their schemas are repeated.
+    // Other providers, including Gemma through OpenRouter, are more reliable
+    // when the final structured-output request has no competing tool mode.
+    const sarvamToolCompatibility = modelRequested.toLowerCase().includes('sarvam');
+    const resp = await llm.chat(finalMessages, {
+      ...(sarvamToolCompatibility ? { tools: toolDefs(), toolChoice: 'none' as const } : {}),
+      responseFormat: 'json',
+      jsonSchema: { name: 'final_judgment', schema: FINAL_JUDGMENT_JSON_SCHEMA },
+      temperature: opts.temperature,
+      maxTokens: 900,
+    });
     addUsage(resp);
-    const obj = parseJsonLoose<Record<string, unknown>>(resp.content);
-    if (obj) {
+    const jsonCandidates = parseJsonCandidates<Record<string, unknown>>(resp.content);
+    for (const obj of jsonCandidates) {
       const normalizedAnswer = normalizeAnyAnswer(claim, obj.answer);
       const normalizedPrior = normalizeAnyAnswer(claim, obj.priorAnswerRestated);
       const candidate = {
@@ -204,11 +216,10 @@ async function elicitFinal(
       const validated = FinalJudgmentSchema.safeParse(candidate);
       if (validated.success) return validated.data;
       lastError = validated.error.issues.map((i) => `${i.path.join('.')}: ${i.message}`).join('; ');
-    } else {
-      lastError = 'unparseable JSON';
     }
+    if (jsonCandidates.length === 0) lastError = 'unparseable JSON';
     result.schemaRepairAttempts.push({ reason: lastError, succeeded: attempt === 0 });
-    finalMessages.push({ role: 'assistant', content: resp.content || '' });
+    finalMessages.push({ role: 'assistant', content: resp.content || '', ...(resp.extraContent !== undefined ? { extra_content: resp.extraContent } : {}) });
     finalMessages.push({ role: 'user', content: `Your previous response was invalid (${lastError}). Respond again with JSON only, matching the schema exactly.` });
   }
   throw new Error(lastError);
@@ -307,20 +318,53 @@ function toStringArray(v: unknown): string[] {
 }
 
 export function parseJsonLoose<T>(raw: string): T | null {
-  try {
-    return JSON.parse(raw) as T;
-  } catch {
-    const start = raw.indexOf('{');
-    const end = raw.lastIndexOf('}');
-    if (start >= 0 && end > start) {
-      try {
-        return JSON.parse(raw.slice(start, end + 1)) as T;
-      } catch {
-        return null;
+  return parseJsonCandidates<T>(raw)[0] ?? null;
+}
+
+/**
+ * Extract complete JSON objects from model text without assuming that the
+ * first opening brace and final closing brace belong to the same object.
+ * Some providers prepend reasoning, examples, or fenced JSON before the
+ * actual answer; callers still validate every candidate against their schema.
+ */
+export function parseJsonCandidates<T>(raw: string): T[] {
+  const candidates: string[] = [raw.trim()];
+  const fenced = raw.matchAll(/```(?:json)?\s*([\s\S]*?)```/gi);
+  for (const match of fenced) candidates.push(match[1]!.trim());
+
+  for (let start = raw.indexOf('{'); start >= 0; start = raw.indexOf('{', start + 1)) {
+    let depth = 0;
+    let quoted = false;
+    let escaped = false;
+    for (let i = start; i < raw.length; i++) {
+      const char = raw[i]!;
+      if (quoted) {
+        if (escaped) escaped = false;
+        else if (char === '\\') escaped = true;
+        else if (char === '"') quoted = false;
+        continue;
+      }
+      if (char === '"') quoted = true;
+      else if (char === '{') depth++;
+      else if (char === '}' && --depth === 0) {
+        candidates.push(raw.slice(start, i + 1));
+        break;
       }
     }
-    return null;
   }
+
+  const seen = new Set<string>();
+  const parsed: T[] = [];
+  for (const candidate of candidates) {
+    if (!candidate || seen.has(candidate)) continue;
+    seen.add(candidate);
+    try {
+      parsed.push(JSON.parse(candidate) as T);
+    } catch {
+      // Keep scanning: a reasoning block can contain malformed or unrelated JSON.
+    }
+  }
+  return parsed;
 }
 
 function truncate(s: string): string {

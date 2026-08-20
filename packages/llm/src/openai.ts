@@ -7,7 +7,7 @@ export interface OpenAIConfig {
   model: string;
   maxRetries: number;
   timeoutMs: number;
-  reasoningEffort: 'none' | 'low' | 'medium' | 'high' | 'xhigh' | 'max';
+  reasoningEffort: 'none' | 'minimal' | 'low' | 'medium' | 'high' | 'xhigh' | 'max';
   completionTokenFloor: number;
 }
 

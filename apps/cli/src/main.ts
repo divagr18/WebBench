@@ -1,4 +1,4 @@
-import { configFromEnv, DeepSeekClient, modelscopeConfigFromEnv, ModelScopeClient, openaiConfigFromEnv, OpenAIClient, openrouterConfigFromEnv, OpenRouterClient } from '@echobench/llm';
+import { configFromEnv, DeepSeekClient, geminiConfigFromEnv, GeminiClient, grokConfigFromEnv, GrokClient, modelscopeConfigFromEnv, ModelScopeClient, museConfigFromEnv, MuseClient, openaiConfigFromEnv, OpenAIClient, OpenAIResponsesClient, openrouterConfigFromEnv, OpenRouterClient, sarvamConfigFromEnv, SarvamClient } from '@echobench/llm';
 import { findRepoRoot, loadDotEnv } from './env.js';
 import { parseArgs } from './args.js';
 import { cmdGenerate } from './commands/generate.js';
@@ -18,9 +18,9 @@ export interface EvalClient {
   chat: DeepSeekClient['chat'];
 }
 
-const VALID_PROVIDERS = ['deepseek', 'openai', 'modelscope', 'openrouter'];
+const VALID_PROVIDERS = ['deepseek', 'openai', 'modelscope', 'openrouter', 'gemini', 'muse', 'grok', 'sarvam'];
 
-export function isValidProvider(provider: string): provider is 'deepseek' | 'openai' | 'modelscope' | 'openrouter' {
+export function isValidProvider(provider: string): provider is 'deepseek' | 'openai' | 'modelscope' | 'openrouter' | 'gemini' | 'muse' | 'grok' | 'sarvam' {
   return VALID_PROVIDERS.includes(provider);
 }
 
@@ -31,12 +31,15 @@ export function makeEvalClient(ctx: CliContext, provider: string, model?: string
     if (!config) {
       throw new Error('OPENAI_API_KEY is not set. Set it in .env at the repo root.');
     }
-    return new OpenAIClient(model ? { ...config, model } : config);
-  }
+    const resolved = model ? { ...config, model } : config;
+    if (config.reasoningEffort !== 'none') {
+      return new OpenAIResponsesClient(resolved);
+    }
+    return new OpenAIClient(resolved);  }
   if (provider === 'modelscope') {
     const config = modelscopeConfigFromEnv(merged);
     if (!config) {
-      throw new Error('MODELSCOPE_API_KEY is not set. Set it in .env at the repo root.');
+      throw new Error('MODELSCOPE_API_KEY or DASHSCOPE_API_KEY is not set. Set the key for the selected Qwen route in .env at the repo root.');
     }
     return new ModelScopeClient(model ? { ...config, model } : config);
   }
@@ -46,6 +49,34 @@ export function makeEvalClient(ctx: CliContext, provider: string, model?: string
       throw new Error('OPENROUTER_API_KEY is not set. Set it in .env at the repo root.');
     }
     return new OpenRouterClient(model ? { ...config, model } : config);
+  }
+  if (provider === 'gemini') {
+    const config = geminiConfigFromEnv(merged);
+    if (!config) {
+      throw new Error('GEMINI_API_KEY is not set. Set it in .env at the repo root.');
+    }
+    return new GeminiClient(model ? { ...config, model } : config);
+  }
+  if (provider === 'muse') {
+    const config = museConfigFromEnv(merged);
+    if (!config) {
+      throw new Error('MUSE_API_KEY is not set. Set it in .env at the repo root.');
+    }
+    return new MuseClient(model ? { ...config, model } : config);
+  }
+  if (provider === 'grok') {
+    const config = grokConfigFromEnv(merged);
+    if (!config) {
+      throw new Error('GROK_API_KEY is not set. Set it in .env at the repo root.');
+    }
+    return new GrokClient(model ? { ...config, model } : config);
+  }
+  if (provider === 'sarvam') {
+    const config = sarvamConfigFromEnv(merged);
+    if (!config) {
+      throw new Error('SARVAM_API_KEY (or sarvam_api_key) is not set. Set it in .env at the repo root.');
+    }
+    return new SarvamClient(model ? { ...config, model } : config);
   }
   const config = configFromEnv(merged);
   if (!config) {

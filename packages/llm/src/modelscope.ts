@@ -7,17 +7,22 @@ export interface ModelScopeConfig {
   model: string;
   maxRetries: number;
   timeoutMs: number;
+  /** Qwen3.8 Max family inference intensity; only supported by the DashScope route. */
+  reasoningEffort?: 'low' | 'medium' | 'xhigh';
 }
 
 export function modelscopeConfigFromEnv(env: NodeJS.ProcessEnv = process.env): ModelScopeConfig | null {
-  const apiKey = env.MODELSCOPE_API_KEY;
+  const apiKey = env.DASHSCOPE_API_KEY ?? env.MODELSCOPE_API_KEY;
   if (!apiKey) return null;
+  const reasoningEffort = qwenReasoningEffort(env.DASHSCOPE_REASONING_EFFORT ?? env.MODELSCOPE_REASONING_EFFORT);
+  const usesDashScope = Boolean(env.DASHSCOPE_API_KEY);
   return {
     apiKey,
-    baseUrl: env.MODELSCOPE_BASE_URL ?? 'https://api-inference.modelscope.ai/v1',
-    model: env.MODELSCOPE_MODEL ?? 'Qwen-Ambassador/Qwen3.7-Max',
+    baseUrl: env.DASHSCOPE_BASE_URL ?? env.MODELSCOPE_BASE_URL ?? (usesDashScope ? 'https://dashscope-intl.aliyuncs.com/compatible-mode/v1' : 'https://api-inference.modelscope.ai/v1'),
+    model: env.DASHSCOPE_MODEL ?? env.MODELSCOPE_MODEL ?? (usesDashScope ? 'qwen3.8-max-preview' : 'Qwen-Ambassador/Qwen3.7-Max'),
     maxRetries: Number(env.MODELSCOPE_MAX_RETRIES ?? 8),
     timeoutMs: Number(env.MODELSCOPE_TIMEOUT_MS ?? 180000),
+    ...(reasoningEffort ? { reasoningEffort } : {}),
   };
 }
 
@@ -64,13 +69,16 @@ export class ModelScopeClient {
   private async singleAttempt(messages: ChatMessage[], opts: ChatOptions): Promise<Omit<ChatResponse, 'latencyMs'>> {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), this.config.timeoutMs);
+    const thinkingEnabled = this.config.reasoningEffort !== undefined || opts.disableThinking === false;
     const body: Record<string, unknown> = {
       model: this.config.model,
-      messages,
+      messages: messages.map(toModelScopeMessage),
       max_tokens: opts.maxTokens ?? 2048,
       tool_choice: opts.toolChoice ?? 'auto',
-      enable_thinking: opts.disableThinking === false ? true : false,
+      enable_thinking: thinkingEnabled,
     };
+    if (this.config.reasoningEffort !== undefined) body.reasoning_effort = this.config.reasoningEffort;
+    if (thinkingEnabled) body.preserve_thinking = true;
     if (typeof opts.temperature === 'number') body.temperature = opts.temperature;
     if (opts.tools && opts.tools.length > 0) body.tools = opts.tools;
     if (opts.responseFormat === 'json') body.response_format = { type: 'json_object' };
@@ -96,7 +104,7 @@ export class ModelScopeClient {
         model: string;
         usage: { prompt_tokens: number; completion_tokens: number; total_tokens: number };
         choices: Array<{
-          message: { content: string | null; tool_calls?: ChatResponse['toolCalls'] };
+          message: { content: string | null; reasoning_content?: string | null; tool_calls?: ChatResponse['toolCalls'] };
           finish_reason: string;
         }>;
       };
@@ -114,6 +122,7 @@ export class ModelScopeClient {
           total_tokens: parsed.usage.total_tokens,
         },
         modelReturned: parsed.model,
+        ...(choice.message.reasoning_content ? { extraContent: { modelscope: { reasoning_content: choice.message.reasoning_content } } } : {}),
       };
     } catch (err) {
       if (err instanceof Error && err.name === 'AbortError') {
@@ -140,6 +149,24 @@ function sleep(ms: number): Promise<void> {
 
 function truncate(s: string, n: number): string {
   return s.length <= n ? s : `${s.slice(0, n)}...`;
+}
+
+function qwenReasoningEffort(value: string | undefined): ModelScopeConfig['reasoningEffort'] | null {
+  return value === 'low' || value === 'medium' || value === 'xhigh' ? value : null;
+}
+
+function toModelScopeMessage(message: ChatMessage): Omit<ChatMessage, 'extra_content'> & { reasoning_content?: string } {
+  const { extra_content, ...base } = message;
+  const reasoningContent = modelscopeReasoning(extra_content);
+  return reasoningContent ? { ...base, reasoning_content: reasoningContent } : base;
+}
+
+function modelscopeReasoning(extraContent: unknown): string | null {
+  if (!extraContent || typeof extraContent !== 'object') return null;
+  const providerPayload = (extraContent as { modelscope?: unknown }).modelscope;
+  if (!providerPayload || typeof providerPayload !== 'object') return null;
+  const reasoningContent = (providerPayload as { reasoning_content?: unknown }).reasoning_content;
+  return typeof reasoningContent === 'string' && reasoningContent.length > 0 ? reasoningContent : null;
 }
 
 export { pricingFor };

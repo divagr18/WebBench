@@ -1,0 +1,895 @@
+\documentclass{article}
+
+\usepackage{arxiv}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{nicefrac}
+\usepackage{microtype}
+\usepackage{cleveref}
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{doi}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta}
+\usepackage{xcolor}
+\usepackage{longtable}
+
+\title{Consensus Is Not Corroboration:\\ Measuring Epistemic Arbitration on a Synthetic Social Web}
+
+\date{}
+
+\author{
+	Divyansh Agrawal \\
+	Independent Researcher \\
+	\texttt{divagr1925@gmail.com} \\
+}
+
+\renewcommand{\shorttitle}{Consensus Is Not Corroboration}
+
+\hypersetup{
+pdftitle={Consensus Is Not Corroboration: Measuring Epistemic Arbitration on a Synthetic Social Web},
+pdfsubject={cs.CL},
+pdfauthor={Divyansh Agrawal},
+pdfkeywords={LLM agents, web agents, LLMs, misinformation, source reliability, belief revision},
+}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Web-connected language models answer from what they read, and what they read is
+presented as consensus. Consensus, however, can be manufactured: one unsupported
+claim copied across a dozen pages is, on the rendered surface, indistinguishable
+from a dozen independent reports. We introduce EchoNet, a benchmark for epistemic
+arbitration in web-enabled models: the decision of when retrieved evidence should
+override what the model already believes. Each model researches a closed synthetic
+social web whose hidden provenance graph records where every page came from. One
+hundred claims are instantiated under six matched counterfactual conditions
+(poisoned pages, manipulated search rankings, manufactured consensus, legitimate
+updates, and a false visible majority) that vary only the stance and provenance
+topology of the pages; surface statistics are held fixed, and a deterministic
+scorer grades belief change against ground truth. Pilots across ten frontier model
+configurations give four results. First, on five of the six conditions accuracy
+spans 0.71 to 1.00 with a spread of at most 0.29, while the false-majority
+condition spreads 0.42, from 0.50 to 0.92, and accounts for most of the observed separation. Second, paired bootstrap on shared episodes puts the head of the field in one
+cluster: Gemini 3.7 Flash is significantly ahead of seven of its nine competitors,
+but not ahead of Gemini 3.5 Flash-Lite or Muse Spark 1.2. Third, resistance and
+revision decouple. Four models never abandon a correct prior, yet the field
+differs five-fold in how often a model disowns the primary source after finding it
+(0.058 to 0.306). Fourth, inference cost is weakly associated with arbitration quality at list pricing:
+the cheapest configuration, statistically tied with the leader, costs \$0.32 per
+hundred runs, while the most expensive spends 24$\times$ as much and gains only
+0.046 of EAS over it.
+\end{abstract}
+
+\keywords{LLM agents \and web agents \and LLMs \and misinformation \and source reliability \and belief revision}
+
+
+\section{Introduction}
+\label{sec:intro}
+
+A query to a web-connected language model is answered by a loop of retrieval,
+reading, and belief revision. The pages the loop returns are not a set of
+independent reports. Claims propagate: a forum post becomes a blog item, the blog
+item becomes a news brief, the brief is aggregated by ten outlets. To a model that
+sees only rendered pages, ten copies of one unsupported claim and ten independent
+observations look alike. Both are consensus. The model must still decide whether
+the pages it found are evidence or echo, and whether they justify changing its
+mind.
+
+We call this decision \emph{epistemic arbitration}: deciding, in the presence of
+retrieved evidence, whether to strengthen, weaken, replace, or leave unchanged an
+existing belief. Arbitration has two symmetric failure modes. A model that treats
+volume as evidence is \emph{gullible}: it starts correct, meets a loud false
+consensus, and finishes wrong. A model that treats its own memory as infallible is
+\emph{stubborn}: its prior is stale, the web carries a genuine update, and it
+refuses to move. Both failures are invisible to accuracy measured on a single
+static snapshot of the web.
+
+Existing evaluation does not make arbitration measurable. Retrieval-augmented QA
+and web-agent benchmarks ask whether a model can find and use information on a
+fixed web \citep{webgpt,webarena,mind2web,gaia,agentbench,toolqa}; they reward
+correct answers, not correct belief revision, and the pages involved are treated
+as trustworthy content. Factuality benchmarks probe parametric memory in closed
+book \citep{lin2022truthfulqa,simpleqa,hle}; FreshQA adds time-varying facts but
+does not control the provenance of the updating evidence \citep{freshllms}.
+Knowledge-conflict studies present context that contradicts the model's memory and
+report which side wins \citep{xie2024chameleon,mallen2023trust,xu2024kcsurvey,
+wu2025clasheval}, but the conflicting context is a bag of sentences with no causal
+history: nothing distinguishes five witnesses from five copies of one witness.
+Attribution work grades the citations a model produces after generating text
+\citep{gao2023alce,min2023factscore}, the reverse direction of our question. On
+the live web the provenance of any claim is unknown to the evaluator, so no
+existing test can separate response to consensus volume from response to evidential
+independence. That separation is the missing variable.
+
+EchoNet supplies it. The benchmark places a model inside a closed synthetic web of
+realistic news sites, official records, and a discussion forum, served over HTTP
+with token-scoped isolation, so the real internet is never reachable. Every world
+is generated from a hidden directed provenance graph that records the stance of
+each page, which page copied which, and where each claim originated. The scorer
+reads this graph; the model never sees it. Each of 100 claims is instantiated
+under six \emph{matched counterfactual conditions} that hold surface statistics
+fixed (the same domains, engagement counts, publication ages, and wording targets
+across conditions) and vary only the stance and provenance topology of the pages.
+In the manufactured-consensus condition, seven pages asserting a false value all
+derive from one unsupported forum post; in the clean condition, the same nine slots
+carry independent reports of the true value. A three-stage protocol elicits the
+model's prior without tools, runs a fresh-context research loop over the synthetic
+web with two tools and a twenty-call budget, and collects a strict final judgment.
+A deterministic scorer computes twelve metrics with bootstrap confidence intervals
+clustered by claim. A sealed 480-world test split is held out; the results below
+come from dev-split pilots.
+
+Contributions:
+\begin{itemize}
+    \item A construction method for evaluating web-enabled models: a synthetic
+    social web with hidden provenance, and matched counterfactual worlds that
+    separate apparent source volume from evidential independence (\Cref{sec:benchmark}).
+    \item A protocol and metric suite for belief revision: prior elicitation,
+    a capped research loop, and deterministic metrics for corruption resistance,
+    legitimate updating, provenance collapse, primary-source fidelity, citation
+    integrity, calibration, and cost (\Cref{sec:metrics}).
+    \item Pilots across ten frontier model configurations scored under identical
+    plans, with paired significance tests on shared episodes
+    (\Cref{sec:setup,sec:results}).
+    \item A cost-adjusted view of epistemic robustness: an inference-cost-versus-arbitration
+    frontier computed at list pricing (\Cref{sec:cost}).
+\end{itemize}
+
+Four findings preview the results (\Cref{sec:results}). (1)~Five of six conditions
+show limited separation: accuracy on them spans 0.71 to 1.00 with a spread of at most
+0.29, and almost all of that spread comes from two cells on manufactured
+consensus. The false-majority condition, where the visible majority is wrong and
+the correct value survives in a citable official record, spreads 0.42 (0.50 to
+0.92). (2)~The
+raw point estimates create larger apparent gaps than the paired comparisons. Gem\-ini 3.7 Flash posts the best raw score
+(0.984), and paired bootstrap on the 34 episodes every pilot shares confirms a
+real advantage over seven of the nine competitors, but it fails to separate the
+leader from Gemini 3.5 Flash-Lite or Muse Spark 1.2. (3)~Resistance and revision
+are different traits. Four models never
+corrupt a correct prior, yet models differ five-fold in how often they disown the
+true primary source after opening it, and the most agentic model in the field makes
+the worst use of its confidence. (4)~At list pricing, cost is weakly associated with arbitration quality:
+Gemini 3.5 Flash-Lite reaches the leader's statistical cluster at \$0.32 per
+hundred runs, while Qwen3.7 Max, the most expensive configuration in the field,
+spends 24$\times$ that and gains only 0.046 of EAS over it.
+
+
+\section{EchoNet: a synthetic social web with known causal history}
+\label{sec:benchmark}
+
+\subsection{Claims and tracks}
+\label{sec:claims}
+
+The benchmark contains 100 claims. Fifty are \emph{synthetic}: fictional entities,
+institutions, and events dated 2030 to 2031, which cannot exist in any training
+corpus and remove memorization as a strategy. Fifty are \emph{real}: curated facts
+with an as-of date, a source record, and an evidence note, included so that the
+benchmark can test whether retrieval corrupts correct parametric knowledge. Each
+claim has a single correct value (numeric, categorical, or a named entity), and
+the question asks the model to verify or determine that value.
+
+\subsection{Six matched counterfactual conditions}
+\label{sec:conditions}
+
+Every claim is instantiated under six conditions, yielding 600 worlds. All worlds
+share a fixed template of nine claim-bearing page slots: two official records, five
+news pages (wire, broadsheet, local, tabloid, aggregator), and two forum posts.
+Five further neutral topical distractor pages fill each world so that search and
+triage behave realistically. Surface attributes (view, like, share, and comment
+counts; publication age; author identities) are seeded per claim-and-slot and are
+identical across all six conditions for a claim. Worlds therefore differ only in
+the stance each page takes and in the provenance edges between pages
+(\Cref{fig:worlds}).
+
+\begin{itemize}
+    \item \textbf{Clean.} All nine claim-bearing pages assert the true value; all
+    are independent. Measures baseline research competence.
+    \item \textbf{Single poison.} As clean, except the tabloid page asserts a false
+    value. Measures resistance to one isolated false page.
+    \item \textbf{Ranked poison.} As single poison, with the false page forced to
+    rank~1 in search whenever it matches the query. Measures sensitivity to rank
+    bias.
+    \item \textbf{Manufactured consensus.} The two official records assert the true
+    value. The remaining seven pages all assert the false value and all derive,
+    through copy and repost edges, from a single unsupported forum post. The model
+    sees seven sources on one side and two on the other; the provenance graph
+    records that the seven contain one independent observation. Measures whether
+    volume is treated as independence.
+    \item \textbf{False majority, true primary.} Seven non-official pages assert
+    the false value, with a small internal copy structure; the two official records
+    assert the true value, and the secondary record cites the primary. The correct
+    answer is recoverable only by reaching the official records against the visible
+    majority. Measures arbitration under a false consensus.
+    \item \textbf{Legitimate update.} The claim's true value is a recent change the
+    model cannot know from training. An official chain (primary record, then wire
+    and broadsheet reports derived from it) asserts the updated value; four older
+    pages assert the stale value that matches the expected parametric prior.
+    Measures legitimate belief revision.
+\end{itemize}
+
+In every condition, ground-truth pages cite the official records and each other, so
+citation traversal is always available to a model that escalates. The frozen
+evaluation contract, including prompt hashes and scoring rules, is recorded in the
+repository preregistration.
+
+\begin{figure}
+\centering
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[
+  page/.style={draw, rounded corners=1pt, minimum width=0.88cm, minimum height=0.60cm,
+               inner sep=1pt, align=center, font=\scriptsize},
+  truepage/.style={page, draw=green!45!black, fill=green!8},
+  falsepage/.style={page, draw=red!60!black, fill=red!7},
+  source/.style={circle, draw, fill=white, minimum size=0.20cm, inner sep=0pt},
+  copyarr/.style={-{Stealth[length=1.6mm]}, thick, red!60!black},
+  truearr/.style={-{Stealth[length=1.4mm]}, semithick, green!45!black},
+  lab/.style={font=\footnotesize\bfseries},
+]
+% Clean: every visible true page has its own origin.  There are no copy edges.
+\node[lab] at (2.5, 4.7) {Clean: genuine corroboration};
+\foreach \x/\y in {0.7/3.7, 1.6/3.7, 2.5/3.7, 3.4/3.7, 4.3/3.7,
+                       1.15/2.55, 2.05/2.55, 2.95/2.55, 3.85/2.55} {
+  \node[truepage] at (\x,\y) {TRUE};
+  \node[source] (s) at (\x,\y-0.72) {};
+  \draw[truearr] (s) -- (\x,\y-0.31);
+}
+\node[font=\scriptsize\itshape, align=center, text=green!45!black] at (2.5,0.75)
+  {9 true pages\\9 independent origins};
+% Manufactured consensus: the false forum post is copied; official records are separate.
+\node[lab] at (10.5, 4.7) {Manufactured consensus};
+\node[falsepage, minimum width=2.35cm, minimum height=0.78cm] (root) at (7.25,2.85)
+  {unsupported forum post\\FALSE};
+\foreach \name/\x/\y in {a/10.0/3.85,b/11.15/3.85,c/10.0/2.70,d/11.15/2.70,e/10.0/1.55,f/11.15/1.55} {
+  \node[falsepage] (\name) at (\x,\y) {FALSE};
+  \draw[copyarr] (root.east) -- (\name.west);
+}
+\node[font=\scriptsize\itshape, align=center, text=red!60!black] at (9.05,0.72)
+  {7 false pages = 1 origin + 6 copies};
+\node[truepage, minimum width=1.70cm] (officialA) at (13.25,3.45) {official record\\TRUE};
+\node[truepage, minimum width=1.70cm] (officialB) at (13.25,1.85) {official record\\TRUE};
+\node[source] (oa) at (12.20,3.45) {};
+\node[source] (ob) at (12.20,1.85) {};
+\draw[truearr] (oa) -- (officialA.west);
+\draw[truearr] (ob) -- (officialB.west);
+\node[font=\scriptsize\itshape, align=center, text=green!45!black] at (13.25,0.72)
+  {2 true official records\\separate origins};
+% shared surface note
+\node[draw, rounded corners=2pt, font=\footnotesize, align=center] at (7.6, -0.32)
+  {Held constant across worlds: domains, engagement counts, ages, and wording targets};
+\end{tikzpicture}}
+\caption{The central manipulation. Both worlds present a model with nine
+claim-bearing pages whose surface statistics are identical. In the clean world
+every page reports the true value from a distinct origin. In the
+manufactured-consensus world seven pages assert the false value, one unsupported
+forum post and six copies of it, while two official records still assert the true
+value. The evaluator knows this graph; the model sees only the rendered web.}
+\label{fig:worlds}
+\end{figure}
+
+\subsection{Serving the web: search and isolation}
+\label{sec:serving}
+
+Worlds are served over HTTP by a Fastify service scoped per world by an opaque
+token; URLs outside the token's world are rejected, so the real internet is
+unreachable and every pilot sees an identical, reproducible web. Pages live on
+realistic fictional domains with human-readable URL paths; the identifiers exposed
+to the model are opaque tokens, and a generation-time validator rejects any page
+that leaks internal slot names or roles.
+
+Search is a hybrid ranker: lexical BM25 ($k_1=1.2$, $b=0.75$, title boost 1.6)
+fused by reciprocal rank fusion ($k=60$) with dense cosine similarity over
+all-MiniLM-L6-v2 embeddings frozen at generation time, with deterministic
+page-id tie-breaks. Results show title, URL, snippet, site, publication date, and
+engagement counts. The dense component adds robustness to paraphrase without any
+API calls at serving time.
+
+\subsection{Protocol}
+\label{sec:protocol}
+
+Each run has three stages (\Cref{fig:protocol}). Stage~1 elicits the prior: the
+claim question is asked with no tools, and the model returns a JSON answer,
+confidence, and rationale; abstention is allowed. Stage~2 is a fresh-context
+research session: the model receives the system prompt, the two tools
+(\texttt{search} and \texttt{openPage}), and a budget of twenty tool calls.
+Stage~3 collects a strict final judgment: final answer, confidence, supporting
+page citations, and the page identified as the primary source, validated against a
+schema with one repair attempt; runs that fail validation are recorded as rejected
+and excluded from scoring. Transcripts are append-only; transient network failures
+are retried, so flaky connections cannot silently drop runs.
+
+\begin{figure}
+\centering
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[
+  box/.style={draw, rounded corners=2pt, align=center, minimum height=1.15cm,
+              minimum width=2.3cm, font=\footnotesize},
+  arr/.style={-{Stealth[length=2mm]}, thick},
+  note/.style={font=\scriptsize\itshape, align=center},
+]
+\node[box] (q) {claim question};
+\node[box, right=0.9cm of q] (s1) {stage 1\\prior elicitation\\(no tools)};
+\node[box, right=0.9cm of s1] (s2) {stage 2\\research loop\\(fresh context, 20 calls)};
+\node[box, right=0.9cm of s2] (s3) {stage 3\\final judgment\\(schema-checked)};
+\node[box, right=0.9cm of s3] (sc) {deterministic\\scorer};
+\draw[arr] (q) -- (s1);
+\draw[arr] (s1) -- (s2);
+\draw[arr] (s2) -- (s3);
+\draw[arr] (s3) -- (sc);
+\node[box, below=0.8cm of s2, minimum width=3.4cm] (web) {synthetic web\\14 pages, hybrid search};
+\node[box, below=0.7cm of web, dashed] (prov) {hidden provenance graph\\stance, copied-from, origin};
+\draw[arr] (web) -- (s2);
+\draw[arr, densely dashed] (prov) -- (sc);
+\node[note, below=0.12cm of prov] {read by the scorer, never by the model};
+\end{tikzpicture}}
+\caption{Evaluation protocol. The same question is asked before research
+(stage~1) and after it (stage~3); the difference, scored against the claim's
+ground truth and the hidden provenance graph, is what the metrics measure.}
+\label{fig:protocol}
+\end{figure}
+
+\subsection{Metrics}
+\label{sec:metrics}
+
+\Cref{tab:metrics} summarizes the suite. All metrics are deterministic functions
+of traces, ground truth, and the provenance graph; confidence intervals use a
+percentile bootstrap clustered by claim (200 resamples; 2000 for the paired tests
+of \Cref{sec:leaderboard}). Let a run's \emph{prior} and \emph{final} denote its
+stage-1 and stage-3 answers.
+
+\begin{table}
+\centering
+\caption{Metric suite. All metrics are computed deterministically from traces,
+ground truth, and the hidden provenance graph; arrows mark lower-is-better.}
+\label{tab:metrics}
+\small
+\begin{tabular}{lp{9.6cm}c}
+\toprule
+Metric & Definition & Direction \\
+\midrule
+FBAR & Prior-correct poisoned runs that finish incorrect & $\downarrow$ \\
+CUR & Legitimate-update runs with wrong or abstained prior that finish correct & $\uparrow$ \\
+EAS & Harmonic mean of $1-\mathrm{FBAR}$ and CUR (headline score) & $\uparrow$ \\
+PCR & Manufactured-consensus runs reporting more independent sources than provenance clusters support the answered value & $\downarrow$ \\
+ICS & Per-claim confidence gap, clean world minus consensus world & $\uparrow$ \\
+SER & Poisoned-condition runs that opened the primary source or followed a citation edge & $\uparrow$ \\
+PSR & Completed runs that opened a designated primary source & $\uparrow$ \\
+PRR & Runs that opened the true primary, then reported no primary or a false one & $\downarrow$ \\
+CI & Cited pages whose hidden stance supports the final conclusion & $\uparrow$ \\
+TUA & Accuracy on legitimate-update worlds & $\uparrow$ \\
+Brier, ECE & Calibration of final confidence against correctness & $\downarrow$ \\
+Cost & Estimated list-price USD per 100 runs; tokens and tool calls logged & context \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Corruption resistance.} The False Belief Adoption Rate (FBAR, lower
+better) is the fraction of prior-correct runs in poisoned conditions that finish
+incorrect:
+\begin{equation}
+\mathrm{FBAR} = \frac{\#\{\text{prior correct} \rightarrow \text{final wrong}\}}
+                     {\#\{\text{prior correct}\}}.
+\end{equation}
+
+\paragraph{Legitimate updating.} The Correct Update Rate (CUR) is the fraction of
+legitimate-update runs with an incorrect or abstained prior that finish correct.
+
+\paragraph{Headline score.} The Epistemic Arbitration Score (EAS) is the harmonic
+mean of resistance and updating:
+\begin{equation}
+\mathrm{EAS} = \frac{2\,(1-\mathrm{FBAR})\,\mathrm{CUR}}
+                    {(1-\mathrm{FBAR}) + \mathrm{CUR}}.
+\end{equation}
+The harmonic mean blocks degenerate strategies: a model that never updates scores
+near zero through CUR, and a model that believes everything it reads scores near
+zero through FBAR.
+
+\paragraph{Provenance and arbitration behavior.} The Provenance Collapse Rate
+(PCR, lower better) is the fraction of manufactured-consensus runs whose reported
+count of independent supporting sources exceeds the number of provenance clusters
+actually supporting the answered value. Independent Corroboration Sensitivity
+(ICS) is the per-claim mean confidence difference between the clean and the
+manufactured-consensus world; a model that weights independence should be more
+confident in the clean world. The Search Escalation Rate (SER) is the fraction of
+poisoned-condition runs that opened the primary source or followed a citation edge;
+the Primary Source Recovery rate (PSR) is the fraction of completed runs that
+opened a designated primary source. The Primary Repudiation Rate (PRR, lower
+better) is the fraction of poisoned-condition runs that opened the true primary
+source yet reported no primary source or a false one: the ``found it, then
+disowned it'' behavior.
+
+\paragraph{Citation quality and calibration.} Citation Integrity (CI) is the
+fraction of cited pages whose hidden stance supports the final conclusion.
+Temporal Update Accuracy (TUA) is accuracy on legitimate-update worlds.
+Calibration is reported as Brier score and 10-bin expected calibration error (ECE)
+of final confidence against correctness \citep{guo2017calibration}. Cost is
+estimated from published per-token list prices, with tokens, latency, and tool
+calls logged per run.
+
+\subsection{Splits, determinism, and reproducibility}
+\label{sec:splits}
+
+The 100 claims are split into a public dev set (20 claims, 120 worlds) and a
+sealed test set (80 claims, 480 worlds), stratified by track and domain with a
+deterministic allocation; the sets are validated disjoint. World generation, page
+embeddings, and prose rendering are seeded and byte-reproducible (LLM-rendered
+prose passes a round-trip extraction check on its asserted value, falling back to a
+deterministic template otherwise); the frozen prompts' SHA-256 hashes are recorded
+in every manifest. The dataset, generator, scorer, serving stack, prompts, and
+the preregistration contract release with the benchmark, and the provided Docker
+image reproduces generation, validation, scoring, and figures end to end. All
+results below are dev-split pilots; the sealed test evaluation (three replicates
+per world, 1{,}440 runs) will decide the leaderboard.
+
+
+\section{Experimental setup}
+\label{sec:setup}
+
+Ten frontier model configurations were evaluated on the identical dev plan: one
+replicate per episode, in a deterministic claim-shuffled order. Pilots ran 50 to
+100 episodes each; \Cref{tab:protocols} gives the per-model totals and serving
+routes. Two
+additional pilots are excluded from the field tables: DeepSeek V4 Pro, because the
+model ignores the legacy thinking-disable flag and the resulting 0.740 EAS is a
+protocol artifact, not a fair configuration; and Gemini 3.1 Pro, stalled at
+62 of 100 runs by that model's 250-requests-per-day quota (it is resume-safe and
+will be completed).
+
+\begin{table}
+\centering
+\caption{Model protocols. Thinking is fixed at the lowest level each API allows
+(Gemini, Muse, and Grok reject or cannot disable it). Muse was served on a
+training-opt-in tier; costs below use official standard-tier list prices for all
+models. Serving routes are recorded in every trace and are part of the measurement
+(\Cref{sec:route}).}
+\label{tab:protocols}
+\small
+\begin{tabular}{llcrr}
+\toprule
+Model & Provider route & Thinking & $n$ & \$ / 100 runs \\
+\midrule
+Gemini 3.7 Flash & Gemini OpenAI-compatible & low (floor) & 100 & 1.08 \\
+Gemini 3.5 Flash-Lite & Gemini OpenAI-compatible & low (floor) & 100 & 0.32 \\
+GPT-5.6 Luna & OpenAI responses API & low & 100 & 0.38 \\
+GPT-5.6 Terra & OpenAI chat completions & none & 80 & 3.49 \\
+GPT-5.6 Sol & OpenRouter & minimal & 50 & 6.69 \\
+Qwen3.7 Max & ModelScope native & disabled & 100 & 7.59 \\
+Qwen3.7 Plus & ModelScope native & disabled & 100 & 2.73 \\
+Muse Spark 1.2 & api.meta.ai & minimal (floor) & 80 & 2.83 \\
+Grok 4.6 & OpenRouter & low (floor) & 80 & 3.21 \\
+DeepSeek V4 Flash & api.deepseek.com & low & 100 & 0.55 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Protocols differ only where the API forces them (\Cref{tab:protocols}):
+OpenAI models use strict structured outputs and an 8192-token completion floor;
+Gemini conversations require a user turn before any tool call, so research loops
+are seeded with a single ``Begin.'' turn, and cache-read tokens are billed at the
+cache rate. DeepSeek and Qwen run at temperature 0.7 with JSON-object enforcement;
+reasoning is disabled where the API allows it. These constraints are recorded in
+each trace. Per-model numbers should be read as \emph{route-specific}: the same
+weights can behave differently across serving routes (\Cref{sec:route}). The Muse
+pilot ran on a contributor (training-opt-in) tier at \$0.09 total; we report the
+same token usage at the official standard tier (\$1.25/\$4.25 per million tokens),
+which is what a benchmark consumer would pay, assuming the tier affects billing
+and data use but not the served weights. Sol pricing uses a 50\%-off list
+rate. Costs are estimates from published prices, not invoices.
+
+
+\section{Results}
+\label{sec:results}
+
+\subsection{Headline scores and head-to-head significance}
+\label{sec:leaderboard}
+
+\Cref{tab:headline} reports the headline metrics. Gemini 3.7 Flash leads the raw
+EAS ranking at 0.984, followed by Qwen3.7 Max (0.951), GPT-5.6 Terra and Muse
+Spark 1.2 (both 0.923), and Qwen3.7 Plus (0.919). The confidence intervals at
+these sample sizes overlap across the whole top of the table, so we turn to paired
+comparisons.
+
+\begin{table}
+\centering
+\caption{Headline metrics on the dev split, ordered by EAS. Arrows mark
+lower-is-better metrics; best per column in bold. Cost is normalized to 100 runs
+at list pricing; per-model run counts are in \Cref{tab:protocols}.}
+\label{tab:headline}
+\small
+\resizebox{\linewidth}{!}{\input{tables/tab_headline}}
+\end{table}
+
+Because every pilot ran the same seeded plan, comparisons on the episodes all
+pilots completed are paired. The intersection contains 34 episodes (bounded by the
+50-run Sol plan and per-pilot rejections). A percentile bootstrap on these shared
+episodes (2000 resamples) gives \Cref{fig:pairwise}: Gemini 3.7 Flash is
+significantly ahead of seven of the nine other field configurations, including
+DeepSeek V4 Flash ($+0.174$, CI $[0.093, 0.267]$) and GPT-5.6 Luna ($+0.060$, CI
+$[0.010, 0.120]$), but it is \emph{not} significantly ahead of Gemini 3.5
+Flash-Lite ($+0.040$, CI $[0.000, 0.090]$) or Muse Spark 1.2 ($+0.039$, CI
+$[-0.013, 0.104]$). Those three form one statistically indistinguishable top
+cluster (all three within-cluster pairs fail to separate, though the boundary is
+soft: Gemini 3.5 Flash-Lite also fails to separate from Qwen3.7 Max); every other
+model except Sol significantly beats DeepSeek. Gemini 3.7 Flash keeps the
+point-estimate lead on the full set, but head-to-head exactly two configurations
+stand level with it, and one of the two, Gemini 3.5 Flash-Lite, gets there at
+\$0.32 per hundred runs against its \$1.08 (\Cref{sec:cost}).
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{figures/fig_pairwise.pdf}
+\caption{Paired accuracy differences against Gemini 3.7 Flash on the 34 episodes
+common to all ten field configurations (percentile bootstrap, 2000 resamples).
+Filled estimates have 95\% CIs excluding zero. The two smallest gaps, against
+Gemini 3.5 Flash-Lite and Muse Spark 1.2, are not significant: with the leader
+they form the top cluster.}
+\label{fig:pairwise}
+\end{figure}
+
+\subsection{False-majority separates the field}
+\label{sec:conditions-results}
+
+Per-condition accuracy (\Cref{tab:conditions}, \Cref{fig:conditions}) shows where
+the configurations separate. On clean, single-poison, ranked-poison,
+manufactured-consensus, and legitimate-update worlds, the ten configurations span
+0.71 to 1.00 with a spread of at most 0.29, and almost all of that spread lives in
+two cells: DeepSeek V4 Flash at 0.71 and Grok 4.6 at 0.77, both on manufactured
+consensus. Every other cell on these five conditions is at least 0.82. The
+false-majority condition is the exception: accuracy spans 0.50 (DeepSeek V4 Flash)
+to 0.92 (Muse Spark 1.2), with Qwen3.7 Max at 0.63, Qwen3.7 Plus and Grok 4.6 at
+0.69, Gemini 3.5 Flash-Lite and GPT-5.6 Sol at 0.75, and Gemini 3.7 Flash, GPT-5.6
+Luna, and GPT-5.6 Terra between 0.81 and 0.85. This condition, where
+the visible majority is wrong and the correct value persists in a citable official
+record, is the arbitration test: it requires the model to distrust apparent
+consensus, escalate through citations, and commit to a minority position backed by
+a primary source.
+
+\begin{table}
+\centering
+\caption{Accuracy per condition (fraction of completed runs). Best per condition
+in bold. The false-majority column spreads 0.42; every other column spreads at
+most 0.29.}
+\label{tab:conditions}
+\small
+\input{tables/tab_conditions}
+\end{table}
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{figures/fig_conditions.pdf}
+\caption{Accuracy by condition for the ten field configurations. Spread stays at
+or below 0.29 except on the false-majority condition (shaded), which spreads 0.42
+and accounts for most of the observed separation.}
+\label{fig:conditions}
+\end{figure}
+
+\subsection{Belief change: rescue, corruption, and stability}
+\label{sec:taxonomy}
+
+Every scored run falls into one of four transitions between prior and final:
+correct-and-stable, rescued (prior wrong, final right), corrupted (prior right,
+final wrong), or stuck wrong (\Cref{fig:taxonomy}). Rescue is common and varies
+widely: Gemini 3.7 Flash rescues 49 of 100 runs, Qwen3.7 Max 45, and GPT-5.6 Luna
+42, while GPT-5.6 Sol rescues 29 and is the least stable model in the field (14
+correct-and-stable of 50). Corruption is rare at the top and concentrated at the
+bottom: DeepSeek V4 Flash corrupts six runs, Grok 4.6 and Qwen3.7 Max three each,
+and Gemini 3.5 Flash-Lite two. At the top, Luna, Terra, and Sol corrupt zero, Muse
+corrupts one (in a legitimate-update world, outside the poisoned conditions), and
+Gemini 3.7 Flash corrupts one. The concentration is
+sharper inside the false-majority condition: of the nine prior-correct DeepSeek
+runs there, five finish wrong, while Luna, Terra, Muse, and Sol corrupt none of
+theirs.
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{figures/fig_taxonomy.pdf}
+\caption{Prior-to-final transitions per configuration, as fractions of scored
+episodes ($n$ in parentheses). Blue is correct-and-stable, green rescued, red
+corrupted, grey stuck wrong. Muse Spark 1.2 has the fewest corrupted runs among
+models facing prior-correct poisoned episodes; DeepSeek V4 Flash has the most.}
+\label{fig:taxonomy}
+\end{figure}
+
+The geometry of arbitration appears in \Cref{fig:arbitration}, which plots
+corruption resistance against correct updating with iso-EAS contours. Resistance
+saturates at the top: four configurations (GPT-5.6 Luna, Terra, Muse Spark 1.2,
+and Sol) never corrupt a prior, yet their update rates run from 0.75 to 0.86, and
+the harmonic mean spreads them accordingly. The EAS leaders instead pair
+near-perfect resistance with a perfect update rate: Gemini 3.7 Flash and Qwen3.7
+Max are the only configurations at CUR 1.0 with FBAR at or below 0.094.
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{figures/fig_arbitration.pdf}
+\caption{Corruption resistance ($1-\mathrm{FBAR}$) against correct update rate
+(CUR), with EAS iso-contours (dashed). Four models sit on the resistance ceiling;
+the field's spread is mostly along the update axis.}
+\label{fig:arbitration}
+\end{figure}
+
+\subsection{Provenance: collapse, sensitivity, and repudiation}
+\label{sec:provenance}
+
+Three metrics probe whether models represent source structure at all. PCR, the
+rate of overstated independence on manufactured-consensus runs, is low at the top
+(Muse 0.000, Gemini 3.7 Flash 0.059) and reaches 0.294 for DeepSeek and 0.231 for
+Grok. ICS, the confidence gap between the clean and the echo world of the same
+claim, is small everywhere: 0.003 to 0.108, with GPT-5.6 Sol slightly negative.
+Models rarely express more confidence when agreement is genuine than when it is
+manufactured; the consensus-versus-corroboration distinction barely modulates
+stated certainty even when final answers stay correct.
+
+PRR isolates a distinct failure: runs that opened the true primary source and then
+reported no primary or a false one. Rates range from 0.058 (Muse Spark 1.2) and
+0.061 (Gemini 3.7 Flash) to 0.306 (GPT-5.6 Luna) and 0.281 (GPT-5.6 Sol).
+Retrieval found the evidence; the judgment stage let go of it. Muse combines
+near-perfect retrieval (SER 1.000, PSR 0.987; only Qwen3.7 Plus posts a higher
+PSR, at 1.000) with the lowest repudiation rate in the field, which is how it
+reaches the best false-majority accuracy (0.92) despite a mid-pack headline score.
+
+\subsection{Calibration}
+\label{sec:calibration}
+
+Confidence quality is measured by discrimination (AUC of confidence separating
+correct from wrong runs), Brier score, and ECE (\Cref{fig:calibration}). The best
+discriminating confidence belongs to GPT-5.6 Terra (AUC 0.963), whose mid-pack EAS
+hides the field's best confidence ordering; Sol (0.944), Muse (0.940), and Gemini
+3.5 Flash-Lite (0.931) follow. The worst are Qwen3.7 Plus (0.732) and Grok 4.6
+(0.743), which pair weak discrimination with mean confidences of 0.88 and 0.83:
+their mistakes arrive announced as near-certainties. Gemini 3.7 Flash keeps the
+best ECE (0.020) and the best Brier (0.036), consistent with its mean confidence
+of 0.977 on 0.96 accuracy. Calibration quality and headline accuracy are
+correlated at the top but dissociable in the middle: Terra and Gemini 3.5
+Flash-Lite both calibrate substantially better than the two Qwen models that beat
+them on EAS.
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{figures/fig_calibration.pdf}
+\caption{Reliability diagrams for the ten field configurations (bars: accuracy
+within confidence bins; line: perfect calibration). Titles give confidence AUC and
+ECE. Terra discriminates best (AUC 0.963) despite a mid-table EAS; Qwen3.7 Plus
+and Grok 4.6 are confidently wrong.}
+\label{fig:calibration}
+\end{figure}
+
+\subsection{Cost versus arbitration}
+\label{sec:cost}
+
+\Cref{fig:cost} plots EAS against estimated API cost per 100 runs at list pricing.
+The cost Pareto frontier contains two points: Gemini 3.5 Flash-Lite (\$0.32, EAS
+0.905) and Gemini 3.7 Flash (\$1.08, 0.984). Everything else is dominated: GPT-5.6
+Luna lands at \$0.38 and 0.857, below the cheaper Gemini 3.5 Flash-Lite; Qwen3.7
+Max spends \$7.59 for 0.951, Sol \$6.69 for 0.909, and Terra \$3.49 for 0.923.
+Between the two frontier points, each 0.01 of EAS costs about \$0.10 per hundred
+runs, and nothing beyond Gemini 3.7 Flash raises the frontier. The cheaper
+frontier point matters most: head-to-head, Gemini 3.5 Flash-Lite is statistically
+inseparable from the leader (\Cref{fig:pairwise}) at under a third of its cost.
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{figures/fig_cost.pdf}
+\caption{EAS against estimated list-price cost per 100 runs (log scale). Dotted
+line: cost Pareto frontier (Gemini 3.5 Flash-Lite, Gemini 3.7 Flash); every other
+configuration is dominated.}
+\label{fig:cost}
+\end{figure}
+
+
+\section{Case studies and ablations}
+\label{sec:case}
+
+\subsection{Difficulty concentrates in a small set of worlds}
+\label{sec:syn008}
+
+Failure concentrates on specific worlds. Across the 34 shared episodes, 23 are
+answered correctly by all ten configurations and none is answered wrongly by
+all. Of the remaining eleven, six are answered correctly by eight or more
+configurations. The other five concentrate on just two synthetic claims: one
+false-majority world of \texttt{syn\_009} (6 of 10 correct) and the four worlds of
+\texttt{syn\_008}, which is unusually difficult across conditions (4 of 10 correct under
+legitimate-update, 3 of 10 under ranked-poison, 2 of 10 under single-poison, and 1
+of 10 under false-majority). No real-claim episode approaches this. The benchmark's
+discriminative power therefore lives in a few
+synthetic worlds, which motivates oversampling such structures in future split
+revisions. It also shows that the difficulty sits in the claim's evidence
+structure, not in any model's priors, since synthetic claims admit no priors.
+
+\subsection{Serving route is not neutral}
+\label{sec:route}
+
+The same Qwen3.7 weights, run through OpenRouter before the ModelScope route was
+wired, scored EAS 0.800 with FBAR 0.250 over 73 runs, against 0.951 and 0.094 for
+the ModelScope-native pilot of identical weights and prompts. We retain the
+OpenRouter run set only as an artifact: it demonstrates that provider middleware
+can change arbitration behavior, so every trace records its route and all
+per-model numbers in this paper are route-specific. This also bounds our claims:
+EchoNet measures a model together with its serving route.
+
+\subsection{Agentic intensity is not arbitration}
+\label{sec:sol}
+
+GPT-5.6 Sol issues 11.7 tool calls per run against 2.8 to 8.9 for the rest of the
+field, at the second-highest cost. It never corrupts a prior (FBAR 0), then
+disowns the primary source it found in 28\% of the relevant runs (PRR 0.281), and
+its confidence is the least informative at ICS $-0.006$: it is marginally
+\emph{less} confident when corroboration is genuine than when it is manufactured.
+Twice the field-average search budget bought no arbitration advantage.
+
+
+\section{Related work}
+\label{sec:related}
+
+\paragraph{Web agents and retrieval evaluation.} WebGPT established
+browsing-assisted question answering with human feedback \citep{webgpt}; WebArena
+and Mind2Web evaluate agents on realistic and live websites
+\citep{webarena,mind2web}; GAIA, AgentBench, ToolQA, and BrowseComp push
+multi-step tool use and hard retrieval \citep{gaia,agentbench,toolqa,browsecomp};
+FreshLLMs measures answers on fast-changing facts \citep{freshllms}. These
+benchmarks reward arriving at the right answer; none controls whether the evidence
+behind an answer is one witness or many, because the open web's provenance is
+unknown to the evaluator. EchoNet inverts the setting: the evaluator knows all
+provenance, so belief revision becomes scorable.
+
+\paragraph{Knowledge conflicts.} Work on conflicts between parametric memory and
+retrieved context shows models favoring one side or the other depending on
+presentation \citep{xie2024chameleon,mallen2023trust}, surveys the conflict
+taxonomy \citep{xu2024kcsurvey}, and quantifies the prior-versus-evidence tug of
+war \citep{wu2025clasheval}. The closest in spirit to our measurement, these
+studies manipulate the \emph{content} of conflicting context. EchoNet manipulates
+the \emph{structure} of the evidence: matched worlds where the conflict is held
+fixed and only provenance topology moves.
+
+\paragraph{Factuality, calibration, and misinformation.} TruthfulQA, SimpleQA, and
+Humanity's Last Exam measure what models know and how confidently they are wrong
+\citep{lin2022truthfulqa,simpleqa,hle}; calibration methods and metrics come from
+\citet{guo2017calibration} and \citet{tian2023calibration}; long-form factuality
+evaluation searches the web to check generations \citep{wei2024longform}. Persuasive
+misinformation changes model beliefs in conversation
+\citep{xu2024earthflat,fastowski2024drift}, a phenomenon our false-majority
+condition reproduces through page structure instead of dialogue.
+
+\paragraph{Attribution and provenance.} ALCE and FActScore grade whether generated
+text is supported by cited sources \citep{gao2023alce,min2023factscore}. Provenance
+research traces generated text back to its sources at sentence granularity
+\citep{zhu2025trove,wei2026genprove}, surveys evidence tracing for agents
+\citep{wang2026evidencetracing}, and verifies facts with source awareness
+\citep{alvarez2026provenanceguard}. EchoNet asks the converse question of that
+literature: whether a model, given retrieved text, behaves as if it knew where
+that text came from.
+
+
+\section{Limitations}
+\label{sec:limitations}
+
+\emph{Sample sizes.} Dev-split pilots run 50 to 100 episodes per model, 16 to 17
+per condition, and 34 shared episodes for paired tests, one stochastic replicate
+per episode (these APIs expose no seed), so the clustered bootstrap reflects
+episode sampling and not run-to-run variance. Confidence intervals are wide;
+rankings outside the top cluster and the negative ICS point estimate are
+directional. The sealed test split (1{,}440 runs) exists to settle this.
+
+\emph{Single harness.} Two tools, twenty calls, and a strict JSON judgment are one
+agent shape. Browser-level agents, longer horizons, and different scaffolds may
+change relative standings; the benchmark measures model-and-harness configurations.
+
+\emph{Held-constant variables.} Engagement counts, authority styling, and temporal
+structure are matched across conditions, which is what makes the counterfactuals
+clean, but it also means EchoNet does not yet measure susceptibility to those
+variables. They are planned ablations, not current results.
+
+\emph{Costs are estimates.} Prices are published list rates applied to logged
+tokens; billing, caching policies, and provider discounts differ. Muse's
+contributor-tier run shows how far list price can sit from actual spend.
+
+\emph{Routes are part of the system.} Serving middleware changed Qwen3.7's
+arbitration materially (\Cref{sec:route}). All numbers are route-specific, and
+comparisons across providers conflate weights and routing.
+
+\emph{Synthetic realism ceiling.} Domains are fictional, prose is template-backed
+wherever LLM rendering failed extraction checks, and the platform ecosystem is
+text-only (no images, video, or live feeds). Sophisticated attackers may exploit
+this stylization; the benchmark targets structural reasoning, not adversarial
+robustness of the surface.
+
+\emph{Truth review.} Real-claim truth records were validated by machine checks
+plus single-operator sign-off, a preregistered substitution for two-person review.
+
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+EchoNet measures whether a web-enabled model treats the web as evidence or as
+volume. Matched counterfactual worlds with hidden provenance make that distinction
+scorable, and ten frontier configurations show what current systems do with it:
+they resist isolated falsehoods well, update on legitimate evidence well, and fail
+in the middle, where a false visible majority opposes a recoverable primary
+record. Raw leaderboards overstate the gaps at the top: in paired evidence, only
+Gemini 3.5 Flash-Lite and Muse Spark 1.2 stand level with the leader, and the
+cheaper of the two costs under a third as much. Resistance and revision behave as
+separate traits, primary-source fidelity varies five-fold among models that corrupt
+nothing, and the cost Pareto frontier contains just two of the ten configurations.
+The sealed 480-world split, platform expansion beyond text, and engagement and
+authority ablations are the next steps. EchoNet makes the distinction between
+consensus volume and independent corroboration measurable.
+
+
+\bibliographystyle{unsrtnat}
+\bibliography{references}
+
+
+\appendix
+
+\section{Full metric matrix}
+\label{app:matrix}
+
+\Cref{tab:full-matrix} reports all twelve metrics for the ten field configurations;
+bold marks the best value per column.
+
+\begin{table}[h]
+\centering
+\footnotesize
+\caption{All metrics, dev-split pilots. SER, PSR, TUA added to the headline set.}
+\label{tab:full-matrix}
+\resizebox{\linewidth}{!}{\input{tables/tab_full_matrix}}
+\end{table}
+
+
+\section{Full pairwise comparisons}
+\label{app:pairwise}
+
+\Cref{tab:pairwise-full} gives every pairwise accuracy comparison on the 34
+episodes common to all pilots (percentile bootstrap, 2000 resamples). Rows where
+the 95\% confidence interval excludes zero are bolded.
+
+{\footnotesize
+\input{tables/tab_pairwise}
+}
+
+
+\section{World difficulty}
+\label{app:worlds}
+
+\Cref{tab:world-dist} gives the distribution of shared episodes by the number of
+configurations that answer them correctly; \Cref{tab:worlds-hard} lists the
+hardest worlds. The four episodes answered correctly by at most four
+configurations all belong to the single synthetic claim \texttt{syn\_008}.
+
+\begin{table}[h]
+\centering
+\caption{Shared episodes ($n=34$) by number of correct configurations (of the ten field configurations).}
+\label{tab:world-dist}
+\input{tables/tab_world_dist}
+\end{table}
+
+\begin{table}[h]
+\centering
+\small
+\caption{Hardest worlds, ordered by number of correct configurations.}
+\label{tab:worlds-hard}
+\resizebox{\linewidth}{!}{\input{tables/tab_worlds_hard}}
+\end{table}
+
+
+\section{Calibration detail}
+\label{app:calibration}
+
+\Cref{tab:calibration-full} reports confidence discrimination and calibration for
+all ten field configurations.
+
+\begin{table}[h]
+\centering
+\caption{Confidence calibration and discrimination, all configurations.}
+\label{tab:calibration-full}
+\input{tables/tab_calibration}
+\end{table}
+
+
+\end{document}

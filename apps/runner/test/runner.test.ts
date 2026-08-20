@@ -10,6 +10,7 @@ import type { ChatOptions, ChatResponse } from '../src/llmIface.js';
 import { InMemoryGateway } from './helpers.js';
 import { runAll, type PlannedRun } from '../src/runner.js';
 import type { ChatMessage } from '../src/llmIface.js';
+import { parseJsonCandidates } from '../src/agent.js';
 
 const REPO_ROOT = join(fileURLToPath(new URL('.', import.meta.url)), '..', '..', '..');
 const OPTS = { createdAt: '2026-01-01T00:00:00Z', proseModel: null };
@@ -63,6 +64,15 @@ function finalJudgmentJson(claim: { groundTruth: { kind: string; value: unknown 
 }
 
 describe('runner orchestration', () => {
+  it('extracts a valid JSON answer after Gemma-style prose and unrelated JSON', () => {
+    const raw = 'Thinking about {"example": true}.\n```json\n{"answer":"ABSTAIN","confidence":0.4,"rationale":"insufficient evidence"}\n```\nDone.';
+    expect(parseJsonCandidates<Record<string, unknown>>(raw)).toContainEqual({
+      answer: 'ABSTAIN',
+      confidence: 0.4,
+      rationale: 'insufficient evidence',
+    });
+  });
+
   it('runs an episode end-to-end through search and openPage', async () => {
     const { claim, worlds, echo, bundle, worldMap, claimsMap } = setup();
     const episode = worlds.find((w) => w.condition === 'clean')!;
@@ -215,6 +225,45 @@ describe('runner orchestration', () => {
     const outcome = await runAll({ llm: makeLlm(), bundle, worlds: worldMap, claims: claimsMap, gatewayFor: (w: WorldManifest) => new InMemoryGateway(echo, w.worldToken) }, config);
     expect(outcome.stoppedForBudget).toBe(true);
     expect(outcome.completed).toBe(0);
+  });
+
+  it('forwards provider extra content (e.g. Gemini thought signatures) into subsequent calls', async () => {
+    const { claim, worlds, echo, bundle, worldMap, claimsMap } = setup();
+    const episode = worlds.find((w) => w.condition === 'clean')!;
+    const signature = { google: { thought_signature: 'sig-xyz' } };
+    const llm = new ScriptedLlm([
+      () => ({ content: JSON.stringify({ answer: claim.groundTruth, confidence: 0.7, rationale: 'prior' }) }),
+      () => ({
+        finishReason: 'tool_calls',
+        toolCalls: [{ id: 'call_1', type: 'function', function: { name: 'search', arguments: JSON.stringify({ query: claim.entityName }) } }],
+        extraContent: signature,
+      }),
+      () => void 0,
+      () => ({ content: finalJudgmentJson(claim) }),
+    ]);
+    const tmp = mkdtempSync(join(tmpdir(), 'echobench-runner-sig-'));
+    const outcome = await runAll(
+      { llm, bundle, worlds: worldMap, claims: claimsMap, gatewayFor: (w: WorldManifest) => new InMemoryGateway(echo, w.worldToken) },
+      {
+        datasetRoot: tmp,
+        tracesRoot: tmp,
+        split: 'dev',
+        runSetId: 'sig-run',
+        modelRequested: 'deepseek-chat',
+        provider: 'deepseek' as const,
+        replicatesPerEpisode: 1,
+        maxToolCalls: 20,
+        temperature: 0.7,
+        budgetUsd: 100,
+        baseSeed: 'seed',
+        plans: [{ episodeId: episode.episodeId, replicate: 0 }],
+      },
+    );
+    expect(outcome.completed).toBe(1);
+    const nextCall = llm.calls[2];
+    if (!nextCall) throw new Error('expected a call after the tool turn');
+    const assistantTurn = nextCall.messages.find((m) => m.role === 'assistant' && m.tool_calls !== undefined);
+    expect(assistantTurn?.extra_content).toEqual(signature);
   });
 
   it('marks runs rejected after unrecoverable schema failures', async () => {

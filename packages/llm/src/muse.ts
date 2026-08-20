@@ -1,83 +1,34 @@
-import { estimateCostUsd } from './pricing.js';
+import type { ChatMessage, ChatOptions, ChatResponse, ToolCall, UsageInfo } from './deepseek.js';
+import { estimateCostUsd, pricingFor } from './pricing.js';
 
-export interface ChatMessage {
-  role: 'system' | 'user' | 'assistant' | 'tool';
-  content: string | null;
-  name?: string;
-  tool_calls?: ToolCall[];
-  tool_call_id?: string;
-  /** Provider-specific passthrough echoed back verbatim (e.g. Gemini thought signatures). */
-  extra_content?: unknown;
-}
-
-export interface ToolCall {
-  id: string;
-  type: 'function';
-  function: { name: string; arguments: string };
-}
-
-export interface ToolDef {
-  type: 'function';
-  function: {
-    name: string;
-    description: string;
-    parameters: Record<string, unknown>;
-  };
-}
-
-export interface ChatOptions {
-  temperature?: number;
-  maxTokens?: number;
-  tools?: ToolDef[];
-  toolChoice?: 'auto' | 'none' | 'required';
-  responseFormat?: 'json' | null;
-  /** Strict structured-output schema; used by providers that require an explicit schema (OpenAI). */
-  jsonSchema?: { name: string; schema: Record<string, unknown> };
-  /** Disable DeepSeek thinking mode for deterministic, low-cost calls. Default true. */
-  disableThinking?: boolean;
-}
-
-export interface UsageInfo {
-  prompt_tokens: number;
-  completion_tokens: number;
-  total_tokens: number;
-  prompt_cache_hit_tokens?: number;
-}
-
-export interface ChatResponse {
-  content: string;
-  toolCalls: ToolCall[];
-  finishReason: string;
-  usage: UsageInfo;
-  modelReturned: string;
-  latencyMs: number;
-  /** Provider-specific payload to attach to the assistant turn when appending it to history. */
-  extraContent?: unknown;
-}
-
-export interface DeepSeekConfig {
+export interface MuseConfig {
   apiKey: string;
   baseUrl: string;
   model: string;
   maxRetries: number;
   timeoutMs: number;
+  reasoningEffort: 'minimal' | 'low' | 'medium' | 'high' | 'xhigh';
 }
 
-export function configFromEnv(env: NodeJS.ProcessEnv = process.env): DeepSeekConfig | null {
-  const apiKey = env.DEEPSEEK_API_KEY;
+const MUSE_REASONING_LEVELS = ['minimal', 'low', 'medium', 'high', 'xhigh'] as const;
+
+export function museConfigFromEnv(env: NodeJS.ProcessEnv = process.env): MuseConfig | null {
+  const apiKey = env.MUSE_API_KEY ?? env.META_API_KEY ?? env.MODEL_API_KEY;
   if (!apiKey) return null;
+  const raw = env.MUSE_REASONING_EFFORT ?? 'minimal';
   return {
     apiKey,
-    baseUrl: env.DEEPSEEK_BASE_URL ?? 'https://api.deepseek.com',
-    model: env.DEEPSEEK_MODEL ?? 'deepseek-chat',
-    maxRetries: Number(env.DEEPSEEK_MAX_RETRIES ?? 8),
-    timeoutMs: Number(env.DEEPSEEK_TIMEOUT_MS ?? 120000),
+    baseUrl: env.MUSE_BASE_URL ?? 'https://api.meta.ai/v1',
+    model: env.MUSE_MODEL ?? 'muse-spark-1.2-contributor',
+    maxRetries: Number(env.MUSE_MAX_RETRIES ?? 8),
+    timeoutMs: Number(env.MUSE_TIMEOUT_MS ?? 180000),
+    reasoningEffort: (MUSE_REASONING_LEVELS as readonly string[]).includes(raw) ? (raw as MuseConfig['reasoningEffort']) : 'minimal',
   };
 }
 
 const RETRYABLE_STATUS = new Set([408, 429, 500, 502, 503, 504]);
 
-export class DeepSeekError extends Error {
+export class MuseError extends Error {
   constructor(
     message: string,
     public readonly status: number | null,
@@ -87,14 +38,22 @@ export class DeepSeekError extends Error {
   }
 }
 
-export class DeepSeekClient {
-  constructor(private readonly config: DeepSeekConfig) {}
+interface MuseUsage {
+  prompt_tokens: number;
+  completion_tokens: number;
+  total_tokens: number;
+  prompt_tokens_details?: { cached_tokens?: number };
+}
+
+export class MuseClient {
+  constructor(private readonly config: MuseConfig) {}
 
   get defaultModel(): string {
     return this.config.model;
   }
 
   async chat(messages: ChatMessage[], opts: ChatOptions = {}): Promise<ChatResponse> {
+    ensureUserOrToolTurn(messages);
     const started = Date.now();
     let lastError: unknown = null;
 
@@ -108,7 +67,7 @@ export class DeepSeekClient {
         return { ...res, latencyMs: Date.now() - started };
       } catch (err) {
         lastError = err;
-        if (err instanceof DeepSeekError && !err.retriable) throw err;
+        if (err instanceof MuseError && !err.retriable) throw err;
         if (attempt === this.config.maxRetries) break;
       }
     }
@@ -122,12 +81,13 @@ export class DeepSeekClient {
       model: this.config.model,
       messages,
       max_tokens: opts.maxTokens ?? 2048,
-      tool_choice: opts.toolChoice ?? 'auto',
-      thinking: { type: opts.disableThinking === false ? 'enabled' : 'disabled' },
-      enable_thinking: opts.disableThinking === false ? true : false,
+      reasoning_effort: this.config.reasoningEffort,
     };
     if (typeof opts.temperature === 'number') body.temperature = opts.temperature;
-    if (opts.tools && opts.tools.length > 0) body.tools = opts.tools;
+    if (opts.tools && opts.tools.length > 0) {
+      body.tools = opts.tools;
+      body.tool_choice = opts.toolChoice ?? 'auto';
+    }
     if (opts.responseFormat === 'json') body.response_format = { type: 'json_object' };
 
     try {
@@ -144,12 +104,12 @@ export class DeepSeekClient {
       const text = await resp.text();
       if (!resp.ok) {
         const retriable = RETRYABLE_STATUS.has(resp.status);
-        throw new DeepSeekError(`DeepSeek API ${resp.status}: ${truncate(text, 500)}`, resp.status, retriable);
+        throw new MuseError(`Muse API ${resp.status}: ${truncate(text, 500)}`, resp.status, retriable);
       }
 
       const parsed = JSON.parse(text) as {
         model: string;
-        usage: UsageInfo;
+        usage: MuseUsage;
         choices: Array<{
           message: { content: string | null; tool_calls?: ToolCall[] };
           finish_reason: string;
@@ -157,21 +117,28 @@ export class DeepSeekClient {
       };
 
       const choice = parsed.choices[0];
-      if (!choice) throw new DeepSeekError('DeepSeek returned no choices', null, false);
+      if (!choice) throw new MuseError('Muse returned no choices', null, false);
+
+      const usage: UsageInfo = {
+        prompt_tokens: parsed.usage.prompt_tokens,
+        completion_tokens: parsed.usage.completion_tokens,
+        total_tokens: parsed.usage.total_tokens,
+        prompt_cache_hit_tokens: parsed.usage.prompt_tokens_details?.cached_tokens ?? 0,
+      };
 
       return {
         content: choice.message.content ?? '',
         toolCalls: choice.message.tool_calls ?? [],
         finishReason: choice.finish_reason,
-        usage: parsed.usage,
+        usage,
         modelReturned: parsed.model,
       };
     } catch (err) {
       if (err instanceof Error && err.name === 'AbortError') {
-        throw new DeepSeekError(`DeepSeek request timed out after ${this.config.timeoutMs}ms`, null, true);
+        throw new MuseError(`Muse request timed out after ${this.config.timeoutMs}ms`, null, true);
       }
       if (err instanceof TypeError) {
-        throw new DeepSeekError(`network error: ${err.message}`, null, true);
+        throw new MuseError(`network error: ${err.message}`, null, true);
       }
       throw err;
     } finally {
@@ -184,13 +151,17 @@ export class DeepSeekClient {
     const uncached = Math.max(0, usage.prompt_tokens - cached);
     const model = modelOverride ?? this.config.model;
     const base = estimateCostUsd(model, uncached, usage.completion_tokens);
-    const { cacheHitInputPerM } = { cacheHitInputPerM: 0.0028 };
-    return base + (cached / 1e6) * cacheHitInputPerM;
+    return base + (cached / 1e6) * pricingFor(model).cacheHitInputPerM;
   }
 }
 
 function sleep(ms: number): Promise<void> {
   return new Promise((r) => setTimeout(r, ms));
+}
+
+function ensureUserOrToolTurn(messages: ChatMessage[]): void {
+  if (messages.some((m) => m.role === 'user' || m.role === 'tool')) return;
+  messages.push({ role: 'user', content: 'Begin.' });
 }
 
 function truncate(s: string, n: number): string {

@@ -1,0 +1,36 @@
+{
+  "title": "EchoBench: Consensus Is Not Corroboration — Measuring Epistemic Arbitration on a Synthetic Social Web",
+  "creators": [
+    {
+      "name": "Agrawal, Divyansh",
+      "affiliation": "Independent Researcher",
+      "orcid": "",
+      "email": "divagr1925@gmail.com"
+    }
+  ],
+  "description": "Benchmark for epistemic arbitration in web-enabled language models. 100 claims × 6 counterfactual conditions (600 worlds, 14 pages/world) with hidden provenance graphs. Hybrid BM25+MiniLM search, deterministic metrics (FBAR/CUR/EAS/PCR/ICS/SER/PSR/PRR/CI/TUA/calibration/cost), clustered bootstrap CIs, sealed test split (480 worlds). This release is the paper-grade MVP (dev split, 10 frontier configs, Docker, analysis figures). See paper/main.pdf and PREREG.md.",
+  "access_right": "open",
+  "license": "MIT",
+  "keywords": [
+    "epistemic arbitration",
+    "misinformation robustness",
+    "retrieval-augmented language models",
+    "benchmark",
+    "provenance",
+    "synthetic web"
+  ],
+  "upload_type": "software",
+  "version": "v0.1.0-paper",
+  "language": "eng",
+  "communities": [],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/divagr18/WebBench",
+      "relation": "isSupplementTo",
+      "resource_type": "software"
+    }
+  ],
+  "references": [
+    "Consensus Is Not Corroboration (paper/main.pdf)"
+  ]
+}

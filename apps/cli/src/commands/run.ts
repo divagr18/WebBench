@@ -52,7 +52,7 @@ export async function cmdRun(args: ParsedArgs, ctx: CliContext): Promise<number>
   const split = splitArg;
   const provider = opt(args, 'provider', 'deepseek');
   if (!isValidProvider(provider)) {
-    console.error(`[run] --provider must be one of deepseek, openai, modelscope, openrouter; got ${provider}`);
+    console.error(`[run] --provider must be one of deepseek, openai, modelscope, openrouter, gemini, muse, grok; got ${provider}`);
     return 2;
   }
   const modelArg = opt(args, 'model', '') || null;
@@ -84,11 +84,13 @@ export async function cmdRun(args: ParsedArgs, ctx: CliContext): Promise<number>
   const { baseUrl, close } = await startEchoWeb(worlds, 0, '127.0.0.1', embedQuery ? { embedQuery } : {});
   console.log(`[run] echoweb at ${baseUrl}; plan=${plans.length} runs split=${split} runSet=${runSetId} budget=$${budgetUsd}${embedQuery ? ' hybrid-search=on' : ' search=bm25-only'}`);
 
-  const llm = makeEvalClient(ctx, provider, modelArg ?? undefined);
-  const bundle = loadPrompts(ctx.repoRoot);
-  console.log(`[run] provider=${provider} model=${llm.defaultModel}`);
-
+  let llm;
+  let bundle;
   try {
+    llm = makeEvalClient(ctx, provider, modelArg ?? undefined);
+    bundle = loadPrompts(ctx.repoRoot);
+    console.log(`[run] provider=${provider} model=${llm.defaultModel}`);
+
     const outcome = await runAll(
       {
         llm,
