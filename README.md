@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/1330055171.svg)](https://doi.org/10.5281/zenodo.22035199)
+
 # EchoBench
 
 Benchmarking **epistemic arbitration** on a synthetic social web: can a web-enabled
