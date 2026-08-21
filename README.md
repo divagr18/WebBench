@@ -1,18 +1,37 @@
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22035199.svg)](https://doi.org/10.5281/zenodo.22035199)
-[![DOI Paper](https://zenodo.org/badge/DOI/10.5281/zenodo.22033697.svg)](https://doi.org/10.5281/zenodo.22033697)
+[![DOI: benchmark archive](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22035200-007EC6?logo=zenodo&logoColor=white)](https://doi.org/10.5281/zenodo.22035200)
+[![DOI: paper](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22033697-007EC6?logo=zenodo&logoColor=white)](https://doi.org/10.5281/zenodo.22033697)
 
 # EchoBench
 
-Benchmarking **epistemic arbitration** on a synthetic social web: can a web-enabled
-language model distinguish genuine corroboration from manufactured consensus, and know
-when to trust the web over its own parametric knowledge?
+> **Can a web agent distinguish independent evidence from a hundred copies of the same lie?**
 
-This repository implements the paper-grade, locally reproducible MVP described in
-`Plan.md`. Research motivation and the full benchmark design are in
-`echobench_synthetic_social_web_benchmark.md`. The frozen evaluation contract is in
-`PREREG.md`.
+EchoBench is a synthetic social web for testing whether AI agents can tell genuine
+corroboration apart from coordinated repetition and manufactured consensus. It puts
+agents in matched worlds where the visible web can look equally convincing while the
+underlying provenance is completely different, then measures whether they reach the
+truth and update their beliefs for the right reasons.
 
-## What was built
+[Read the paper](paper/main.pdf) · [Read the preregistration](PREREG.md) · [Explore the benchmark design](echobench_synthetic_social_web_benchmark.md)
+
+## Why this benchmark
+
+Most web-agent evaluations ask whether a model finds the correct answer. EchoBench
+also asks *why* it trusted that answer. A model should not mistake copied pages for
+independent reporting, abandon a correct belief because a rumor is popular, or ignore
+a real update because it conflicts with its prior knowledge.
+
+## What you get
+
+- **A realistic but controlled web.** Agents search and open ordinary-looking news,
+  forum, and official pages without ever seeing the hidden provenance graph.
+- **Matched counterfactual worlds.** The same claim appears under clean, poisoned,
+  manufactured-consensus, and legitimate-update conditions, so behavior can be
+  compared rather than merely observed.
+- **Auditable evaluation.** Append-only traces and deterministic scoring show not just
+  whether the final answer was right, but whether the agent resisted misinformation,
+  found primary sources, calibrated confidence, and cited evidence responsibly.
+
+## Under the hood
 
 A closed, adversarial "internet" the model can search and read, plus a deterministic
 scorer for whether the model updates beliefs correctly.
