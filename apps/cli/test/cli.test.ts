@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { CONDITIONS, type DatasetManifest } from '@echobench/schema';
 import { selectPlans } from '../src/commands/run.js';
 import { renderMarkdown } from '../src/commands/report.js';
+import { computeReplicateStatus } from '../src/commands/replicate-status.js';
 import { parseArgs, opt, optNumber } from '../src/args.js';
 
 function fakeManifest(claimCount: number): DatasetManifest {
@@ -39,8 +40,8 @@ describe('selectPlans', () => {
       const claimId = plan.episodeId.split('__')[0]!;
       byClaim.set(claimId, (byClaim.get(claimId) ?? 0) + 1);
     }
-    const fullClaims = [...byClaim.values()].filter((n) => n === 6).length;
-    expect(fullClaims).toBeGreaterThanOrEqual(16);
+    const fullClaims = [...byClaim.values()].filter((n) => n === CONDITIONS.length).length;
+    expect(fullClaims).toBeGreaterThanOrEqual(Math.floor(100 / CONDITIONS.length) - 1);
   });
 
   it('is deterministic for a fixed seed and differs across seeds', () => {
@@ -61,7 +62,46 @@ describe('selectPlans', () => {
 
   it('never exceeds available episodes', () => {
     const plans = selectPlans(fakeManifest(2), 100, 1, 'seed-a');
-    expect(plans.length).toBe(12);
+    expect(plans.length).toBe(2 * CONDITIONS.length);
+  });
+
+  it('restricts to allowedEpisodeIds when a world set is pinned', () => {
+    const m = fakeManifest(5);
+    const allEpisodeIds = Object.keys(m.episodes);
+    const allowed = new Set(allEpisodeIds.slice(0, 3));
+    const plans = selectPlans(m, 100, 1, 'seed-a', allowed);
+    expect(plans.length).toBe(3);
+    for (const p of plans) expect(allowed.has(p.episodeId)).toBe(true);
+  });
+});
+
+describe('computeReplicateStatus', () => {
+  const worldSet = { worldSetId: 'ws-1', episodeIds: ['syn_001__clean', 'syn_002__clean'], replicatesPromised: 3 };
+
+  it('reports full/partial/not-started per episode against promised replicates', () => {
+    const entries = [
+      { episodeId: 'syn_001__clean', replicate: 0, status: 'completed' as const },
+      { episodeId: 'syn_001__clean', replicate: 1, status: 'completed' as const },
+      { episodeId: 'syn_001__clean', replicate: 2, status: 'completed' as const },
+      { episodeId: 'syn_002__clean', replicate: 0, status: 'rejected' as const },
+    ];
+    const report = computeReplicateStatus(worldSet, entries);
+    expect(report.summary).toEqual({ fullyReplicated: 1, partiallyReplicated: 1, notStarted: 0 });
+    const ep1 = report.byEpisode.find((r) => r.episodeId === 'syn_001__clean')!;
+    expect(ep1).toEqual({ episodeId: 'syn_001__clean', completed: 3, rejected: 0, failed: 0, missing: 0 });
+    const ep2 = report.byEpisode.find((r) => r.episodeId === 'syn_002__clean')!;
+    expect(ep2).toEqual({ episodeId: 'syn_002__clean', completed: 0, rejected: 1, failed: 0, missing: 3 });
+  });
+
+  it('treats an episode with zero traces at all as not-started', () => {
+    const report = computeReplicateStatus(worldSet, []);
+    expect(report.summary).toEqual({ fullyReplicated: 0, partiallyReplicated: 0, notStarted: 2 });
+  });
+
+  it('ignores trace entries for episodes outside the world set', () => {
+    const entries = [{ episodeId: 'syn_999__clean', replicate: 0, status: 'completed' as const }];
+    const report = computeReplicateStatus(worldSet, entries);
+    expect(report.summary.notStarted).toBe(2);
   });
 });
 

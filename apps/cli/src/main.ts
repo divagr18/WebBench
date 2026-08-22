@@ -7,6 +7,8 @@ import { cmdServe } from './commands/serve.js';
 import { cmdRun } from './commands/run.js';
 import { cmdScore } from './commands/score.js';
 import { cmdReport } from './commands/report.js';
+import { cmdWorldset } from './commands/worldset.js';
+import { cmdReplicateStatus } from './commands/replicate-status.js';
 
 export interface CliContext {
   repoRoot: string;
@@ -103,6 +105,8 @@ commands:
   run        execute DeepSeek evaluation runs against the synthetic web
   score      score completed traces into metrics
   report     produce report artifacts (tables + figures)
+  worldset   freeze a named, fixed episode-id list for cross-model reruns
+  replicate-status   check replicate completeness of run sets against a world set
 
 global options:
   --data-dir <path>     dataset directory (default <repo>/datasets)
@@ -133,6 +137,12 @@ async function main(): Promise<void> {
       break;
     case 'report':
       process.exitCode = await cmdReport(args, ctx);
+      break;
+    case 'worldset':
+      process.exitCode = await cmdWorldset(args, ctx);
+      break;
+    case 'replicate-status':
+      process.exitCode = await cmdReplicateStatus(args, ctx);
       break;
     case 'help':
     case '--help':

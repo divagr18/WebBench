@@ -1,14 +1,22 @@
+import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { CONDITIONS, type DatasetManifest, type Split } from '@echobench/schema';
+import { CONDITIONS, WorldSetManifestSchema, type DatasetManifest, type Split } from '@echobench/schema';
 import { loadAndValidateDataset, loadPrompts, SeededRng } from '@echobench/generator';
 import { HttpToolGateway, runAll, type PlannedRun } from '@echobench/runner';
 import { isValidProvider, makeEvalClient, type CliContext } from '../main.js';
 import { opt, optNumber, type ParsedArgs } from '../args.js';
 import { startEchoWeb, makeEmbedQuery } from '../serveHelper.js';
 
-export function selectPlans(manifest: DatasetManifest, maxRuns: number, replicates: number, seed: string): PlannedRun[] {
+export function selectPlans(
+  manifest: DatasetManifest,
+  maxRuns: number,
+  replicates: number,
+  seed: string,
+  allowedEpisodeIds?: ReadonlySet<string> | null,
+): PlannedRun[] {
   const byClaim = new Map<string, string[]>();
   for (const [episodeId, entry] of Object.entries(manifest.episodes)) {
+    if (allowedEpisodeIds && !allowedEpisodeIds.has(episodeId)) continue;
     const list = byClaim.get(entry.claimId) ?? [];
     list.push(episodeId);
     byClaim.set(entry.claimId, list);
@@ -65,6 +73,7 @@ export async function cmdRun(args: ParsedArgs, ctx: CliContext): Promise<number>
   const temperature = optNumber(args, 'temperature', 0.7);
   const planSeed = opt(args, 'plan-seed', `plan-${split}-v1`);
   const retryRejected = args.flags.has('retry-rejected');
+  const worldSetPathArg = opt(args, 'world-set', '');
   const now = new Date();
   const runSetId = opt(args, 'run-set-id', `run-${split}-${now.toISOString().slice(0, 16).replace(/[:T-]/g, '')}`);
 
@@ -74,7 +83,26 @@ export async function cmdRun(args: ParsedArgs, ctx: CliContext): Promise<number>
     return 1;
   }
 
-  const plans = selectPlans(dataset.manifest, maxRuns, replicates, planSeed);
+  let allowedEpisodeIds: Set<string> | null = null;
+  if (worldSetPathArg) {
+    if (!existsSync(worldSetPathArg)) {
+      console.error(`[run] --world-set file not found: ${worldSetPathArg}`);
+      return 1;
+    }
+    const worldSet = WorldSetManifestSchema.parse(JSON.parse(readFileSync(worldSetPathArg, 'utf8')));
+    if (worldSet.split !== split) {
+      console.error(`[run] --world-set ${worldSetPathArg} was frozen for split=${worldSet.split}, not ${split}`);
+      return 1;
+    }
+    if (worldSet.sourceDatasetManifestHash !== dataset.manifest.integrityChecksum) {
+      console.error(`[run] --world-set ${worldSetPathArg} was frozen against a different dataset build (integrityChecksum mismatch) -- the ${split} dataset has changed since this world set was created. Refusing to run against a possibly-inconsistent episode list.`);
+      return 1;
+    }
+    allowedEpisodeIds = new Set(worldSet.episodeIds);
+    console.log(`[run] pinned to world set ${worldSet.worldSetId}: ${allowedEpisodeIds.size} episodes (${worldSet.replicatesPromised} replicates promised)`);
+  }
+
+  const plans = selectPlans(dataset.manifest, maxRuns, replicates, planSeed, allowedEpisodeIds);
   if (plans.length === 0) {
     console.error('[run] no episodes to run.');
     return 1;
