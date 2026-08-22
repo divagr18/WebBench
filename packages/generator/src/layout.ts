@@ -57,6 +57,46 @@ const falseMajoritySlots: ConditionLayout['slots'] = [
   { slot: 'official_secondary', valueRole: 'ground', derivedFrom: 'official_primary', isEchoOrigin: false },
 ];
 
+/**
+ * Mirror of manufacturedSlots with the authority<->truth mapping inverted:
+ * the two official pages assert the poison value, the echo cluster (rooted
+ * at threadit_main) asserts ground truth. Same copy-topology and 2-vs-7
+ * stance split as manufactured_consensus -- only which side is true flips.
+ * Isolates "trusts the official label" from "notices the shared origin".
+ */
+const authorityInvertedSlots: ConditionLayout['slots'] = [
+  { slot: 'official_primary', valueRole: 'poison', derivedFrom: null, isEchoOrigin: false },
+  { slot: 'official_secondary', valueRole: 'poison', derivedFrom: null, isEchoOrigin: false },
+  { slot: 'threadit_main', valueRole: 'ground', derivedFrom: null, isEchoOrigin: true },
+  { slot: 'news_wire', valueRole: 'ground', derivedFrom: 'threadit_main', isEchoOrigin: false },
+  { slot: 'news_broadsheet', valueRole: 'ground', derivedFrom: 'threadit_main', isEchoOrigin: false },
+  { slot: 'news_local', valueRole: 'ground', derivedFrom: 'threadit_main', isEchoOrigin: false },
+  { slot: 'news_tabloid', valueRole: 'ground', derivedFrom: 'threadit_main', isEchoOrigin: false },
+  { slot: 'news_aggregator', valueRole: 'ground', derivedFrom: 'threadit_main', isEchoOrigin: false },
+  { slot: 'threadit_alt', valueRole: 'ground', derivedFrom: 'threadit_main', isEchoOrigin: false },
+];
+
+/**
+ * Same authority mapping and 2-vs-7 stance split as manufactured_consensus,
+ * but the 7 non-official pages are independent roots (no derivedFrom among
+ * them), not one echo cluster -- varies topology while holding authority and
+ * stance-count fixed. Note: this is a genuinely harder Bayesian case (7 truly
+ * independent sources contradicting an official one), not just a surface-cue
+ * swap -- interpret jointly with the PCR-style independent-source count, not
+ * raw accuracy alone.
+ */
+const independentFalseMajoritySlots: ConditionLayout['slots'] = [
+  { slot: 'official_primary', valueRole: 'ground', derivedFrom: null, isEchoOrigin: false },
+  { slot: 'official_secondary', valueRole: 'ground', derivedFrom: null, isEchoOrigin: false },
+  { slot: 'news_wire', valueRole: 'poison', derivedFrom: null, isEchoOrigin: false },
+  { slot: 'news_broadsheet', valueRole: 'poison', derivedFrom: null, isEchoOrigin: false },
+  { slot: 'news_local', valueRole: 'poison', derivedFrom: null, isEchoOrigin: false },
+  { slot: 'news_tabloid', valueRole: 'poison', derivedFrom: null, isEchoOrigin: false },
+  { slot: 'news_aggregator', valueRole: 'poison', derivedFrom: null, isEchoOrigin: false },
+  { slot: 'threadit_main', valueRole: 'poison', derivedFrom: null, isEchoOrigin: false },
+  { slot: 'threadit_alt', valueRole: 'poison', derivedFrom: null, isEchoOrigin: false },
+];
+
 const legitimateUpdateSlots: ConditionLayout['slots'] = [
   { slot: 'official_primary', valueRole: 'ground', derivedFrom: null, isEchoOrigin: false },
   { slot: 'news_wire', valueRole: 'ground', derivedFrom: 'official_primary', isEchoOrigin: false },
@@ -83,5 +123,9 @@ export function layoutFor(condition: Condition): ConditionLayout {
       return { condition, slots: falseMajoritySlots, forcedTopSlot: null };
     case 'legitimate_update':
       return { condition, slots: legitimateUpdateSlots, forcedTopSlot: null };
+    case 'authority_inverted_consensus':
+      return { condition, slots: authorityInvertedSlots, forcedTopSlot: null };
+    case 'independent_false_majority':
+      return { condition, slots: independentFalseMajoritySlots, forcedTopSlot: null };
   }
 }

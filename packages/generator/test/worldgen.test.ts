@@ -23,7 +23,7 @@ function distractors(world: WorldManifest): VisiblePage[] {
 }
 
 describe('world generation v2', () => {
-  it('builds all six conditions: 14 pages each, structural validation passes', () => {
+  it('builds all eight conditions: 14 pages each, structural validation passes', () => {
     const claim = makeTestClaim();
     for (const condition of CONDITIONS) {
       const world = buildWorld(claim, condition, OPTS);
@@ -112,6 +112,61 @@ describe('world generation v2', () => {
     }
     const ranked = buildWorld(claim, 'ranked_poison', OPTS);
     expect(ranked.searchConfig.forcedTopPageIds).toEqual([pageBySlot(ranked, 'news_tabloid').pageId]);
+  });
+
+  it('authority_inverted_consensus inverts the authority<->truth mapping, not the topology', () => {
+    const claim = makeTestClaim();
+    const manufactured = buildWorld(claim, 'manufactured_consensus', OPTS);
+    const inverted = buildWorld(claim, 'authority_inverted_consensus', OPTS);
+
+    const officialPrimary = pageBySlot(inverted, 'official_primary');
+    const officialSecondary = pageBySlot(inverted, 'official_secondary');
+    const origin = pageBySlot(inverted, 'threadit_main');
+    expect(inverted.truth.pageMeta[officialPrimary.pageId]!.stance).toBe('supports_false');
+    expect(inverted.truth.pageMeta[officialSecondary.pageId]!.stance).toBe('supports_false');
+    expect(inverted.truth.pageMeta[origin.pageId]!.stance).toBe('supports_true');
+
+    // Same 2-vs-7 split and same echo-cluster topology as manufactured_consensus.
+    const falsePages = inverted.pages.filter((p) => inverted.truth.pageMeta[p.pageId]!.stance === 'supports_false');
+    const truePages = inverted.pages.filter((p) => inverted.truth.pageMeta[p.pageId]!.stance === 'supports_true');
+    expect(falsePages.length).toBe(2);
+    expect(truePages.length).toBe(7);
+    const wireMeta = inverted.truth.pageMeta[pageBySlot(inverted, 'news_wire').pageId]!;
+    const originMeta = inverted.truth.pageMeta[origin.pageId]!;
+    expect(wireMeta.originClusterId).toBe(originMeta.originClusterId);
+    // Same cluster shape as manufactured_consensus's poison cluster, just on the true side now.
+    const manufacturedOrigin = pageBySlot(manufactured, 'threadit_main');
+    const manufacturedEdgesIntoOrigin = manufactured.truth.provenance.filter((e) => e.to === manufacturedOrigin.pageId && e.from !== manufacturedOrigin.pageId);
+    const invertedEdgesIntoOrigin = inverted.truth.provenance.filter((e) => e.to === origin.pageId && e.from !== origin.pageId);
+    expect(invertedEdgesIntoOrigin.length).toBe(manufacturedEdgesIntoOrigin.length);
+
+    // No true-asserting page cites the poisoned official primary as if corroborating it.
+    for (const p of inverted.pages) {
+      if (inverted.truth.pageMeta[p.pageId]!.stance !== 'supports_true') continue;
+      expect(p.citations.some((c) => c.targetPageId === officialPrimary.pageId)).toBe(false);
+    }
+  });
+
+  it('independent_false_majority holds authority mapping fixed and varies only topology', () => {
+    const claim = makeTestClaim();
+    const world = buildWorld(claim, 'independent_false_majority', OPTS);
+
+    const officialPrimary = pageBySlot(world, 'official_primary');
+    const officialSecondary = pageBySlot(world, 'official_secondary');
+    expect(world.truth.pageMeta[officialPrimary.pageId]!.stance).toBe('supports_true');
+    expect(world.truth.pageMeta[officialSecondary.pageId]!.stance).toBe('supports_true');
+
+    const poisonSlots = ['news_wire', 'news_broadsheet', 'news_local', 'news_tabloid', 'news_aggregator', 'threadit_main', 'threadit_alt'];
+    const clusterIds = new Set<string>();
+    for (const slot of poisonSlots) {
+      const page = pageBySlot(world, slot);
+      const pmeta = world.truth.pageMeta[page.pageId]!;
+      expect(pmeta.stance).toBe('supports_false');
+      clusterIds.add(pmeta.originClusterId);
+    }
+    // Fully independent roots: 7 distinct clusters, not one echo cluster.
+    expect(clusterIds.size).toBe(7);
+    expect(world.truth.independentEvidenceCount).toBe(2);
   });
 
   it('legitimate_update worlds separate stale from current evidence by timestamp', () => {

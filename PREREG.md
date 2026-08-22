@@ -3,6 +3,9 @@
 This document freezes the evaluation contract for the MVP pilot. Any change after the
 pilot starts requires a version bump of the affected artifact.
 
+*Naming note:* this benchmark is released as EchoBench (this repo's DOI); the
+accompanying paper refers to the same benchmark as EchoNet. See README.md.
+
 ## Model under test
 
 - Single provider: DeepSeek only (`api.deepseek.com`), no other API key is read.
@@ -170,3 +173,52 @@ previously published metric values are unchanged.
   (the only variant probed to zero reasoning tokens), `tool_choice` only with
   `tools` present, `json_object` mode; pricing qwen/qwen3.7-max $1.48/$4.42,
   qwen/qwen3.7-plus $0.32/$1.28 per M.
+
+## Counterbalanced authority x topology ablation amendment (2026-08-22)
+
+Recorded per the version-bump clause above. This is an **exploratory, post-hoc
+addition** — it does not modify, reinterpret, or supersede any previously
+published metric on the original six matched conditions, and its own results
+are reported separately from the headline field comparison, never folded into
+it. Prompted by peer review of the paper draft, which noted that
+`manufactured_consensus` confounds source-authority styling with copy-topology
+(the two official pages are always true and independent; the seven non-official
+pages are always false and share one origin), so a model succeeding there could
+be "trusting the official label" rather than detecting shared provenance.
+
+- **Two new conditions**, added to the frozen six-condition set (dataset
+  generator version and `manifest.integrityChecksum` both bump accordingly for
+  any split regenerated after this amendment):
+  - `authority_inverted_consensus`: identical copy-topology and 2-vs-7 stance
+    split as `manufactured_consensus`, but the authority<->truth mapping is
+    inverted — the two official pages assert the poison value, the seven-page
+    echo cluster asserts ground truth. Isolates "trusts the official label"
+    from "notices the pages share one origin."
+  - `independent_false_majority`: same authority mapping and 2-vs-7 split as
+    `manufactured_consensus`, but the seven non-official pages are independent
+    roots (no shared derivation), not one echo cluster. Varies topology while
+    holding authority and stance-count fixed. This is a genuinely harder
+    Bayesian case (seven truly independent sources contradicting an official
+    one), not merely a surface-cue swap; interpret jointly with the
+    independent-source-count diagnostic (PCR-style), not raw accuracy alone.
+- **Schema invariant relaxation:** the structural rule that a designated
+  primary source must support ground truth is narrowed, not removed — it is
+  gated specifically to `authority_inverted_consensus`, where the primary
+  source must support the poisoned value instead (a positive counter-invariant,
+  still catches a generator defect that leaves the official page truthful by
+  accident). Every other condition, including `independent_false_majority`,
+  keeps the original invariant unchanged.
+- **Scoring:** results on these two conditions are reported in a new, fully
+  additive `authorityAblation` block (per-condition FBAR/PCR/PRR/SER/accuracy
+  plus an `authorityIndependenceGap` scalar). They are **not** added to
+  `POISON_CONDITIONS` and do not affect headline FBAR/EAS/SER/PRR for any
+  model, on any run set, regenerated before or after this amendment — a
+  regression test enforces this. PRR's polarity is flipped under
+  `authority_inverted_consensus` (repudiating the poisoned primary is the
+  correct behavior there) and must be interpreted accordingly when reported.
+- **Execution scope:** planned as a dev-split-only pilot (3 replicates per
+  new-condition episode, matching the existing replicate commitment) on
+  configurations that already have complete, checksummed dev data under the
+  field-eligibility rule — not the full eleven-configuration field, and not
+  the sealed test split. Any expansion beyond the dev pilot is a further
+  amendment, not implied by this one.

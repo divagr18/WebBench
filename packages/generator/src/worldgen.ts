@@ -142,23 +142,42 @@ export function buildWorld(claim: ClaimRecord, condition: Condition, opts: World
   return finalizeWorld(world);
 }
 
-/** Ground pages cite authoritative records in every condition so citation-traversal exists everywhere. */
+/**
+ * Ground pages cite authoritative records in every condition so
+ * citation-traversal exists everywhere.
+ *
+ * `official_primary` is only ever a valid anchor when it actually asserts
+ * ground truth in this condition -- in authority_inverted_consensus it
+ * asserts the poison value, so a ground-truth page must never be wired to
+ * cite it (that would make a true page appear to corroborate a false
+ * record). The echo cluster's origin page is also excluded as a citer here:
+ * it is the root every other cluster member already cites via `derivedFrom`,
+ * so forcing it to also cite one of its own derivatives would create a
+ * provenance cycle.
+ */
 function buildCitationPlan(mainRecords: SlotRecord[], bySlot: Map<string, SlotRecord>): Map<string, string[]> {
   const plan = new Map<string, string[]>();
   const roleOf = (slot: string) => bySlot.get(slot)?.valueRole;
+  const officialPrimaryGround = roleOf('official_primary') === 'ground';
 
   for (const rec of mainRecords) {
     const targets: string[] = [];
     if (rec.slot === 'official_secondary' && rec.valueRole === 'ground') {
-      targets.push('official_primary');
+      if (officialPrimaryGround) targets.push('official_primary');
     } else if (rec.slotDef.platform === 'news' && rec.valueRole === 'ground') {
-      if (rec.slot === 'news_wire' || rec.slot === 'news_broadsheet') targets.push('official_primary');
-      else targets.push(roleOf('news_wire') === 'ground' ? 'news_wire' : 'official_primary');
+      if (rec.slot === 'news_wire' || rec.slot === 'news_broadsheet') {
+        if (officialPrimaryGround) targets.push('official_primary');
+      } else if (roleOf('news_wire') === 'ground') {
+        targets.push('news_wire');
+      } else if (officialPrimaryGround) {
+        targets.push('official_primary');
+      }
     } else if (rec.slot === 'news_local' && rec.valueRole === 'prior' && roleOf('official_secondary') === 'prior') {
       targets.push('official_secondary');
-    } else if (rec.slotDef.platform === 'threadit' && rec.valueRole === 'ground') {
+    } else if (rec.slotDef.platform === 'threadit' && rec.valueRole === 'ground' && !rec.layout.isEchoOrigin) {
       const groundNews = (['news_wire', 'news_broadsheet'] as const).find((s) => roleOf(s) === 'ground');
-      targets.push(groundNews ?? 'official_primary');
+      if (groundNews) targets.push(groundNews);
+      else if (officialPrimaryGround) targets.push('official_primary');
     } else if (rec.slot === 'threadit_main' && rec.valueRole === 'prior' && roleOf('news_local') === 'prior') {
       targets.push('news_local');
     }

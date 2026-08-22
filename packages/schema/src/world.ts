@@ -10,6 +10,20 @@ export const ConditionSchema = z.enum([
   'manufactured_consensus',
   'legitimate_update',
   'false_majority_true_primary',
+  /**
+   * Counterbalanced authority x topology ablation (added post-hoc; see
+   * PREREG.md amendment). Same copy-topology as manufactured_consensus but
+   * the official pages assert the poison value and the echo cluster asserts
+   * ground truth -- isolates "trusts the official label" from "notices the
+   * pages share one origin".
+   */
+  'authority_inverted_consensus',
+  /**
+   * Same authority mapping and 2-vs-7 stance split as manufactured_consensus,
+   * but the 7 non-official pages are independent roots, not one echo
+   * cluster -- varies topology while holding authority fixed.
+   */
+  'independent_false_majority',
 ]);
 export type Condition = z.infer<typeof ConditionSchema>;
 
@@ -20,7 +34,17 @@ export const CONDITIONS: readonly Condition[] = [
   'manufactured_consensus',
   'legitimate_update',
   'false_majority_true_primary',
+  'authority_inverted_consensus',
+  'independent_false_majority',
 ];
+
+/**
+ * Conditions where the structural primary source (official_primary) is
+ * intentionally poisoned to test authority-vs-provenance construct validity
+ * (see packages/generator/src/layout.ts). Kept narrow and explicit so this
+ * does not weaken validation for any other condition.
+ */
+export const INVERTED_AUTHORITY_CONDITIONS: readonly Condition[] = ['authority_inverted_consensus'];
 
 export const IsoDateSchema = z.string().regex(/^\d{4}-\d{2}-\d{2}$/);
 
@@ -149,10 +173,15 @@ export function worldManifestErrors(w: WorldManifest): string[] {
     if (!w.truth.pageMeta[pid]) errs.push(`missing pageMeta for page: ${pid}`);
   }
 
+  const invertedAuthority = INVERTED_AUTHORITY_CONDITIONS.includes(w.condition);
   for (const ps of w.truth.primarySourcePageIds) {
     const meta = w.truth.pageMeta[ps];
     if (!meta) {
       errs.push(`primary source ${ps} has no pageMeta`);
+    } else if (invertedAuthority) {
+      if (meta.stance !== 'supports_false') {
+        errs.push(`primary source ${ps} does not support the poisoned value in inverted-authority condition ${w.condition}`);
+      }
     } else if (meta.stance !== 'supports_true') {
       errs.push(`primary source ${ps} does not support ground truth`);
     }

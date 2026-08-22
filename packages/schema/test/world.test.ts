@@ -58,6 +58,27 @@ describe('WorldManifest structural validation', () => {
     expect(errs.some((e) => e.includes('does not support ground truth'))).toBe(true);
   });
 
+  it('accepts a poisoned primary source only under authority_inverted_consensus', () => {
+    const w = makeWorld({ condition: 'authority_inverted_consensus', episodeId: 'syn_001__authority_inverted_consensus' });
+    w.truth.pageMeta[opaqueId('official_primary')] = meta('syn_001', { stance: 'supports_false' });
+    const errs = worldManifestErrors(w);
+    expect(errs.some((e) => e.includes('does not support the poisoned value'))).toBe(false);
+  });
+
+  it('still rejects a poisoned primary source under every other condition', () => {
+    const w = makeWorld();
+    w.truth.pageMeta[opaqueId('official_primary')] = meta('syn_001', { stance: 'supports_false' });
+    const errs = worldManifestErrors(w);
+    expect(errs.some((e) => e.includes('does not support ground truth'))).toBe(true);
+  });
+
+  it('rejects a truthful primary source under authority_inverted_consensus (the gate is a real invariant, not a no-op)', () => {
+    const w = makeWorld({ condition: 'authority_inverted_consensus', episodeId: 'syn_001__authority_inverted_consensus' });
+    // default fixture primary already supports_true
+    const errs = worldManifestErrors(w);
+    expect(errs.some((e) => e.includes('does not support the poisoned value in inverted-authority condition'))).toBe(true);
+  });
+
   it('rejects episodeId that does not match claimId__condition', () => {
     const w = makeWorld();
     w.episodeId = 'syn_002__clean';
