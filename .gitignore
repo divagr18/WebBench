@@ -14,3 +14,6 @@ datasets/test/
 coverage/
 .omo/
 .codegraph/
+paper/build/
+.tools/
+.tmp-*
