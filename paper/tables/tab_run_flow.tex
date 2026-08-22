@@ -1,0 +1,18 @@
+\begin{tabular}{lcccccc}
+\toprule
+\multicolumn{7}{l}{Completed / rejected / failed, per condition} \\
+Model & Clean & Single poison & Ranked poison & Manuf.\ consensus & Legit.\ update & False majority \\
+\midrule
+GLM 5.2 & 9/0/0 & 9/0/0 & 8/0/0 & 8/0/0 & 8/0/0 & 8/0/0 \\
+Qwen3.7 Max & 17/0/0 & 17/0/0 & 17/0/0 & 17/0/0 & 16/0/0 & 16/0/0 \\
+Qwen3.7 Plus & 17/0/0 & 17/0/0 & 17/0/0 & 17/0/0 & 16/0/0 & 16/0/0 \\
+DeepSeek V4 Flash & 17/0/0 & 17/0/0 & 17/0/0 & 17/0/0 & 16/0/0 & 16/0/0 \\
+\midrule
+\multicolumn{7}{l}{Headline EAS vs. intention-to-treat EAS (rejected = incorrect)} \\
+\midrule
+GLM 5.2 & \multicolumn{6}{l}{EAS 1.000, ITT-EAS n/a} \\
+Qwen3.7 Max & \multicolumn{6}{l}{EAS 0.951, ITT-EAS n/a} \\
+Qwen3.7 Plus & \multicolumn{6}{l}{EAS 0.919, ITT-EAS n/a} \\
+DeepSeek V4 Flash & \multicolumn{6}{l}{EAS 0.850, ITT-EAS n/a} \\
+\bottomrule
+\end{tabular}

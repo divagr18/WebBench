@@ -22,6 +22,8 @@ COND_ORDER = [
     "manufactured_consensus",
     "legitimate_update",
     "false_majority_true_primary",
+    "authority_inverted_consensus",
+    "independent_false_majority",
 ]
 
 # (runset, modelId, name, short, color, logo)  — finished pilots only
@@ -43,6 +45,9 @@ PILOTS = [
 def build_entry(runset: str) -> dict:
     score = json.loads((REPORTS / runset / "score-report.json").read_text(encoding="utf8"))
     entry: dict = {"runSet": runset}
+    entry["totalRuns"] = score["totalRuns"]
+    entry["completedRuns"] = score["completedRuns"]
+    entry["rejectedRuns"] = score["rejectedRuns"]
     entry["eas"] = score["eas"]
     entry["easCi"] = score["bootstrap"]["eas"]["ci95"]
     for k in ("fbar", "cur", "pcr", "prr"):
@@ -73,9 +78,16 @@ def build_entry(runset: str) -> dict:
             "acc": c["accuracy"]["value"],
             "correct": c["correct"],
             "total": c["total"],
-            "ci": list(c["accuracy"]["ci95"]),
+            "ci": list(c["accuracy"]["ci95"]) if c["accuracy"].get("ci95") else [0, 0],
+            "rejected": c.get("rejected", 0),
+            "failed": c.get("failed", 0),
         }
-    entry["conditions"] = {k: conds.get(k, {"acc": 0, "correct": 0, "total": 0, "ci": [0, 0]}) for k in COND_ORDER}
+    entry["conditions"] = {
+        k: conds.get(k, {"acc": 0, "correct": 0, "total": 0, "ci": [0, 0], "rejected": 0, "failed": 0})
+        for k in COND_ORDER
+    }
+    entry["authorityAblation"] = score.get("authorityAblation")
+    entry["itt"] = score.get("itt")
     cost = score["cost"]
     total_runs = score["totalRuns"]
     # Muse ran on the contributor (training-opt-in) tier; surface OFFICIAL standard pricing

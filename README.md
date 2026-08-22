@@ -5,6 +5,12 @@
 
 > **Can a web agent distinguish independent evidence from a hundred copies of the same lie?**
 
+*Note on naming:* the archived benchmark/code (this repo, the Zenodo DOIs above) is
+released as **EchoBench**; the accompanying paper refers to the same benchmark as
+**EchoNet**. Same artifact, two names in circulation — not a rename in progress or a
+different project. If citing the paper, use "EchoNet"; if citing the software
+release, use "EchoBench" (its DOI).
+
 EchoBench is a synthetic social web for testing whether AI agents can tell genuine
 corroboration apart from coordinated repetition and manufactured consensus. It puts
 agents in matched worlds where the visible web can look equally convincing while the

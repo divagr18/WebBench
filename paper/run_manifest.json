@@ -1,0 +1,141 @@
+{
+  "schemaVersion": 1,
+  "notes": [
+    "Single source of truth mapping paper-displayed models to reports/dev run directories.",
+    "Replaces the divergent PILOTS/PAPER_PILOTS lists formerly hand-maintained separately",
+    "in paper/gen_paper_data.py, analysis/gen_dashboard_data.py, analysis/cross_model_analysis.py,",
+    "and analysis/export_glm_dashboard.py.",
+    "role: 'field' = eligible for the comparative leaderboard/pairwise table/cost frontier,",
+    "  subject to the completeness+rejection-rate eligibility rule in cross_field.py's eligible().",
+    "  'effort-appendix' = same weights, different reasoning-effort setting, reported only in",
+    "  the effort-sensitivity analysis, never in the field.",
+    "  'route-appendix' = same weights/effort via a different serving route, reported only as a",
+    "  route-sensitivity note, never in the field.",
+    "status: 'available' = reports/dev/<runSet>/score-report.json + runs.csv exist.",
+    "  'missing' = expected but not yet present; validate_manifest.py checks this against disk."
+  ],
+  "models": [
+    {
+      "modelId": "deepseek-chat",
+      "displayName": "DeepSeek V4 Flash",
+      "runSet": "pilot-dev-v2",
+      "modelRequested": "deepseek-chat",
+      "role": "field",
+      "status": "available"
+    },
+    {
+      "modelId": "gpt-5.6-luna-low",
+      "displayName": "GPT-5.6 Luna",
+      "runSet": "pilot-dev-v2-openai-low",
+      "modelRequested": "gpt-5.6-luna",
+      "role": "field",
+      "status": "missing",
+      "note": "Genuinely un-shipped low-reasoning-effort run (confirmed via git log --all: never committed, not a rename of pilot-dev-v2-openai). User will supply. Do not substitute the 'none' variant below."
+    },
+    {
+      "modelId": "gpt-5.6-luna-none",
+      "displayName": "GPT-5.6 Luna (no reasoning)",
+      "runSet": "pilot-dev-v2-openai",
+      "modelRequested": "gpt-5.6-luna",
+      "role": "effort-appendix",
+      "status": "available"
+    },
+    {
+      "modelId": "qwen3.7-max",
+      "displayName": "Qwen3.7 Max",
+      "runSet": "pilot-dev-v2-modelscope-max",
+      "modelRequested": "Qwen-Ambassador/Qwen3.7-Max",
+      "role": "field",
+      "status": "available"
+    },
+    {
+      "modelId": "qwen3.7-plus",
+      "displayName": "Qwen3.7 Plus",
+      "runSet": "pilot-dev-v2-modelscope-plus",
+      "modelRequested": "Qwen-Ambassador/Qwen3.7-Plus",
+      "role": "field",
+      "status": "available"
+    },
+    {
+      "modelId": "qwen3.7-max-openrouter",
+      "displayName": "Qwen3.7 Max (OpenRouter, superseded route)",
+      "runSet": "pilot-dev-v2-qwen37max",
+      "modelRequested": "qwen/qwen3.7-max",
+      "role": "route-appendix",
+      "status": "available",
+      "note": "73/100 completed (27 failed, stopped by OpenRouter account credits). Retained only as a route-sensitivity artifact per PREREG.md; never in the field."
+    },
+    {
+      "modelId": "gemini-3.7-fl",
+      "displayName": "Gemini 3.7 Flash",
+      "runSet": "pilot-gemini-37",
+      "modelRequested": "gemini-3.7-flash",
+      "role": "field",
+      "status": "missing",
+      "note": "User will supply."
+    },
+    {
+      "modelId": "gemini-3.5-lite",
+      "displayName": "Gemini 3.5 Flash-Lite",
+      "runSet": "pilot-gemini-35-lite",
+      "modelRequested": "gemini-3.5-flash-lite",
+      "role": "field",
+      "status": "missing",
+      "note": "User will supply."
+    },
+    {
+      "modelId": "gpt-5.6-terra",
+      "displayName": "GPT-5.6 Terra",
+      "runSet": "pilot-terra-80",
+      "modelRequested": "gpt-5.6-terra",
+      "role": "field",
+      "status": "missing",
+      "note": "User will supply."
+    },
+    {
+      "modelId": "muse",
+      "displayName": "Muse Spark 1.2",
+      "runSet": "pilot-muse-80",
+      "modelRequested": "muse-spark-1.2",
+      "role": "field",
+      "status": "missing",
+      "note": "User will supply."
+    },
+    {
+      "modelId": "grok",
+      "displayName": "Grok 4.6",
+      "runSet": "pilot-grok-80",
+      "modelRequested": "grok-4.6",
+      "role": "field",
+      "status": "missing",
+      "note": "Being freshly re-run, not recovered from an old directory -- treat main.tex passages that cite its numbers (ICS discussion, worst-calibration callout, results table) as regenerated, not re-pointed, once this lands. runSet name may change once the new run-set-id is chosen; update this entry then."
+    },
+    {
+      "modelId": "gpt-5.6-sol",
+      "displayName": "GPT-5.6 Sol",
+      "runSet": "pilot-sol-50",
+      "modelRequested": "gpt-5.6-sol",
+      "role": "field",
+      "status": "missing",
+      "note": "User will supply."
+    },
+    {
+      "modelId": "glm-5.2",
+      "displayName": "GLM 5.2",
+      "runSet": "dev-glm52-gmicloud-pinned-low-20260821",
+      "modelRequested": "z-ai/glm-5.2",
+      "role": "field",
+      "status": "available",
+      "note": "Canonical GLM entry (50/50 completed, 0 rejected). paper_data.json previously mislabeled this runSet as 'dev-glm52-low-20260821' (byte-identical data, wrong string) -- fixed here."
+    },
+    {
+      "modelId": "glm-5.2-openrouter-100",
+      "displayName": "GLM 5.2 (OpenRouter, n=100)",
+      "runSet": "glm52-streamlake-openrouter-low-100-20260821",
+      "modelRequested": "z-ai/glm-5.2",
+      "role": "route-appendix",
+      "status": "available",
+      "note": "76/100 completed, 24% rejected -- far above any other config (next-worst is ~1%). Reported as a route/robustness sensitivity note alongside its rejection rate, never as a higher-n replacement for the canonical 50-run GLM entry: a 24% rejection rate is itself a validity signal, not a reason to prefer the larger n."
+    }
+  ]
+}
