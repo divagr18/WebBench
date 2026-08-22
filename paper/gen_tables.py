@@ -23,11 +23,13 @@ NAME = {
     "muse": "Muse Spark 1.2",
     "grok": "Grok 4.6",
     "gpt-5.6-sol": "GPT-5.6 Sol",
+    "glm-5.2": "GLM 5.2",
 }
 N_RUNS = {
     "deepseek-chat": 100, "gpt-5.6-luna": 100, "qwen3.7-max": 100,
     "qwen3.7-plus": 100, "gemini-3.7-fl": 100, "gemini-3.5-lite": 100,
     "gpt-5.6-terra": 80, "muse": 80, "grok": 80, "gpt-5.6-sol": 50,
+    "glm-5.2": 50,
 }
 ORDER = sorted(DATA.keys(), key=lambda k: DATA[k]["eas"], reverse=True)
 
@@ -63,7 +65,7 @@ for key, acc, hib, _ in cols:
 lines = []
 lines.append(r"\begin{tabular}{l" + "c" * len(cols) + "r}")
 lines.append(r"\toprule")
-lines.append(r"Model & EAS & FBAR $\downarrow$ & CUR & PCR $\downarrow$ & ICS & PRR $\downarrow$ & CI & Brier $\downarrow$ & ECE $\downarrow$ & \$ / 100 runs \\")
+lines.append(r"Model & EAS & FBAR $\downarrow$ & CUR & PCR $\downarrow$ & ICS & PRR $\downarrow$ & CI & Brier $\downarrow$ & ECE $\downarrow$ & Est. \$ / episode \\")
 lines.append(r"\midrule")
 for k in ORDER:
     d = DATA[k]
@@ -71,8 +73,8 @@ for k in ORDER:
     for key, acc, hib, nd in cols:
         v = acc(d)
         cells.append(maybe_bold(fmt(v, nd), abs(v - best[key]) < 1e-12))
-    cost100 = d["cost"] * 100.0 / N_RUNS[k]
-    row = NAME[k] + " & " + " & ".join(cells) + f" & {cost100:.2f} \\\\"
+    cost_per_episode = d["cost"] / N_RUNS[k]
+    row = NAME[k] + " & " + " & ".join(cells) + f" & {cost_per_episode:.3f} \\\\"
     lines.append(row)
 lines.append(r"\bottomrule")
 lines.append(r"\end{tabular}")

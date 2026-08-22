@@ -64,6 +64,7 @@ export async function cmdRun(args: ParsedArgs, ctx: CliContext): Promise<number>
   const maxToolCalls = optNumber(args, 'max-tool-calls', 20);
   const temperature = optNumber(args, 'temperature', 0.7);
   const planSeed = opt(args, 'plan-seed', `plan-${split}-v1`);
+  const retryRejected = args.flags.has('retry-rejected');
   const now = new Date();
   const runSetId = opt(args, 'run-set-id', `run-${split}-${now.toISOString().slice(0, 16).replace(/[:T-]/g, '')}`);
 
@@ -110,6 +111,7 @@ export async function cmdRun(args: ParsedArgs, ctx: CliContext): Promise<number>
         maxToolCalls,
         temperature,
         budgetUsd,
+        retryRejected,
         baseSeed: planSeed,
         plans,
       },

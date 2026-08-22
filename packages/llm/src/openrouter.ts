@@ -85,7 +85,10 @@ export class OpenRouterClient {
     const timer = setTimeout(() => controller.abort(), this.config.timeoutMs);
     const body: Record<string, unknown> = {
       model: this.config.model,
-      messages,
+      // Some OpenRouter providers (including Alibaba) reject null assistant
+      // content alongside tool calls, while the OpenAI-compatible schema allows
+      // it. An empty string preserves the tool-call turn and is portable.
+      messages: messages.map((message) => message.content === null ? { ...message, content: '' } : message),
       max_tokens: opts.maxTokens ?? 2048,
       reasoning: { effort: this.config.reasoningEffort },
     };
@@ -110,7 +113,10 @@ export class OpenRouterClient {
 
       const text = await resp.text();
       if (!resp.ok) {
-        const retriable = RETRYABLE_STATUS.has(resp.status);
+        // OpenRouter uses HTTP 400 for certain transient upstream-provider failures.
+        // Do not retry normal malformed requests, but give an affected provider the
+        // same bounded backoff treatment as 429/5xx responses.
+        const retriable = RETRYABLE_STATUS.has(resp.status) || isTransientProviderError(resp.status, text);
         throw new OpenRouterError(`OpenRouter API ${resp.status}: ${truncate(text, 500)}`, resp.status, retriable);
       }
 
@@ -162,4 +168,14 @@ function sleep(ms: number): Promise<void> {
 
 function truncate(s: string, n: number): string {
   return s.length <= n ? s : `${s.slice(0, n)}...`;
+}
+
+function isTransientProviderError(status: number, body: string): boolean {
+  if (status !== 400) return false;
+  try {
+    const parsed = JSON.parse(body) as { error?: { message?: unknown; metadata?: { provider_name?: unknown } } };
+    return parsed.error?.message === 'Provider returned error' && typeof parsed.error.metadata?.provider_name === 'string';
+  } catch {
+    return false;
+  }
 }

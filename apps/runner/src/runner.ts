@@ -31,6 +31,8 @@ export interface RunnerConfig {
   maxToolCalls: number;
   temperature: number;
   budgetUsd: number;
+  /** Requeue rejected episodes when explicitly requested by the caller. */
+  retryRejected?: boolean;
   baseSeed: string;
   plans: PlannedRun[];
 }
@@ -47,7 +49,9 @@ export interface RunnerOutcome {
 export async function runAll(deps: RunnerDeps, config: RunnerConfig): Promise<RunnerOutcome> {
   const existing = loadIndex(config.tracesRoot, config.split, config.runSetId);
   const keyOf = (episodeId: string, replicate: number) => `${episodeId}|${replicate}`;
-  const terminalKeys = new Set(existing.filter((e) => e.status === 'completed' || e.status === 'rejected').map((e) => keyOf(e.episodeId, e.replicate)));
+  const terminalKeys = new Set(existing
+    .filter((e) => e.status === 'completed' || (e.status === 'rejected' && !config.retryRejected))
+    .map((e) => keyOf(e.episodeId, e.replicate)));
 
   const outcome: RunnerOutcome = { completed: 0, failed: 0, rejected: 0, skipped: 0, totalCostUsd: 0, stoppedForBudget: false };
   const entriesByKey = new Map<string, { runId: string; episodeId: string; replicate: number; tracePath: string; status: 'completed' | 'failed' | 'rejected'; modelReturned: string | null; checksum: string; finishedAt: string }>();

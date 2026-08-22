@@ -313,6 +313,11 @@ every pilot shares the plan seed, these are **paired** on the shared episode set
   field tables** — EAS 0.740 with thinking disabled is a protocol artifact (V4
   ignores the legacy `enable_thinking` flag; with thinking disabled the model
   underperforms the baseline). A `low`-effort rerun would be the fair test.
+
+  Run the requested rerun through OpenRouter with `OPENROUTER_MODEL=deepseek/deepseek-v4-pro-0813`,
+  `OPENROUTER_REASONING_EFFORT=low`, `OPENROUTER_PROVIDER_ORDER=gmicloud/fp8`, and
+  `OPENROUTER_ALLOW_FALLBACKS=false`. This pins the selected FP8 host
+  and prevents an automatic provider switch.
 - **Luna `low`** (reasoning experiment): EAS 0.857 — worse than `none`; shown
   only in the cross-model analyses, not the field tables.
 - **Serving route is not neutral**: the same Qwen3.7 weights arbitrated

@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { configFromEnv, estimateCostUsd, estimateCostUsdCached, geminiConfigFromEnv, GeminiClient, grokConfigFromEnv, GrokClient, ModelScopeClient, modelscopeConfigFromEnv, museConfigFromEnv, MuseClient, openaiConfigFromEnv, OpenAIClient, OpenAIResponsesClient, openrouterConfigFromEnv, pricingFor, type ChatMessage } from '../src/index.js';
+import { configFromEnv, estimateCostUsd, estimateCostUsdCached, geminiConfigFromEnv, GeminiClient, grokConfigFromEnv, GrokClient, ModelScopeClient, modelscopeConfigFromEnv, museConfigFromEnv, MuseClient, openaiConfigFromEnv, OpenAIClient, OpenAIResponsesClient, OpenRouterClient, openrouterConfigFromEnv, pricingFor, type ChatMessage } from '../src/index.js';
 
 describe('llm package', () => {
   it('parses DeepSeek config from env and uses only DeepSeek keys', () => {
@@ -170,6 +170,62 @@ describe('llm package', () => {
     expect(cfg!.baseUrl).toBe('https://openrouter.ai/api/v1');
     expect(cfg!.model).toBe('qwen/qwen3.7-max');
     expect(cfg!.reasoningEffort).toBe('none');
+    expect(cfg!.provider).toBeUndefined();
+  });
+
+  it('routes OpenRouter requests to an explicitly selected provider', async () => {
+    const fetchSpy = vi.spyOn(globalThis, 'fetch').mockImplementation(async () => fakeResponse(200, {
+      model: 'deepseek/deepseek-v4-pro',
+      choices: [{ message: { content: 'ok' }, finish_reason: 'stop' }],
+      usage: { prompt_tokens: 10, completion_tokens: 5, total_tokens: 15 },
+    }));
+    const config = openrouterConfigFromEnv({
+      OPENROUTER_API_KEY: 'sk-or-test',
+      OPENROUTER_MODEL: 'deepseek/deepseek-v4-pro',
+      OPENROUTER_REASONING_EFFORT: 'low',
+      OPENROUTER_PROVIDER_ORDER: 'deepseek',
+      OPENROUTER_ALLOW_FALLBACKS: 'false',
+    } as NodeJS.ProcessEnv);
+    const client = new OpenRouterClient({ ...config!, maxRetries: 0, timeoutMs: 1000 });
+    await client.chat([{ role: 'user', content: 'hi' }]);
+    const body = JSON.parse(String(fetchSpy.mock.calls[0]![1]!.body)) as { reasoning?: unknown; provider?: unknown };
+    expect(body.reasoning).toEqual({ effort: 'low' });
+    expect(body.provider).toEqual({ order: ['deepseek'], allow_fallbacks: false });
+    fetchSpy.mockRestore();
+  });
+
+  it('retries an OpenRouter 429 response before succeeding', async () => {
+    const fetchSpy = vi.spyOn(globalThis, 'fetch')
+      .mockResolvedValueOnce(fakeResponse(429, { error: { message: 'rate limited' } }))
+      .mockResolvedValueOnce(fakeResponse(200, {
+        model: 'stealth/ox-alpha',
+        choices: [{ message: { content: 'ok' }, finish_reason: 'stop' }],
+        usage: { prompt_tokens: 10, completion_tokens: 5, total_tokens: 15 },
+      }));
+    const client = new OpenRouterClient({
+      apiKey: 'sk-or-test', baseUrl: 'http://localhost:9999/v1', model: 'stealth/ox-alpha',
+      maxRetries: 1, timeoutMs: 1000, reasoningEffort: 'low',
+    });
+    await expect(client.chat([{ role: 'user', content: 'hi' }])).resolves.toMatchObject({ content: 'ok' });
+    expect(fetchSpy).toHaveBeenCalledTimes(2);
+    fetchSpy.mockRestore();
+  });
+
+  it('retries an OpenRouter transient provider 400 but not ordinary request errors', async () => {
+    const fetchSpy = vi.spyOn(globalThis, 'fetch')
+      .mockResolvedValueOnce(fakeResponse(400, { error: { message: 'Provider returned error', metadata: { provider_name: 'Stealth' } } }))
+      .mockResolvedValueOnce(fakeResponse(200, {
+        model: 'stealth/ox-alpha',
+        choices: [{ message: { content: 'ok' }, finish_reason: 'stop' }],
+        usage: { prompt_tokens: 10, completion_tokens: 5, total_tokens: 15 },
+      }));
+    const client = new OpenRouterClient({
+      apiKey: 'sk-or-test', baseUrl: 'http://localhost:9999/v1', model: 'stealth/ox-alpha',
+      maxRetries: 1, timeoutMs: 1000, reasoningEffort: 'low',
+    });
+    await expect(client.chat([{ role: 'user', content: 'hi' }])).resolves.toMatchObject({ content: 'ok' });
+    expect(fetchSpy).toHaveBeenCalledTimes(2);
+    fetchSpy.mockRestore();
   });
 
   it('parses explicit OpenRouter upstream routing preferences', () => {

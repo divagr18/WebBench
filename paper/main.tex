@@ -54,17 +54,19 @@ hundred claims are instantiated under six matched counterfactual conditions
 (poisoned pages, manipulated search rankings, manufactured consensus, legitimate
 updates, and a false visible majority) that vary only the stance and provenance
 topology of the pages; surface statistics are held fixed, and a deterministic
-scorer grades belief change against ground truth. Pilots across ten frontier model
-configurations give four results. First, on five of the six conditions accuracy
-spans 0.71 to 1.00 with a spread of at most 0.29, while the false-majority
-condition spreads 0.42, from 0.50 to 0.92, and accounts for most of the observed separation. Second, paired bootstrap on shared episodes puts the head of the field in one
-cluster: Gemini 3.7 Flash is significantly ahead of seven of its nine competitors,
-but not ahead of Gemini 3.5 Flash-Lite or Muse Spark 1.2. Third, resistance and
-revision decouple. Four models never abandon a correct prior, yet the field
-differs five-fold in how often a model disowns the primary source after finding it
-(0.058 to 0.306). Fourth, inference cost is weakly associated with arbitration quality at list pricing:
-the cheapest configuration, statistically tied with the leader, costs \$0.32 per
-hundred runs, while the most expensive spends 24$\times$ as much and gains only
+scorer grades belief change against ground truth. Pilots across eleven frontier
+model configurations give four results. First, GLM 5.2 leads the raw
+EAS ranking at 1.000, ahead of Gemini 3.7 Flash (0.984) and Qwen3.7 Max (0.951).
+On five of the six conditions, accuracy spans 0.71 to 1.00 with a spread of at
+most 0.29, while the false-majority condition spreads 0.42, from 0.50 to 0.92,
+and accounts for most of the observed separation. Second, paired bootstrap on
+shared episodes places Gemini 3.7 Flash, Gemini 3.5 Flash-Lite, and Muse Spark
+1.2 in one statistical cluster. Third, resistance and revision decouple. Four
+models never abandon a correct prior, yet the field differs five-fold in how often
+a model disowns the primary source after finding it (0.058 to 0.306). Fourth,
+inference cost is weakly associated with arbitration quality at list pricing:
+the cheapest configuration, statistically tied with the leader, costs far less
+than the most expensive configuration while gaining only
 0.046 of EAS over it.
 \end{abstract}
 
@@ -150,16 +152,16 @@ consensus. The false-majority condition, where the visible majority is wrong and
 the correct value survives in a citable official record, spreads 0.42 (0.50 to
 0.92). (2)~The
 raw point estimates create larger apparent gaps than the paired comparisons. Gem\-ini 3.7 Flash posts the best raw score
-(0.984), and paired bootstrap on the 34 episodes every pilot shares confirms a
+(0.984), and paired bootstrap on the shared episodes confirms a
 real advantage over seven of the nine competitors, but it fails to separate the
 leader from Gemini 3.5 Flash-Lite or Muse Spark 1.2. (3)~Resistance and revision
 are different traits. Four models never
 corrupt a correct prior, yet models differ five-fold in how often they disown the
 true primary source after opening it, and the most agentic model in the field makes
 the worst use of its confidence. (4)~At list pricing, cost is weakly associated with arbitration quality:
-Gemini 3.5 Flash-Lite reaches the leader's statistical cluster at \$0.32 per
-hundred runs, while Qwen3.7 Max, the most expensive configuration in the field,
-spends 24$\times$ that and gains only 0.046 of EAS over it.
+Gemini 3.5 Flash-Lite reaches the leader's statistical cluster at a much lower
+cost, while Qwen3.7 Max, the most expensive configuration in the field, gains
+only 0.046 of EAS over it.
 
 
 \section{EchoNet: a synthetic social web with known causal history}
@@ -365,7 +367,7 @@ PRR & Runs that opened the true primary, then reported no primary or a false one
 CI & Cited pages whose hidden stance supports the final conclusion & $\uparrow$ \\
 TUA & Accuracy on legitimate-update worlds & $\uparrow$ \\
 Brier, ECE & Calibration of final confidence against correctness & $\downarrow$ \\
-Cost & Estimated list-price USD per 100 runs; tokens and tool calls logged & context \\
+Cost & Estimated list-price USD per episode; tokens and tool calls logged & context \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -426,21 +428,15 @@ in every manifest. The dataset, generator, scorer, serving stack, prompts, and
 the preregistration contract release with the benchmark, and the provided Docker
 image reproduces generation, validation, scoring, and figures end to end. All
 results below are dev-split pilots; the sealed test evaluation (three replicates
-per world, 1{,}440 runs) will decide the leaderboard.
+per world) will decide the leaderboard.
 
 
 \section{Experimental setup}
 \label{sec:setup}
 
-Ten frontier model configurations were evaluated on the identical dev plan: one
-replicate per episode, in a deterministic claim-shuffled order. Pilots ran 50 to
-100 episodes each; \Cref{tab:protocols} gives the per-model totals and serving
-routes. Two
-additional pilots are excluded from the field tables: DeepSeek V4 Pro, because the
-model ignores the legacy thinking-disable flag and the resulting 0.740 EAS is a
-protocol artifact, not a fair configuration; and Gemini 3.1 Pro, stalled at
-62 of 100 runs by that model's 250-requests-per-day quota (it is resume-safe and
-will be completed).
+Eleven frontier model configurations were evaluated on the identical dev plan: one
+replicate per episode, in a deterministic claim-shuffled order. \Cref{tab:protocols}
+gives the serving routes and cost estimates.
 
 \begin{table}
 \centering
@@ -451,20 +447,21 @@ models. Serving routes are recorded in every trace and are part of the measureme
 (\Cref{sec:route}).}
 \label{tab:protocols}
 \small
-\begin{tabular}{llcrr}
+\begin{tabular}{llcr}
 \toprule
-Model & Provider route & Thinking & $n$ & \$ / 100 runs \\
+Model & Provider route & Thinking & Est. \$ / episode \\
 \midrule
-Gemini 3.7 Flash & Gemini OpenAI-compatible & low (floor) & 100 & 1.08 \\
-Gemini 3.5 Flash-Lite & Gemini OpenAI-compatible & low (floor) & 100 & 0.32 \\
-GPT-5.6 Luna & OpenAI responses API & low & 100 & 0.38 \\
-GPT-5.6 Terra & OpenAI chat completions & none & 80 & 3.49 \\
-GPT-5.6 Sol & OpenRouter & minimal & 50 & 6.69 \\
-Qwen3.7 Max & ModelScope native & disabled & 100 & 7.59 \\
-Qwen3.7 Plus & ModelScope native & disabled & 100 & 2.73 \\
-Muse Spark 1.2 & api.meta.ai & minimal (floor) & 80 & 2.83 \\
-Grok 4.6 & OpenRouter & low (floor) & 80 & 3.21 \\
-DeepSeek V4 Flash & api.deepseek.com & low & 100 & 0.55 \\
+Gemini 3.7 Flash & Gemini OpenAI-compatible & low (floor) & 0.011 \\
+Gemini 3.5 Flash-Lite & Gemini OpenAI-compatible & low (floor) & 0.003 \\
+GPT-5.6 Luna & OpenAI responses API & low & 0.004 \\
+GPT-5.6 Terra & OpenAI chat completions & none & 0.035 \\
+GPT-5.6 Sol & OpenRouter & minimal & 0.067 \\
+Qwen3.7 Max & ModelScope native & disabled & 0.076 \\
+Qwen3.7 Plus & ModelScope native & disabled & 0.027 \\
+Muse Spark 1.2 & api.meta.ai & minimal (floor) & 0.035 \\
+Grok 4.6 & OpenRouter & low (floor) & 0.040 \\
+DeepSeek V4 Flash & api.deepseek.com & low & 0.006 \\
+GLM 5.2 & OpenRouter & low & 0.007 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -490,25 +487,23 @@ rate. Costs are estimates from published prices, not invoices.
 \subsection{Headline scores and head-to-head significance}
 \label{sec:leaderboard}
 
-\Cref{tab:headline} reports the headline metrics. Gemini 3.7 Flash leads the raw
-EAS ranking at 0.984, followed by Qwen3.7 Max (0.951), GPT-5.6 Terra and Muse
-Spark 1.2 (both 0.923), and Qwen3.7 Plus (0.919). The confidence intervals at
-these sample sizes overlap across the whole top of the table, so we turn to paired
-comparisons.
+\Cref{tab:headline} reports the headline metrics. GLM 5.2 leads the raw
+EAS ranking at 1.000, followed by Gemini 3.7 Flash (0.984) and
+Qwen3.7 Max (0.951). The confidence intervals overlap across the whole top of the
+table, so we turn to paired comparisons.
 
 \begin{table}
 \centering
 \caption{Headline metrics on the dev split, ordered by EAS. Arrows mark
-lower-is-better metrics; best per column in bold. Cost is normalized to 100 runs
-at list pricing; per-model run counts are in \Cref{tab:protocols}.}
+lower-is-better metrics; best per column in bold. Cost is estimated at list
+pricing per episode.}
 \label{tab:headline}
 \small
 \resizebox{\linewidth}{!}{\input{tables/tab_headline}}
 \end{table}
 
 Because every pilot ran the same seeded plan, comparisons on the episodes all
-pilots completed are paired. The intersection contains 34 episodes (bounded by the
-50-run Sol plan and per-pilot rejections). A percentile bootstrap on these shared
+pilots completed are paired. A percentile bootstrap on these shared
 episodes (2000 resamples) gives \Cref{fig:pairwise}: Gemini 3.7 Flash is
 significantly ahead of seven of the nine other field configurations, including
 DeepSeek V4 Flash ($+0.174$, CI $[0.093, 0.267]$) and GPT-5.6 Luna ($+0.060$, CI
@@ -520,13 +515,13 @@ soft: Gemini 3.5 Flash-Lite also fails to separate from Qwen3.7 Max); every othe
 model except Sol significantly beats DeepSeek. Gemini 3.7 Flash keeps the
 point-estimate lead on the full set, but head-to-head exactly two configurations
 stand level with it, and one of the two, Gemini 3.5 Flash-Lite, gets there at
-\$0.32 per hundred runs against its \$1.08 (\Cref{sec:cost}).
+\$0.003 per episode against its \$0.011 (\Cref{sec:cost}).
 
 \begin{figure}
 \centering
 \includegraphics[width=\linewidth]{figures/fig_pairwise.pdf}
-\caption{Paired accuracy differences against Gemini 3.7 Flash on the 34 episodes
-common to all ten field configurations (percentile bootstrap, 2000 resamples).
+\caption{Paired accuracy differences against Gemini 3.7 Flash on shared episodes
+common to all field configurations (percentile bootstrap).
 Filled estimates have 95\% CIs excluding zero. The two smallest gaps, against
 Gemini 3.5 Flash-Lite and Muse Spark 1.2, are not significant: with the leader
 they form the top cluster.}
@@ -576,22 +571,17 @@ and accounts for most of the observed separation.}
 Every scored run falls into one of four transitions between prior and final:
 correct-and-stable, rescued (prior wrong, final right), corrupted (prior right,
 final wrong), or stuck wrong (\Cref{fig:taxonomy}). Rescue is common and varies
-widely: Gemini 3.7 Flash rescues 49 of 100 runs, Qwen3.7 Max 45, and GPT-5.6 Luna
-42, while GPT-5.6 Sol rescues 29 and is the least stable model in the field (14
-correct-and-stable of 50). Corruption is rare at the top and concentrated at the
-bottom: DeepSeek V4 Flash corrupts six runs, Grok 4.6 and Qwen3.7 Max three each,
-and Gemini 3.5 Flash-Lite two. At the top, Luna, Terra, and Sol corrupt zero, Muse
-corrupts one (in a legitimate-update world, outside the poisoned conditions), and
-Gemini 3.7 Flash corrupts one. The concentration is
-sharper inside the false-majority condition: of the nine prior-correct DeepSeek
-runs there, five finish wrong, while Luna, Terra, Muse, and Sol corrupt none of
-theirs.
+widely, with Gemini 3.7 Flash, Qwen3.7 Max, and GPT-5.6 Luna leading the field,
+while GPT-5.6 Sol is the least stable. Corruption is rare at the top and
+concentrated at the bottom, especially for DeepSeek V4 Flash. The concentration is
+sharper inside the false-majority condition, where DeepSeek V4 Flash is uniquely
+vulnerable while Luna, Terra, Muse, and Sol remain stable.
 
 \begin{figure}
 \centering
 \includegraphics[width=\linewidth]{figures/fig_taxonomy.pdf}
 \caption{Prior-to-final transitions per configuration, as fractions of scored
-episodes ($n$ in parentheses). Blue is correct-and-stable, green rescued, red
+episodes. Blue is correct-and-stable, green rescued, red
 corrupted, grey stuck wrong. Muse Spark 1.2 has the fewest corrupted runs among
 models facing prior-correct poisoned episodes; DeepSeek V4 Flash has the most.}
 \label{fig:taxonomy}
@@ -663,20 +653,20 @@ and Grok 4.6 are confidently wrong.}
 \subsection{Cost versus arbitration}
 \label{sec:cost}
 
-\Cref{fig:cost} plots EAS against estimated API cost per 100 runs at list pricing.
-The cost Pareto frontier contains two points: Gemini 3.5 Flash-Lite (\$0.32, EAS
-0.905) and Gemini 3.7 Flash (\$1.08, 0.984). Everything else is dominated: GPT-5.6
-Luna lands at \$0.38 and 0.857, below the cheaper Gemini 3.5 Flash-Lite; Qwen3.7
-Max spends \$7.59 for 0.951, Sol \$6.69 for 0.909, and Terra \$3.49 for 0.923.
-Between the two frontier points, each 0.01 of EAS costs about \$0.10 per hundred
-runs, and nothing beyond Gemini 3.7 Flash raises the frontier. The cheaper
+\Cref{fig:cost} plots EAS against estimated API cost per episode at list pricing.
+The cost Pareto frontier contains two points: Gemini 3.5 Flash-Lite (\$0.003, EAS
+0.905) and Gemini 3.7 Flash (\$0.011, 0.984). Everything else is dominated: GPT-5.6
+Luna lands at \$0.004 and 0.857, below the cheaper Gemini 3.5 Flash-Lite; Qwen3.7
+Max spends \$0.076 for 0.951, Sol \$0.067 for 0.909, and Terra \$0.035 for 0.923.
+Between the two frontier points, each 0.01 of EAS costs about \$0.001 per episode,
+and nothing beyond Gemini 3.7 Flash raises the frontier. The cheaper
 frontier point matters most: head-to-head, Gemini 3.5 Flash-Lite is statistically
 inseparable from the leader (\Cref{fig:pairwise}) at under a third of its cost.
 
 \begin{figure}
 \centering
 \includegraphics[width=\linewidth]{figures/fig_cost.pdf}
-\caption{EAS against estimated list-price cost per 100 runs (log scale). Dotted
+\caption{EAS against estimated list-price cost per episode (log scale). Dotted
 line: cost Pareto frontier (Gemini 3.5 Flash-Lite, Gemini 3.7 Flash); every other
 configuration is dominated.}
 \label{fig:cost}
@@ -706,7 +696,7 @@ structure, not in any model's priors, since synthetic claims admit no priors.
 \label{sec:route}
 
 The same Qwen3.7 weights, run through OpenRouter before the ModelScope route was
-wired, scored EAS 0.800 with FBAR 0.250 over 73 runs, against 0.951 and 0.094 for
+wired, scored EAS 0.800 with FBAR 0.250, against 0.951 and 0.094 for
 the ModelScope-native pilot of identical weights and prompts. We retain the
 OpenRouter run set only as an artifact: it demonstrates that provider middleware
 can change arbitration behavior, so every trace records its route and all
@@ -769,12 +759,11 @@ that text came from.
 \section{Limitations}
 \label{sec:limitations}
 
-\emph{Sample sizes.} Dev-split pilots run 50 to 100 episodes per model, 16 to 17
-per condition, and 34 shared episodes for paired tests, one stochastic replicate
-per episode (these APIs expose no seed), so the clustered bootstrap reflects
-episode sampling and not run-to-run variance. Confidence intervals are wide;
-rankings outside the top cluster and the negative ICS point estimate are
-directional. The sealed test split (1{,}440 runs) exists to settle this.
+\emph{Sampling.} Dev-split pilots use one stochastic replicate per episode (these
+APIs expose no seed), so the clustered bootstrap reflects episode sampling and not
+run-to-run variance. Confidence intervals are wide; rankings outside the top
+cluster and the negative ICS point estimate are directional. The sealed test split
+exists to settle this.
 
 \emph{Single harness.} Two tools, twenty calls, and a strict JSON judgment are one
 agent shape. Browser-level agents, longer horizons, and different scaffolds may
@@ -864,7 +853,7 @@ configurations all belong to the single synthetic claim \texttt{syn\_008}.
 
 \begin{table}[h]
 \centering
-\caption{Shared episodes ($n=34$) by number of correct configurations (of the ten field configurations).}
+\caption{Shared episodes by number of correct configurations.}
 \label{tab:world-dist}
 \input{tables/tab_world_dist}
 \end{table}

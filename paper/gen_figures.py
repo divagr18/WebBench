@@ -44,7 +44,7 @@ DATA = json.load(open(os.path.join(HERE, "paper_data.json"), encoding="utf-8"))
 # tab10, fixed assignment per model
 C10 = plt.get_cmap("tab10").colors
 MODEL_ORDER = [  # leaderboard order, 11 configs
-    "gemini-3.7-fl", "qwen3.7-max", "gpt-5.6-luna", "gpt-5.6-terra", "muse",
+    "glm-5.2", "gemini-3.7-fl", "qwen3.7-max", "gpt-5.6-luna", "gpt-5.6-terra", "muse",
     "qwen3.7-plus", "gpt-5.6-sol", "gemini-3.5-lite", "grok", "deepseek-chat",
 ]
 SHORT = {
@@ -58,11 +58,13 @@ SHORT = {
     "muse": "Muse Spark 1.2",
     "grok": "Grok 4.6",
     "gpt-5.6-sol": "GPT-5.6 Sol",
+    "glm-5.2": "GLM 5.2",
 }
 N_RUNS = {  # completed runs per pilot (README / PREREG)
     "deepseek-chat": 100, "gpt-5.6-luna": 100, "qwen3.7-max": 100,
     "qwen3.7-plus": 100, "gemini-3.7-fl": 100, "gemini-3.5-lite": 100,
     "gpt-5.6-terra": 80, "muse": 80, "grok": 80, "gpt-5.6-sol": 50,
+    "glm-5.2": 50,
 }
 COLORS = {k: C10[i % 10] for i, k in enumerate(MODEL_ORDER)}
 
@@ -127,6 +129,7 @@ SHORT2 = {  # compact panel names for the calibration grid
     "qwen3.7-plus": "Qwen Plus", "gemini-3.7-fl": "Gemini 3.7",
     "gemini-3.5-lite": "Gemini 3.5L", "gpt-5.6-terra": "Terra", "muse": "Muse",
     "grok": "Grok 4.6", "gpt-5.6-sol": "Sol",
+    "glm-5.2": "GLM 5.2",
 }
 for k in MODEL_ORDER:
     cur = DATA[k]["cur"]
@@ -147,12 +150,12 @@ save(fig, "fig_arbitration")
 fig, ax = plt.subplots(figsize=(5.5, 3.0))
 pts = {}
 for k in MODEL_ORDER:
-    cost100 = DATA[k]["cost"] * 100.0 / N_RUNS[k]
-    pts[k] = (cost100, DATA[k]["eas"])
-    ax.scatter(cost100, DATA[k]["eas"], color=COLORS[k], s=26, zorder=3)
+    cost_per_episode = DATA[k]["cost"] / N_RUNS[k]
+    pts[k] = (cost_per_episode, DATA[k]["eas"])
+    ax.scatter(cost_per_episode, DATA[k]["eas"], color=COLORS[k], s=26, zorder=3)
     ox, oy = OFF5.get(k, (4, 3))
     ax.annotate(SHORT[k].replace("GPT-5.6 ", "").replace(" Spark 1.2", " Spark"),
-                (cost100, DATA[k]["eas"]), textcoords="offset points",
+                (cost_per_episode, DATA[k]["eas"]), textcoords="offset points",
                 xytext=(ox, oy), fontsize=6.8, zorder=3)
 # Pareto frontier: gemini-3.5-lite -> luna -> gemini-3.7-flash
 front = sorted([("gemini-3.5-lite",), ("gemini-3.7-fl",)],
@@ -162,7 +165,7 @@ fy = [pts[t[0]][1] for t in front]
 ax.step(fx + [10], fy + [fy[-1]], where="post", color="0.55", linewidth=0.8,
         linestyle=":", zorder=2)
 ax.set_xscale("log")
-ax.set_xlabel("Estimated API cost per 100 runs (USD, list pricing)")
+ax.set_xlabel("Estimated API cost per episode (USD, list pricing)")
 ax.set_ylabel("Epistemic Arbitration Score (EAS)")
 ax.set_xlim(0.22, 12)
 ax.set_ylim(0.82, 1.00)
@@ -199,7 +202,7 @@ for ci, cat in enumerate(CATS):
             edgecolor="white", linewidth=0.4)
     lefts += fr
 ax.set_yticks(ys)
-ax.set_yticklabels([f"{m} (n={sum(TAX[m])})" for m in TAX], fontsize=7.5)
+ax.set_yticklabels(list(TAX), fontsize=7.5)
 ax.set_xlim(0, 1)
 ax.set_xlabel("Fraction of scored episodes")
 ax.legend(ncols=4, loc="upper center", bbox_to_anchor=(0.5, -0.12), frameon=False,
@@ -213,9 +216,10 @@ AUC = {
     "qwen3.7-plus": 0.732, "gemini-3.7-fl": 0.919, "gemini-3.5-lite": 0.931,
     "gpt-5.6-terra": 0.963, "muse": 0.940, "grok": 0.743, "gpt-5.6-sol": 0.944,
 }
-fig, axes = plt.subplots(2, 5, figsize=(5.5, 3.3))
+fig, axes = plt.subplots(3, 4, figsize=(5.5, 4.6))
+axes = axes.ravel()
 for i, k in enumerate(MODEL_ORDER):
-    ax = axes[i // 5, i % 5]
+    ax = axes[i]
     d = DATA[k]
     ax.plot([0, 1], [0, 1], color="0.7", linewidth=0.6)
     for b in d["bins"]:
@@ -227,14 +231,17 @@ for i, k in enumerate(MODEL_ORDER):
     ax.set_xticks([0.5, 0.75, 1.0])
     ax.set_yticks([0, 0.5, 1.0])
     ax.tick_params(labelsize=5.8, length=2)
-    ax.set_title(f"{SHORT2[k]}\nAUC {AUC[k]:.2f}, ECE {d['ece']:.2f}", fontsize=6.6, pad=2)
-axes[1, 0].set_xlabel("Confidence", fontsize=7)
-axes[0, 0].set_ylabel("Accuracy", fontsize=7)
+    auc_label = f"AUC {AUC[k]:.2f}, " if k in AUC else ""
+    ax.set_title(f"{SHORT2[k]}\n{auc_label}ECE {d['ece']:.2f}", fontsize=6.6, pad=2)
+for ax in axes[len(MODEL_ORDER):]:
+    ax.axis("off")
+axes[2].set_xlabel("Confidence", fontsize=7)
+axes[0].set_ylabel("Accuracy", fontsize=7)
 fig.tight_layout(pad=0.6, h_pad=0.9)
 save(fig, "fig_calibration")
 
 # ------------------------------------------------ F8: paired differences vs Gemini 3.7 Flash
-# Source: analysis/cross_model_report.md, table 1 (A = Gemini 3.7-fl rows, 34 common episodes, bootstrap n=2000).
+# Source: analysis/cross_model_report.md, paired comparison table.
 PAIRS = [  # (model, diff, ci_lo, ci_hi, significant)
     ("DeepSeek V4 Flash", 0.174, 0.093, 0.267, True),
     ("GPT-5.6 Sol", 0.100, 0.020, 0.200, True),
@@ -257,7 +264,7 @@ ax.axvline(0.0, color="0.5", linewidth=0.7)
 ax.set_yticks(ys)
 ax.set_yticklabels([p[0] for p in PAIRS], fontsize=7.5)
 ax.set_xlim(-0.06, 0.30)
-ax.set_xlabel("Accuracy difference vs. Gemini 3.7 Flash (95% paired bootstrap CI, n=34)")
+ax.set_xlabel("Accuracy difference vs. Gemini 3.7 Flash (95% paired bootstrap CI)")
 save(fig, "fig_pairwise")
 
 print("ALL FIGURES DONE")
