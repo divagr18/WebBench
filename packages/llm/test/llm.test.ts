@@ -93,6 +93,32 @@ describe('llm package', () => {
     fetchSpy.mockRestore();
   });
 
+  it('can omit Qwen reasoning-history preservation for an ablation run', async () => {
+    const cfg = modelscopeConfigFromEnv({ DASHSCOPE_API_KEY: 'ds-test', DASHSCOPE_PRESERVE_THINKING: 'false', DASHSCOPE_REASONING_EFFORT: 'medium' } as NodeJS.ProcessEnv);
+    const fetchSpy = vi.spyOn(globalThis, 'fetch').mockImplementation(async () => fakeResponse(200, {
+      model: 'qwen3.8-max-preview',
+      choices: [{ message: { content: 'ok' }, finish_reason: 'stop' }],
+      usage: { prompt_tokens: 10, completion_tokens: 5, total_tokens: 15 },
+    }));
+    const client = new ModelScopeClient({ ...cfg!, maxRetries: 0, timeoutMs: 1000 });
+    await client.chat([{ role: 'user', content: 'hi' }]);
+    const body = JSON.parse(String(fetchSpy.mock.calls[0]![1]!.body)) as { preserve_thinking?: boolean; reasoning_effort?: string };
+    expect(body.reasoning_effort).toBe('medium');
+    expect(body.preserve_thinking).toBeUndefined();
+    fetchSpy.mockRestore();
+  });
+
+  it('reports an empty ModelScope completion instead of treating it as a network error', async () => {
+    const fetchSpy = vi.spyOn(globalThis, 'fetch').mockImplementation(async () => fakeResponse(200, {
+      model: 'Qwen-Ambassador/Qwen3.8-27B',
+      choices: null,
+      usage: { prompt_tokens: 0, completion_tokens: 0, total_tokens: 0 },
+    }));
+    const client = new ModelScopeClient({ apiKey: 'ms-test', baseUrl: 'https://api-inference.modelscope.ai/v1', model: 'Qwen-Ambassador/Qwen3.8-27B', maxRetries: 0, timeoutMs: 1000 });
+    await expect(client.chat([{ role: 'user', content: 'hi' }])).rejects.toThrow('empty completion (choices=null, total_tokens=0)');
+    fetchSpy.mockRestore();
+  });
+
   it('captures and replays ModelScope Qwen reasoning across turns without leaking generic extra_content', async () => {
     const fetchSpy = vi
       .spyOn(globalThis, 'fetch')
@@ -144,6 +170,15 @@ describe('llm package', () => {
     expect(cfg!.baseUrl).toBe('https://openrouter.ai/api/v1');
     expect(cfg!.model).toBe('qwen/qwen3.7-max');
     expect(cfg!.reasoningEffort).toBe('none');
+  });
+
+  it('parses explicit OpenRouter upstream routing preferences', () => {
+    const cfg = openrouterConfigFromEnv({
+      OPENROUTER_API_KEY: 'test-key',
+      OPENROUTER_PROVIDER_ORDER: 'streamlake',
+      OPENROUTER_ALLOW_FALLBACKS: 'false',
+    } as NodeJS.ProcessEnv);
+    expect(cfg!.provider).toEqual({ order: ['streamlake'], allow_fallbacks: false });
   });
 
   it('returns null OpenRouter config when key missing', () => {

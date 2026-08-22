@@ -9,12 +9,15 @@ export interface ModelScopeConfig {
   timeoutMs: number;
   /** Qwen3.8 Max family inference intensity; only supported by the DashScope route. */
   reasoningEffort?: 'low' | 'medium' | 'xhigh';
+  /** Preserve Qwen reasoning across turns unless explicitly disabled for an ablation. */
+  preserveThinking?: boolean;
 }
 
 export function modelscopeConfigFromEnv(env: NodeJS.ProcessEnv = process.env): ModelScopeConfig | null {
   const apiKey = env.DASHSCOPE_API_KEY ?? env.MODELSCOPE_API_KEY;
   if (!apiKey) return null;
   const reasoningEffort = qwenReasoningEffort(env.DASHSCOPE_REASONING_EFFORT ?? env.MODELSCOPE_REASONING_EFFORT);
+  const preserveThinking = (env.DASHSCOPE_PRESERVE_THINKING ?? env.MODELSCOPE_PRESERVE_THINKING) !== 'false';
   const usesDashScope = Boolean(env.DASHSCOPE_API_KEY);
   return {
     apiKey,
@@ -23,6 +26,7 @@ export function modelscopeConfigFromEnv(env: NodeJS.ProcessEnv = process.env): M
     maxRetries: Number(env.MODELSCOPE_MAX_RETRIES ?? 8),
     timeoutMs: Number(env.MODELSCOPE_TIMEOUT_MS ?? 180000),
     ...(reasoningEffort ? { reasoningEffort } : {}),
+    preserveThinking,
   };
 }
 
@@ -78,7 +82,7 @@ export class ModelScopeClient {
       enable_thinking: thinkingEnabled,
     };
     if (this.config.reasoningEffort !== undefined) body.reasoning_effort = this.config.reasoningEffort;
-    if (thinkingEnabled) body.preserve_thinking = true;
+    if (thinkingEnabled && this.config.preserveThinking !== false) body.preserve_thinking = true;
     if (typeof opts.temperature === 'number') body.temperature = opts.temperature;
     if (opts.tools && opts.tools.length > 0) body.tools = opts.tools;
     if (opts.responseFormat === 'json') body.response_format = { type: 'json_object' };
@@ -106,11 +110,15 @@ export class ModelScopeClient {
         choices: Array<{
           message: { content: string | null; reasoning_content?: string | null; tool_calls?: ChatResponse['toolCalls'] };
           finish_reason: string;
-        }>;
+        }> | null;
       };
 
-      const choice = parsed.choices[0];
-      if (!choice) throw new ModelScopeError('ModelScope returned no choices', null, false);
+      const choice = Array.isArray(parsed.choices) ? parsed.choices[0] : undefined;
+      if (!choice) {
+        const choiceState = parsed.choices === null ? 'null' : 'empty';
+        const totalTokens = parsed.usage?.total_tokens ?? 0;
+        throw new ModelScopeError(`ModelScope returned an empty completion (choices=${choiceState}, total_tokens=${totalTokens})`, null, false);
+      }
 
       return {
         content: choice.message.content ?? '',

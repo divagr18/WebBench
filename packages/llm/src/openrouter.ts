@@ -8,11 +8,27 @@ export interface OpenRouterConfig {
   maxRetries: number;
   timeoutMs: number;
   reasoningEffort: 'none' | 'minimal' | 'low' | 'medium' | 'high' | 'xhigh';
+  /** Per-request OpenRouter upstream routing preferences. */
+  provider?: {
+    order?: string[];
+    allow_fallbacks?: boolean;
+  };
 }
 
 export function openrouterConfigFromEnv(env: NodeJS.ProcessEnv = process.env): OpenRouterConfig | null {
   const apiKey = env.OPENROUTER_API_KEY;
   if (!apiKey) return null;
+  const order = env.OPENROUTER_PROVIDER_ORDER
+    ?.split(',')
+    .map((provider) => provider.trim())
+    .filter(Boolean);
+  const allowFallbacks = env.OPENROUTER_ALLOW_FALLBACKS;
+  const provider = order?.length || allowFallbacks !== undefined
+    ? {
+        ...(order?.length ? { order } : {}),
+        ...(allowFallbacks !== undefined ? { allow_fallbacks: allowFallbacks !== 'false' } : {}),
+      }
+    : undefined;
   return {
     apiKey,
     baseUrl: env.OPENROUTER_BASE_URL ?? 'https://openrouter.ai/api/v1',
@@ -20,6 +36,7 @@ export function openrouterConfigFromEnv(env: NodeJS.ProcessEnv = process.env): O
     maxRetries: Number(env.OPENROUTER_MAX_RETRIES ?? 8),
     timeoutMs: Number(env.OPENROUTER_TIMEOUT_MS ?? 180000),
     reasoningEffort: (env.OPENROUTER_REASONING_EFFORT as OpenRouterConfig['reasoningEffort'] | undefined) ?? 'none',
+    ...(provider ? { provider } : {}),
   };
 }
 
@@ -72,6 +89,7 @@ export class OpenRouterClient {
       max_tokens: opts.maxTokens ?? 2048,
       reasoning: { effort: this.config.reasoningEffort },
     };
+    if (this.config.provider) body.provider = this.config.provider;
     if (typeof opts.temperature === 'number') body.temperature = opts.temperature;
     if (opts.tools && opts.tools.length > 0) {
       body.tools = opts.tools;
