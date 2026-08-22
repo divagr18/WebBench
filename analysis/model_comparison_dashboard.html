@@ -1,0 +1,2096 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="EchoBench model comparison: epistemic arbitration benchmark results for four LLMs.">
+<title>EchoBench — Model Comparison</title>
+<link rel="icon" href="data:,">
+<script>
+(function () {
+  var t = null;
+  try { t = localStorage.getItem('echobench-theme'); } catch (e) {}
+  if (t !== 'light' && t !== 'dark') {
+    t = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+  document.documentElement.setAttribute('data-theme', t);
+})();
+</script>
+<style>
+  /* ---------- design tokens ---------- */
+  :root[data-theme="light"] {
+    color-scheme: light;
+    --bg: #f6f7f8;
+    --surface: #ffffff;
+    --ink: #14181d;
+    --muted: #5b6470;
+    --grid: #dfe3e8;
+    --hairline: #e8ebee;
+    --wash: #eef1f5;
+    --neg: #b42318;
+    --pos: #147a46;
+    --heat-0: rgba(20, 122, 70, 0.16);
+    --heat-1: rgba(20, 122, 70, 0.06);
+    --heat-2: rgba(180, 35, 24, 0.07);
+    --heat-3: rgba(180, 35, 24, 0.17);
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #0d1013;
+    --surface: #14171b;
+    --ink: #e8ebef;
+    --muted: #9aa3ae;
+    --grid: #2a2f36;
+    --hairline: #22262c;
+    --wash: #1b2026;
+    --neg: #f97066;
+    --pos: #4ade80;
+    --heat-0: rgba(74, 222, 128, 0.18);
+    --heat-1: rgba(74, 222, 128, 0.07);
+    --heat-2: rgba(249, 112, 102, 0.09);
+    --heat-3: rgba(249, 112, 102, 0.20);
+  }
+
+  /* ---------- base ---------- */
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    transition: background-color .18s ease, color .18s ease;
+  }
+  svg text {
+    font-family: inherit;
+    font-variant-numeric: tabular-nums;
+    text-rendering: geometricPrecision;
+  }
+  .wrap { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+  .num { font-variant-numeric: tabular-nums; }
+
+  /* ---------- header ---------- */
+  header { padding: 44px 0 8px; }
+  .head-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; }
+  h1 {
+    font-size: clamp(24px, 3.4vw, 34px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin: 0 0 8px;
+  }
+  .subtitle { color: var(--muted); font-size: 13.5px; max-width: 62ch; margin: 0; }
+  #theme-toggle {
+    flex: none;
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    border: 1px solid var(--grid);
+    background: var(--surface);
+    color: var(--ink);
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background-color .18s ease, border-color .18s ease;
+  }
+  #theme-toggle:hover { border-color: var(--muted); }
+  #theme-toggle:focus-visible { outline: 2px solid #4D6BFE; outline-offset: 2px; }
+  #theme-toggle svg { width: 17px; height: 17px; }
+  html[data-theme="light"] .icon-moon { display: none; }
+  html[data-theme="dark"] .icon-sun { display: none; }
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; margin: 22px 0 6px; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: 999px;
+    padding: 5px 14px 5px 6px;
+    font-size: 13px; font-weight: 600;
+  }
+  .badge { display: block; flex: none; }
+
+  /* ---------- layout ---------- */
+  main { padding: 18px 0 56px; }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: 12px;
+    padding: 24px 26px 22px;
+    margin-bottom: 20px;
+  }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .grid2 .card { margin-bottom: 0; }
+  .grid2 > .card:nth-last-child(-n+1) { margin-bottom: 0; }
+  main > .card.wide { margin-top: 0; }
+  .spacer { height: 20px; }
+  @media (max-width: 900px) {
+    .grid2 { grid-template-columns: 1fr; }
+    .head-row { flex-direction: column-reverse; align-items: flex-end; }
+  }
+
+  /* ---------- card typography ---------- */
+  .kicker {
+    font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.09em;
+    color: var(--muted);
+    margin: 0 0 6px;
+  }
+  h2 { font-size: 17px; font-weight: 650; letter-spacing: -0.01em; margin: 0 0 5px; }
+  .explain { color: var(--muted); font-size: 13.5px; max-width: 72ch; margin: 0 0 18px; }
+  .caption { color: var(--muted); font-size: 12.5px; max-width: 80ch; margin: 14px 0 0; }
+  .chart { width: 100%; }
+  .chart svg { display: block; width: 100%; height: auto; }
+
+  /* ---------- svg theme classes ---------- */
+  .ax    { stroke: var(--grid); stroke-width: 1; }
+  .ax-strong { stroke: var(--muted); stroke-width: 1; opacity: .55; }
+  .ref   { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 5 5; opacity: .8; }
+  .txti  { fill: var(--ink); }
+  .txtm  { fill: var(--muted); }
+  .rank  { fill: var(--muted); opacity: .4; }
+  .pool  { fill: var(--wash); stroke: var(--grid); stroke-width: 1; }
+  .wash-fill { fill: var(--wash); }
+  .neg-fill  { fill: var(--neg); }
+  .whisk { stroke: var(--ink); stroke-width: 1.4; opacity: .6; }
+  .bracket { stroke: var(--muted); stroke-width: 1; fill: none; opacity: .75; }
+
+  /* ---------- legends ---------- */
+  .legend { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 14px; align-items: center; }
+  .legend .item { display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px; color: var(--muted); }
+  .legend .item b { color: var(--ink); font-weight: 600; }
+  .swatch { width: 11px; height: 11px; border-radius: 3px; flex: none; }
+  .axis-defs { margin: 16px 0 0; display: grid; grid-template-columns: 1fr 1fr; gap: 7px 28px; }
+  @media (max-width: 640px) { .axis-defs { grid-template-columns: 1fr; } }
+  .axis-defs .def { font-size: 12.5px; color: var(--muted); }
+  .axis-defs .def b { color: var(--ink); }
+  .axis-defs .def .tag {
+    font-size: 10.5px; color: var(--muted);
+    border: 1px solid var(--grid); border-radius: 4px;
+    padding: 0 4px; margin-left: 3px; vertical-align: .5px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---------- heatmap ---------- */
+  table.matrix { width: 100%; border-collapse: collapse; margin-top: 4px; }
+  table.matrix th, table.matrix td { padding: 7px 12px; text-align: right; font-size: 13px; }
+  table.matrix thead th {
+    font-size: 12px; font-weight: 600; color: var(--ink);
+    border-bottom: 1px solid var(--grid);
+    white-space: nowrap;
+  }
+  table.matrix thead th .hcell { display: inline-flex; align-items: center; gap: 7px; }
+  table.matrix tbody tr { border-bottom: 1px solid var(--hairline); }
+  table.matrix tbody tr:last-child { border-bottom: none; }
+  table.matrix td.metric, table.matrix th.metric {
+    text-align: left; font-weight: 550; white-space: nowrap;
+  }
+  table.matrix td .dir { color: var(--muted); font-weight: 400; }
+  table.matrix td { font-variant-numeric: tabular-nums; }
+  td.heat-0 { background: var(--heat-0); }
+  td.heat-1 { background: var(--heat-1); }
+  td.heat-2 { background: var(--heat-2); }
+  td.heat-3 { background: var(--heat-3); }
+  .matrix-note { font-size: 12px; color: var(--muted); margin: 0 0 10px; }
+
+  /* ---------- footer ---------- */
+  footer { border-top: 1px solid var(--hairline); padding: 34px 0 60px; }
+  footer h3 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.09em; margin: 0 0 12px; color: var(--muted); font-weight: 700; }
+  footer p { font-size: 13px; color: var(--muted); max-width: 88ch; margin: 0 0 12px; }
+  footer p b { color: var(--ink); font-weight: 600; }
+
+  /* ---------- 2026 editorial dark refresh ---------- */
+  :root,
+  :root[data-theme="light"],
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #111110;
+    --surface: #090909;
+    --ink: #f2f0eb;
+    --muted: #b6b3ac;
+    --grid: #292927;
+    --hairline: #20201e;
+    --wash: #171715;
+    --neg: #ef796f;
+    --pos: #76c69b;
+    --heat-0: rgba(118, 198, 155, .18);
+    --heat-1: rgba(118, 198, 155, .07);
+    --heat-2: rgba(239, 121, 111, .07);
+    --heat-3: rgba(239, 121, 111, .17);
+  }
+  body {
+    background: #111110;
+    letter-spacing: -.006em;
+  }
+  .wrap { max-width: 1240px; padding: 0 32px; }
+  header { padding: 54px 0 22px; border-bottom: 1px solid #252523; }
+  .head-row { align-items: center; }
+  h1 { font-size: clamp(30px, 4vw, 46px); font-weight: 650; letter-spacing: -.045em; }
+  .subtitle { color: #c1beb7; font-size: 14px; line-height: 1.5; }
+  #theme-toggle { display: none; }
+  .chips { gap: 8px 22px; margin: 26px 0 0; }
+  .chip {
+    border: 0;
+    background: transparent;
+    border-radius: 0;
+    padding: 0;
+    font-size: 12px;
+    color: #d8d6d0;
+  }
+  main { padding: 28px 0 64px; }
+  .grid2 { gap: 18px; }
+  .card {
+    position: relative;
+    overflow: hidden;
+    background: #090909;
+    border: 1px solid #242422;
+    border-radius: 10px;
+    padding: 28px 30px 26px;
+    margin-bottom: 18px;
+    box-shadow: 0 18px 50px rgba(0,0,0,.16);
+  }
+  .card::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.12), transparent);
+  }
+  .kicker {
+    margin-bottom: 10px;
+    color: #77756f;
+    font-size: 10px;
+    letter-spacing: .16em;
+  }
+  h2 { font-size: 19px; font-weight: 640; letter-spacing: -.025em; margin-bottom: 7px; }
+  .explain { color: #d0cdc6; font-size: 13.5px; font-weight: 450; line-height: 1.55; margin-bottom: 22px; }
+  .caption { color: #bdbab3; font-size: 12.5px; font-weight: 450; line-height: 1.5; }
+  .card .explain,
+  .card .caption { max-width: none; width: 100%; }
+  .legend { gap: 9px 18px; padding-top: 14px; border-top: 1px solid #1d1d1b; }
+  .legend .item { color: #bdbab3; font-size: 12px; font-weight: 500; }
+  .legend .item b { color: #dedbd4; font-weight: 560; }
+  .metric-glossary,
+  .matrix-glossary {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px 24px;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid #1d1d1b;
+  }
+  .matrix-glossary { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .metric-glossary .metric-def,
+  .matrix-glossary .metric-def {
+    color: #aaa8a2;
+    font-size: 12px;
+    font-weight: 450;
+    line-height: 1.45;
+  }
+  .metric-glossary .metric-def b,
+  .matrix-glossary .metric-def b {
+    display: block;
+    margin-bottom: 2px;
+    color: #f0ede6;
+    font-size: 12.5px;
+    font-weight: 650;
+  }
+  .axis-defs { border-top: 1px solid #1d1d1b; padding-top: 14px; }
+  .axis-defs .def { color: #bdbab3; font-size: 12px; font-weight: 450; }
+  .axis-defs .def b { color: #dedbd4; }
+  .axis-defs .def .tag { border-color: #383834; color: #aaa8a2; }
+  .badge { overflow: visible; }
+  .chart .hcell .badge { width: 20px !important; height: 20px !important; flex: 0 0 20px; }
+  .hcell { justify-content: flex-end; }
+  table.matrix th, table.matrix td { padding: 9px 12px; font-size: 14px; }
+  .matrix {
+    width: 100%;
+    table-layout: fixed;
+  }
+  .matrix th, .matrix td {
+    padding: 7px 4px;
+    font-size: 10.5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .matrix th.metric, .matrix td.metric { width: 184px; }
+  .matrix .hcell { gap: 4px; font-size: 10px; }
+  .chart .matrix .hcell .badge { width: 14px !important; height: 14px !important; flex-basis: 14px; }
+  footer { border-color: #242422; }
+  @media (max-width: 900px) {
+    .wrap { padding: 0 18px; }
+    .head-row { align-items: flex-start; }
+    .metric-glossary,
+    .matrix-glossary { grid-template-columns: 1fr 1fr; }
+  }
+  body.exporting { background: #111110; }
+  body.exporting header, body.exporting footer { display: none; }
+  body.exporting main { padding: 28px 0; }
+  body.exporting .card { box-shadow: none; }
+  body.exporting .grid2 { display: contents; }
+  body.exporting .spacer { display: none; }
+  body.exporting[data-export-card] .card { display: none; }
+  body.exporting[data-export-card="1"] #card-1,
+  body.exporting[data-export-card="2"] #card-7,
+  body.exporting[data-export-card="3"] #card-5,
+  body.exporting[data-export-card="4"] #card-3,
+  body.exporting[data-export-card="5"] #card-4,
+  body.exporting[data-export-card="6"] #card-6,
+  body.exporting[data-export-card="7"] #card-8 { display: block; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="head-row">
+    <div>
+      <h1>EchoBench — Model Comparison</h1>
+      <p class="subtitle">How 10 models handle a tricky job: given a web full of fake pages, do they end up believing the truth? Each model ran the same 100 trials on the same synthetic "internet" — some worlds are clean, some are full of coordinated lies. The glossary below explains every number in plain English.</p>
+    </div>
+    <button id="theme-toggle" type="button" aria-label="Toggle light and dark theme">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+      </svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+      </svg>
+    </button>
+  </div>
+  <div class="chips" id="model-chips"></div>
+</header>
+
+<main>
+  <!-- 00 glossary: plain-English metric meanings -->
+  <section class="card" id="card-glossary">
+    <p class="kicker">Before you read the charts</p>
+    <h2>What the numbers mean (plain English)</h2>
+    <div class="metric-glossary" aria-label="Plain-English metric definitions">
+      <div class="metric-def"><b>EAS — ends up right</b>Across all trials, how often the model's final belief matches reality (0–1). The headline metric.</div>
+      <div class="metric-def"><b>FBAR — gullibility</b>How often fake pages talked the model out of an answer it already had right. Lower is better.</div>
+      <div class="metric-def"><b>CUR — accepts real news</b>When the world genuinely changed, how often the model updated to the new truth. Higher is better.</div>
+      <div class="metric-def"><b>PCR — false independence</b>In echo chambers, how often the model mistook one repeated story for many independent sources. Lower is better.</div>
+      <div class="metric-def"><b>PRR — found it, disowned it</b>How often the model opened the real primary source and then failed to name it. Lower is better.</div>
+      <div class="metric-def"><b>ICS — healthy doubt</b>How much the model's confidence drops when the web contradicts it. Positive = sensible caution.</div>
+      <div class="metric-def"><b>SER / PSR — did the research</b>How often the model reached the true source or followed real citations. Higher is better.</div>
+      <div class="metric-def"><b>CI — citations check out</b>Of the pages a model cites, how many actually support its answer. Higher is better.</div>
+      <div class="metric-def"><b>TUA — answered the update</b>On worlds that genuinely changed, the fraction answered correctly. Higher is better.</div>
+      <div class="metric-def"><b>ECE / Brier — honest confidence</b>The gap between stated confidence and real accuracy. Lower is better.</div>
+      <div class="metric-def"><b>Cost</b>Estimated API spend per trial at official published prices.</div>
+    </div>
+  </section>
+
+  <!-- 01 hero: composite score -->
+  <section class="card" id="card-1">
+    <p class="kicker">01 · The big picture</p>
+    <h2>Which model arbitrates best — one score</h2>
+    <p class="explain">ECS (EchoBench Composite Score) folds all our measurements into a single 0–1 score. Higher = the model more often ends up believing the truth. Getting fooled by lies counts against it, and so does ignoring real updates. The thin strip under each bar shows which parts of the score each model is good or bad at.</p>
+    <div class="chart" id="c1"></div>
+    <div class="legend" id="c1-legend"></div>
+    <div class="metric-glossary" aria-label="Composite metric definitions">
+      <div class="metric-def"><b>EAS — not fooled, and updates</b>How often the final belief is right.</div>
+      <div class="metric-def"><b>PCR — false independence</b>Mistaking one repeated story for many sources. Lower is better.</div>
+      <div class="metric-def"><b>PRR — disowned the truth</b>Opened the real source, then didn't name it. Lower is better.</div>
+      <div class="metric-def"><b>CI — citations check out</b>Cited pages actually support the answer.</div>
+      <div class="metric-def"><b>ECE — honest confidence</b>Gap between stated confidence and real accuracy. Lower is better.</div>
+      <div class="metric-def"><b>PSR / SER — did the research</b>Found the true source and real supporting evidence.</div>
+    </div>
+  </section>
+
+  <div class="grid2">
+    <!-- 02 cost vs performance -->
+    <section class="card" id="card-7">
+      <p class="kicker">02 · Price vs. performance</p>
+      <h2>What it costs vs. how well it arbitrates</h2>
+      <p class="explain">Horizontal axis = estimated API cost per trial. Vertical axis = how often the model ends up right (EAS). Bubble size = how often the model got talked out of a correct answer (bigger = worse). The best models sit up-left: cheap and right. Costs use official published pricing.</p>
+      <div class="chart" id="c7"></div>
+      <div class="legend" id="c7-legend"></div>
+    </section>
+
+    <!-- 03 gullibility -->
+    <section class="card" id="card-5">
+      <p class="kicker">03 · Gullibility</p>
+      <h2>Who gets talked out of the truth</h2>
+      <p class="explain">The benchmark's favorite failure: a model already knows the right answer, then reads convincing fake pages and changes its mind. Each bar is how often that happened (FBAR). An empty bar means the model was never fooled — 0.000 is the perfect score.</p>
+      <div class="chart" id="c5"></div>
+    </section>
+
+    <!-- 04 EAS with CI -->
+    <section class="card" id="card-3">
+      <p class="kicker">04 · The headline number</p>
+      <h2>How often each model ends up believing the truth</h2>
+      <p class="explain">EAS (Epistemic Arbitration Score) answers one question: across all the trials, how often is the model's final belief the correct one? It balances two skills — (1) not getting talked out of a correct answer by fake pages, and (2) accepting real news when the world genuinely changed. 1.00 = perfect. The tick marks show the 95% uncertainty range; models whose ranges overlap are effectively tied.</p>
+      <div class="chart" id="c3"></div>
+      <p class="caption">EAS = harmonic mean of resistance (1 − corruption rate) and correct updating. The harmonic mean punishes one-sided models: being strong only at resisting — or only at updating — is dragged toward the weaker side.</p>
+    </section>
+
+    <!-- 05 accuracy by condition -->
+    <section class="card" id="card-4">
+      <p class="kicker">05 · By scenario</p>
+      <h2>Six kinds of worlds</h2>
+      <p class="explain">Each panel is a different kind of world the model can land in. "Clean" = nothing is wrong. "Single lie" / "Lie ranked first" = the truth is hidden under a lie. "Echo chamber" = every page repeats the same false story. "Genuine update" = the answer really changed and the web is right. "False majority" = most sources are wrong, but the real source is findable. Hover any bar for the exact counts.</p>
+      <div class="chart" id="c4"></div>
+      <div class="legend" id="c4-legend"></div>
+      <p class="caption">Clean: no misinformation planted. Single lie: one fabricated page. Lie ranked first: the fabricated page tops the search results. Echo chamber: one fabricated claim repeated across many pages. Genuine update: the web legitimately contradicts prior knowledge. False majority: most pages wrong, true official record still findable.</p>
+    </section>
+
+    <!-- 06 calibration -->
+    <section class="card" id="card-6">
+      <p class="kicker">06 · Honesty of confidence</p>
+      <h2>When a model says "sure", how sure is it really?</h2>
+      <p class="explain">If a model says it's 90% confident, it should be right about 90% of the time. Points on the dashed line = perfectly honest. Below the line = overconfident (claims "sure" more often than it's right). ECE = the average gap between stated confidence and actual accuracy; lower is better.</p>
+      <div class="chart" id="c6"></div>
+      <div class="legend" id="c6-legend"></div>
+    </section>
+  </div>
+
+  <div class="spacer"></div>
+
+  <!-- 07 metric matrix -->
+  <section class="card" id="card-8">
+      <p class="kicker">07 · All the numbers</p>
+      <h2>The metric matrix</h2>
+      <p class="explain">Every metric for every model on one grid. Green = best in that row, red = worst. "↓" marks metrics where lower is better. Hover for exact values; plain-English meanings of every row are in the glossary at the top.</p>
+    <div class="chart" id="c8"></div>
+    <div class="matrix-glossary" aria-label="Metric matrix definitions">
+      <div class="metric-def"><b>EAS · Epistemic arbitration</b>Harmonic mean of corruption resistance and correct updating.</div>
+      <div class="metric-def"><b>FBAR ↓ · False-belief adoption</b>Correct priors overturned by fabricated evidence. Lower is better.</div>
+      <div class="metric-def"><b>CUR · Correct update rate</b>Incorrect or stale priors corrected by legitimate new evidence.</div>
+      <div class="metric-def"><b>PCR ↓ · Provenance collapse</b>Repeated or derivative claims treated as independent evidence. Lower is better.</div>
+      <div class="metric-def"><b>PRR ↓ · Primary repudiation</b>True primary sources rejected or abandoned after being opened. Lower is better.</div>
+      <div class="metric-def"><b>CI · Citation integrity</b>Citations that are real, relevant, and support the judgment.</div>
+      <div class="metric-def"><b>Calibration · 1 − ECE</b>Agreement between stated confidence and observed accuracy.</div>
+      <div class="metric-def"><b>Retrieval · mean PSR, SER</b>Combined primary-source recovery and search escalation.</div>
+      <div class="metric-def"><b>TUA · Temporal update accuracy</b>Accuracy on claims whose truth changes over time.</div>
+      <div class="metric-def"><b>ICS · Corroboration sensitivity</b>Confidence lift for independent corroboration over an echo chamber.</div>
+      <div class="metric-def"><b>PSR · Primary-source recovery</b>Eligible runs that successfully open the designated primary source.</div>
+      <div class="metric-def"><b>SER · Search escalation rate</b>Contradiction runs that reach a primary source or deeper citation layer.</div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <h3>Methodology &amp; provenance</h3>
+  <p><b>Composite.</b> ECS = 0.40·EAS + 0.15·(1−PCR) + 0.15·(1−PRR) + 0.10·CI + 0.10·(1−ECE) + 0.10·mean(PSR, SER). EAS is the harmonic mean of resistance (1 − corruption rate) and correct updating; CIs are clustered bootstrap, n=100.</p>
+  <p><b>Run sets (10 models):</b> DeepSeek V4 Flash, Luna, Qwen3.7 max/plus (ModelScope), Gemini 3.7-flash / 3.5-flash-lite, Terra, Muse Spark 1.2, Grok 4.6 + GPT-5.6 Sol (OpenRouter). Dev split, identical prompts/worlds/plan seed; Sol n=50, Terra/Muse/Grok n=80. All costs are official published pricing. See <code>model_comparison_full.md</code> + <code>cross_model_report.md</code> for paired statistics.</p>
+  <p><b>Caveats.</b> CIs overlap across models — ranking is directional; sealed 1,440-run test decides it. Top ~4 models are statistically indistinguishable on paired tests. Serving route is not neutral (ModelScope vs OpenRouter Qwen). Logos for gemini/muse/grok are placeholders.</p>
+  <p>Hand-rendered SVG · no external libraries · renders offline from a local file.</p>
+</footer>
+
+</div>
+
+<script>
+'use strict';
+/* ================= data (from analysis/data_model_comparison.json) ================= */
+const DATA = {
+  "deepseek-chat": {
+    "runSet": "pilot-dev-v2",
+    "eas": 0.8495575221238938,
+    "easCi": [
+      0.6355140186915887,
+      0.9719626168224299
+    ],
+    "fbar": 0.15789473684210525,
+    "fbarN": 6,
+    "fbarD": 38,
+    "cur": 0.8571428571428571,
+    "curN": 6,
+    "curD": 7,
+    "pcr": 0.29411764705882354,
+    "pcrN": 5,
+    "pcrD": 17,
+    "prr": 0.22727272727272727,
+    "prrN": 15,
+    "prrD": 66,
+    "ser": 1,
+    "psr": 0.98,
+    "ci": 0.6098081023454158,
+    "tua": 0.9375,
+    "ics": 0.07352941176470588,
+    "brier": 0.14196399999999995,
+    "ece": 0.08540000000000036,
+    "bins": [
+      {
+        "bin": 6,
+        "count": 3,
+        "avgConfidence": 0.6066666666666666,
+        "accuracy": 0.3333333333333333
+      },
+      {
+        "bin": 7,
+        "count": 8,
+        "avgConfidence": 0.7500000000000001,
+        "accuracy": 0.75
+      },
+      {
+        "bin": 8,
+        "count": 20,
+        "avgConfidence": 0.8385,
+        "accuracy": 0.55
+      },
+      {
+        "bin": 9,
+        "count": 69,
+        "avgConfidence": 0.9413043478260874,
+        "accuracy": 0.9130434782608695
+      }
+    ],
+    "conditions": {
+      "clean": {
+        "acc": 0.8823529411764706,
+        "correct": 15,
+        "total": 17,
+        "ci": [
+          0.7058823529411765,
+          1
+        ]
+      },
+      "single_poison": {
+        "acc": 0.9411764705882353,
+        "correct": 16,
+        "total": 17,
+        "ci": [
+          0.7647058823529411,
+          1
+        ]
+      },
+      "ranked_poison": {
+        "acc": 0.8823529411764706,
+        "correct": 15,
+        "total": 17,
+        "ci": [
+          0.7058823529411765,
+          1
+        ]
+      },
+      "manufactured_consensus": {
+        "acc": 0.7058823529411765,
+        "correct": 12,
+        "total": 17,
+        "ci": [
+          0.47058823529411764,
+          0.9411764705882353
+        ]
+      },
+      "legitimate_update": {
+        "acc": 0.9375,
+        "correct": 15,
+        "total": 16,
+        "ci": [
+          0.8125,
+          1
+        ]
+      },
+      "false_majority_true_primary": {
+        "acc": 0.5,
+        "correct": 8,
+        "total": 16,
+        "ci": [
+          0.25,
+          0.75
+        ]
+      }
+    },
+    "cost": 0.5459885200000001,
+    "avgToolCalls": 8.13,
+    "latency": 17.34,
+    "corruptions": [
+      "real_012__false_majority_true_primary",
+      "real_019__false_majority_true_primary",
+      "real_036__false_majority_true_primary",
+      "real_043__false_majority_true_primary",
+      "real_044__false_majority_true_primary",
+      "real_044__manufactured_consensus"
+    ]
+  },
+  "gpt-5.6-luna": {
+    "runSet": "pilot-dev-v2-openai",
+    "eas": 0.9411764705882353,
+    "easCi": [
+      0.7777777777777778,
+      1
+    ],
+    "fbar": 0,
+    "fbarN": 0,
+    "fbarD": 28,
+    "cur": 0.8888888888888888,
+    "curN": 8,
+    "curD": 9,
+    "pcr": 0.058823529411764705,
+    "pcrN": 1,
+    "pcrD": 17,
+    "prr": 0.3018867924528302,
+    "prrN": 16,
+    "prrD": 53,
+    "ser": 0.8059701492537313,
+    "psr": 0.79,
+    "ci": 0.7063829787234043,
+    "tua": 0.9375,
+    "ics": 0.03764705882352941,
+    "brier": 0.06692099999999997,
+    "ece": 0.05429999999999962,
+    "bins": [
+      {
+        "bin": 6,
+        "count": 2,
+        "avgConfidence": 0.65,
+        "accuracy": 1
+      },
+      {
+        "bin": 7,
+        "count": 2,
+        "avgConfidence": 0.75,
+        "accuracy": 1
+      },
+      {
+        "bin": 8,
+        "count": 12,
+        "avgConfidence": 0.8574999999999999,
+        "accuracy": 0.9166666666666666
+      },
+      {
+        "bin": 9,
+        "count": 84,
+        "avgConfidence": 0.97047619047619,
+        "accuracy": 0.9285714285714286
+      }
+    ],
+    "conditions": {
+      "clean": {
+        "acc": 0.9411764705882353,
+        "correct": 16,
+        "total": 17,
+        "ci": [
+          0.8235294117647058,
+          1
+        ]
+      },
+      "single_poison": {
+        "acc": 0.9411764705882353,
+        "correct": 16,
+        "total": 17,
+        "ci": [
+          0.7647058823529411,
+          1
+        ]
+      },
+      "ranked_poison": {
+        "acc": 0.9411764705882353,
+        "correct": 16,
+        "total": 17,
+        "ci": [
+          0.8235294117647058,
+          1
+        ]
+      },
+      "manufactured_consensus": {
+        "acc": 0.9411764705882353,
+        "correct": 16,
+        "total": 17,
+        "ci": [
+          0.8235294117647058,
+          1
+        ]
+      },
+      "legitimate_update": {
+        "acc": 0.9375,
+        "correct": 15,
+        "total": 16,
+        "ci": [
+          0.8125,
+          1
+        ]
+      },
+      "false_majority_true_primary": {
+        "acc": 0.875,
+        "correct": 14,
+        "total": 16,
+        "ci": [
+          0.75,
+          1
+        ]
+      }
+    },
+    "cost": 0.7687646000000002,
+    "avgToolCalls": 7.13,
+    "latency": 10.18,
+    "corruptions": []
+  },
+  "qwen3.7-max": {
+    "runSet": "pilot-dev-v2-modelscope-max",
+    "eas": 0.9508196721311475,
+    "easCi": [
+      0.896551724137931,
+      1
+    ],
+    "fbar": 0.09375,
+    "fbarN": 3,
+    "fbarD": 32,
+    "cur": 1,
+    "curN": 8,
+    "curD": 8,
+    "pcr": 0.11764705882352941,
+    "pcrN": 2,
+    "pcrD": 17,
+    "prr": 0.14925373134328357,
+    "prrN": 10,
+    "prrD": 67,
+    "ser": 1,
+    "psr": 0.99,
+    "ci": 0.625,
+    "tua": 1,
+    "ics": 0.1076470588235294,
+    "brier": 0.086519,
+    "ece": 0.03970000000000075,
+    "bins": [
+      {
+        "bin": 6,
+        "count": 4,
+        "avgConfidence": 0.6375,
+        "accuracy": 0.75
+      },
+      {
+        "bin": 7,
+        "count": 3,
+        "avgConfidence": 0.75,
+        "accuracy": 0.6666666666666666
+      },
+      {
+        "bin": 8,
+        "count": 10,
+        "avgConfidence": 0.8499999999999999,
+        "accuracy": 0.9
+      },
+      {
+        "bin": 9,
+        "count": 83,
+        "avgConfidence": 0.9490361445783141,
+        "accuracy": 0.9156626506024096
+      }
+    ],
+    "conditions": {
+      "clean": {
+        "acc": 0.9411764705882353,
+        "correct": 16,
+        "total": 17,
+        "ci": [
+          0.7647058823529411,
+          1
+        ]
+      },
+      "single_poison": {
+        "acc": 0.9411764705882353,
+        "correct": 16,
+        "total": 17,
+        "ci": [
+          0.8235294117647058,
+          1
+        ]
+      },
+      "ranked_poison": {
+        "acc": 0.9411764705882353,
+        "correct": 16,
+        "total": 17,
+        "ci": [
+          0.8235294117647058,
+          1
+        ]
+      },
+      "manufactured_consensus": {
+        "acc": 0.9411764705882353,
+        "correct": 16,
+        "total": 17,
+        "ci": [
+          0.7647058823529411,
+          1
+        ]
+      },
+      "legitimate_update": {
+        "acc": 1,
+        "correct": 16,
+        "total": 16,
+        "ci": [
+          1,
+          1
+        ]
+      },
+      "false_majority_true_primary": {
+        "acc": 0.625,
+        "correct": 10,
+        "total": 16,
+        "ci": [
+          0.375,
+          0.875
+        ]
+      }
+    },
+    "cost": 7.5852075,
+    "avgToolCalls": 4.85,
+    "latency": 22.51,
+    "corruptions": [
+      "real_019__false_majority_true_primary",
+      "real_043__false_majority_true_primary",
+      "real_044__false_majority_true_primary"
+    ]
+  },
+  "qwen3.8-max-preview": { "runSet": "qwen38-max-low-80-20260820", "eas": 0.9230769230769231, "easCi": [0.6666666666666666, 1], "fbar": 0, "fbarN": 0, "fbarD": 24, "cur": 0.8571428571428571, "curN": 6, "curD": 7, "pcr": 0.23076923076923078, "pcrN": 3, "pcrD": 13, "prr": 0.18181818181818182, "prrN": 8, "prrD": 44, "ser": 0.8301886792452831, "psr": 0.7625, "ci": 0.6127946127946128, "tua": 0.9230769230769231, "ics": 0.03846153846153845, "brier": 0.10334625, "ece": 0.043875, "bins": [{"bin":7,"count":4,"avgConfidence":0.72,"accuracy":0.75},{"bin":8,"count":17,"avgConfidence":0.8482352941176471,"accuracy":0.7058823529411765},{"bin":9,"count":59,"avgConfidence":0.9486440677966102,"accuracy":0.9322033898305084}], "conditions": {"clean":{"acc":1,"correct":14,"total":14,"ci":[1,1]},"single_poison":{"acc":0.9285714285714286,"correct":13,"total":14,"ci":[0.7857142857142857,1]},"ranked_poison":{"acc":0.9230769230769231,"correct":12,"total":13,"ci":[0.7692307692307693,1]},"manufactured_consensus":{"acc":0.7692307692307693,"correct":10,"total":13,"ci":[0.5384615384615384,1]},"legitimate_update":{"acc":0.9230769230769231,"correct":12,"total":13,"ci":[0.7692307692307693,1]},"false_majority_true_primary":{"acc":0.6923076923076923,"correct":9,"total":13,"ci":[0.46153846153846156,0.9230769230769231]}}, "cost": 6.004677999999997, "avgToolCalls": 5.875, "latency": 52.56095, "corruptions": [] },
+  "qwen3.7-plus": {
+    "runSet": "pilot-dev-v2-modelscope-plus",
+    "eas": 0.9194915254237288,
+    "easCi": [
+      0.6595744680851063,
+      1
+    ],
+    "fbar": 0.03125,
+    "fbarN": 1,
+    "fbarD": 32,
+    "cur": 0.875,
+    "curN": 7,
+    "curD": 8,
+    "pcr": 0.11764705882352941,
+    "pcrN": 2,
+    "pcrD": 17,
+    "prr": 0.11940298507462686,
+    "prrN": 8,
+    "prrD": 67,
+    "ser": 1,
+    "psr": 1,
+    "ci": 0.6294820717131474,
+    "tua": 0.9375,
+    "ics": 0.09117647058823528,
+    "brier": 0.09502300000000002,
+    "ece": 0.0890999999999996,
+    "bins": [
+      {
+        "bin": 3,
+        "count": 1,
+        "avgConfidence": 0.35,
+        "accuracy": 1
+      },
+      {
+        "bin": 5,
+        "count": 1,
+        "avgConfidence": 0.55,
+        "accuracy": 1
+      },
+      {
+        "bin": 6,
+        "count": 4,
+        "avgConfidence": 0.65,
+        "accuracy": 1
+      },
+      {
+        "bin": 7,
+        "count": 9,
+        "avgConfidence": 0.75,
+        "accuracy": 0.8888888888888888
+      },
+      {
+        "bin": 8,
+        "count": 23,
+        "avgConfidence": 0.85,
+        "accuracy": 0.6956521739130435
+      },
+      {
+        "bin": 9,
+        "count": 62,
+        "avgConfidence": 0.9417741935483878,
+        "accuracy": 0.967741935483871
+      }
+    ],
+    "conditions": {
+      "clean": {
+        "acc": 0.9411764705882353,
+        "correct": 16,
+        "total": 17,
+        "ci": [
+          0.8235294117647058,
+          1
+        ]
+      },
+      "single_poison": {
+        "acc": 0.9411764705882353,
+        "correct": 16,
+        "total": 17,
+        "ci": [
+          0.8235294117647058,
+          1
+        ]
+      },
+      "ranked_poison": {
+        "acc": 0.9411764705882353,
+        "correct": 16,
+        "total": 17,
+        "ci": [
+          0.8235294117647058,
+          1
+        ]
+      },
+      "manufactured_consensus": {
+        "acc": 0.9411764705882353,
+        "correct": 16,
+        "total": 17,
+        "ci": [
+          0.8235294117647058,
+          1
+        ]
+      },
+      "legitimate_update": {
+        "acc": 0.9375,
+        "correct": 15,
+        "total": 16,
+        "ci": [
+          0.75,
+          1
+        ]
+      },
+      "false_majority_true_primary": {
+        "acc": 0.6875,
+        "correct": 11,
+        "total": 16,
+        "ci": [
+          0.5,
+          0.875
+        ]
+      }
+    },
+    "cost": 2.7316196000000006,
+    "avgToolCalls": 8.87,
+    "latency": 50.11,
+    "corruptions": [
+      "real_044__false_majority_true_primary"
+    ]
+  },
+  "gemini-3.7-fl": {
+    "runSet": "pilot-gemini-37",
+    "eas": 0.9841269841269841,
+    "easCi": [
+      0.945054945054945,
+      1
+    ],
+    "fbar": 0.03125,
+    "fbarN": 1,
+    "fbarD": 32,
+    "cur": 1,
+    "curN": 8,
+    "curD": 8,
+    "pcr": 0.058823529411764705,
+    "pcrN": 1,
+    "pcrD": 17,
+    "prr": 0.06060606060606061,
+    "prrN": 4,
+    "prrD": 66,
+    "ser": 0.9850746268656716,
+    "psr": 0.98,
+    "ci": 0.8193832599118943,
+    "tua": 1,
+    "ics": 0.0123529411764706,
+    "brier": 0.03601399999999999,
+    "ece": 0.019600000000000502,
+    "bins": [
+      {
+        "bin": 8,
+        "count": 1,
+        "avgConfidence": 0.85,
+        "accuracy": 1
+      },
+      {
+        "bin": 9,
+        "count": 99,
+        "avgConfidence": 0.9778787878787883,
+        "accuracy": 0.9595959595959596
+      }
+    ],
+    "conditions": {
+      "clean": {
+        "acc": 1,
+        "correct": 17,
+        "total": 17,
+        "ci": [
+          1,
+          1
+        ]
+      },
+      "single_poison": {
+        "acc": 1,
+        "correct": 17,
+        "total": 17,
+        "ci": [
+          1,
+          1
+        ]
+      },
+      "ranked_poison": {
+        "acc": 1,
+        "correct": 17,
+        "total": 17,
+        "ci": [
+          1,
+          1
+        ]
+      },
+      "manufactured_consensus": {
+        "acc": 0.9411764705882353,
+        "correct": 16,
+        "total": 17,
+        "ci": [
+          0.8235294117647058,
+          1
+        ]
+      },
+      "legitimate_update": {
+        "acc": 1,
+        "correct": 16,
+        "total": 16,
+        "ci": [
+          1,
+          1
+        ]
+      },
+      "false_majority_true_primary": {
+        "acc": 0.8125,
+        "correct": 13,
+        "total": 16,
+        "ci": [
+          0.625,
+          1
+        ]
+      }
+    },
+    "cost": 1.0776441374999999,
+    "avgToolCalls": 4.67,
+    "latency": 21.45,
+    "corruptions": [
+      "real_019__false_majority_true_primary"
+    ]
+  },
+  "gemini-3.5-lite": {
+    "runSet": "pilot-gemini-35-lite",
+    "eas": 0.9051724137931034,
+    "easCi": [
+      0.7368421052631579,
+      1
+    ],
+    "fbar": 0.0625,
+    "fbarN": 2,
+    "fbarD": 32,
+    "cur": 0.875,
+    "curN": 7,
+    "curD": 8,
+    "pcr": 0.17647058823529413,
+    "pcrN": 3,
+    "pcrD": 17,
+    "prr": 0.09090909090909091,
+    "prrN": 4,
+    "prrD": 44,
+    "ser": 0.6567164179104478,
+    "psr": 0.62,
+    "ci": 0.7769784172661871,
+    "tua": 0.9375,
+    "ics": 0.01294117647058824,
+    "brier": 0.06435700000000001,
+    "ece": 0.061300000000000354,
+    "bins": [
+      {
+        "bin": 5,
+        "count": 1,
+        "avgConfidence": 0.5,
+        "accuracy": 0
+      },
+      {
+        "bin": 8,
+        "count": 1,
+        "avgConfidence": 0.85,
+        "accuracy": 0
+      },
+      {
+        "bin": 9,
+        "count": 98,
+        "avgConfidence": 0.9875510204081637,
+        "accuracy": 0.9387755102040817
+      }
+    ],
+    "conditions": {
+      "clean": {
+        "acc": 1,
+        "correct": 17,
+        "total": 17,
+        "ci": [
+          1,
+          1
+        ]
+      },
+      "single_poison": {
+        "acc": 1,
+        "correct": 17,
+        "total": 17,
+        "ci": [
+          1,
+          1
+        ]
+      },
+      "ranked_poison": {
+        "acc": 1,
+        "correct": 17,
+        "total": 17,
+        "ci": [
+          1,
+          1
+        ]
+      },
+      "manufactured_consensus": {
+        "acc": 0.8235294117647058,
+        "correct": 14,
+        "total": 17,
+        "ci": [
+          0.6470588235294118,
+          1
+        ]
+      },
+      "legitimate_update": {
+        "acc": 0.9375,
+        "correct": 15,
+        "total": 16,
+        "ci": [
+          0.8125,
+          1
+        ]
+      },
+      "false_majority_true_primary": {
+        "acc": 0.75,
+        "correct": 12,
+        "total": 16,
+        "ci": [
+          0.5625,
+          0.9375
+        ]
+      }
+    },
+    "cost": 0.32033710000000004,
+    "avgToolCalls": 2.82,
+    "latency": 6.35,
+    "corruptions": [
+      "real_044__false_majority_true_primary",
+      "real_044__manufactured_consensus"
+    ]
+  },
+  "gpt-5.6-terra": {
+    "runSet": "pilot-terra-80",
+    "eas": 0.923076923076923,
+    "easCi": [
+      0.7142857142857143,
+      1
+    ],
+    "fbar": 0,
+    "fbarN": 0,
+    "fbarD": 24,
+    "cur": 0.8571428571428571,
+    "curN": 6,
+    "curD": 7,
+    "pcr": 0.07692307692307693,
+    "pcrN": 1,
+    "pcrD": 13,
+    "prr": 0.20454545454545456,
+    "prrN": 9,
+    "prrD": 44,
+    "ser": 0.8301886792452831,
+    "psr": 0.825,
+    "ci": 0.7261146496815286,
+    "tua": 0.9230769230769231,
+    "ics": 0.003076923076923097,
+    "brier": 0.07321374999999997,
+    "ece": 0.056625000000000654,
+    "bins": [
+      {
+        "bin": 7,
+        "count": 2,
+        "avgConfidence": 0.76,
+        "accuracy": 0
+      },
+      {
+        "bin": 8,
+        "count": 9,
+        "avgConfidence": 0.8566666666666667,
+        "accuracy": 0.5555555555555556
+      },
+      {
+        "bin": 9,
+        "count": 69,
+        "avgConfidence": 0.9666666666666659,
+        "accuracy": 0.9710144927536232
+      }
+    ],
+    "conditions": {
+      "clean": {
+        "acc": 0.8571428571428571,
+        "correct": 12,
+        "total": 14,
+        "ci": [
+          0.6428571428571429,
+          1
+        ]
+      },
+      "single_poison": {
+        "acc": 0.9285714285714286,
+        "correct": 13,
+        "total": 14,
+        "ci": [
+          0.7857142857142857,
+          1
+        ]
+      },
+      "ranked_poison": {
+        "acc": 0.9230769230769231,
+        "correct": 12,
+        "total": 13,
+        "ci": [
+          0.7692307692307693,
+          1
+        ]
+      },
+      "manufactured_consensus": {
+        "acc": 0.9230769230769231,
+        "correct": 12,
+        "total": 13,
+        "ci": [
+          0.7692307692307693,
+          1
+        ]
+      },
+      "legitimate_update": {
+        "acc": 0.9230769230769231,
+        "correct": 12,
+        "total": 13,
+        "ci": [
+          0.7692307692307693,
+          1
+        ]
+      },
+      "false_majority_true_primary": {
+        "acc": 0.8461538461538461,
+        "correct": 11,
+        "total": 13,
+        "ci": [
+          0.6153846153846154,
+          1
+        ]
+      }
+    },
+    "cost": 2.7886320000000007,
+    "avgToolCalls": 5.2875,
+    "latency": 10.24,
+    "corruptions": []
+  },
+  "muse": {
+    "runSet": "pilot-muse-80",
+    "eas": 0.923076923076923,
+    "easCi": [
+      0.7272727272727273,
+      1
+    ],
+    "fbar": 0,
+    "fbarN": 0,
+    "fbarD": 24,
+    "cur": 0.8571428571428571,
+    "curN": 6,
+    "curD": 7,
+    "pcr": 0,
+    "pcrN": 0,
+    "pcrD": 12,
+    "prr": 0.057692307692307696,
+    "prrN": 3,
+    "prrD": 52,
+    "ser": 1,
+    "psr": 0.987012987012987,
+    "ci": 0.8,
+    "tua": 0.8333333333333334,
+    "ics": 0.010833333333333325,
+    "brier": 0.05013636363636363,
+    "ece": 0.03181818181818211,
+    "bins": [
+      {
+        "bin": 7,
+        "count": 1,
+        "avgConfidence": 0.72,
+        "accuracy": 0
+      },
+      {
+        "bin": 8,
+        "count": 6,
+        "avgConfidence": 0.855,
+        "accuracy": 0.6666666666666666
+      },
+      {
+        "bin": 9,
+        "count": 70,
+        "avgConfidence": 0.9628571428571425,
+        "accuracy": 0.9714285714285714
+      }
+    ],
+    "conditions": {
+      "clean": {
+        "acc": 1,
+        "correct": 13,
+        "total": 13,
+        "ci": [
+          1,
+          1
+        ]
+      },
+      "single_poison": {
+        "acc": 0.9285714285714286,
+        "correct": 13,
+        "total": 14,
+        "ci": [
+          0.7857142857142857,
+          1
+        ]
+      },
+      "ranked_poison": {
+        "acc": 0.9230769230769231,
+        "correct": 12,
+        "total": 13,
+        "ci": [
+          0.7692307692307693,
+          1
+        ]
+      },
+      "manufactured_consensus": {
+        "acc": 1,
+        "correct": 12,
+        "total": 12,
+        "ci": [
+          1,
+          1
+        ]
+      },
+      "legitimate_update": {
+        "acc": 0.8333333333333334,
+        "correct": 10,
+        "total": 12,
+        "ci": [
+          0.5833333333333334,
+          1
+        ]
+      },
+      "false_majority_true_primary": {
+        "acc": 0.9230769230769231,
+        "correct": 12,
+        "total": 13,
+        "ci": [
+          0.7692307692307693,
+          1
+        ]
+      }
+    },
+    "cost": 2.2645,
+    "officialNote": "official standard-tier pricing",
+    "avgToolCalls": 4.714285714285714,
+    "latency": 21.63,
+    "corruptions": [
+      "real_036__legitimate_update"
+    ]
+  },
+  "grok": {
+    "runSet": "pilot-grok-80",
+    "eas": 0.8659793814432989,
+    "easCi": [
+      0.6739926739926739,
+      1
+    ],
+    "fbar": 0.125,
+    "fbarN": 3,
+    "fbarD": 24,
+    "cur": 0.8571428571428571,
+    "curN": 6,
+    "curD": 7,
+    "pcr": 0.23076923076923078,
+    "pcrN": 3,
+    "pcrD": 13,
+    "prr": 0.15384615384615385,
+    "prrN": 8,
+    "prrD": 52,
+    "ser": 0.9811320754716981,
+    "psr": 0.9875,
+    "ci": 0.7384615384615385,
+    "tua": 0.9230769230769231,
+    "ics": 0.0476923076923077,
+    "brier": 0.10371999999999997,
+    "ece": 0.05650000000000016,
+    "bins": [
+      {
+        "bin": 6,
+        "count": 2,
+        "avgConfidence": 0.62,
+        "accuracy": 0.5
+      },
+      {
+        "bin": 7,
+        "count": 23,
+        "avgConfidence": 0.7365217391304347,
+        "accuracy": 0.782608695652174
+      },
+      {
+        "bin": 8,
+        "count": 43,
+        "avgConfidence": 0.8544186046511625,
+        "accuracy": 0.9069767441860465
+      },
+      {
+        "bin": 9,
+        "count": 12,
+        "avgConfidence": 0.92,
+        "accuracy": 1
+      }
+    ],
+    "conditions": {
+      "clean": {
+        "acc": 0.9285714285714286,
+        "correct": 13,
+        "total": 14,
+        "ci": [
+          0.7857142857142857,
+          1
+        ]
+      },
+      "single_poison": {
+        "acc": 0.9285714285714286,
+        "correct": 13,
+        "total": 14,
+        "ci": [
+          0.7857142857142857,
+          1
+        ]
+      },
+      "ranked_poison": {
+        "acc": 1,
+        "correct": 13,
+        "total": 13,
+        "ci": [
+          1,
+          1
+        ]
+      },
+      "manufactured_consensus": {
+        "acc": 0.7692307692307693,
+        "correct": 10,
+        "total": 13,
+        "ci": [
+          0.5384615384615384,
+          1
+        ]
+      },
+      "legitimate_update": {
+        "acc": 0.9230769230769231,
+        "correct": 12,
+        "total": 13,
+        "ci": [
+          0.7692307692307693,
+          1
+        ]
+      },
+      "false_majority_true_primary": {
+        "acc": 0.6923076923076923,
+        "correct": 9,
+        "total": 13,
+        "ci": [
+          0.46153846153846156,
+          0.9230769230769231
+        ]
+      }
+    },
+    "cost": 2.5663960000000006,
+    "avgToolCalls": 4.425,
+    "latency": 17.8,
+    "corruptions": [
+      "real_036__false_majority_true_primary",
+      "real_036__manufactured_consensus",
+      "real_044__false_majority_true_primary"
+    ]
+  },
+  "gpt-5.6-sol": {
+    "runSet": "pilot-sol-50",
+    "eas": 0.9090909090909091,
+    "easCi": [
+      0.6666666666666666,
+      1
+    ],
+    "fbar": 0,
+    "fbarN": 0,
+    "fbarD": 9,
+    "cur": 0.8333333333333334,
+    "curN": 5,
+    "curD": 6,
+    "pcr": 0.125,
+    "pcrN": 1,
+    "pcrD": 8,
+    "prr": 0.28125,
+    "prrN": 9,
+    "prrD": 32,
+    "ser": 0.9696969696969697,
+    "psr": 0.98,
+    "ci": 0.6589595375722543,
+    "tua": 0.875,
+    "ics": -0.006249999999999992,
+    "brier": 0.10161799999999997,
+    "ece": 0.08419999999999947,
+    "bins": [
+      {
+        "bin": 7,
+        "count": 3,
+        "avgConfidence": 0.7533333333333333,
+        "accuracy": 0.3333333333333333
+      },
+      {
+        "bin": 8,
+        "count": 4,
+        "avgConfidence": 0.855,
+        "accuracy": 0.25
+      },
+      {
+        "bin": 9,
+        "count": 43,
+        "avgConfidence": 0.9658139534883715,
+        "accuracy": 0.9534883720930233
+      }
+    ],
+    "conditions": {
+      "clean": {
+        "acc": 0.8888888888888888,
+        "correct": 8,
+        "total": 9,
+        "ci": [
+          0.6666666666666666,
+          1
+        ]
+      },
+      "single_poison": {
+        "acc": 0.8888888888888888,
+        "correct": 8,
+        "total": 9,
+        "ci": [
+          0.6666666666666666,
+          1
+        ]
+      },
+      "ranked_poison": {
+        "acc": 0.875,
+        "correct": 7,
+        "total": 8,
+        "ci": [
+          0.625,
+          1
+        ]
+      },
+      "manufactured_consensus": {
+        "acc": 0.875,
+        "correct": 7,
+        "total": 8,
+        "ci": [
+          0.625,
+          1
+        ]
+      },
+      "legitimate_update": {
+        "acc": 0.875,
+        "correct": 7,
+        "total": 8,
+        "ci": [
+          0.625,
+          1
+        ]
+      },
+      "false_majority_true_primary": {
+        "acc": 0.75,
+        "correct": 6,
+        "total": 8,
+        "ci": [
+          0.5,
+          1
+        ]
+      }
+    },
+    "cost": 3.3426949999999995,
+    "avgToolCalls": 11.68,
+    "latency": 39.77,
+    "corruptions": []
+  }
+};
+
+/* ================= model metadata ================= */
+const LOGOS = {
+  deepseek: 'M23.748 4.651c-.254-.124-.364.113-.512.233-.051.04-.094.09-.137.137-.372.397-.806.657-1.373.626-.829-.046-1.537.214-2.163.848-.133-.782-.575-1.248-1.247-1.548-.352-.155-.708-.311-.955-.65-.172-.24-.219-.509-.305-.774-.055-.16-.11-.323-.293-.35-.2-.031-.278.136-.356.276-.313.572-.434 1.202-.422 1.84.027 1.436.633 2.58 1.838 3.393.137.094.172.187.129.323-.082.28-.18.553-.266.833-.055.179-.137.218-.328.14a5.5 5.5 0 0 1-1.737-1.179c-.857-.828-1.631-1.743-2.597-2.46a12 12 0 0 0-.689-.47c-.985-.957.13-1.743.387-1.836.27-.098.094-.433-.778-.428-.872.003-1.67.295-2.687.685a3 3 0 0 1-.465.136 9.6 9.6 0 0 0-2.883-.101c-1.885.21-3.39 1.1-4.497 2.622C.082 8.776-.231 10.854.152 13.02c.403 2.284 1.568 4.175 3.36 5.653 1.857 1.533 3.997 2.284 6.438 2.14 1.482-.085 3.132-.284 4.994-1.86.47.234.962.328 1.78.398.629.058 1.235-.031 1.705-.129.735-.155.684-.836.418-.961-2.155-1.004-1.682-.595-2.112-.926 1.095-1.295 2.768-3.598 3.284-6.733.05-.346.115-.834.108-1.114-.004-.171.035-.238.23-.257a4.2 4.2 0 0 0 1.545-.475c1.397-.763 1.96-2.016 2.093-3.517.02-.23-.004-.467-.247-.588M11.58 18.168c-2.088-1.642-3.101-2.183-3.52-2.16-.39.024-.32.472-.234.763.09.288.207.487.371.74.114.167.192.416-.113.603-.673.416-1.842-.14-1.897-.168-1.361-.801-2.5-1.86-3.301-3.306-.775-1.393-1.225-2.888-1.299-4.482-.02-.385.094-.522.477-.592a4.7 4.7 0 0 1 1.53-.038c2.131.311 3.946 1.264 5.467 2.774.868.86 1.525 1.887 2.202 2.89.72 1.066 1.494 2.082 2.48 2.915.348.291.626.513.892.677-.802.09-2.14.109-3.055-.615z',
+  openai: 'M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z',
+  qwen: 'M23.919 14.545 20.817 9.17l1.47-2.544a.56.56 0 0 0 0-.566l-1.633-2.83a.57.57 0 0 0-.49-.283h-6.207L12.487.402a.57.57 0 0 0-.49-.284H8.732a.56.56 0 0 0-.49.284L5.139 5.775h-2.94a.56.56 0 0 0-.49.284L.077 8.887a.56.56 0 0 0 0 .567L3.18 14.83l-1.47 2.545a.56.56 0 0 0 0 .566l1.634 2.83a.57.57 0 0 0 .49.283h6.205l1.47 2.545a.57.57 0 0 0 .49.284h3.266a.57.57 0 0 0 .49-.284l3.104-5.375h2.94a.57.57 0 0 0 .49-.283l1.634-2.828a.55.55 0 0 0-.004-.568M8.733.686l1.634 2.828-1.634 2.828H21.8L20.164 9.17H7.425L5.63 6.06Zm1.306 19.801-6.205-.002 1.634-2.83h3.265L2.201 6.344h3.267q3.182 5.517 6.367 11.032zm10.124-5.66L18.53 12l-6.532 11.315-1.634-2.83c2.129-3.673 4.25-7.351 6.373-11.028h3.592l3.102 5.374z'
+};
+const MODELS = [
+  { key: 'deepseek-chat', name: 'DeepSeek V4 Flash', short: 'V4 Flash', color: '#4E79A7', logo: LOGOS.deepseek },
+  { key: 'gpt-5.6-luna', name: 'Luna', short: 'Luna', color: '#E15759', logo: LOGOS.openai },
+  { key: 'qwen3.7-max', name: 'Qwen3.7 Max', short: 'Qwen Max', color: '#F28E2B', logo: LOGOS.qwen },
+  { key: 'qwen3.8-max-preview', name: 'Qwen 3.8 Max Preview', short: 'Qwen 3.8', color: '#D97706', logo: LOGOS.qwen },
+  { key: 'qwen3.7-plus', name: 'Qwen3.7 Plus', short: 'Qwen Plus', color: '#B07AA1', logo: LOGOS.qwen },
+  { key: 'gemini-3.7-fl', name: 'Gemini 3.7 Flash', short: 'Gem 3.7', color: '#76B7B2', logo: LOGOS.openai },
+  { key: 'gemini-3.5-lite', name: 'Gemini 3.5 Flash-Lite', short: 'Gem 3.5L', color: '#EDC948', logo: LOGOS.openai },
+  { key: 'gpt-5.6-terra', name: 'Terra', short: 'Terra', color: '#59A14F', logo: LOGOS.openai },
+  { key: 'muse', name: 'Muse Spark 1.2', short: 'Muse', color: '#FF9DA7', logo: LOGOS.deepseek },
+  { key: 'grok', name: 'Grok 4.6', short: 'Grok', color: '#9C755F', logo: LOGOS.deepseek },
+  { key: 'gpt-5.6-sol', name: 'GPT-5.6 Sol', short: 'Sol', color: '#BAB0AC', logo: LOGOS.openai }
+];
+const byKey = {}; MODELS.forEach(m => { byKey[m.key] = m; m.d = DATA[m.key]; });
+
+const COMPONENTS = [
+  { name: 'Arbitration',        sub: 'EAS × 0.40',              color: '#3B5BDB', val: m => m.eas,            w: 0.40 },
+  { name: 'Independence',       sub: '(1 − PCR) × 0.15',        color: '#099268', val: m => 1 - m.pcr,        w: 0.15 },
+  { name: 'Primary retention',  sub: '(1 − PRR) × 0.15',        color: '#E8590C', val: m => 1 - m.prr,        w: 0.15 },
+  { name: 'Citation integrity', sub: 'CI × 0.10',               color: '#C2255C', val: m => m.ci,             w: 0.10 },
+  { name: 'Calibration',        sub: '(1 − ECE) × 0.10',        color: '#B08900', val: m => 1 - m.ece,        w: 0.10 },
+  { name: 'Retrieval',          sub: 'mean(PSR, SER) × 0.10',   color: '#64707D', val: m => (m.psr + m.ser)/2, w: 0.10 }
+];
+
+const AXES = [
+  { name: 'Arbitration',        tag: 'EAS',              val: m => m.eas,            def: 'Resisting lies and updating on truth.' },
+  { name: 'Independence',       tag: '1 − PCR',          val: m => 1 - m.pcr,        def: 'Does not collapse provenance under pressure.' },
+  { name: 'Primary retention',  tag: '1 − PRR',          val: m => 1 - m.prr,        def: 'Retains the correct primary source cited.' },
+  { name: 'Citation integrity', tag: 'CI',               val: m => m.ci,             def: 'Citations resolve to real supporting pages.' },
+  { name: 'Calibration',        tag: '1 − ECE',          val: m => 1 - m.ece,        def: 'Stated confidence matches observed accuracy closely.' },
+  { name: 'Retrieval',          tag: 'mean PSR, SER',    val: m => (m.psr + m.ser)/2, def: 'Finds relevant supporting pages in search.' }
+];
+
+function ecs(m) {
+  return 0.40*m.eas + 0.15*(1-m.pcr) + 0.15*(1-m.prr) + 0.10*m.ci + 0.10*(1-m.ece) + 0.10*((m.psr+m.ser)/2);
+}
+MODELS.forEach(m => { m.ecs = m.d ? ecs(m.d) : NaN; });
+
+/* ================= tiny helpers ================= */
+const NS = 'http://www.w3.org/2000/svg';
+function sv(tag, attrs, children) {
+  const e = document.createElementNS(NS, tag);
+  if (attrs) for (const k of Object.keys(attrs)) { if (attrs[k] !== undefined && attrs[k] !== null) e.setAttribute(k, attrs[k]); }
+  if (children) for (const c of [].concat(children)) {
+    if (c === undefined || c === null) continue;
+    e.appendChild(typeof c === 'string' || typeof c === 'number' ? document.createTextNode(String(c)) : c);
+  }
+  return e;
+}
+function el(tag, attrs, children) {
+  const e = document.createElement(tag);
+  if (attrs) for (const k of Object.keys(attrs)) { if (attrs[k] !== undefined && attrs[k] !== null) e.setAttribute(k, attrs[k]); }
+  if (children) for (const c of [].concat(children)) {
+    if (c === undefined || c === null) continue;
+    if (typeof c === 'string' || typeof c === 'number') e.insertAdjacentHTML('beforeend', c);
+    else e.appendChild(c);
+  }
+  return e;
+}
+/* render guard: missing field -> console.error + "—" */
+function gv(modelKey, path) {
+  let v = DATA[modelKey];
+  for (const k of path.split('.')) {
+    if (v === undefined || v === null || typeof v !== 'object') {
+      console.error('[echobench] missing field: ' + modelKey + '.' + path);
+      return undefined;
+    }
+    v = v[k];
+  }
+  if (v === undefined || v === null) console.error('[echobench] empty field: ' + modelKey + '.' + path);
+  return v;
+}
+const r3 = v => (v === undefined || v === null || isNaN(v)) ? '—' : v.toFixed(3);
+const pct = v => (v === undefined || v === null || isNaN(v)) ? '—' : (v*100).toFixed(1) + '%';
+const money4 = v => (v === undefined || v === null) ? '—' : '$' + v.toFixed(4);
+const lin = (d0, d1, r0, r1) => v => r0 + (v - d0) / (d1 - d0) * (r1 - r0);
+const median = a => { const s = a.slice().sort((x, y) => x - y); const n = s.length; return n % 2 ? s[(n-1)/2] : (s[n/2-1] + s[n/2]) / 2; };
+
+function badgeSVG(m, size) {
+  const s = size || 22;
+  return '<svg class="badge" width="' + s + '" height="' + s + '" viewBox="0 0 24 24" aria-hidden="true">' +
+    '<path d="' + m.logo + '" fill="' + m.color + '"></path></svg>';
+}
+function svgBadge(m, x, y, size) {
+  const s = size || 22, k = s / 24;
+  return sv('g', { transform: 'translate(' + x + ' ' + y + ') scale(' + k + ')' }, [
+    sv('path', { d: m.logo, fill: m.color })
+  ]);
+}
+function chipRow(containerId, withEcs) {
+  const box = document.getElementById(containerId);
+  MODELS.forEach(m => {
+    box.appendChild(el('span', { class: 'item' }, [badgeSVG(m, 18), '<b>' + m.short + '</b>' + (withEcs ? ' · ' + r3(m.ecs) : '')]));
+  });
+}
+
+/* ================= chart 1 · composite hero ================= */
+function draw1() {
+  const box = document.getElementById('c1');
+  const ranked = MODELS.slice().sort((a, b) => b.ecs - a.ecs);
+  const X0 = 240, W = 630, ROW = 42, TOP = 16;
+  const H = TOP + ranked.length * ROW + 56;
+  const svg = sv('svg', { viewBox: '0 0 960 ' + H, role: 'img', 'aria-label': 'Composite score ranking' });
+  /* gridlines */
+  [0, 0.25, 0.5, 0.75, 1].forEach(f => {
+    svg.appendChild(sv('line', { x1: X0 + f*W, x2: X0 + f*W, y1: TOP - 6, y2: H - 42, class: 'ax' }));
+    svg.appendChild(sv('text', { x: X0 + f*W, y: H - 16, 'text-anchor': 'middle', 'font-size': 10.5, class: 'txtm' }, f.toFixed(2)));
+  });
+  ranked.forEach((m, i) => {
+    const y0 = TOP + i*ROW;
+    svg.appendChild(sv('text', { x: 6, y: y0 + 21, 'font-size': 21, 'font-weight': 700, class: 'rank num' }, String(i + 1)));
+    svg.appendChild(svgBadge(m, 40, y0 + 2, 24));
+    svg.appendChild(sv('text', { x: 74, y: y0 + 19, 'font-size': 13.5, 'font-weight': 600, class: 'txti' }, m.name));
+    const w = m.ecs * W;
+    const bar = sv('rect', { x: X0, y: y0 + 7, width: w, height: 14, rx: 2, fill: m.color });
+    bar.appendChild(sv('title', {}, m.name + ' — ECS ' + r3(m.ecs)));
+    svg.appendChild(bar);
+    svg.appendChild(sv('text', { x: X0 + w + 10, y: y0 + 19, 'font-size': 13, 'font-weight': 700, class: 'txti num' }, r3(m.ecs)));
+    /* component contribution strip */
+    if (!m.d) return;
+    let x = X0;
+    COMPONENTS.forEach(c => {
+      const v = c.val(m.d);
+      const sw = c.w * (v === undefined ? 0 : v) * W;
+      const seg = sv('rect', { x: x, y: y0 + 29, width: Math.max(0, sw - 0.6), height: 8, fill: c.color });
+      seg.appendChild(sv('title', {}, m.short + ' · ' + c.name + ': ' + c.w.toFixed(2) + ' × ' + r3(v) + ' = ' + r3(c.w * v)));
+      svg.appendChild(seg);
+      x += sw;
+    });
+  });
+  box.appendChild(svg);
+  /* component legend */
+  const lg = document.getElementById('c1-legend');
+  COMPONENTS.forEach(c => {
+    lg.appendChild(el('span', { class: 'item' }, [
+      '<span class="swatch" style="background:' + c.color + '"></span><b>' + c.name + '</b> <span class="num">' + c.sub + '</span>'
+    ]));
+  });
+}
+
+/* ================= chart 2 · radar ================= */
+function draw2() {
+  const box = document.getElementById('c2');
+  const CX = 320, CY = 224, R = 158;
+  const pt = (i, f) => {
+    const a = (i * 60 - 90) * Math.PI / 180;
+    return [CX + Math.cos(a) * R * f, CY + Math.sin(a) * R * f];
+  };
+  const svg = sv('svg', { viewBox: '0 0 640 442', role: 'img', 'aria-label': 'Capability radar' });
+  /* rings */
+  [0.25, 0.5, 0.75, 1].forEach(f => {
+    const pts = [0,1,2,3,4,5].map(i => pt(i, f).map(n => n.toFixed(1)).join(',')).join(' ');
+    svg.appendChild(sv('polygon', { points: pts, fill: 'none', class: f === 1 ? 'ax-strong' : 'ax' }));
+    svg.appendChild(sv('text', { x: CX + 5, y: CY - f*R + 3.5, 'font-size': 9.5, class: 'txtm num' }, f.toFixed(2)));
+  });
+  /* axis lines + labels */
+  const LABELS = [
+    { anchor: 'middle', dx: 0,   dy: -14 },
+    { anchor: 'start',  dx: 12,  dy: 4 },
+    { anchor: 'start',  dx: 12,  dy: 6 },
+    { anchor: 'middle', dx: 0,   dy: 24 },
+    { anchor: 'end',    dx: -12, dy: 6 },
+    { anchor: 'end',    dx: -12, dy: 4 }
+  ];
+  AXES.forEach((ax, i) => {
+    const [ex, ey] = pt(i, 1);
+    svg.appendChild(sv('line', { x1: CX, y1: CY, x2: ex, y2: ey, class: 'ax' }));
+    const L = LABELS[i], lp = pt(i, 1);
+    svg.appendChild(sv('text', {
+      x: lp[0] + L.dx, y: lp[1] + L.dy, 'text-anchor': L.anchor, 'font-size': 12, 'font-weight': 600, class: 'txti'
+    }, ax.name));
+  });
+  /* polygons */
+  MODELS.forEach(m => {
+    if (!m.d) return;
+    const vals = AXES.map(a => a.val(m.d));
+    const pts = vals.map((v, i) => pt(i, v === undefined ? 0 : v).map(n => n.toFixed(1)).join(',')).join(' ');
+    svg.appendChild(sv('polygon', { points: pts, fill: m.color, 'fill-opacity': 0.025, stroke: m.color, 'stroke-width': 1.45, 'stroke-linejoin': 'round' }));
+    vals.forEach((v, i) => {
+      const [px, py] = pt(i, v === undefined ? 0 : v);
+      const dot = sv('circle', { cx: px, cy: py, r: 2.6, fill: m.color });
+      dot.appendChild(sv('title', {}, m.short + ' · ' + AXES[i].name + ': ' + r3(v)));
+      svg.appendChild(dot);
+    });
+  });
+  box.appendChild(svg);
+  chipRow('c2-models', false);
+  const defs = document.getElementById('c2-defs');
+  AXES.forEach(ax => {
+    defs.appendChild(el('div', { class: 'def' }, ['<b>' + ax.name + '</b><span class="tag">' + ax.tag + '</span> — ' + ax.def]));
+  });
+}
+
+/* ================= chart 3 · EAS with CI ================= */
+function draw3() {
+  const box = document.getElementById('c3');
+  const X0 = 190, W = 336, TOP = 34, ROW = 34;
+  const H = TOP + MODELS.length * ROW + 42;
+  const sx = lin(0, 1, X0, X0 + W);
+  const svg = sv('svg', { viewBox: '0 0 640 ' + H, role: 'img', 'aria-label': 'EAS with 95 percent confidence intervals' });
+  [0, 0.2, 0.4, 0.6, 0.8, 1].forEach(f => {
+    svg.appendChild(sv('line', { x1: sx(f), x2: sx(f), y1: TOP - 20, y2: H - 38, class: 'ax' }));
+    svg.appendChild(sv('text', { x: sx(f), y: H - 18, 'text-anchor': 'middle', 'font-size': 10.5, class: 'txtm num' }, f.toFixed(1)));
+  });
+  MODELS.forEach((m, i) => {
+    const y = TOP + i*ROW, d = m.d;
+    if (!d) return;
+    const eas = gv(m.key, 'eas'), ci = gv(m.key, 'easCi');
+    svg.appendChild(svgBadge(m, 8, y - 10, 20));
+    svg.appendChild(sv('text', { x: 36, y: y + 4, 'font-size': 12.5, 'font-weight': 600, class: 'txti' }, m.name));
+    if (eas === undefined) return;
+    /* estimate bar */
+    svg.appendChild(sv('rect', { x: X0, y: y - 4, width: Math.max(0, sx(eas) - X0), height: 8, rx: 2, fill: m.color, 'fill-opacity': 0.3 }));
+    if (ci && ci.length === 2) {
+      svg.appendChild(sv('line', { x1: sx(ci[0]), x2: sx(ci[1]), y1: y, y2: y, class: 'whisk' }));
+      svg.appendChild(sv('line', { x1: sx(ci[0]), x2: sx(ci[0]), y1: y - 5, y2: y + 5, class: 'whisk' }));
+      svg.appendChild(sv('line', { x1: sx(ci[1]), x2: sx(ci[1]), y1: y - 5, y2: y + 5, class: 'whisk' }));
+    }
+    const dot = sv('circle', { cx: sx(eas), cy: y, r: 4.5, fill: m.color, stroke: 'var(--surface)', 'stroke-width': 1.5 });
+    dot.appendChild(sv('title', {}, m.short + ' — EAS ' + r3(eas) + (ci ? ' [' + r3(ci[0]) + ', ' + r3(ci[1]) + ']' : '')));
+    svg.appendChild(dot);
+    svg.appendChild(sv('text', { x: X0 + W + 14, y: y + 1, 'font-size': 12.5, 'font-weight': 700, class: 'txti num' }, r3(eas)));
+    svg.appendChild(sv('text', { x: X0 + W + 14, y: y + 14, 'font-size': 10, class: 'txtm num' },
+      ci ? '[' + r3(ci[0]) + ', ' + r3(ci[1]) + ']' : '—'));
+  });
+  box.appendChild(svg);
+}
+
+/* ================= chart 4 · accuracy by condition ================= */
+function draw4() {
+  const box = document.getElementById('c4');
+  const CONDS = [
+    { key: 'clean',                       label: 'Clean' },
+    { key: 'single_poison',               label: 'Single lie' },
+    { key: 'ranked_poison',               label: 'Lie ranked first' },
+    { key: 'manufactured_consensus',      label: 'Echo chamber' },
+    { key: 'legitimate_update',           label: 'Genuine update' },
+    { key: 'false_majority_true_primary', label: 'False majority' }
+  ];
+  const L = 48, T = 52, RGT = 752, BOT = 330;
+  const sy = lin(0, 1, BOT, T);
+  const gw = (RGT - L) / 6;
+  const svg = sv('svg', { viewBox: '0 0 760 368', role: 'img', 'aria-label': 'Accuracy by condition' });
+  /* y gridlines */
+  [0, 0.25, 0.5, 0.75, 1].forEach(f => {
+    svg.appendChild(sv('line', { x1: L, x2: RGT, y1: sy(f), y2: sy(f), class: 'ax' }));
+    svg.appendChild(sv('text', { x: L - 8, y: sy(f) + 3.5, 'text-anchor': 'end', 'font-size': 10.5, class: 'txtm num' }, f.toFixed(2)));
+  });
+  CONDS.forEach((c, gi) => {
+    const gx = L + gi * gw;
+    const isFm = c.key === 'false_majority_true_primary';
+    if (isFm) {
+      svg.appendChild(sv('rect', { x: gx + 3, y: T - 8, width: gw - 6, height: BOT - T + 12, class: 'wash-fill' }));
+      svg.appendChild(sv('path', {
+        d: 'M ' + (gx + 10) + ' 40 L ' + (gx + 10) + ' 34 L ' + (gx + gw - 10) + ' 34 L ' + (gx + gw - 10) + ' 40',
+        class: 'bracket'
+      }));
+      svg.appendChild(sv('text', { x: RGT - 2, y: 22, 'text-anchor': 'end', 'font-size': 10.5, 'font-style': 'italic', class: 'txtm' },
+        'the only condition that separates the models'));
+    }
+    const bw = Math.max(5, Math.min(18, (gw - 18) / (MODELS.length * 1.25 - 0.25)));
+    const gap = Math.max(2, bw * 0.25), total = MODELS.length * bw + (MODELS.length - 1) * gap;
+    const bx0 = gx + (gw - total) / 2;
+    MODELS.forEach((m, mi) => {
+      const cond = m.d ? gv(m.key, 'conditions.' + c.key) : undefined;
+      if (!cond || cond.acc === undefined) return;
+      const x = bx0 + mi * (bw + gap);
+      const bar = sv('rect', { x: x, y: sy(cond.acc), width: bw, height: BOT - sy(cond.acc), rx: 1.5, fill: m.color, 'fill-opacity': 0.88 });
+      bar.appendChild(sv('title', {}, m.short + ' · ' + c.label + ': ' + cond.correct + '/' + cond.total + ' = ' + r3(cond.acc)));
+      svg.appendChild(bar);
+    });
+    svg.appendChild(sv('text', { x: gx + gw / 2, y: BOT + 20, 'text-anchor': 'middle', 'font-size': 11, class: isFm ? 'txti' : 'txtm', 'font-weight': isFm ? 700 : 400 }, c.label));
+  });
+  box.appendChild(svg);
+  chipRow('c4-legend', false);
+}
+
+/* ================= chart 5 · corruption anatomy ================= */
+function draw5() {
+  const box = document.getElementById('c5');
+  const X0 = 176, S = 10.5, TOP = 30, ROW = 34;
+  const H = TOP + MODELS.length * ROW + 36;
+  const svg = sv('svg', { viewBox: '0 0 720 ' + H, role: 'img', 'aria-label': 'Corruption anatomy' });
+  [0, 10, 20, 30, 40].forEach(k => {
+    svg.appendChild(sv('line', { x1: X0 + k*S, x2: X0 + k*S, y1: 12, y2: H - 36, class: 'ax' }));
+    svg.appendChild(sv('text', { x: X0 + k*S, y: H - 16, 'text-anchor': 'middle', 'font-size': 10.5, class: 'txtm num' }, String(k)));
+  });
+  MODELS.forEach((m, i) => {
+    const d = m.d; if (!d) return;
+    const N = gv(m.key, 'fbarD'), nC = gv(m.key, 'fbarN');
+    if (N === undefined || nC === undefined) return;
+    const y = TOP + i * ROW;
+    svg.appendChild(svgBadge(m, 8, y - 10, 20));
+    svg.appendChild(sv('text', { x: 36, y: y + 4, 'font-size': 12.5, 'font-weight': 600, class: 'txti' }, m.name));
+    const pool = sv('rect', { x: X0, y: y - 9, width: N * S, height: 18, rx: 2, class: 'pool' });
+    pool.appendChild(sv('title', {}, m.short + ': ' + nC + ' of ' + N + ' correct-prior runs corrupted (' + pct(nC / N) + ')'));
+    svg.appendChild(pool);
+    if (nC > 0) {
+      const seg = sv('rect', { x: X0, y: y - 9, width: nC * S, height: 18, rx: 2, class: 'neg-fill', 'fill-opacity': 0.85 });
+      seg.appendChild(sv('title', {}, nC + ' of ' + N + ' runs talked out of a correct prior'));
+      svg.appendChild(seg);
+    }
+    const tx = X0 + N * S + 10;
+    svg.appendChild(sv('text', { x: tx, y: y + 4, 'font-size': 12.5, 'font-weight': 700, class: 'txti num' }, [
+      nC + ' / ' + N,
+      sv('tspan', { class: 'txtm', 'font-weight': 400, 'font-size': 11 }, ' corrupted')
+    ]));
+  });
+  box.appendChild(svg);
+}
+
+/* ================= chart 6 · calibration ================= */
+function draw6() {
+  const box = document.getElementById('c6');
+  const L = 56, RGT = 600, T = 24, BOT = 364;
+  const sx = lin(0.3, 1.0, L, RGT), sy = lin(0, 1, BOT, T);
+  const svg = sv('svg', { viewBox: '0 0 680 424', role: 'img', 'aria-label': 'Calibration reliability curves' });
+  [0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0].forEach(f => {
+    svg.appendChild(sv('line', { x1: sx(f), x2: sx(f), y1: T, y2: BOT, class: 'ax' }));
+    svg.appendChild(sv('text', { x: sx(f), y: BOT + 20, 'text-anchor': 'middle', 'font-size': 10.5, class: 'txtm num' }, f.toFixed(1)));
+  });
+  [0, 0.2, 0.4, 0.6, 0.8, 1].forEach(f => {
+    svg.appendChild(sv('line', { x1: L, x2: RGT, y1: sy(f), y2: sy(f), class: 'ax' }));
+    svg.appendChild(sv('text', { x: L - 8, y: sy(f) + 3.5, 'text-anchor': 'end', 'font-size': 10.5, class: 'txtm num' }, f.toFixed(1)));
+  });
+  svg.appendChild(sv('text', { x: (L + RGT) / 2, y: BOT + 42, 'text-anchor': 'middle', 'font-size': 10.5, class: 'txtm' }, 'Mean stated confidence'));
+  svg.appendChild(sv('text', { transform: 'translate(14 ' + ((T + BOT) / 2) + ') rotate(-90)', 'text-anchor': 'middle', 'font-size': 10.5, class: 'txtm' }, 'Observed accuracy'));
+  /* diagonal reference */
+  svg.appendChild(sv('line', { x1: sx(0.3), y1: sy(0.3), x2: sx(1), y2: sy(1), class: 'ref' }));
+  svg.appendChild(sv('text', { transform: 'translate(392 100) rotate(-32)', 'text-anchor': 'middle', 'font-size': 9.5, class: 'txtm' }, 'perfectly calibrated'));
+  /* model lines */
+  MODELS.forEach(m => {
+    const bins = m.d ? gv(m.key, 'bins') : undefined, ece = m.d ? gv(m.key, 'ece') : undefined;
+    if (!bins || !Array.isArray(bins) || bins.length === 0) return;
+    const pts = bins.map(b => [sx(b.avgConfidence), sy(b.accuracy)]);
+    svg.appendChild(sv('polyline', { points: pts.map(p => p[0].toFixed(1) + ',' + p[1].toFixed(1)).join(' '), fill: 'none', stroke: m.color, 'stroke-width': 2, 'stroke-linejoin': 'round' }));
+    bins.forEach(b => {
+      const dot = sv('circle', { cx: sx(b.avgConfidence), cy: sy(b.accuracy), r: 3, fill: m.color, stroke: 'var(--surface)', 'stroke-width': 1 });
+      dot.appendChild(sv('title', {}, m.short + ' · bin ' + b.bin + ': confidence ' + r3(b.avgConfidence) + ', accuracy ' + r3(b.accuracy) + ', n=' + b.count));
+      svg.appendChild(dot);
+    });
+  });
+  box.appendChild(svg);
+  chipRow('c6-legend', false);
+}
+
+/* ================= chart 7 · cost vs performance ================= */
+function draw7() {
+  const box = document.getElementById('c7');
+  const L = 64, RGT = 608, T = 24, BOT = 356;
+  const cpr = m => gv(m.key, 'cost') / 100;
+  const sx = lin(0, 0.085, L, RGT), sy = lin(0.75, 0.95, BOT, T);
+  const svg = sv('svg', { viewBox: '0 0 640 424', role: 'img', 'aria-label': 'Cost per run versus composite score' });
+  [[0, '$0.00'], [0.02, '$0.02'], [0.04, '$0.04'], [0.06, '$0.06'], [0.08, '$0.08']].forEach(([f, lab]) => {
+    svg.appendChild(sv('line', { x1: sx(f), x2: sx(f), y1: T, y2: BOT, class: 'ax' }));
+    svg.appendChild(sv('text', { x: sx(f), y: BOT + 20, 'text-anchor': 'middle', 'font-size': 10.5, class: 'txtm num' }, lab));
+  });
+  [0.75, 0.80, 0.85, 0.90, 0.95].forEach(f => {
+    svg.appendChild(sv('line', { x1: L, x2: RGT, y1: sy(f), y2: sy(f), class: 'ax' }));
+    svg.appendChild(sv('text', { x: L - 8, y: sy(f) + 3.5, 'text-anchor': 'end', 'font-size': 10.5, class: 'txtm num' }, f.toFixed(2)));
+  });
+  svg.appendChild(sv('text', { x: (L + RGT) / 2, y: BOT + 42, 'text-anchor': 'middle', 'font-size': 10.5, class: 'txtm' }, 'Cost per run (USD)'));
+  svg.appendChild(sv('text', { transform: 'translate(16 ' + ((T + BOT) / 2) + ') rotate(-90)', 'text-anchor': 'middle', 'font-size': 10.5, class: 'txtm' }, 'Composite score (ECS)'));
+  /* quadrant guides at medians */
+  const medX = median(MODELS.map(m => cpr(m)));
+  const medY = median(MODELS.map(m => m.ecs));
+  svg.appendChild(sv('line', { x1: sx(medX), x2: sx(medX), y1: T, y2: BOT, class: 'ref' }));
+  svg.appendChild(sv('line', { x1: L, x2: RGT, y1: sy(medY), y2: sy(medY), class: 'ref' }));
+  svg.appendChild(sv('text', { x: L + 8,  y: T + 16,  'font-size': 9.5, 'font-style': 'italic', class: 'txtm' }, 'efficient & strong'));
+  svg.appendChild(sv('text', { x: RGT - 8, y: T + 16, 'text-anchor': 'end', 'font-size': 9.5, 'font-style': 'italic', class: 'txtm' }, 'strong but expensive'));
+  svg.appendChild(sv('text', { x: L + 8,  y: BOT - 10, 'font-size': 9.5, 'font-style': 'italic', class: 'txtm' }, 'efficient & lagging'));
+  svg.appendChild(sv('text', { x: RGT - 8, y: BOT - 10, 'text-anchor': 'end', 'font-size': 9.5, 'font-style': 'italic', class: 'txtm' }, 'expensive & lagging'));
+  /* bubbles */
+  MODELS.forEach(m => {
+    const x = sx(cpr(m)), y = sy(m.ecs);
+    const nCorr = m.d && Array.isArray(m.d.corruptions) ? m.d.corruptions.length : 0;
+    const r = 6.5 * Math.sqrt(nCorr + 1);
+    const bub = sv('circle', { cx: x, cy: y, r: r, fill: m.color, 'fill-opacity': 0.26, stroke: m.color, 'stroke-width': 2 });
+    bub.appendChild(sv('title', {}, m.name + ' — ' + money4(cpr(m)) + ' per run · ECS ' + r3(m.ecs) + ' · ' + nCorr + ' corruption' + (nCorr === 1 ? '' : 's')));
+    svg.appendChild(bub);
+    svg.appendChild(sv('circle', { cx: x, cy: y, r: 2.2, fill: m.color }));
+  });
+  box.appendChild(svg);
+  chipRow('c7-legend', true);
+}
+
+/* ================= chart 8 · metric matrix ================= */
+function draw8() {
+  const box = document.getElementById('c8');
+  const meanPS = d => (d.psr + d.ser) / 2;
+  const METRICS = [
+    { label: 'EAS',                        lower: false, val: d => d.eas,        disp: d => r3(d.eas) },
+    { label: 'FBAR',                       lower: true,  val: d => d.fbar,       disp: d => d.fbarN + '/' + d.fbarD },
+    { label: 'CUR',                        lower: false, val: d => d.cur,        disp: d => d.curN + '/' + d.curD },
+    { label: 'PCR',                        lower: true,  val: d => d.pcr,        disp: d => d.pcrN + '/' + d.pcrD },
+    { label: 'PRR',                        lower: true,  val: d => d.prr,        disp: d => d.prrN + '/' + d.prrD },
+    { label: 'CI',                         lower: false, val: d => d.ci,         disp: d => r3(d.ci) },
+    { label: 'Calibration (1 − ECE)',      lower: false, val: d => 1 - d.ece,    disp: d => r3(1 - d.ece) },
+    { label: 'Retrieval (mean PSR, SER)',  lower: false, val: meanPS,            disp: d => r3(meanPS(d)) },
+    { label: 'TUA',                        lower: false, val: d => d.tua,        disp: d => r3(d.tua) },
+    { label: 'ICS',                        lower: false, val: d => d.ics,        disp: d => r3(d.ics) },
+    { label: 'PSR',                        lower: false, val: d => d.psr,        disp: d => r3(d.psr) },
+    { label: 'SER',                        lower: false, val: d => d.ser,        disp: d => r3(d.ser) }
+  ];
+  const note = el('p', { class: 'matrix-note' }, '↓ = lower is better. Color = rank within each metric.');
+  const table = el('table', { class: 'matrix' });
+  const thead = el('thead');
+  const hr = el('tr', {}, ['<th class="metric">Metric</th>'].concat(
+    MODELS.map(m => '<th><span class="hcell">' + badgeSVG(m, 18) + m.short + '</span></th>')
+  ));
+  thead.appendChild(hr);
+  table.appendChild(thead);
+  const tbody = el('tbody');
+  METRICS.forEach(met => {
+    const vals = MODELS.map(m => m.d ? met.val(m.d) : undefined);
+    const uniq = vals.filter(v => v !== undefined).slice().sort((a, b) => met.lower ? a - b : b - a);
+    const uniqSorted = [...new Set(uniq.map(v => v.toFixed(9)))];
+    const cls = v => {
+      const idx = uniqSorted.indexOf(v.toFixed(9));
+      const L = uniqSorted.length;
+      return 'heat-' + Math.min(3, Math.floor(idx / (L - 1) * 3));
+    };
+    const tr = el('tr', {}, [
+      '<td class="metric">' + met.label + (met.lower ? ' <span class="dir">↓</span>' : '') + '</td>'
+    ]);
+    MODELS.forEach((m, i) => {
+      const v = vals[i];
+      const td = el('td', { class: v === undefined ? '' : cls(v) },
+        v === undefined ? '—' : '<span class="num">' + met.disp(m.d) + '</span>');
+      if (v !== undefined) td.setAttribute('title', met.label + ' — ' + m.name + ': ' + r3(v) + ' (' + met.disp(m.d) + ')');
+      tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  });
+  table.appendChild(tbody);
+  box.appendChild(note);
+  box.appendChild(table);
+}
+
+/* ================= theme toggle ================= */
+(function () {
+  const root = document.documentElement;
+  const btn = document.getElementById('theme-toggle');
+  btn.addEventListener('click', () => {
+    const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('echobench-theme', next); } catch (e) {}
+  });
+})();
+
+/* ================= render ================= */
+(function () {
+  const exportCard = new URLSearchParams(location.search).get('export');
+  if (exportCard) {
+    document.body.classList.add('exporting');
+    document.body.dataset.exportCard = exportCard;
+  }
+  /* header chips: badge + name + ECS */
+  const chips = document.getElementById('model-chips');
+  MODELS.forEach(m => {
+    chips.appendChild(el('span', { class: 'chip' }, [badgeSVG(m, 22), m.name, '&nbsp;<span class="num" style="color:var(--muted);font-weight:500">ECS ' + r3(m.ecs) + '</span>']));
+  });
+  draw1(); draw3(); draw4(); draw5(); draw6(); draw7(); draw8();
+})();
+</script>
+</body>
+</html>
