@@ -57,15 +57,6 @@
       "status": "available"
     },
     {
-      "modelId": "qwen3.7-max-openrouter",
-      "displayName": "Qwen3.7 Max (OpenRouter, superseded route)",
-      "runSet": "pilot-dev-v2-qwen37max",
-      "modelRequested": "qwen/qwen3.7-max",
-      "role": "route-appendix",
-      "status": "available",
-      "note": "73/100 completed (27 failed, stopped by OpenRouter account credits). Retained only as a route-sensitivity artifact per PREREG.md; never in the field."
-    },
-    {
       "modelId": "gemini-3.7-fl",
       "displayName": "Gemini 3.7 Flash",
       "runSet": "pilot-gemini-37",
@@ -120,15 +111,6 @@
       "note": "User will supply."
     },
     {
-      "modelId": "glm-5.2",
-      "displayName": "GLM 5.2",
-      "runSet": "dev-glm52-gmicloud-pinned-low-20260821",
-      "modelRequested": "z-ai/glm-5.2",
-      "role": "field",
-      "status": "available",
-      "note": "Canonical GLM entry (50/50 completed, 0 rejected). paper_data.json previously mislabeled this runSet as 'dev-glm52-low-20260821' (byte-identical data, wrong string) -- fixed here."
-    },
-    {
       "modelId": "glm-5.2-openrouter-100",
       "displayName": "GLM 5.2 (OpenRouter, n=100)",
       "runSet": "glm52-streamlake-openrouter-low-100-20260821",
@@ -136,6 +118,60 @@
       "role": "route-appendix",
       "status": "available",
       "note": "76/100 completed, 24% rejected -- far above any other config (next-worst is ~1%). Reported as a route/robustness sensitivity note alongside its rejection rate, never as a higher-n replacement for the canonical 50-run GLM entry: a 24% rejection rate is itself a validity signal, not a reason to prefer the larger n."
+    },
+    {
+      "modelId": "inkling-small",
+      "displayName": "Inkling Small",
+      "runSet": "inkling-small-50-20260822",
+      "modelRequested": "thinkingmachines/inkling-small",
+      "role": "field",
+      "status": "available",
+      "note": "100/100 completed, 0 rejected. Recovered from a separate worktree (WebBench-inkling-smoke) that had never been merged; copied in 2026-08-23."
+    },
+    {
+      "modelId": "nemotron-ultra",
+      "displayName": "Nemotron 3 Ultra",
+      "runSet": "nemotron-ultra-deepinfra-50-20260822",
+      "modelRequested": "nvidia/nemotron-3-ultra-550b-a55b",
+      "role": "field",
+      "status": "available",
+      "note": "50/50 completed, 0 rejected, served via DeepInfra. Recovered from a separate worktree (WebBench-inkling-smoke) that had never been merged; copied in 2026-08-23."
+    },
+    {
+      "modelId": "qwen3.8-27b",
+      "displayName": "Qwen3.8 27B",
+      "runSet": "qwen38-27b-alibaba-50-20260828",
+      "modelRequested": "qwen/qwen3.8-27b",
+      "role": "field",
+      "status": "available",
+      "note": "50/50 completed, 0 rejected, served via OpenRouter/Alibaba."
+    },
+    {
+      "modelId": "qwen3.8-flash",
+      "displayName": "Qwen3.8 Flash",
+      "runSet": "qwen38-flash-alibaba-50-20260828",
+      "modelRequested": "qwen/qwen3.8-flash",
+      "role": "field",
+      "status": "available",
+      "note": "50/50 completed, 0 rejected, served via OpenRouter/Alibaba."
+    },
+    {
+      "modelId": "deepseek-v4-pro-low",
+      "displayName": "DeepSeek V4 Pro (low reasoning)",
+      "runSet": "dev-v4pro-0813-gmicloud-fp8-low-20260821",
+      "modelRequested": "deepseek/deepseek-v4-pro-0813",
+      "role": "field",
+      "status": "available",
+      "note": "49/50 completed, 1 rejected, served via OpenRouter/gmicloud FP8. This is the low-effort rerun PREREG.md's original Pilot section called for as 'the fair test' after the thinking-disabled pilot (pilot-v4pro-100, see below) turned out to be a protocol artifact."
+    },
+    {
+      "modelId": "deepseek-v4-pro-thinking-disabled",
+      "displayName": "DeepSeek V4 Pro (thinking disabled)",
+      "runSet": "pilot-v4pro-100",
+      "modelRequested": "deepseek-v4-pro",
+      "role": "effort-appendix",
+      "status": "available",
+      "note": "100/100 completed, 0 rejected. Original pilot; excluded from the field by design (not a data gap) -- V4 Pro ignores the legacy enable_thinking flag, so 'thinking disabled' silently runs at default effort, making this pilot a reasoning-effort variant of deepseek-v4-pro-low above, not an independent configuration. Kept for the effort-sensitivity analysis only, per PREREG.md's original Pilot section."
     }
   ]
 }

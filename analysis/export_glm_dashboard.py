@@ -1,22 +1,33 @@
-"""Stage a GLM 5.2 variant of the dashboard for the browser export route.
+"""Stage a GLM 5.2 (OpenRouter, n=100) variant of the dashboard for the
+browser export route.
 
 The rendered page is deliberately the normal dashboard with only one extra
 model datum/row.  This keeps `?export=N` sizing and card CSS identical to the
 existing PNG exports.
+
+The GLM report directory comes from `paper/run_manifest.json`'s
+`glm-5.2-openrouter-100` entry instead of being hardcoded here, and there is
+no more fallback to a `tmp/paper-source-glm/paper_data.json` path -- that
+path never existed on disk (confirmed) and was dead code.
 """
 from __future__ import annotations
 
 import json
 import csv
+import sys
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
 DASHBOARD = ROOT / "analysis" / "model_comparison_dashboard.html"
-PAPER_DATA = ROOT / "tmp" / "paper-source-glm" / "paper_data.json"
-SCORE_REPORT = ROOT / "reports" / "dev" / "glm52-streamlake-openrouter-low-100-20260821" / "score-report.json"
-RUNS_CSV = SCORE_REPORT.with_name("runs.csv")
 STAGED = ROOT / "tmp" / "model-comparison-dashboard-glm.html"
+
+sys.path.insert(0, str(ROOT / "paper"))
+from validate_manifest import load_manifest, report_dir  # noqa: E402
+
+_MANIFEST_ENTRY = next(m for m in load_manifest()["models"] if m["modelId"] == "glm-5.2-openrouter-100")
+SCORE_REPORT = report_dir(_MANIFEST_ENTRY["runSet"]) / "score-report.json"
+RUNS_CSV = SCORE_REPORT.with_name("runs.csv")
 
 
 def match_close(text: str, start: int) -> int:
@@ -58,19 +69,24 @@ def main() -> None:
     data_open = html.index("{", data_start)
     data_close = match_close(html, data_open)
     data = json.loads(html[data_open : data_close + 1])
-    data["glm-5.2"] = glm
+    # A distinct key from the canonical "glm-5.2" entry gen_dashboard_data.py already
+    # writes (50-run/0%-rejected) -- this is the separate 100-run/24%-rejected OpenRouter
+    # sensitivity variant; overwriting "glm-5.2" here would silently replace the
+    # canonical entry with the higher-n, higher-rejection-rate one.
+    data["glm-5.2-openrouter-100"] = glm
     html = html[:data_start] + "const DATA = " + json.dumps(data, indent=2) + html[data_close + 1:]
 
     models_start = html.index("const MODELS = [")
     models_open = html.index("[", models_start)
     models_close = match_close(html, models_open)
     models = html[models_open + 1 : models_close].rstrip()
-    glm_model = "  { key: 'glm-5.2', name: 'GLM 5.2', short: 'GLM 5.2', color: '#2563A8', logo: LOGOS.openai }"
+    glm_model = "  { key: 'glm-5.2-openrouter-100', name: 'GLM 5.2 (OpenRouter, n=100)', short: 'GLM 100', color: '#2563A8', logo: LOGOS.openai }"
     if models:
         models += ",\n"
     models += glm_model + "\n"
     html = html[:models_start] + "const MODELS = [\n" + models + "]" + html[models_close + 1:]
 
+    STAGED.parent.mkdir(parents=True, exist_ok=True)
     STAGED.write_text(html, encoding="utf-8")
     print(STAGED)
 
@@ -78,7 +94,10 @@ def main() -> None:
 def fresh_glm_entry() -> dict:
     """Turn the scored Streamlake run into the dashboard's compact schema."""
     if not SCORE_REPORT.exists():
-        return json.loads(PAPER_DATA.read_text(encoding="utf-8"))["glm-5.2"]
+        raise FileNotFoundError(
+            f"manifest entry glm-5.2-openrouter-100 points at {SCORE_REPORT}, "
+            f"which does not exist -- update run_manifest.json's runSet or status"
+        )
     score = json.loads(SCORE_REPORT.read_text(encoding="utf-8"))
     conditions = {
         condition["condition"]: {

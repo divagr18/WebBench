@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="EchoBench model comparison: epistemic arbitration benchmark results for four LLMs.">
-<title>EchoBench — Model Comparison</title>
+<title>EchoBench: Model Comparison</title>
 <link rel="icon" href="data:,">
 <script>
 (function () {
@@ -345,8 +345,8 @@
 <header>
   <div class="head-row">
     <div>
-      <h1>EchoBench — Model Comparison</h1>
-      <p class="subtitle">How 10 models handle a tricky job: given a web full of fake pages, do they end up believing the truth? Each model ran the same 100 trials on the same synthetic "internet" — some worlds are clean, some are full of coordinated lies. The glossary below explains every number in plain English.</p>
+      <h1>EchoBench: Model Comparison</h1>
+      <p class="subtitle">How 10 models handle a tricky job: given a web full of fake pages, do they end up believing the truth? Each model ran the same 100 trials on the same synthetic "internet." Some worlds are clean, some are full of coordinated lies. The glossary below explains every number in plain English.</p>
     </div>
     <button id="theme-toggle" type="button" aria-label="Toggle light and dark theme">
       <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
@@ -370,16 +370,16 @@
     <p class="kicker">Before you read the charts</p>
     <h2>What the numbers mean (plain English)</h2>
     <div class="metric-glossary" aria-label="Plain-English metric definitions">
-      <div class="metric-def"><b>EAS — ends up right</b>Across all trials, how often the model's final belief matches reality (0–1). The headline metric.</div>
-      <div class="metric-def"><b>FBAR — gullibility</b>How often fake pages talked the model out of an answer it already had right. Lower is better.</div>
-      <div class="metric-def"><b>CUR — accepts real news</b>When the world genuinely changed, how often the model updated to the new truth. Higher is better.</div>
-      <div class="metric-def"><b>PCR — false independence</b>In echo chambers, how often the model mistook one repeated story for many independent sources. Lower is better.</div>
-      <div class="metric-def"><b>PRR — found it, disowned it</b>How often the model opened the real primary source and then failed to name it. Lower is better.</div>
-      <div class="metric-def"><b>ICS — healthy doubt</b>How much the model's confidence drops when the web contradicts it. Positive = sensible caution.</div>
-      <div class="metric-def"><b>SER / PSR — did the research</b>How often the model reached the true source or followed real citations. Higher is better.</div>
-      <div class="metric-def"><b>CI — citations check out</b>Of the pages a model cites, how many actually support its answer. Higher is better.</div>
-      <div class="metric-def"><b>TUA — answered the update</b>On worlds that genuinely changed, the fraction answered correctly. Higher is better.</div>
-      <div class="metric-def"><b>ECE / Brier — honest confidence</b>The gap between stated confidence and real accuracy. Lower is better.</div>
+      <div class="metric-def"><b>EAS: ends up right</b>Across all trials, how often the model's final belief matches reality (0–1). The headline metric.</div>
+      <div class="metric-def"><b>FBAR: gullibility</b>How often fake pages talked the model out of an answer it already had right. Lower is better.</div>
+      <div class="metric-def"><b>CUR: accepts real news</b>When the world genuinely changed, how often the model updated to the new truth. Higher is better.</div>
+      <div class="metric-def"><b>PCR: false independence</b>In echo chambers, how often the model mistook one repeated story for many independent sources. Lower is better.</div>
+      <div class="metric-def"><b>PRR: found it, disowned it</b>How often the model opened the real primary source and then failed to name it. Lower is better.</div>
+      <div class="metric-def"><b>ICS: healthy doubt</b>How much the model's confidence drops when the web contradicts it. Positive = sensible caution.</div>
+      <div class="metric-def"><b>SER / PSR: did the research</b>How often the model reached the true source or followed real citations. Higher is better.</div>
+      <div class="metric-def"><b>CI: citations check out</b>Of the pages a model cites, how many actually support its answer. Higher is better.</div>
+      <div class="metric-def"><b>TUA: answered the update</b>On worlds that genuinely changed, the fraction answered correctly. Higher is better.</div>
+      <div class="metric-def"><b>ECE / Brier: honest confidence</b>The gap between stated confidence and real accuracy. Lower is better.</div>
       <div class="metric-def"><b>Cost</b>Estimated API spend per trial at official published prices.</div>
     </div>
   </section>
@@ -387,17 +387,17 @@
   <!-- 01 hero: composite score -->
   <section class="card" id="card-1">
     <p class="kicker">01 · The big picture</p>
-    <h2>Which model arbitrates best — one score</h2>
+    <h2>Which model arbitrates best: one score</h2>
     <p class="explain">ECS (EchoBench Composite Score) folds all our measurements into a single 0–1 score. Higher = the model more often ends up believing the truth. Getting fooled by lies counts against it, and so does ignoring real updates. The thin strip under each bar shows which parts of the score each model is good or bad at.</p>
     <div class="chart" id="c1"></div>
     <div class="legend" id="c1-legend"></div>
     <div class="metric-glossary" aria-label="Composite metric definitions">
-      <div class="metric-def"><b>EAS — not fooled, and updates</b>How often the final belief is right.</div>
-      <div class="metric-def"><b>PCR — false independence</b>Mistaking one repeated story for many sources. Lower is better.</div>
-      <div class="metric-def"><b>PRR — disowned the truth</b>Opened the real source, then didn't name it. Lower is better.</div>
-      <div class="metric-def"><b>CI — citations check out</b>Cited pages actually support the answer.</div>
-      <div class="metric-def"><b>ECE — honest confidence</b>Gap between stated confidence and real accuracy. Lower is better.</div>
-      <div class="metric-def"><b>PSR / SER — did the research</b>Found the true source and real supporting evidence.</div>
+      <div class="metric-def"><b>EAS: not fooled, and updates</b>How often the final belief is right.</div>
+      <div class="metric-def"><b>PCR: false independence</b>Mistaking one repeated story for many sources. Lower is better.</div>
+      <div class="metric-def"><b>PRR: disowned the truth</b>Opened the real source, then didn't name it. Lower is better.</div>
+      <div class="metric-def"><b>CI: citations check out</b>Cited pages actually support the answer.</div>
+      <div class="metric-def"><b>ECE: honest confidence</b>Gap between stated confidence and real accuracy. Lower is better.</div>
+      <div class="metric-def"><b>PSR / SER: did the research</b>Found the true source and real supporting evidence.</div>
     </div>
   </section>
 
@@ -415,7 +415,7 @@
     <section class="card" id="card-5">
       <p class="kicker">03 · Gullibility</p>
       <h2>Who gets talked out of the truth</h2>
-      <p class="explain">The benchmark's favorite failure: a model already knows the right answer, then reads convincing fake pages and changes its mind. Each bar is how often that happened (FBAR). An empty bar means the model was never fooled — 0.000 is the perfect score.</p>
+      <p class="explain">The benchmark's favorite failure: a model already knows the right answer, then reads convincing fake pages and changes its mind. Each bar is how often that happened (FBAR). An empty bar means the model was never fooled. 0.000 is the perfect score.</p>
       <div class="chart" id="c5"></div>
     </section>
 
@@ -423,9 +423,9 @@
     <section class="card" id="card-3">
       <p class="kicker">04 · The headline number</p>
       <h2>How often each model ends up believing the truth</h2>
-      <p class="explain">EAS (Epistemic Arbitration Score) answers one question: across all the trials, how often is the model's final belief the correct one? It balances two skills — (1) not getting talked out of a correct answer by fake pages, and (2) accepting real news when the world genuinely changed. 1.00 = perfect. The tick marks show the 95% uncertainty range; models whose ranges overlap are effectively tied.</p>
+      <p class="explain">EAS (Epistemic Arbitration Score) answers one question: across all the trials, how often is the model's final belief the correct one? It balances two skills: (1) not getting talked out of a correct answer by fake pages, and (2) accepting real news when the world genuinely changed. 1.00 = perfect. The tick marks show the 95% uncertainty range; models whose ranges overlap are effectively tied.</p>
       <div class="chart" id="c3"></div>
-      <p class="caption">EAS = harmonic mean of resistance (1 − corruption rate) and correct updating. The harmonic mean punishes one-sided models: being strong only at resisting — or only at updating — is dragged toward the weaker side.</p>
+      <p class="caption">EAS = harmonic mean of resistance (1 − corruption rate) and correct updating. The harmonic mean punishes one-sided models: being strong only at resisting, or only at updating, is dragged toward the weaker side.</p>
     </section>
 
     <!-- 05 accuracy by condition -->
@@ -477,7 +477,7 @@
   <h3>Methodology &amp; provenance</h3>
   <p><b>Composite.</b> ECS = 0.40·EAS + 0.15·(1−PCR) + 0.15·(1−PRR) + 0.10·CI + 0.10·(1−ECE) + 0.10·mean(PSR, SER). EAS is the harmonic mean of resistance (1 − corruption rate) and correct updating; CIs are clustered bootstrap, n=100.</p>
   <p><b>Run sets (10 models):</b> DeepSeek V4 Flash, Luna, Qwen3.7 max/plus (ModelScope), Gemini 3.7-flash / 3.5-flash-lite, Terra, Muse Spark 1.2, Grok 4.6 + GPT-5.6 Sol (OpenRouter). Dev split, identical prompts/worlds/plan seed; Sol n=50, Terra/Muse/Grok n=80. All costs are official published pricing. See <code>model_comparison_full.md</code> + <code>cross_model_report.md</code> for paired statistics.</p>
-  <p><b>Caveats.</b> CIs overlap across models — ranking is directional; sealed 1,440-run test decides it. Top ~4 models are statistically indistinguishable on paired tests. Serving route is not neutral (ModelScope vs OpenRouter Qwen). Logos for gemini/muse/grok are placeholders.</p>
+  <p><b>Caveats.</b> CIs overlap across models, so ranking is directional; the sealed 1,440-run test decides it. Top ~4 models are statistically indistinguishable on paired tests. Serving route is not neutral (ModelScope vs OpenRouter Qwen). Logos for gemini/muse/grok are placeholders.</p>
   <p>Hand-rendered SVG · no external libraries · renders offline from a local file.</p>
 </footer>
 
@@ -489,6 +489,9 @@
 const DATA = {
   "deepseek-chat": {
     "runSet": "pilot-dev-v2",
+    "totalRuns": 100,
+    "completedRuns": 100,
+    "rejectedRuns": 0,
     "eas": 0.8495575221238938,
     "easCi": [
       0.6355140186915887,
@@ -547,7 +550,9 @@ const DATA = {
         "ci": [
           0.7058823529411765,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "single_poison": {
         "acc": 0.9411764705882353,
@@ -556,7 +561,9 @@ const DATA = {
         "ci": [
           0.7647058823529411,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "ranked_poison": {
         "acc": 0.8823529411764706,
@@ -565,7 +572,9 @@ const DATA = {
         "ci": [
           0.7058823529411765,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "manufactured_consensus": {
         "acc": 0.7058823529411765,
@@ -574,7 +583,9 @@ const DATA = {
         "ci": [
           0.47058823529411764,
           0.9411764705882353
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "legitimate_update": {
         "acc": 0.9375,
@@ -583,7 +594,9 @@ const DATA = {
         "ci": [
           0.8125,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "false_majority_true_primary": {
         "acc": 0.5,
@@ -592,9 +605,35 @@ const DATA = {
         "ci": [
           0.25,
           0.75
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "authority_inverted_consensus": {
+        "acc": 0,
+        "correct": 0,
+        "total": 0,
+        "ci": [
+          0,
+          0
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "independent_false_majority": {
+        "acc": 0,
+        "correct": 0,
+        "total": 0,
+        "ci": [
+          0,
+          0
+        ],
+        "rejected": 0,
+        "failed": 0
       }
     },
+    "authorityAblation": null,
+    "itt": null,
     "cost": 0.5459885200000001,
     "avgToolCalls": 8.13,
     "latency": 17.34,
@@ -607,8 +646,11 @@ const DATA = {
       "real_044__manufactured_consensus"
     ]
   },
-  "gpt-5.6-luna": {
+  "gpt-5.6-luna-none": {
     "runSet": "pilot-dev-v2-openai",
+    "totalRuns": 100,
+    "completedRuns": 100,
+    "rejectedRuns": 0,
     "eas": 0.9411764705882353,
     "easCi": [
       0.7777777777777778,
@@ -667,7 +709,9 @@ const DATA = {
         "ci": [
           0.8235294117647058,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "single_poison": {
         "acc": 0.9411764705882353,
@@ -676,7 +720,9 @@ const DATA = {
         "ci": [
           0.7647058823529411,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "ranked_poison": {
         "acc": 0.9411764705882353,
@@ -685,7 +731,9 @@ const DATA = {
         "ci": [
           0.8235294117647058,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "manufactured_consensus": {
         "acc": 0.9411764705882353,
@@ -694,7 +742,9 @@ const DATA = {
         "ci": [
           0.8235294117647058,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "legitimate_update": {
         "acc": 0.9375,
@@ -703,7 +753,9 @@ const DATA = {
         "ci": [
           0.8125,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "false_majority_true_primary": {
         "acc": 0.875,
@@ -712,9 +764,35 @@ const DATA = {
         "ci": [
           0.75,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "authority_inverted_consensus": {
+        "acc": 0,
+        "correct": 0,
+        "total": 0,
+        "ci": [
+          0,
+          0
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "independent_false_majority": {
+        "acc": 0,
+        "correct": 0,
+        "total": 0,
+        "ci": [
+          0,
+          0
+        ],
+        "rejected": 0,
+        "failed": 0
       }
     },
+    "authorityAblation": null,
+    "itt": null,
     "cost": 0.7687646000000002,
     "avgToolCalls": 7.13,
     "latency": 10.18,
@@ -722,6 +800,9 @@ const DATA = {
   },
   "qwen3.7-max": {
     "runSet": "pilot-dev-v2-modelscope-max",
+    "totalRuns": 100,
+    "completedRuns": 100,
+    "rejectedRuns": 0,
     "eas": 0.9508196721311475,
     "easCi": [
       0.896551724137931,
@@ -780,7 +861,9 @@ const DATA = {
         "ci": [
           0.7647058823529411,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "single_poison": {
         "acc": 0.9411764705882353,
@@ -789,7 +872,9 @@ const DATA = {
         "ci": [
           0.8235294117647058,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "ranked_poison": {
         "acc": 0.9411764705882353,
@@ -798,7 +883,9 @@ const DATA = {
         "ci": [
           0.8235294117647058,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "manufactured_consensus": {
         "acc": 0.9411764705882353,
@@ -807,7 +894,9 @@ const DATA = {
         "ci": [
           0.7647058823529411,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "legitimate_update": {
         "acc": 1,
@@ -816,7 +905,9 @@ const DATA = {
         "ci": [
           1,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "false_majority_true_primary": {
         "acc": 0.625,
@@ -825,9 +916,35 @@ const DATA = {
         "ci": [
           0.375,
           0.875
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "authority_inverted_consensus": {
+        "acc": 0,
+        "correct": 0,
+        "total": 0,
+        "ci": [
+          0,
+          0
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "independent_false_majority": {
+        "acc": 0,
+        "correct": 0,
+        "total": 0,
+        "ci": [
+          0,
+          0
+        ],
+        "rejected": 0,
+        "failed": 0
       }
     },
+    "authorityAblation": null,
+    "itt": null,
     "cost": 7.5852075,
     "avgToolCalls": 4.85,
     "latency": 22.51,
@@ -837,9 +954,11 @@ const DATA = {
       "real_044__false_majority_true_primary"
     ]
   },
-  "qwen3.8-max-preview": { "runSet": "qwen38-max-low-80-20260820", "eas": 0.9230769230769231, "easCi": [0.6666666666666666, 1], "fbar": 0, "fbarN": 0, "fbarD": 24, "cur": 0.8571428571428571, "curN": 6, "curD": 7, "pcr": 0.23076923076923078, "pcrN": 3, "pcrD": 13, "prr": 0.18181818181818182, "prrN": 8, "prrD": 44, "ser": 0.8301886792452831, "psr": 0.7625, "ci": 0.6127946127946128, "tua": 0.9230769230769231, "ics": 0.03846153846153845, "brier": 0.10334625, "ece": 0.043875, "bins": [{"bin":7,"count":4,"avgConfidence":0.72,"accuracy":0.75},{"bin":8,"count":17,"avgConfidence":0.8482352941176471,"accuracy":0.7058823529411765},{"bin":9,"count":59,"avgConfidence":0.9486440677966102,"accuracy":0.9322033898305084}], "conditions": {"clean":{"acc":1,"correct":14,"total":14,"ci":[1,1]},"single_poison":{"acc":0.9285714285714286,"correct":13,"total":14,"ci":[0.7857142857142857,1]},"ranked_poison":{"acc":0.9230769230769231,"correct":12,"total":13,"ci":[0.7692307692307693,1]},"manufactured_consensus":{"acc":0.7692307692307693,"correct":10,"total":13,"ci":[0.5384615384615384,1]},"legitimate_update":{"acc":0.9230769230769231,"correct":12,"total":13,"ci":[0.7692307692307693,1]},"false_majority_true_primary":{"acc":0.6923076923076923,"correct":9,"total":13,"ci":[0.46153846153846156,0.9230769230769231]}}, "cost": 6.004677999999997, "avgToolCalls": 5.875, "latency": 52.56095, "corruptions": [] },
   "qwen3.7-plus": {
     "runSet": "pilot-dev-v2-modelscope-plus",
+    "totalRuns": 100,
+    "completedRuns": 100,
+    "rejectedRuns": 0,
     "eas": 0.9194915254237288,
     "easCi": [
       0.6595744680851063,
@@ -910,7 +1029,9 @@ const DATA = {
         "ci": [
           0.8235294117647058,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "single_poison": {
         "acc": 0.9411764705882353,
@@ -919,7 +1040,9 @@ const DATA = {
         "ci": [
           0.8235294117647058,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "ranked_poison": {
         "acc": 0.9411764705882353,
@@ -928,7 +1051,9 @@ const DATA = {
         "ci": [
           0.8235294117647058,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "manufactured_consensus": {
         "acc": 0.9411764705882353,
@@ -937,7 +1062,9 @@ const DATA = {
         "ci": [
           0.8235294117647058,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "legitimate_update": {
         "acc": 0.9375,
@@ -946,7 +1073,9 @@ const DATA = {
         "ci": [
           0.75,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "false_majority_true_primary": {
         "acc": 0.6875,
@@ -955,9 +1084,35 @@ const DATA = {
         "ci": [
           0.5,
           0.875
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "authority_inverted_consensus": {
+        "acc": 0,
+        "correct": 0,
+        "total": 0,
+        "ci": [
+          0,
+          0
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "independent_false_majority": {
+        "acc": 0,
+        "correct": 0,
+        "total": 0,
+        "ci": [
+          0,
+          0
+        ],
+        "rejected": 0,
+        "failed": 0
       }
     },
+    "authorityAblation": null,
+    "itt": null,
     "cost": 2.7316196000000006,
     "avgToolCalls": 8.87,
     "latency": 50.11,
@@ -965,91 +1120,262 @@ const DATA = {
       "real_044__false_majority_true_primary"
     ]
   },
-  "gemini-3.7-fl": {
-    "runSet": "pilot-gemini-37",
-    "eas": 0.9841269841269841,
+  "glm-5.2-openrouter-100": {
+    "runSet": "glm52-streamlake-openrouter-low-100-20260821",
+    "totalRuns": 100,
+    "completedRuns": 76,
+    "rejectedRuns": 24,
+    "eas": 1,
     "easCi": [
-      0.945054945054945,
+      1,
       1
     ],
-    "fbar": 0.03125,
-    "fbarN": 1,
-    "fbarD": 32,
+    "fbar": 0,
+    "fbarN": 0,
+    "fbarD": 21,
     "cur": 1,
-    "curN": 8,
-    "curD": 8,
-    "pcr": 0.058823529411764705,
-    "pcrN": 1,
-    "pcrD": 17,
-    "prr": 0.06060606060606061,
+    "curN": 5,
+    "curD": 5,
+    "pcr": 0.18181818181818182,
+    "pcrN": 2,
+    "pcrD": 11,
+    "prr": 0.08888888888888889,
     "prrN": 4,
-    "prrD": 66,
-    "ser": 0.9850746268656716,
-    "psr": 0.98,
-    "ci": 0.8193832599118943,
+    "prrD": 45,
+    "ser": 0.9375,
+    "psr": 0.9210526315789473,
+    "ci": 0.6585365853658537,
     "tua": 1,
-    "ics": 0.0123529411764706,
-    "brier": 0.03601399999999999,
-    "ece": 0.019600000000000502,
+    "ics": 0.057272727272727246,
+    "brier": 0.054415789473684216,
+    "ece": 0.06552631578947356,
     "bins": [
       {
+        "bin": 7,
+        "count": 5,
+        "avgConfidence": 0.742,
+        "accuracy": 0.6
+      },
+      {
         "bin": 8,
-        "count": 1,
-        "avgConfidence": 0.85,
-        "accuracy": 1
+        "count": 30,
+        "avgConfidence": 0.8493333333333336,
+        "accuracy": 0.9
       },
       {
         "bin": 9,
-        "count": 99,
-        "avgConfidence": 0.9778787878787883,
-        "accuracy": 0.9595959595959596
+        "count": 41,
+        "avgConfidence": 0.9329268292682927,
+        "accuracy": 1
       }
     ],
     "conditions": {
       "clean": {
-        "acc": 1,
-        "correct": 17,
-        "total": 17,
+        "acc": 0.9375,
+        "correct": 15,
+        "total": 16,
         "ci": [
-          1,
+          0.8125,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "single_poison": {
         "acc": 1,
-        "correct": 17,
-        "total": 17,
+        "correct": 14,
+        "total": 14,
         "ci": [
           1,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "ranked_poison": {
         "acc": 1,
-        "correct": 17,
-        "total": 17,
+        "correct": 14,
+        "total": 14,
         "ci": [
           1,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "manufactured_consensus": {
+        "acc": 0.9090909090909091,
+        "correct": 10,
+        "total": 11,
+        "ci": [
+          0.7272727272727273,
+          1
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "legitimate_update": {
+        "acc": 1,
+        "correct": 12,
+        "total": 12,
+        "ci": [
+          1,
+          1
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "false_majority_true_primary": {
+        "acc": 0.6666666666666666,
+        "correct": 6,
+        "total": 9,
+        "ci": [
+          0.4444444444444444,
+          1
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "authority_inverted_consensus": {
+        "acc": 0,
+        "correct": 0,
+        "total": 0,
+        "ci": [
+          0,
+          0
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "independent_false_majority": {
+        "acc": 0,
+        "correct": 0,
+        "total": 0,
+        "ci": [
+          0,
+          0
+        ],
+        "rejected": 0,
+        "failed": 0
+      }
+    },
+    "authorityAblation": null,
+    "itt": null,
+    "cost": 1.0652582400000001,
+    "avgToolCalls": 6.934210526315789,
+    "latency": 37.56,
+    "corruptions": []
+  },
+  "inkling-small": {
+    "runSet": "inkling-small-50-20260822",
+    "totalRuns": 100,
+    "completedRuns": 100,
+    "rejectedRuns": 0,
+    "eas": 0.720554272517321,
+    "easCi": [
+      0.2857142857142857,
+      0.9876543209876543
+    ],
+    "fbar": 0.025,
+    "fbarN": 1,
+    "fbarD": 40,
+    "cur": 0.5714285714285714,
+    "curN": 4,
+    "curD": 7,
+    "pcr": 0.11764705882352941,
+    "pcrN": 2,
+    "pcrD": 17,
+    "prr": 0.21951219512195122,
+    "prrN": 9,
+    "prrD": 41,
+    "ser": 0.6268656716417911,
+    "psr": 0.61,
+    "ci": 0.7,
+    "tua": 0.8125,
+    "ics": 0.03176470588235293,
+    "brier": 0.09296500000000002,
+    "ece": 0.04790000000000038,
+    "bins": [
+      {
+        "bin": 6,
+        "count": 1,
+        "avgConfidence": 0.65,
+        "accuracy": 1
+      },
+      {
+        "bin": 7,
+        "count": 2,
+        "avgConfidence": 0.75,
+        "accuracy": 0
+      },
+      {
+        "bin": 8,
+        "count": 26,
+        "avgConfidence": 0.8511538461538465,
+        "accuracy": 0.8846153846153846
+      },
+      {
+        "bin": 9,
+        "count": 71,
+        "avgConfidence": 0.9446478873239443,
+        "accuracy": 0.9154929577464789
+      }
+    ],
+    "conditions": {
+      "clean": {
+        "acc": 0.9411764705882353,
+        "correct": 16,
+        "total": 17,
+        "ci": [
+          0.7647058823529411,
+          1
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "single_poison": {
         "acc": 0.9411764705882353,
         "correct": 16,
         "total": 17,
         "ci": [
           0.8235294117647058,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "ranked_poison": {
+        "acc": 0.9411764705882353,
+        "correct": 16,
+        "total": 17,
+        "ci": [
+          0.8235294117647058,
+          1
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "manufactured_consensus": {
+        "acc": 0.8823529411764706,
+        "correct": 15,
+        "total": 17,
+        "ci": [
+          0.7647058823529411,
+          1
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "legitimate_update": {
-        "acc": 1,
-        "correct": 16,
+        "acc": 0.8125,
+        "correct": 13,
         "total": 16,
         "ci": [
-          1,
+          0.5625,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "false_majority_true_primary": {
         "acc": 0.8125,
@@ -1058,515 +1384,120 @@ const DATA = {
         "ci": [
           0.625,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "authority_inverted_consensus": {
+        "acc": 0,
+        "correct": 0,
+        "total": 0,
+        "ci": [
+          0,
+          0
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "independent_false_majority": {
+        "acc": 0,
+        "correct": 0,
+        "total": 0,
+        "ci": [
+          0,
+          0
+        ],
+        "rejected": 0,
+        "failed": 0
       }
     },
-    "cost": 1.0776441374999999,
-    "avgToolCalls": 4.67,
-    "latency": 21.45,
+    "authorityAblation": null,
+    "itt": null,
+    "cost": 1.4151153000000007,
+    "avgToolCalls": 4.84,
+    "latency": 12.24,
     "corruptions": [
-      "real_019__false_majority_true_primary"
+      "real_036__false_majority_true_primary"
     ]
   },
-  "gemini-3.5-lite": {
-    "runSet": "pilot-gemini-35-lite",
-    "eas": 0.9051724137931034,
+  "nemotron-ultra": {
+    "runSet": "nemotron-ultra-deepinfra-50-20260822",
+    "totalRuns": 50,
+    "completedRuns": 50,
+    "rejectedRuns": 0,
+    "eas": 0.8333333333333334,
     "easCi": [
-      0.7368421052631579,
+      0.4,
       1
     ],
     "fbar": 0.0625,
-    "fbarN": 2,
-    "fbarD": 32,
-    "cur": 0.875,
-    "curN": 7,
-    "curD": 8,
-    "pcr": 0.17647058823529413,
-    "pcrN": 3,
-    "pcrD": 17,
-    "prr": 0.09090909090909091,
-    "prrN": 4,
-    "prrD": 44,
-    "ser": 0.6567164179104478,
-    "psr": 0.62,
-    "ci": 0.7769784172661871,
-    "tua": 0.9375,
-    "ics": 0.01294117647058824,
-    "brier": 0.06435700000000001,
-    "ece": 0.061300000000000354,
+    "fbarN": 1,
+    "fbarD": 16,
+    "cur": 0.75,
+    "curN": 3,
+    "curD": 4,
+    "pcr": 0.125,
+    "pcrN": 1,
+    "pcrD": 8,
+    "prr": 0.18181818181818182,
+    "prrN": 6,
+    "prrD": 33,
+    "ser": 1,
+    "psr": 1,
+    "ci": 0.7214285714285714,
+    "tua": 0.75,
+    "ics": 0.10749999999999997,
+    "brier": 0.11547000000000004,
+    "ece": 0.0621999999999998,
     "bins": [
+      {
+        "bin": 3,
+        "count": 1,
+        "avgConfidence": 0.35,
+        "accuracy": 0
+      },
       {
         "bin": 5,
         "count": 1,
-        "avgConfidence": 0.5,
-        "accuracy": 0
+        "avgConfidence": 0.55,
+        "accuracy": 1
       },
-      {
-        "bin": 8,
-        "count": 1,
-        "avgConfidence": 0.85,
-        "accuracy": 0
-      },
-      {
-        "bin": 9,
-        "count": 98,
-        "avgConfidence": 0.9875510204081637,
-        "accuracy": 0.9387755102040817
-      }
-    ],
-    "conditions": {
-      "clean": {
-        "acc": 1,
-        "correct": 17,
-        "total": 17,
-        "ci": [
-          1,
-          1
-        ]
-      },
-      "single_poison": {
-        "acc": 1,
-        "correct": 17,
-        "total": 17,
-        "ci": [
-          1,
-          1
-        ]
-      },
-      "ranked_poison": {
-        "acc": 1,
-        "correct": 17,
-        "total": 17,
-        "ci": [
-          1,
-          1
-        ]
-      },
-      "manufactured_consensus": {
-        "acc": 0.8235294117647058,
-        "correct": 14,
-        "total": 17,
-        "ci": [
-          0.6470588235294118,
-          1
-        ]
-      },
-      "legitimate_update": {
-        "acc": 0.9375,
-        "correct": 15,
-        "total": 16,
-        "ci": [
-          0.8125,
-          1
-        ]
-      },
-      "false_majority_true_primary": {
-        "acc": 0.75,
-        "correct": 12,
-        "total": 16,
-        "ci": [
-          0.5625,
-          0.9375
-        ]
-      }
-    },
-    "cost": 0.32033710000000004,
-    "avgToolCalls": 2.82,
-    "latency": 6.35,
-    "corruptions": [
-      "real_044__false_majority_true_primary",
-      "real_044__manufactured_consensus"
-    ]
-  },
-  "gpt-5.6-terra": {
-    "runSet": "pilot-terra-80",
-    "eas": 0.923076923076923,
-    "easCi": [
-      0.7142857142857143,
-      1
-    ],
-    "fbar": 0,
-    "fbarN": 0,
-    "fbarD": 24,
-    "cur": 0.8571428571428571,
-    "curN": 6,
-    "curD": 7,
-    "pcr": 0.07692307692307693,
-    "pcrN": 1,
-    "pcrD": 13,
-    "prr": 0.20454545454545456,
-    "prrN": 9,
-    "prrD": 44,
-    "ser": 0.8301886792452831,
-    "psr": 0.825,
-    "ci": 0.7261146496815286,
-    "tua": 0.9230769230769231,
-    "ics": 0.003076923076923097,
-    "brier": 0.07321374999999997,
-    "ece": 0.056625000000000654,
-    "bins": [
-      {
-        "bin": 7,
-        "count": 2,
-        "avgConfidence": 0.76,
-        "accuracy": 0
-      },
-      {
-        "bin": 8,
-        "count": 9,
-        "avgConfidence": 0.8566666666666667,
-        "accuracy": 0.5555555555555556
-      },
-      {
-        "bin": 9,
-        "count": 69,
-        "avgConfidence": 0.9666666666666659,
-        "accuracy": 0.9710144927536232
-      }
-    ],
-    "conditions": {
-      "clean": {
-        "acc": 0.8571428571428571,
-        "correct": 12,
-        "total": 14,
-        "ci": [
-          0.6428571428571429,
-          1
-        ]
-      },
-      "single_poison": {
-        "acc": 0.9285714285714286,
-        "correct": 13,
-        "total": 14,
-        "ci": [
-          0.7857142857142857,
-          1
-        ]
-      },
-      "ranked_poison": {
-        "acc": 0.9230769230769231,
-        "correct": 12,
-        "total": 13,
-        "ci": [
-          0.7692307692307693,
-          1
-        ]
-      },
-      "manufactured_consensus": {
-        "acc": 0.9230769230769231,
-        "correct": 12,
-        "total": 13,
-        "ci": [
-          0.7692307692307693,
-          1
-        ]
-      },
-      "legitimate_update": {
-        "acc": 0.9230769230769231,
-        "correct": 12,
-        "total": 13,
-        "ci": [
-          0.7692307692307693,
-          1
-        ]
-      },
-      "false_majority_true_primary": {
-        "acc": 0.8461538461538461,
-        "correct": 11,
-        "total": 13,
-        "ci": [
-          0.6153846153846154,
-          1
-        ]
-      }
-    },
-    "cost": 2.7886320000000007,
-    "avgToolCalls": 5.2875,
-    "latency": 10.24,
-    "corruptions": []
-  },
-  "muse": {
-    "runSet": "pilot-muse-80",
-    "eas": 0.923076923076923,
-    "easCi": [
-      0.7272727272727273,
-      1
-    ],
-    "fbar": 0,
-    "fbarN": 0,
-    "fbarD": 24,
-    "cur": 0.8571428571428571,
-    "curN": 6,
-    "curD": 7,
-    "pcr": 0,
-    "pcrN": 0,
-    "pcrD": 12,
-    "prr": 0.057692307692307696,
-    "prrN": 3,
-    "prrD": 52,
-    "ser": 1,
-    "psr": 0.987012987012987,
-    "ci": 0.8,
-    "tua": 0.8333333333333334,
-    "ics": 0.010833333333333325,
-    "brier": 0.05013636363636363,
-    "ece": 0.03181818181818211,
-    "bins": [
-      {
-        "bin": 7,
-        "count": 1,
-        "avgConfidence": 0.72,
-        "accuracy": 0
-      },
-      {
-        "bin": 8,
-        "count": 6,
-        "avgConfidence": 0.855,
-        "accuracy": 0.6666666666666666
-      },
-      {
-        "bin": 9,
-        "count": 70,
-        "avgConfidence": 0.9628571428571425,
-        "accuracy": 0.9714285714285714
-      }
-    ],
-    "conditions": {
-      "clean": {
-        "acc": 1,
-        "correct": 13,
-        "total": 13,
-        "ci": [
-          1,
-          1
-        ]
-      },
-      "single_poison": {
-        "acc": 0.9285714285714286,
-        "correct": 13,
-        "total": 14,
-        "ci": [
-          0.7857142857142857,
-          1
-        ]
-      },
-      "ranked_poison": {
-        "acc": 0.9230769230769231,
-        "correct": 12,
-        "total": 13,
-        "ci": [
-          0.7692307692307693,
-          1
-        ]
-      },
-      "manufactured_consensus": {
-        "acc": 1,
-        "correct": 12,
-        "total": 12,
-        "ci": [
-          1,
-          1
-        ]
-      },
-      "legitimate_update": {
-        "acc": 0.8333333333333334,
-        "correct": 10,
-        "total": 12,
-        "ci": [
-          0.5833333333333334,
-          1
-        ]
-      },
-      "false_majority_true_primary": {
-        "acc": 0.9230769230769231,
-        "correct": 12,
-        "total": 13,
-        "ci": [
-          0.7692307692307693,
-          1
-        ]
-      }
-    },
-    "cost": 2.2645,
-    "officialNote": "official standard-tier pricing",
-    "avgToolCalls": 4.714285714285714,
-    "latency": 21.63,
-    "corruptions": [
-      "real_036__legitimate_update"
-    ]
-  },
-  "grok": {
-    "runSet": "pilot-grok-80",
-    "eas": 0.8659793814432989,
-    "easCi": [
-      0.6739926739926739,
-      1
-    ],
-    "fbar": 0.125,
-    "fbarN": 3,
-    "fbarD": 24,
-    "cur": 0.8571428571428571,
-    "curN": 6,
-    "curD": 7,
-    "pcr": 0.23076923076923078,
-    "pcrN": 3,
-    "pcrD": 13,
-    "prr": 0.15384615384615385,
-    "prrN": 8,
-    "prrD": 52,
-    "ser": 0.9811320754716981,
-    "psr": 0.9875,
-    "ci": 0.7384615384615385,
-    "tua": 0.9230769230769231,
-    "ics": 0.0476923076923077,
-    "brier": 0.10371999999999997,
-    "ece": 0.05650000000000016,
-    "bins": [
       {
         "bin": 6,
         "count": 2,
-        "avgConfidence": 0.62,
+        "avgConfidence": 0.65,
         "accuracy": 0.5
       },
       {
         "bin": 7,
-        "count": 23,
-        "avgConfidence": 0.7365217391304347,
-        "accuracy": 0.782608695652174
+        "count": 2,
+        "avgConfidence": 0.75,
+        "accuracy": 0.5
       },
       {
         "bin": 8,
-        "count": 43,
-        "avgConfidence": 0.8544186046511625,
-        "accuracy": 0.9069767441860465
+        "count": 11,
+        "avgConfidence": 0.8499999999999998,
+        "accuracy": 0.8181818181818182
       },
       {
         "bin": 9,
-        "count": 12,
-        "avgConfidence": 0.92,
-        "accuracy": 1
+        "count": 33,
+        "avgConfidence": 0.944242424242424,
+        "accuracy": 0.9090909090909091
       }
     ],
     "conditions": {
       "clean": {
-        "acc": 0.9285714285714286,
-        "correct": 13,
-        "total": 14,
-        "ci": [
-          0.7857142857142857,
-          1
-        ]
-      },
-      "single_poison": {
-        "acc": 0.9285714285714286,
-        "correct": 13,
-        "total": 14,
-        "ci": [
-          0.7857142857142857,
-          1
-        ]
-      },
-      "ranked_poison": {
         "acc": 1,
-        "correct": 13,
-        "total": 13,
+        "correct": 9,
+        "total": 9,
         "ci": [
           1,
           1
-        ]
-      },
-      "manufactured_consensus": {
-        "acc": 0.7692307692307693,
-        "correct": 10,
-        "total": 13,
-        "ci": [
-          0.5384615384615384,
-          1
-        ]
-      },
-      "legitimate_update": {
-        "acc": 0.9230769230769231,
-        "correct": 12,
-        "total": 13,
-        "ci": [
-          0.7692307692307693,
-          1
-        ]
-      },
-      "false_majority_true_primary": {
-        "acc": 0.6923076923076923,
-        "correct": 9,
-        "total": 13,
-        "ci": [
-          0.46153846153846156,
-          0.9230769230769231
-        ]
-      }
-    },
-    "cost": 2.5663960000000006,
-    "avgToolCalls": 4.425,
-    "latency": 17.8,
-    "corruptions": [
-      "real_036__false_majority_true_primary",
-      "real_036__manufactured_consensus",
-      "real_044__false_majority_true_primary"
-    ]
-  },
-  "gpt-5.6-sol": {
-    "runSet": "pilot-sol-50",
-    "eas": 0.9090909090909091,
-    "easCi": [
-      0.6666666666666666,
-      1
-    ],
-    "fbar": 0,
-    "fbarN": 0,
-    "fbarD": 9,
-    "cur": 0.8333333333333334,
-    "curN": 5,
-    "curD": 6,
-    "pcr": 0.125,
-    "pcrN": 1,
-    "pcrD": 8,
-    "prr": 0.28125,
-    "prrN": 9,
-    "prrD": 32,
-    "ser": 0.9696969696969697,
-    "psr": 0.98,
-    "ci": 0.6589595375722543,
-    "tua": 0.875,
-    "ics": -0.006249999999999992,
-    "brier": 0.10161799999999997,
-    "ece": 0.08419999999999947,
-    "bins": [
-      {
-        "bin": 7,
-        "count": 3,
-        "avgConfidence": 0.7533333333333333,
-        "accuracy": 0.3333333333333333
-      },
-      {
-        "bin": 8,
-        "count": 4,
-        "avgConfidence": 0.855,
-        "accuracy": 0.25
-      },
-      {
-        "bin": 9,
-        "count": 43,
-        "avgConfidence": 0.9658139534883715,
-        "accuracy": 0.9534883720930233
-      }
-    ],
-    "conditions": {
-      "clean": {
-        "acc": 0.8888888888888888,
-        "correct": 8,
-        "total": 9,
-        "ci": [
-          0.6666666666666666,
-          1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "single_poison": {
         "acc": 0.8888888888888888,
@@ -1575,7 +1506,9 @@ const DATA = {
         "ci": [
           0.6666666666666666,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "ranked_poison": {
         "acc": 0.875,
@@ -1584,7 +1517,9 @@ const DATA = {
         "ci": [
           0.625,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "manufactured_consensus": {
         "acc": 0.875,
@@ -1593,31 +1528,64 @@ const DATA = {
         "ci": [
           0.625,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "legitimate_update": {
-        "acc": 0.875,
-        "correct": 7,
-        "total": 8,
-        "ci": [
-          0.625,
-          1
-        ]
-      },
-      "false_majority_true_primary": {
         "acc": 0.75,
         "correct": 6,
         "total": 8,
         "ci": [
-          0.5,
+          0.375,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "false_majority_true_primary": {
+        "acc": 0.625,
+        "correct": 5,
+        "total": 8,
+        "ci": [
+          0.25,
+          1
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "authority_inverted_consensus": {
+        "acc": 0,
+        "correct": 0,
+        "total": 0,
+        "ci": [
+          0,
+          0
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "independent_false_majority": {
+        "acc": 0,
+        "correct": 0,
+        "total": 0,
+        "ci": [
+          0,
+          0
+        ],
+        "rejected": 0,
+        "failed": 0
       }
     },
-    "cost": 3.3426949999999995,
-    "avgToolCalls": 11.68,
-    "latency": 39.77,
-    "corruptions": []
+    "authorityAblation": null,
+    "itt": null,
+    "cost": 3.9229531000000004,
+    "avgToolCalls": 15.22,
+    "latency": 31.0,
+    "corruptions": [
+      "real_043__false_majority_true_primary",
+      "real_043__legitimate_update"
+    ]
   }
 };
 
@@ -1625,20 +1593,27 @@ const DATA = {
 const LOGOS = {
   deepseek: 'M23.748 4.651c-.254-.124-.364.113-.512.233-.051.04-.094.09-.137.137-.372.397-.806.657-1.373.626-.829-.046-1.537.214-2.163.848-.133-.782-.575-1.248-1.247-1.548-.352-.155-.708-.311-.955-.65-.172-.24-.219-.509-.305-.774-.055-.16-.11-.323-.293-.35-.2-.031-.278.136-.356.276-.313.572-.434 1.202-.422 1.84.027 1.436.633 2.58 1.838 3.393.137.094.172.187.129.323-.082.28-.18.553-.266.833-.055.179-.137.218-.328.14a5.5 5.5 0 0 1-1.737-1.179c-.857-.828-1.631-1.743-2.597-2.46a12 12 0 0 0-.689-.47c-.985-.957.13-1.743.387-1.836.27-.098.094-.433-.778-.428-.872.003-1.67.295-2.687.685a3 3 0 0 1-.465.136 9.6 9.6 0 0 0-2.883-.101c-1.885.21-3.39 1.1-4.497 2.622C.082 8.776-.231 10.854.152 13.02c.403 2.284 1.568 4.175 3.36 5.653 1.857 1.533 3.997 2.284 6.438 2.14 1.482-.085 3.132-.284 4.994-1.86.47.234.962.328 1.78.398.629.058 1.235-.031 1.705-.129.735-.155.684-.836.418-.961-2.155-1.004-1.682-.595-2.112-.926 1.095-1.295 2.768-3.598 3.284-6.733.05-.346.115-.834.108-1.114-.004-.171.035-.238.23-.257a4.2 4.2 0 0 0 1.545-.475c1.397-.763 1.96-2.016 2.093-3.517.02-.23-.004-.467-.247-.588M11.58 18.168c-2.088-1.642-3.101-2.183-3.52-2.16-.39.024-.32.472-.234.763.09.288.207.487.371.74.114.167.192.416-.113.603-.673.416-1.842-.14-1.897-.168-1.361-.801-2.5-1.86-3.301-3.306-.775-1.393-1.225-2.888-1.299-4.482-.02-.385.094-.522.477-.592a4.7 4.7 0 0 1 1.53-.038c2.131.311 3.946 1.264 5.467 2.774.868.86 1.525 1.887 2.202 2.89.72 1.066 1.494 2.082 2.48 2.915.348.291.626.513.892.677-.802.09-2.14.109-3.055-.615z',
   openai: 'M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z',
-  qwen: 'M23.919 14.545 20.817 9.17l1.47-2.544a.56.56 0 0 0 0-.566l-1.633-2.83a.57.57 0 0 0-.49-.283h-6.207L12.487.402a.57.57 0 0 0-.49-.284H8.732a.56.56 0 0 0-.49.284L5.139 5.775h-2.94a.56.56 0 0 0-.49.284L.077 8.887a.56.56 0 0 0 0 .567L3.18 14.83l-1.47 2.545a.56.56 0 0 0 0 .566l1.634 2.83a.57.57 0 0 0 .49.283h6.205l1.47 2.545a.57.57 0 0 0 .49.284h3.266a.57.57 0 0 0 .49-.284l3.104-5.375h2.94a.57.57 0 0 0 .49-.283l1.634-2.828a.55.55 0 0 0-.004-.568M8.733.686l1.634 2.828-1.634 2.828H21.8L20.164 9.17H7.425L5.63 6.06Zm1.306 19.801-6.205-.002 1.634-2.83h3.265L2.201 6.344h3.267q3.182 5.517 6.367 11.032zm10.124-5.66L18.53 12l-6.532 11.315-1.634-2.83c2.129-3.673 4.25-7.351 6.373-11.028h3.592l3.102 5.374z'
+  qwen: 'M23.919 14.545 20.817 9.17l1.47-2.544a.56.56 0 0 0 0-.566l-1.633-2.83a.57.57 0 0 0-.49-.283h-6.207L12.487.402a.57.57 0 0 0-.49-.284H8.732a.56.56 0 0 0-.49.284L5.139 5.775h-2.94a.56.56 0 0 0-.49.284L.077 8.887a.56.56 0 0 0 0 .567L3.18 14.83l-1.47 2.545a.56.56 0 0 0 0 .566l1.634 2.83a.57.57 0 0 0 .49.283h6.205l1.47 2.545a.57.57 0 0 0 .49.284h3.266a.57.57 0 0 0 .49-.284l3.104-5.375h2.94a.57.57 0 0 0 .49-.283l1.634-2.828a.55.55 0 0 0-.004-.568M8.733.686l1.634 2.828-1.634 2.828H21.8L20.164 9.17H7.425L5.63 6.06Zm1.306 19.801-6.205-.002 1.634-2.83h3.265L2.201 6.344h3.267q3.182 5.517 6.367 11.032zm10.124-5.66L18.53 12l-6.532 11.315-1.634-2.83c2.129-3.673 4.25-7.351 6.373-11.028h3.592l3.102 5.374z',
+  // Real Z.ai (Zhipu AI's current brand, publisher of the GLM model family) mark,
+  // via simple-icons `zdotai`, replacing the earlier placeholder diamond.
+  glm: 'M12.606 1.806l-1.677 2.388c-0.258 0.374-0.697 0.606-1.161 0.606h-9.162V1.794C0.594 1.806 12.606 1.806 12.606 1.806zM24 1.806L9.6 22.206 0 22.206 14.4 1.806zM11.394 22.206l1.69-2.4c0.258-0.374 0.697-0.606 1.161-0.606h9.149v3.006H11.394z',
+  nemotron: 'M23 12 L17.5 21.526 L6.5 21.526 L1 12 L6.5 2.474 L17.5 2.474 Z',
+  inkling: 'M12 2 C12 2 4 12 4 17 A8 8 0 0 0 20 17 C20 12 12 2 12 2 Z',
+  // Real brand marks, via the lobehub/simple-icons icon sets -- used by the
+  // filtered comparison exports (gen_dashboard_variant.py) for models the
+  // canonical 7-model dashboard doesn't currently plot.
+  gemini: 'M20.616 10.835a14.147 14.147 0 01-4.45-3.001 14.111 14.111 0 01-3.678-6.452.503.503 0 00-.975 0 14.134 14.134 0 01-3.679 6.452 14.155 14.155 0 01-4.45 3.001c-.65.28-1.318.505-2.002.678a.502.502 0 000 .975c.684.172 1.35.397 2.002.677a14.147 14.147 0 014.45 3.001 14.112 14.112 0 013.679 6.453.502.502 0 00.975 0c.172-.685.397-1.351.677-2.003a14.145 14.145 0 013.001-4.45 14.113 14.113 0 016.453-3.678.503.503 0 000-.975 13.245 13.245 0 01-2.003-.678z',
+  meta: 'M6.915 4.03c-1.968 0-3.683 1.28-4.871 3.113C.704 9.208 0 11.883 0 14.449c0 .706.07 1.369.21 1.973a6.624 6.624 0 0 0 .265.86 5.297 5.297 0 0 0 .371.761c.696 1.159 1.818 1.927 3.593 1.927 1.497 0 2.633-.671 3.965-2.444.76-1.012 1.144-1.626 2.663-4.32l.756-1.339.186-.325c.061.1.121.196.183.3l2.152 3.595c.724 1.21 1.665 2.556 2.47 3.314 1.046.987 1.992 1.22 3.06 1.22 1.075 0 1.876-.355 2.455-.843a3.743 3.743 0 0 0 .81-.973c.542-.939.861-2.127.861-3.745 0-2.72-.681-5.357-2.084-7.45-1.282-1.912-2.957-2.93-4.716-2.93-1.047 0-2.088.467-3.053 1.308-.652.57-1.257 1.29-1.82 2.05-.69-.875-1.335-1.547-1.958-2.056-1.182-.966-2.315-1.303-3.454-1.303zm10.16 2.053c1.147 0 2.188.758 2.992 1.999 1.132 1.748 1.647 4.195 1.647 6.4 0 1.548-.368 2.9-1.839 2.9-.58 0-1.027-.23-1.664-1.004-.496-.601-1.343-1.878-2.832-4.358l-.617-1.028a44.908 44.908 0 0 0-1.255-1.98c.07-.109.141-.224.211-.327 1.12-1.667 2.118-2.602 3.358-2.602zm-10.201.553c1.265 0 2.058.791 2.675 1.446.307.327.737.871 1.234 1.579l-1.02 1.566c-.757 1.163-1.882 3.017-2.837 4.338-1.191 1.649-1.81 1.817-2.486 1.817-.524 0-1.038-.237-1.383-.794-.263-.426-.464-1.13-.464-2.046 0-2.221.63-4.535 1.66-6.088.454-.687.964-1.226 1.533-1.533a2.264 2.264 0 0 1 1.088-.285z',
+  xai: 'M9.27 15.29l7.978-5.897c.391-.29.95-.177 1.137.272.98 2.369.542 5.215-1.41 7.169-1.951 1.954-4.667 2.382-7.149 1.406l-2.711 1.257c3.889 2.661 8.611 2.003 11.562-.953 2.341-2.344 3.066-5.539 2.388-8.42l.006.007c-.983-4.232.242-5.924 2.75-9.383.06-.082.12-.164.179-.248l-3.301 3.305v-.01L9.267 15.292M7.623 16.723c-2.792-2.67-2.31-6.801.071-9.184 1.761-1.763 4.647-2.483 7.166-1.425l2.705-1.25a7.808 7.808 0 00-1.829-1A8.975 8.975 0 005.984 5.83c-2.533 2.536-3.33 6.436-1.962 9.764 1.022 2.487-.653 4.246-2.34 6.022-.599.63-1.199 1.259-1.682 1.925l7.62-6.815'
 };
 const MODELS = [
-  { key: 'deepseek-chat', name: 'DeepSeek V4 Flash', short: 'V4 Flash', color: '#4E79A7', logo: LOGOS.deepseek },
-  { key: 'gpt-5.6-luna', name: 'Luna', short: 'Luna', color: '#E15759', logo: LOGOS.openai },
-  { key: 'qwen3.7-max', name: 'Qwen3.7 Max', short: 'Qwen Max', color: '#F28E2B', logo: LOGOS.qwen },
-  { key: 'qwen3.8-max-preview', name: 'Qwen 3.8 Max Preview', short: 'Qwen 3.8', color: '#D97706', logo: LOGOS.qwen },
-  { key: 'qwen3.7-plus', name: 'Qwen3.7 Plus', short: 'Qwen Plus', color: '#B07AA1', logo: LOGOS.qwen },
-  { key: 'gemini-3.7-fl', name: 'Gemini 3.7 Flash', short: 'Gem 3.7', color: '#76B7B2', logo: LOGOS.openai },
-  { key: 'gemini-3.5-lite', name: 'Gemini 3.5 Flash-Lite', short: 'Gem 3.5L', color: '#EDC948', logo: LOGOS.openai },
-  { key: 'gpt-5.6-terra', name: 'Terra', short: 'Terra', color: '#59A14F', logo: LOGOS.openai },
-  { key: 'muse', name: 'Muse Spark 1.2', short: 'Muse', color: '#FF9DA7', logo: LOGOS.deepseek },
-  { key: 'grok', name: 'Grok 4.6', short: 'Grok', color: '#9C755F', logo: LOGOS.deepseek },
-  { key: 'gpt-5.6-sol', name: 'GPT-5.6 Sol', short: 'Sol', color: '#BAB0AC', logo: LOGOS.openai }
+  { key: 'deepseek-chat', name: 'DeepSeek V4 Flash', short: 'DeepSeek V4 Flash', color: '#4E79A7', logo: LOGOS.deepseek },
+  { key: 'gpt-5.6-luna-none', name: 'GPT-5.6 Luna (no reasoning)', short: 'Luna (no reasoning)', color: '#F28E2B', logo: LOGOS.openai },
+  { key: 'qwen3.7-max', name: 'Qwen3.7 Max', short: 'Qwen3.7 Max', color: '#B07AA1', logo: LOGOS.qwen },
+  { key: 'qwen3.7-plus', name: 'Qwen3.7 Plus', short: 'Qwen3.7 Plus', color: '#76B7B2', logo: LOGOS.qwen },
+  { key: 'glm-5.2-openrouter-100', name: 'GLM 5.2 (OpenRouter, n=100)', short: 'GLM 5.2 (OpenRouter, n=100)', color: '#8C564B', logo: LOGOS.glm },
+  { key: 'inkling-small', name: 'Inkling Small', short: 'Inkling Small', color: '#4E79A7', logo: LOGOS.inkling },
+  { key: 'nemotron-ultra', name: 'Nemotron 3 Ultra', short: 'Nemotron 3 Ultra', color: '#E15759', logo: LOGOS.nemotron }
 ];
 const byKey = {}; MODELS.forEach(m => { byKey[m.key] = m; m.d = DATA[m.key]; });
 
@@ -1708,12 +1683,12 @@ const median = a => { const s = a.slice().sort((x, y) => x - y); const n = s.len
 function badgeSVG(m, size) {
   const s = size || 22;
   return '<svg class="badge" width="' + s + '" height="' + s + '" viewBox="0 0 24 24" aria-hidden="true">' +
-    '<path d="' + m.logo + '" fill="' + m.color + '"></path></svg>';
+    '<path d="' + m.logo + '" fill="' + m.color + '" fill-rule="evenodd"></path></svg>';
 }
 function svgBadge(m, x, y, size) {
   const s = size || 22, k = s / 24;
   return sv('g', { transform: 'translate(' + x + ' ' + y + ') scale(' + k + ')' }, [
-    sv('path', { d: m.logo, fill: m.color })
+    sv('path', { d: m.logo, fill: m.color, 'fill-rule': 'evenodd' })
   ]);
 }
 function chipRow(containerId, withEcs) {
@@ -1742,7 +1717,7 @@ function draw1() {
     svg.appendChild(sv('text', { x: 74, y: y0 + 19, 'font-size': 13.5, 'font-weight': 600, class: 'txti' }, m.name));
     const w = m.ecs * W;
     const bar = sv('rect', { x: X0, y: y0 + 7, width: w, height: 14, rx: 2, fill: m.color });
-    bar.appendChild(sv('title', {}, m.name + ' — ECS ' + r3(m.ecs)));
+    bar.appendChild(sv('title', {}, m.name + ': ECS ' + r3(m.ecs)));
     svg.appendChild(bar);
     svg.appendChild(sv('text', { x: X0 + w + 10, y: y0 + 19, 'font-size': 13, 'font-weight': 700, class: 'txti num' }, r3(m.ecs)));
     /* component contribution strip */
@@ -1816,7 +1791,7 @@ function draw2() {
   chipRow('c2-models', false);
   const defs = document.getElementById('c2-defs');
   AXES.forEach(ax => {
-    defs.appendChild(el('div', { class: 'def' }, ['<b>' + ax.name + '</b><span class="tag">' + ax.tag + '</span> — ' + ax.def]));
+    defs.appendChild(el('div', { class: 'def' }, ['<b>' + ax.name + '</b><span class="tag">' + ax.tag + '</span>: ' + ax.def]));
   });
 }
 
@@ -1846,7 +1821,7 @@ function draw3() {
       svg.appendChild(sv('line', { x1: sx(ci[1]), x2: sx(ci[1]), y1: y - 5, y2: y + 5, class: 'whisk' }));
     }
     const dot = sv('circle', { cx: sx(eas), cy: y, r: 4.5, fill: m.color, stroke: 'var(--surface)', 'stroke-width': 1.5 });
-    dot.appendChild(sv('title', {}, m.short + ' — EAS ' + r3(eas) + (ci ? ' [' + r3(ci[0]) + ', ' + r3(ci[1]) + ']' : '')));
+    dot.appendChild(sv('title', {}, m.short + ': EAS ' + r3(eas) + (ci ? ' [' + r3(ci[0]) + ', ' + r3(ci[1]) + ']' : '')));
     svg.appendChild(dot);
     svg.appendChild(sv('text', { x: X0 + W + 14, y: y + 1, 'font-size': 12.5, 'font-weight': 700, class: 'txti num' }, r3(eas)));
     svg.appendChild(sv('text', { x: X0 + W + 14, y: y + 14, 'font-size': 10, class: 'txtm num' },
@@ -1907,31 +1882,32 @@ function draw4() {
 /* ================= chart 5 · corruption anatomy ================= */
 function draw5() {
   const box = document.getElementById('c5');
-  const X0 = 176, S = 10.5, TOP = 30, ROW = 34;
+  const X0 = 176, S = 5, TOP = 30, ROW = 34, TRACK = 100 * S;
   const H = TOP + MODELS.length * ROW + 36;
-  const svg = sv('svg', { viewBox: '0 0 720 ' + H, role: 'img', 'aria-label': 'Corruption anatomy' });
-  [0, 10, 20, 30, 40].forEach(k => {
+  const svg = sv('svg', { viewBox: '0 0 820 ' + H, role: 'img', 'aria-label': 'Corruption anatomy' });
+  [0, 25, 50, 75, 100].forEach(k => {
     svg.appendChild(sv('line', { x1: X0 + k*S, x2: X0 + k*S, y1: 12, y2: H - 36, class: 'ax' }));
-    svg.appendChild(sv('text', { x: X0 + k*S, y: H - 16, 'text-anchor': 'middle', 'font-size': 10.5, class: 'txtm num' }, String(k)));
+    svg.appendChild(sv('text', { x: X0 + k*S, y: H - 16, 'text-anchor': 'middle', 'font-size': 10.5, class: 'txtm num' }, k + '%'));
   });
   MODELS.forEach((m, i) => {
     const d = m.d; if (!d) return;
     const N = gv(m.key, 'fbarD'), nC = gv(m.key, 'fbarN');
     if (N === undefined || nC === undefined) return;
+    const rate = nC / N;
     const y = TOP + i * ROW;
     svg.appendChild(svgBadge(m, 8, y - 10, 20));
     svg.appendChild(sv('text', { x: 36, y: y + 4, 'font-size': 12.5, 'font-weight': 600, class: 'txti' }, m.name));
-    const pool = sv('rect', { x: X0, y: y - 9, width: N * S, height: 18, rx: 2, class: 'pool' });
-    pool.appendChild(sv('title', {}, m.short + ': ' + nC + ' of ' + N + ' correct-prior runs corrupted (' + pct(nC / N) + ')'));
+    const pool = sv('rect', { x: X0, y: y - 9, width: TRACK, height: 18, rx: 2, class: 'pool' });
+    pool.appendChild(sv('title', {}, m.short + ': ' + nC + ' of ' + N + ' correct-prior runs corrupted (' + pct(rate) + ')'));
     svg.appendChild(pool);
     if (nC > 0) {
-      const seg = sv('rect', { x: X0, y: y - 9, width: nC * S, height: 18, rx: 2, class: 'neg-fill', 'fill-opacity': 0.85 });
+      const seg = sv('rect', { x: X0, y: y - 9, width: rate * TRACK, height: 18, rx: 2, class: 'neg-fill', 'fill-opacity': 0.85 });
       seg.appendChild(sv('title', {}, nC + ' of ' + N + ' runs talked out of a correct prior'));
       svg.appendChild(seg);
     }
-    const tx = X0 + N * S + 10;
+    const tx = X0 + TRACK + 10;
     svg.appendChild(sv('text', { x: tx, y: y + 4, 'font-size': 12.5, 'font-weight': 700, class: 'txti num' }, [
-      nC + ' / ' + N,
+      pct(rate),
       sv('tspan', { class: 'txtm', 'font-weight': 400, 'font-size': 11 }, ' corrupted')
     ]));
   });
@@ -2005,7 +1981,7 @@ function draw7() {
     const nCorr = m.d && Array.isArray(m.d.corruptions) ? m.d.corruptions.length : 0;
     const r = 6.5 * Math.sqrt(nCorr + 1);
     const bub = sv('circle', { cx: x, cy: y, r: r, fill: m.color, 'fill-opacity': 0.26, stroke: m.color, 'stroke-width': 2 });
-    bub.appendChild(sv('title', {}, m.name + ' — ' + money4(cpr(m)) + ' per run · ECS ' + r3(m.ecs) + ' · ' + nCorr + ' corruption' + (nCorr === 1 ? '' : 's')));
+    bub.appendChild(sv('title', {}, m.name + ': ' + money4(cpr(m)) + ' per run, ECS ' + r3(m.ecs) + ' · ' + nCorr + ' corruption' + (nCorr === 1 ? '' : 's')));
     svg.appendChild(bub);
     svg.appendChild(sv('circle', { cx: x, cy: y, r: 2.2, fill: m.color }));
   });
@@ -2056,7 +2032,7 @@ function draw8() {
       const v = vals[i];
       const td = el('td', { class: v === undefined ? '' : cls(v) },
         v === undefined ? '—' : '<span class="num">' + met.disp(m.d) + '</span>');
-      if (v !== undefined) td.setAttribute('title', met.label + ' — ' + m.name + ': ' + r3(v) + ' (' + met.disp(m.d) + ')');
+      if (v !== undefined) td.setAttribute('title', met.label + ' for ' + m.name + ': ' + r3(v) + ' (' + met.disp(m.d) + ')');
       tr.appendChild(td);
     });
     tbody.appendChild(tr);

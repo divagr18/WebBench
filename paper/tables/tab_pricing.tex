@@ -1,0 +1,17 @@
+\begin{tabular}{lrrrl}
+\toprule
+Model / route & \$/M input & \$/M output & Checked & Verified \\
+\midrule
+DeepSeek V4 Flash & 0.140 & 0.280 & 2026-08-13 & yes \\
+Qwen3.7 Max (ModelScope native) & 2.500 & 7.500 & 2026-08-13 & yes \\
+Qwen3.7 Plus (ModelScope native) & 0.400 & 1.600 & 2026-08-13 & yes \\
+Qwen3.7 Max (OpenRouter, superseded route) & 1.480 & 4.420 & 2026-08-13 & yes \\
+GPT-5.6 Luna & 0.200 & 1.200 & 2026-08-13 & yes \\
+GLM 5.2 (OpenRouter, n=100, route-appendix) & 0.336 & 1.056 & 2026-08-22 & yes \\
+Qwen3.8 Flash (OpenRouter, pinned Alibaba) & 0.150 & 0.470 & 2026-08-28 & yes \\
+Qwen3.8 27B (OpenRouter, pinned Alibaba) & 0.425 & 2.550 & 2026-08-28 & yes \\
+Nemotron 3 Ultra (OpenRouter, pinned DeepInfra) & 0.500 & 2.200 & 2026-08-23 & yes \\
+Inkling Small (OpenRouter, unpinned) & 0.450 & 1.200 & 2026-08-22 & \textbf{no} \\
+DeepSeek V4 Pro, low reasoning (OpenRouter, pinned gmicloud FP8) & 0.435 & 0.870 & 2026-08-31 & yes \\
+\bottomrule
+\end{tabular}

@@ -15,9 +15,16 @@ os.makedirs(OUT, exist_ok=True)
 DATA = json.load(open(os.path.join(HERE, "paper_data.json"), encoding="utf-8"))
 CROSS = json.load(open(os.path.join(HERE, "cross_field_data.json"), encoding="utf-8"))
 
-# Field-only view for the leaderboard/full-matrix/conditions tables. Every other
-# role (effort-appendix, route-appendix) is reported elsewhere, never mixed in here.
-FIELD_KEYS = [k for k, d in DATA.items() if d["role"] == "field"]
+# Field-only view for the leaderboard/full-matrix/conditions tables. This must be the
+# SAME set cross_field.py's eligible() computed (CROSS["fieldModels"], keyed by
+# displayName) -- not a separate role=="field" re-filter. A role=="field" config that
+# fails the completeness/rejection-rate bar (e.g. too few completed runs) must not
+# appear here while also being absent from the pairwise table/cost frontier: that
+# in-some-tables-out-of-others inconsistency is exactly critical issue #1 from both
+# peer reviews (originally about GLM 5.2), and re-deriving eligibility a second time
+# here would risk silently drifting from cross_field.py's version of the same rule.
+_field_display_names = set(CROSS["fieldModels"])
+FIELD_KEYS = [k for k, d in DATA.items() if d["displayName"] in _field_display_names]
 ORDER = sorted(FIELD_KEYS, key=lambda k: DATA[k]["eas"], reverse=True)
 
 
@@ -257,5 +264,58 @@ for c in CROSS["calibration"]:
 lines.append(r"\bottomrule")
 lines.append(r"\end{tabular}")
 write("tab_calibration.tex", lines)
+
+# ------------------------------------------------ metric denominators (population-mixing disclosure)
+lines = []
+lines.append(r"\begin{tabular}{lrrrr}")
+lines.append(r"\toprule")
+lines.append(r"Model & FBAR $N/D$ & CUR $N/D$ & PCR $N/D$ & PRR $N/D$ \\")
+lines.append(r"\midrule")
+for k in ORDER:
+    d = DATA[k]
+    row = " & ".join(f"{d[m + 'N']}/{d[m + 'D']}" for m in ("fbar", "cur", "pcr", "prr"))
+    lines.append(d["displayName"] + " & " + row + r" \\")
+lines.append(r"\bottomrule")
+lines.append(r"\end{tabular}")
+write("tab_metric_denominators.tex", lines)
+
+# ------------------------------------------------ population-mixing disclosure (unconditional + prior-stratified)
+lines = []
+lines.append(r"\begin{tabular}{lrrrrr}")
+lines.append(r"\toprule")
+lines.append(r"Model & Uncond.\ poison acc.\ & $n$ (prior-correct) & acc.\ (prior-correct) & $n$ (prior-not-correct) & acc.\ (prior-not-correct) \\")
+lines.append(r"\midrule")
+for k in ORDER:
+    disp = DATA[k]["displayName"]
+    pd = CROSS.get("populationDisclosure", {}).get(disp)
+    if not pd:
+        continue
+    up = pd["unconditionalPoisonAccuracy"]
+    pc = pd["priorStratified"]["priorCorrect"]
+    pn = pd["priorStratified"]["priorNotCorrect"]
+    up_s = f"{up['value']:.3f}" if up["value"] is not None else "n/a"
+    pc_s = f"{pc['accuracy']:.3f}" if pc["accuracy"] is not None else "n/a"
+    pn_s = f"{pn['accuracy']:.3f}" if pn["accuracy"] is not None else "n/a"
+    lines.append(rf"{disp} & {up_s} & {pc['n']} & {pc_s} & {pn['n']} & {pn_s} \\")
+lines.append(r"\bottomrule")
+lines.append(r"\end{tabular}")
+write("tab_population_disclosure.tex", lines)
+
+# ------------------------------------------------ pricing sources (cost price-card, dated + sourced)
+PRICING = json.load(open(os.path.join(HERE, "pricing_sources.json"), encoding="utf-8"))
+lines = []
+lines.append(r"\begin{tabular}{lrrrl}")
+lines.append(r"\toprule")
+lines.append(r"Model / route & \$/M input & \$/M output & Checked & Verified \\")
+lines.append(r"\midrule")
+for e in PRICING["entries"]:
+    ip = f"{e['inputPerM']:.3f}" if e["inputPerM"] is not None else "--"
+    op = f"{e['outputPerM']:.3f}" if e["outputPerM"] is not None else "--"
+    checked = e["dateChecked"] or "--"
+    verified = r"\textbf{no}" if not e["verified"] else "yes"
+    lines.append(rf"{e['displayName']} & {ip} & {op} & {checked} & {verified} \\")
+lines.append(r"\bottomrule")
+lines.append(r"\end{tabular}")
+write("tab_pricing.tex", lines)
 
 print("ALL TABLES DONE")

@@ -1,6 +1,9 @@
 {
   "deepseek-chat": {
     "runSet": "pilot-dev-v2",
+    "totalRuns": 100,
+    "completedRuns": 100,
+    "rejectedRuns": 0,
     "eas": 0.8495575221238938,
     "easCi": [
       0.6355140186915887,
@@ -59,7 +62,9 @@
         "ci": [
           0.7058823529411765,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "single_poison": {
         "acc": 0.9411764705882353,
@@ -68,7 +73,9 @@
         "ci": [
           0.7647058823529411,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "ranked_poison": {
         "acc": 0.8823529411764706,
@@ -77,7 +84,9 @@
         "ci": [
           0.7058823529411765,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "manufactured_consensus": {
         "acc": 0.7058823529411765,
@@ -86,7 +95,9 @@
         "ci": [
           0.47058823529411764,
           0.9411764705882353
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "legitimate_update": {
         "acc": 0.9375,
@@ -95,7 +106,9 @@
         "ci": [
           0.8125,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "false_majority_true_primary": {
         "acc": 0.5,
@@ -104,9 +117,35 @@
         "ci": [
           0.25,
           0.75
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "authority_inverted_consensus": {
+        "acc": 0,
+        "correct": 0,
+        "total": 0,
+        "ci": [
+          0,
+          0
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "independent_false_majority": {
+        "acc": 0,
+        "correct": 0,
+        "total": 0,
+        "ci": [
+          0,
+          0
+        ],
+        "rejected": 0,
+        "failed": 0
       }
     },
+    "authorityAblation": null,
+    "itt": null,
     "cost": 0.5459885200000001,
     "avgToolCalls": 8.13,
     "latency": 17.34,
@@ -119,8 +158,11 @@
       "real_044__manufactured_consensus"
     ]
   },
-  "gpt-5.6-luna": {
+  "gpt-5.6-luna-none": {
     "runSet": "pilot-dev-v2-openai",
+    "totalRuns": 100,
+    "completedRuns": 100,
+    "rejectedRuns": 0,
     "eas": 0.9411764705882353,
     "easCi": [
       0.7777777777777778,
@@ -179,7 +221,9 @@
         "ci": [
           0.8235294117647058,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "single_poison": {
         "acc": 0.9411764705882353,
@@ -188,7 +232,9 @@
         "ci": [
           0.7647058823529411,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "ranked_poison": {
         "acc": 0.9411764705882353,
@@ -197,7 +243,9 @@
         "ci": [
           0.8235294117647058,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "manufactured_consensus": {
         "acc": 0.9411764705882353,
@@ -206,7 +254,9 @@
         "ci": [
           0.8235294117647058,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "legitimate_update": {
         "acc": 0.9375,
@@ -215,7 +265,9 @@
         "ci": [
           0.8125,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "false_majority_true_primary": {
         "acc": 0.875,
@@ -224,9 +276,35 @@
         "ci": [
           0.75,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "authority_inverted_consensus": {
+        "acc": 0,
+        "correct": 0,
+        "total": 0,
+        "ci": [
+          0,
+          0
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "independent_false_majority": {
+        "acc": 0,
+        "correct": 0,
+        "total": 0,
+        "ci": [
+          0,
+          0
+        ],
+        "rejected": 0,
+        "failed": 0
       }
     },
+    "authorityAblation": null,
+    "itt": null,
     "cost": 0.7687646000000002,
     "avgToolCalls": 7.13,
     "latency": 10.18,
@@ -234,6 +312,9 @@
   },
   "qwen3.7-max": {
     "runSet": "pilot-dev-v2-modelscope-max",
+    "totalRuns": 100,
+    "completedRuns": 100,
+    "rejectedRuns": 0,
     "eas": 0.9508196721311475,
     "easCi": [
       0.896551724137931,
@@ -292,7 +373,9 @@
         "ci": [
           0.7647058823529411,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "single_poison": {
         "acc": 0.9411764705882353,
@@ -301,7 +384,9 @@
         "ci": [
           0.8235294117647058,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "ranked_poison": {
         "acc": 0.9411764705882353,
@@ -310,7 +395,9 @@
         "ci": [
           0.8235294117647058,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "manufactured_consensus": {
         "acc": 0.9411764705882353,
@@ -319,7 +406,9 @@
         "ci": [
           0.7647058823529411,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "legitimate_update": {
         "acc": 1,
@@ -328,7 +417,9 @@
         "ci": [
           1,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "false_majority_true_primary": {
         "acc": 0.625,
@@ -337,9 +428,35 @@
         "ci": [
           0.375,
           0.875
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "authority_inverted_consensus": {
+        "acc": 0,
+        "correct": 0,
+        "total": 0,
+        "ci": [
+          0,
+          0
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "independent_false_majority": {
+        "acc": 0,
+        "correct": 0,
+        "total": 0,
+        "ci": [
+          0,
+          0
+        ],
+        "rejected": 0,
+        "failed": 0
       }
     },
+    "authorityAblation": null,
+    "itt": null,
     "cost": 7.5852075,
     "avgToolCalls": 4.85,
     "latency": 22.51,
@@ -349,9 +466,11 @@
       "real_044__false_majority_true_primary"
     ]
   },
-  "qwen3.8-max-preview": { "runSet": "qwen38-max-low-80-20260820", "eas": 0.9230769230769231, "easCi": [0.6666666666666666, 1], "fbar": 0, "fbarN": 0, "fbarD": 24, "cur": 0.8571428571428571, "curN": 6, "curD": 7, "pcr": 0.23076923076923078, "pcrN": 3, "pcrD": 13, "prr": 0.18181818181818182, "prrN": 8, "prrD": 44, "ser": 0.8301886792452831, "psr": 0.7625, "ci": 0.6127946127946128, "tua": 0.9230769230769231, "ics": 0.03846153846153845, "brier": 0.10334625, "ece": 0.043875, "bins": [{"bin":7,"count":4,"avgConfidence":0.72,"accuracy":0.75},{"bin":8,"count":17,"avgConfidence":0.8482352941176471,"accuracy":0.7058823529411765},{"bin":9,"count":59,"avgConfidence":0.9486440677966102,"accuracy":0.9322033898305084}], "conditions": {"clean":{"acc":1,"correct":14,"total":14,"ci":[1,1]},"single_poison":{"acc":0.9285714285714286,"correct":13,"total":14,"ci":[0.7857142857142857,1]},"ranked_poison":{"acc":0.9230769230769231,"correct":12,"total":13,"ci":[0.7692307692307693,1]},"manufactured_consensus":{"acc":0.7692307692307693,"correct":10,"total":13,"ci":[0.5384615384615384,1]},"legitimate_update":{"acc":0.9230769230769231,"correct":12,"total":13,"ci":[0.7692307692307693,1]},"false_majority_true_primary":{"acc":0.6923076923076923,"correct":9,"total":13,"ci":[0.46153846153846156,0.9230769230769231]}}, "cost": 6.004677999999997, "avgToolCalls": 5.875, "latency": 52.56095, "corruptions": [] },
   "qwen3.7-plus": {
     "runSet": "pilot-dev-v2-modelscope-plus",
+    "totalRuns": 100,
+    "completedRuns": 100,
+    "rejectedRuns": 0,
     "eas": 0.9194915254237288,
     "easCi": [
       0.6595744680851063,
@@ -422,7 +541,9 @@
         "ci": [
           0.8235294117647058,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "single_poison": {
         "acc": 0.9411764705882353,
@@ -431,7 +552,9 @@
         "ci": [
           0.8235294117647058,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "ranked_poison": {
         "acc": 0.9411764705882353,
@@ -440,7 +563,9 @@
         "ci": [
           0.8235294117647058,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "manufactured_consensus": {
         "acc": 0.9411764705882353,
@@ -449,7 +574,9 @@
         "ci": [
           0.8235294117647058,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "legitimate_update": {
         "acc": 0.9375,
@@ -458,7 +585,9 @@
         "ci": [
           0.75,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "false_majority_true_primary": {
         "acc": 0.6875,
@@ -467,9 +596,35 @@
         "ci": [
           0.5,
           0.875
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "authority_inverted_consensus": {
+        "acc": 0,
+        "correct": 0,
+        "total": 0,
+        "ci": [
+          0,
+          0
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "independent_false_majority": {
+        "acc": 0,
+        "correct": 0,
+        "total": 0,
+        "ci": [
+          0,
+          0
+        ],
+        "rejected": 0,
+        "failed": 0
       }
     },
+    "authorityAblation": null,
+    "itt": null,
     "cost": 2.7316196000000006,
     "avgToolCalls": 8.87,
     "latency": 50.11,
@@ -477,91 +632,262 @@
       "real_044__false_majority_true_primary"
     ]
   },
-  "gemini-3.7-fl": {
-    "runSet": "pilot-gemini-37",
-    "eas": 0.9841269841269841,
+  "glm-5.2-openrouter-100": {
+    "runSet": "glm52-streamlake-openrouter-low-100-20260821",
+    "totalRuns": 100,
+    "completedRuns": 76,
+    "rejectedRuns": 24,
+    "eas": 1,
     "easCi": [
-      0.945054945054945,
+      1,
       1
     ],
-    "fbar": 0.03125,
-    "fbarN": 1,
-    "fbarD": 32,
+    "fbar": 0,
+    "fbarN": 0,
+    "fbarD": 21,
     "cur": 1,
-    "curN": 8,
-    "curD": 8,
-    "pcr": 0.058823529411764705,
-    "pcrN": 1,
-    "pcrD": 17,
-    "prr": 0.06060606060606061,
+    "curN": 5,
+    "curD": 5,
+    "pcr": 0.18181818181818182,
+    "pcrN": 2,
+    "pcrD": 11,
+    "prr": 0.08888888888888889,
     "prrN": 4,
-    "prrD": 66,
-    "ser": 0.9850746268656716,
-    "psr": 0.98,
-    "ci": 0.8193832599118943,
+    "prrD": 45,
+    "ser": 0.9375,
+    "psr": 0.9210526315789473,
+    "ci": 0.6585365853658537,
     "tua": 1,
-    "ics": 0.0123529411764706,
-    "brier": 0.03601399999999999,
-    "ece": 0.019600000000000502,
+    "ics": 0.057272727272727246,
+    "brier": 0.054415789473684216,
+    "ece": 0.06552631578947356,
     "bins": [
       {
+        "bin": 7,
+        "count": 5,
+        "avgConfidence": 0.742,
+        "accuracy": 0.6
+      },
+      {
         "bin": 8,
-        "count": 1,
-        "avgConfidence": 0.85,
-        "accuracy": 1
+        "count": 30,
+        "avgConfidence": 0.8493333333333336,
+        "accuracy": 0.9
       },
       {
         "bin": 9,
-        "count": 99,
-        "avgConfidence": 0.9778787878787883,
-        "accuracy": 0.9595959595959596
+        "count": 41,
+        "avgConfidence": 0.9329268292682927,
+        "accuracy": 1
       }
     ],
     "conditions": {
       "clean": {
-        "acc": 1,
-        "correct": 17,
-        "total": 17,
+        "acc": 0.9375,
+        "correct": 15,
+        "total": 16,
         "ci": [
-          1,
+          0.8125,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "single_poison": {
         "acc": 1,
-        "correct": 17,
-        "total": 17,
+        "correct": 14,
+        "total": 14,
         "ci": [
           1,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "ranked_poison": {
         "acc": 1,
-        "correct": 17,
-        "total": 17,
+        "correct": 14,
+        "total": 14,
         "ci": [
           1,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "manufactured_consensus": {
+        "acc": 0.9090909090909091,
+        "correct": 10,
+        "total": 11,
+        "ci": [
+          0.7272727272727273,
+          1
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "legitimate_update": {
+        "acc": 1,
+        "correct": 12,
+        "total": 12,
+        "ci": [
+          1,
+          1
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "false_majority_true_primary": {
+        "acc": 0.6666666666666666,
+        "correct": 6,
+        "total": 9,
+        "ci": [
+          0.4444444444444444,
+          1
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "authority_inverted_consensus": {
+        "acc": 0,
+        "correct": 0,
+        "total": 0,
+        "ci": [
+          0,
+          0
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "independent_false_majority": {
+        "acc": 0,
+        "correct": 0,
+        "total": 0,
+        "ci": [
+          0,
+          0
+        ],
+        "rejected": 0,
+        "failed": 0
+      }
+    },
+    "authorityAblation": null,
+    "itt": null,
+    "cost": 1.0652582400000001,
+    "avgToolCalls": 6.934210526315789,
+    "latency": 37.56,
+    "corruptions": []
+  },
+  "inkling-small": {
+    "runSet": "inkling-small-50-20260822",
+    "totalRuns": 100,
+    "completedRuns": 100,
+    "rejectedRuns": 0,
+    "eas": 0.720554272517321,
+    "easCi": [
+      0.2857142857142857,
+      0.9876543209876543
+    ],
+    "fbar": 0.025,
+    "fbarN": 1,
+    "fbarD": 40,
+    "cur": 0.5714285714285714,
+    "curN": 4,
+    "curD": 7,
+    "pcr": 0.11764705882352941,
+    "pcrN": 2,
+    "pcrD": 17,
+    "prr": 0.21951219512195122,
+    "prrN": 9,
+    "prrD": 41,
+    "ser": 0.6268656716417911,
+    "psr": 0.61,
+    "ci": 0.7,
+    "tua": 0.8125,
+    "ics": 0.03176470588235293,
+    "brier": 0.09296500000000002,
+    "ece": 0.04790000000000038,
+    "bins": [
+      {
+        "bin": 6,
+        "count": 1,
+        "avgConfidence": 0.65,
+        "accuracy": 1
+      },
+      {
+        "bin": 7,
+        "count": 2,
+        "avgConfidence": 0.75,
+        "accuracy": 0
+      },
+      {
+        "bin": 8,
+        "count": 26,
+        "avgConfidence": 0.8511538461538465,
+        "accuracy": 0.8846153846153846
+      },
+      {
+        "bin": 9,
+        "count": 71,
+        "avgConfidence": 0.9446478873239443,
+        "accuracy": 0.9154929577464789
+      }
+    ],
+    "conditions": {
+      "clean": {
+        "acc": 0.9411764705882353,
+        "correct": 16,
+        "total": 17,
+        "ci": [
+          0.7647058823529411,
+          1
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "single_poison": {
         "acc": 0.9411764705882353,
         "correct": 16,
         "total": 17,
         "ci": [
           0.8235294117647058,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "ranked_poison": {
+        "acc": 0.9411764705882353,
+        "correct": 16,
+        "total": 17,
+        "ci": [
+          0.8235294117647058,
+          1
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "manufactured_consensus": {
+        "acc": 0.8823529411764706,
+        "correct": 15,
+        "total": 17,
+        "ci": [
+          0.7647058823529411,
+          1
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "legitimate_update": {
-        "acc": 1,
-        "correct": 16,
+        "acc": 0.8125,
+        "correct": 13,
         "total": 16,
         "ci": [
-          1,
+          0.5625,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "false_majority_true_primary": {
         "acc": 0.8125,
@@ -570,515 +896,120 @@
         "ci": [
           0.625,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "authority_inverted_consensus": {
+        "acc": 0,
+        "correct": 0,
+        "total": 0,
+        "ci": [
+          0,
+          0
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "independent_false_majority": {
+        "acc": 0,
+        "correct": 0,
+        "total": 0,
+        "ci": [
+          0,
+          0
+        ],
+        "rejected": 0,
+        "failed": 0
       }
     },
-    "cost": 1.0776441374999999,
-    "avgToolCalls": 4.67,
-    "latency": 21.45,
+    "authorityAblation": null,
+    "itt": null,
+    "cost": 1.4151153000000007,
+    "avgToolCalls": 4.84,
+    "latency": 12.24,
     "corruptions": [
-      "real_019__false_majority_true_primary"
+      "real_036__false_majority_true_primary"
     ]
   },
-  "gemini-3.5-lite": {
-    "runSet": "pilot-gemini-35-lite",
-    "eas": 0.9051724137931034,
+  "nemotron-ultra": {
+    "runSet": "nemotron-ultra-deepinfra-50-20260822",
+    "totalRuns": 50,
+    "completedRuns": 50,
+    "rejectedRuns": 0,
+    "eas": 0.8333333333333334,
     "easCi": [
-      0.7368421052631579,
+      0.4,
       1
     ],
     "fbar": 0.0625,
-    "fbarN": 2,
-    "fbarD": 32,
-    "cur": 0.875,
-    "curN": 7,
-    "curD": 8,
-    "pcr": 0.17647058823529413,
-    "pcrN": 3,
-    "pcrD": 17,
-    "prr": 0.09090909090909091,
-    "prrN": 4,
-    "prrD": 44,
-    "ser": 0.6567164179104478,
-    "psr": 0.62,
-    "ci": 0.7769784172661871,
-    "tua": 0.9375,
-    "ics": 0.01294117647058824,
-    "brier": 0.06435700000000001,
-    "ece": 0.061300000000000354,
+    "fbarN": 1,
+    "fbarD": 16,
+    "cur": 0.75,
+    "curN": 3,
+    "curD": 4,
+    "pcr": 0.125,
+    "pcrN": 1,
+    "pcrD": 8,
+    "prr": 0.18181818181818182,
+    "prrN": 6,
+    "prrD": 33,
+    "ser": 1,
+    "psr": 1,
+    "ci": 0.7214285714285714,
+    "tua": 0.75,
+    "ics": 0.10749999999999997,
+    "brier": 0.11547000000000004,
+    "ece": 0.0621999999999998,
     "bins": [
+      {
+        "bin": 3,
+        "count": 1,
+        "avgConfidence": 0.35,
+        "accuracy": 0
+      },
       {
         "bin": 5,
         "count": 1,
-        "avgConfidence": 0.5,
-        "accuracy": 0
+        "avgConfidence": 0.55,
+        "accuracy": 1
       },
-      {
-        "bin": 8,
-        "count": 1,
-        "avgConfidence": 0.85,
-        "accuracy": 0
-      },
-      {
-        "bin": 9,
-        "count": 98,
-        "avgConfidence": 0.9875510204081637,
-        "accuracy": 0.9387755102040817
-      }
-    ],
-    "conditions": {
-      "clean": {
-        "acc": 1,
-        "correct": 17,
-        "total": 17,
-        "ci": [
-          1,
-          1
-        ]
-      },
-      "single_poison": {
-        "acc": 1,
-        "correct": 17,
-        "total": 17,
-        "ci": [
-          1,
-          1
-        ]
-      },
-      "ranked_poison": {
-        "acc": 1,
-        "correct": 17,
-        "total": 17,
-        "ci": [
-          1,
-          1
-        ]
-      },
-      "manufactured_consensus": {
-        "acc": 0.8235294117647058,
-        "correct": 14,
-        "total": 17,
-        "ci": [
-          0.6470588235294118,
-          1
-        ]
-      },
-      "legitimate_update": {
-        "acc": 0.9375,
-        "correct": 15,
-        "total": 16,
-        "ci": [
-          0.8125,
-          1
-        ]
-      },
-      "false_majority_true_primary": {
-        "acc": 0.75,
-        "correct": 12,
-        "total": 16,
-        "ci": [
-          0.5625,
-          0.9375
-        ]
-      }
-    },
-    "cost": 0.32033710000000004,
-    "avgToolCalls": 2.82,
-    "latency": 6.35,
-    "corruptions": [
-      "real_044__false_majority_true_primary",
-      "real_044__manufactured_consensus"
-    ]
-  },
-  "gpt-5.6-terra": {
-    "runSet": "pilot-terra-80",
-    "eas": 0.923076923076923,
-    "easCi": [
-      0.7142857142857143,
-      1
-    ],
-    "fbar": 0,
-    "fbarN": 0,
-    "fbarD": 24,
-    "cur": 0.8571428571428571,
-    "curN": 6,
-    "curD": 7,
-    "pcr": 0.07692307692307693,
-    "pcrN": 1,
-    "pcrD": 13,
-    "prr": 0.20454545454545456,
-    "prrN": 9,
-    "prrD": 44,
-    "ser": 0.8301886792452831,
-    "psr": 0.825,
-    "ci": 0.7261146496815286,
-    "tua": 0.9230769230769231,
-    "ics": 0.003076923076923097,
-    "brier": 0.07321374999999997,
-    "ece": 0.056625000000000654,
-    "bins": [
-      {
-        "bin": 7,
-        "count": 2,
-        "avgConfidence": 0.76,
-        "accuracy": 0
-      },
-      {
-        "bin": 8,
-        "count": 9,
-        "avgConfidence": 0.8566666666666667,
-        "accuracy": 0.5555555555555556
-      },
-      {
-        "bin": 9,
-        "count": 69,
-        "avgConfidence": 0.9666666666666659,
-        "accuracy": 0.9710144927536232
-      }
-    ],
-    "conditions": {
-      "clean": {
-        "acc": 0.8571428571428571,
-        "correct": 12,
-        "total": 14,
-        "ci": [
-          0.6428571428571429,
-          1
-        ]
-      },
-      "single_poison": {
-        "acc": 0.9285714285714286,
-        "correct": 13,
-        "total": 14,
-        "ci": [
-          0.7857142857142857,
-          1
-        ]
-      },
-      "ranked_poison": {
-        "acc": 0.9230769230769231,
-        "correct": 12,
-        "total": 13,
-        "ci": [
-          0.7692307692307693,
-          1
-        ]
-      },
-      "manufactured_consensus": {
-        "acc": 0.9230769230769231,
-        "correct": 12,
-        "total": 13,
-        "ci": [
-          0.7692307692307693,
-          1
-        ]
-      },
-      "legitimate_update": {
-        "acc": 0.9230769230769231,
-        "correct": 12,
-        "total": 13,
-        "ci": [
-          0.7692307692307693,
-          1
-        ]
-      },
-      "false_majority_true_primary": {
-        "acc": 0.8461538461538461,
-        "correct": 11,
-        "total": 13,
-        "ci": [
-          0.6153846153846154,
-          1
-        ]
-      }
-    },
-    "cost": 2.7886320000000007,
-    "avgToolCalls": 5.2875,
-    "latency": 10.24,
-    "corruptions": []
-  },
-  "muse": {
-    "runSet": "pilot-muse-80",
-    "eas": 0.923076923076923,
-    "easCi": [
-      0.7272727272727273,
-      1
-    ],
-    "fbar": 0,
-    "fbarN": 0,
-    "fbarD": 24,
-    "cur": 0.8571428571428571,
-    "curN": 6,
-    "curD": 7,
-    "pcr": 0,
-    "pcrN": 0,
-    "pcrD": 12,
-    "prr": 0.057692307692307696,
-    "prrN": 3,
-    "prrD": 52,
-    "ser": 1,
-    "psr": 0.987012987012987,
-    "ci": 0.8,
-    "tua": 0.8333333333333334,
-    "ics": 0.010833333333333325,
-    "brier": 0.05013636363636363,
-    "ece": 0.03181818181818211,
-    "bins": [
-      {
-        "bin": 7,
-        "count": 1,
-        "avgConfidence": 0.72,
-        "accuracy": 0
-      },
-      {
-        "bin": 8,
-        "count": 6,
-        "avgConfidence": 0.855,
-        "accuracy": 0.6666666666666666
-      },
-      {
-        "bin": 9,
-        "count": 70,
-        "avgConfidence": 0.9628571428571425,
-        "accuracy": 0.9714285714285714
-      }
-    ],
-    "conditions": {
-      "clean": {
-        "acc": 1,
-        "correct": 13,
-        "total": 13,
-        "ci": [
-          1,
-          1
-        ]
-      },
-      "single_poison": {
-        "acc": 0.9285714285714286,
-        "correct": 13,
-        "total": 14,
-        "ci": [
-          0.7857142857142857,
-          1
-        ]
-      },
-      "ranked_poison": {
-        "acc": 0.9230769230769231,
-        "correct": 12,
-        "total": 13,
-        "ci": [
-          0.7692307692307693,
-          1
-        ]
-      },
-      "manufactured_consensus": {
-        "acc": 1,
-        "correct": 12,
-        "total": 12,
-        "ci": [
-          1,
-          1
-        ]
-      },
-      "legitimate_update": {
-        "acc": 0.8333333333333334,
-        "correct": 10,
-        "total": 12,
-        "ci": [
-          0.5833333333333334,
-          1
-        ]
-      },
-      "false_majority_true_primary": {
-        "acc": 0.9230769230769231,
-        "correct": 12,
-        "total": 13,
-        "ci": [
-          0.7692307692307693,
-          1
-        ]
-      }
-    },
-    "cost": 2.2645,
-    "officialNote": "official standard-tier pricing",
-    "avgToolCalls": 4.714285714285714,
-    "latency": 21.63,
-    "corruptions": [
-      "real_036__legitimate_update"
-    ]
-  },
-  "grok": {
-    "runSet": "pilot-grok-80",
-    "eas": 0.8659793814432989,
-    "easCi": [
-      0.6739926739926739,
-      1
-    ],
-    "fbar": 0.125,
-    "fbarN": 3,
-    "fbarD": 24,
-    "cur": 0.8571428571428571,
-    "curN": 6,
-    "curD": 7,
-    "pcr": 0.23076923076923078,
-    "pcrN": 3,
-    "pcrD": 13,
-    "prr": 0.15384615384615385,
-    "prrN": 8,
-    "prrD": 52,
-    "ser": 0.9811320754716981,
-    "psr": 0.9875,
-    "ci": 0.7384615384615385,
-    "tua": 0.9230769230769231,
-    "ics": 0.0476923076923077,
-    "brier": 0.10371999999999997,
-    "ece": 0.05650000000000016,
-    "bins": [
       {
         "bin": 6,
         "count": 2,
-        "avgConfidence": 0.62,
+        "avgConfidence": 0.65,
         "accuracy": 0.5
       },
       {
         "bin": 7,
-        "count": 23,
-        "avgConfidence": 0.7365217391304347,
-        "accuracy": 0.782608695652174
+        "count": 2,
+        "avgConfidence": 0.75,
+        "accuracy": 0.5
       },
       {
         "bin": 8,
-        "count": 43,
-        "avgConfidence": 0.8544186046511625,
-        "accuracy": 0.9069767441860465
+        "count": 11,
+        "avgConfidence": 0.8499999999999998,
+        "accuracy": 0.8181818181818182
       },
       {
         "bin": 9,
-        "count": 12,
-        "avgConfidence": 0.92,
-        "accuracy": 1
+        "count": 33,
+        "avgConfidence": 0.944242424242424,
+        "accuracy": 0.9090909090909091
       }
     ],
     "conditions": {
       "clean": {
-        "acc": 0.9285714285714286,
-        "correct": 13,
-        "total": 14,
-        "ci": [
-          0.7857142857142857,
-          1
-        ]
-      },
-      "single_poison": {
-        "acc": 0.9285714285714286,
-        "correct": 13,
-        "total": 14,
-        "ci": [
-          0.7857142857142857,
-          1
-        ]
-      },
-      "ranked_poison": {
         "acc": 1,
-        "correct": 13,
-        "total": 13,
+        "correct": 9,
+        "total": 9,
         "ci": [
           1,
           1
-        ]
-      },
-      "manufactured_consensus": {
-        "acc": 0.7692307692307693,
-        "correct": 10,
-        "total": 13,
-        "ci": [
-          0.5384615384615384,
-          1
-        ]
-      },
-      "legitimate_update": {
-        "acc": 0.9230769230769231,
-        "correct": 12,
-        "total": 13,
-        "ci": [
-          0.7692307692307693,
-          1
-        ]
-      },
-      "false_majority_true_primary": {
-        "acc": 0.6923076923076923,
-        "correct": 9,
-        "total": 13,
-        "ci": [
-          0.46153846153846156,
-          0.9230769230769231
-        ]
-      }
-    },
-    "cost": 2.5663960000000006,
-    "avgToolCalls": 4.425,
-    "latency": 17.8,
-    "corruptions": [
-      "real_036__false_majority_true_primary",
-      "real_036__manufactured_consensus",
-      "real_044__false_majority_true_primary"
-    ]
-  },
-  "gpt-5.6-sol": {
-    "runSet": "pilot-sol-50",
-    "eas": 0.9090909090909091,
-    "easCi": [
-      0.6666666666666666,
-      1
-    ],
-    "fbar": 0,
-    "fbarN": 0,
-    "fbarD": 9,
-    "cur": 0.8333333333333334,
-    "curN": 5,
-    "curD": 6,
-    "pcr": 0.125,
-    "pcrN": 1,
-    "pcrD": 8,
-    "prr": 0.28125,
-    "prrN": 9,
-    "prrD": 32,
-    "ser": 0.9696969696969697,
-    "psr": 0.98,
-    "ci": 0.6589595375722543,
-    "tua": 0.875,
-    "ics": -0.006249999999999992,
-    "brier": 0.10161799999999997,
-    "ece": 0.08419999999999947,
-    "bins": [
-      {
-        "bin": 7,
-        "count": 3,
-        "avgConfidence": 0.7533333333333333,
-        "accuracy": 0.3333333333333333
-      },
-      {
-        "bin": 8,
-        "count": 4,
-        "avgConfidence": 0.855,
-        "accuracy": 0.25
-      },
-      {
-        "bin": 9,
-        "count": 43,
-        "avgConfidence": 0.9658139534883715,
-        "accuracy": 0.9534883720930233
-      }
-    ],
-    "conditions": {
-      "clean": {
-        "acc": 0.8888888888888888,
-        "correct": 8,
-        "total": 9,
-        "ci": [
-          0.6666666666666666,
-          1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "single_poison": {
         "acc": 0.8888888888888888,
@@ -1087,7 +1018,9 @@
         "ci": [
           0.6666666666666666,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "ranked_poison": {
         "acc": 0.875,
@@ -1096,7 +1029,9 @@
         "ci": [
           0.625,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "manufactured_consensus": {
         "acc": 0.875,
@@ -1105,30 +1040,63 @@
         "ci": [
           0.625,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
       },
       "legitimate_update": {
-        "acc": 0.875,
-        "correct": 7,
-        "total": 8,
-        "ci": [
-          0.625,
-          1
-        ]
-      },
-      "false_majority_true_primary": {
         "acc": 0.75,
         "correct": 6,
         "total": 8,
         "ci": [
-          0.5,
+          0.375,
           1
-        ]
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "false_majority_true_primary": {
+        "acc": 0.625,
+        "correct": 5,
+        "total": 8,
+        "ci": [
+          0.25,
+          1
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "authority_inverted_consensus": {
+        "acc": 0,
+        "correct": 0,
+        "total": 0,
+        "ci": [
+          0,
+          0
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "independent_false_majority": {
+        "acc": 0,
+        "correct": 0,
+        "total": 0,
+        "ci": [
+          0,
+          0
+        ],
+        "rejected": 0,
+        "failed": 0
       }
     },
-    "cost": 3.3426949999999995,
-    "avgToolCalls": 11.68,
-    "latency": 39.77,
-    "corruptions": []
+    "authorityAblation": null,
+    "itt": null,
+    "cost": 3.9229531000000004,
+    "avgToolCalls": 15.22,
+    "latency": 31.0,
+    "corruptions": [
+      "real_043__false_majority_true_primary",
+      "real_043__legitimate_update"
+    ]
   }
 }

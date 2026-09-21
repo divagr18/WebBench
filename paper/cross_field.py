@@ -15,7 +15,7 @@ from a single, principled rule instead of a hand-typed model list:
     clusteredBootstrap, which the previous row-level resample here
     contradicted (each "episode" is claimId__condition, so treating rows as
     independent double-counts within-claim correlation).
-  - Two-tier multiplicity: each field member vs. the raw EAS leader gets a
+  - Two-tier multiplicity: each field member vs. the shared-episode accuracy leader gets a
     Holm-Bonferroni-corrected comparison (the "vs-leader" family, what the
     main text and fig_pairwise actually foreground); the full pairwise
     matrix (every pair) stays uncorrected/exploratory and is labeled as such.
@@ -123,6 +123,54 @@ def paired_bootstrap_clustered(pairs_by_episode: dict, common_episodes) -> dict:
     return {"diff": point, "lo": lo, "hi": hi, "p": p, "nClaims": n_claims}
 
 
+POISON_CONDITIONS = ["single_poison", "ranked_poison", "manufactured_consensus", "false_majority_true_primary"]
+
+
+def compute_population_disclosure(data: dict, names: list) -> dict:
+    """Per eligible config: an unconditional accuracy on poison conditions (not
+    restricted to the prior-correct-only subset FBAR uses) and a prior-
+    stratified accuracy breakdown, computed from each config's already-loaded
+    runs.csv (no new data collection).
+
+    Addresses Thorough Reviewer 1's "EAS mixes model-dependent populations"
+    concern: FBAR conditions on the prior-correct subset of poison-condition
+    runs, CUR conditions on the prior-incorrect/abstained subset of
+    legitimate_update runs -- these are different, model-dependent
+    populations (a model with a higher prior-accuracy rate has a smaller,
+    differently-composed FBAR denominator than one with a lower rate). This
+    reports the full population behind the rate so it isn't read as directly
+    comparable across models without that qualification.
+    """
+    out = {}
+    for n in names:
+        poison_runs = [r for r in data[n].values() if r["condition"] in POISON_CONDITIONS]
+        total = len(poison_runs)
+        correct = sum(1 for r in poison_runs if r["finalCorrect"])
+        prior_correct = [r for r in poison_runs if r["priorCorrect"]]
+        prior_not_correct = [r for r in poison_runs if not r["priorCorrect"]]
+
+        def stratum(rows):
+            n_rows = len(rows)
+            n_correct = sum(1 for r in rows if r["finalCorrect"])
+            return {
+                "n": n_rows,
+                "accuracy": (n_correct / n_rows) if n_rows else None,
+            }
+
+        out[n] = {
+            "unconditionalPoisonAccuracy": {
+                "value": (correct / total) if total else None,
+                "numerator": correct,
+                "denominator": total,
+            },
+            "priorStratified": {
+                "priorCorrect": stratum(prior_correct),
+                "priorNotCorrect": stratum(prior_not_correct),
+            },
+        }
+    return out
+
+
 def holm_bonferroni(pvals: list, alpha: float = 0.05) -> list:
     """Holm step-down: returns a same-length list of booleans (reject H0)."""
     m = len(pvals)
@@ -191,6 +239,9 @@ def main() -> int:
             row["significant"] = sig
             row["corrected"] = True
             vs_leader_rows.append(row)
+
+    # ---- population-mixing disclosure (Thorough Reviewer 1 concern #3) ----
+    population_disclosure = compute_population_disclosure(data, names)
 
     # ---- world difficulty & cross-model agreement ----
     counts = {ep: sum(1 for n in names if data[n][ep]["finalCorrect"]) for ep in common}
@@ -267,6 +318,7 @@ def main() -> int:
         "taxonomy": taxonomy,
         "falseMajorityCorruption": fm_corruption,
         "calibration": calibration,
+        "populationDisclosure": population_disclosure,
     }
     out_json = Path(__file__).resolve().parent / "cross_field_data.json"
     out_json.write_text(json.dumps(struct, indent=2), encoding="utf-8")
@@ -337,6 +389,25 @@ def _write_markdown(struct: dict) -> None:
     for c in struct["calibration"]:
         auc = f"{c['auc']:.3f}" if c["auc"] is not None else "n/a"
         lines.append(f"| {c['model']} | {auc} | {c['brier']:.3f} | {c['ece']:.3f} | {c['meanConfidence']:.3f} | {c['accuracy']:.3f} |")
+
+    lines.append("\n## 5. Population-mixing disclosure")
+    lines.append(
+        "FBAR conditions on the prior-correct subset of poison-condition runs; CUR conditions "
+        "on the prior-incorrect/abstained subset of legitimate_update runs. These are different, "
+        "model-dependent populations. This table reports the unconditional accuracy on all "
+        "poison-condition runs (not just the prior-correct subset) alongside a prior-stratified "
+        "breakdown, so the populations behind each headline rate are visible.\n"
+    )
+    lines.append("| Model | Unconditional poison accuracy | n (prior-correct) | acc (prior-correct) | n (prior-not-correct) | acc (prior-not-correct) |")
+    lines.append("|---|---|---|---|---|---|")
+    for n, d in struct["populationDisclosure"].items():
+        up = d["unconditionalPoisonAccuracy"]
+        pc = d["priorStratified"]["priorCorrect"]
+        pn = d["priorStratified"]["priorNotCorrect"]
+        up_str = f"{up['value']:.3f} ({up['numerator']}/{up['denominator']})" if up["value"] is not None else "n/a"
+        pc_str = f"{pc['accuracy']:.3f}" if pc["accuracy"] is not None else "n/a"
+        pn_str = f"{pn['accuracy']:.3f}" if pn["accuracy"] is not None else "n/a"
+        lines.append(f"| {n} | {up_str} | {pc['n']} | {pc_str} | {pn['n']} | {pn_str} |")
 
     out = Path(__file__).resolve().parent / "cross_field_report.md"
     out.write_text("\n".join(lines) + "\n", encoding="utf-8")

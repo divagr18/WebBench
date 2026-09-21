@@ -1,19 +1,29 @@
-"""Regenerate the cross-model dashboard data for all finished pilots.
+"""Regenerate the cross-model dashboard data for all available run sets.
 
 Rewrites `data_model_comparison.json` and splices the refreshed DATA/MODELS
-blocks into `model_comparison_dashboard.html` so the dashboard reflects the
-full 11-model field.
+blocks into `model_comparison_dashboard.html`.
+
+Model list comes from `paper/run_manifest.json` (every `status: "available"`
+entry, any role) instead of a hand-maintained list here -- this was
+previously the one script the manifest migration missed: `paper/
+gen_paper_data.py` moved to the manifest, this one didn't, and it still had
+a stale plain "Luna" entry that didn't distinguish the effort-appendix role
+from the (still-missing) field entry.
 """
 from __future__ import annotations
 
 import csv
 import json
+import sys
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 REPORTS = REPO / "reports" / "dev"
 OUT = Path(__file__).resolve().parent
 HTML = OUT / "model_comparison_dashboard.html"
+
+sys.path.insert(0, str(REPO / "paper"))
+from validate_manifest import load_manifest, report_files_present  # noqa: E402
 
 COND_ORDER = [
     "clean",
@@ -26,20 +36,49 @@ COND_ORDER = [
     "independent_false_majority",
 ]
 
-# (runset, modelId, name, short, color, logo)  — finished pilots only
-# Colors from the Tableau-10 categorical palette for maximal separation.
-PILOTS = [
-    ("pilot-dev-v2", "deepseek-chat", "DeepSeek V4 Flash", "V4 Flash", "#4E79A7", "deepseek"),
-    ("pilot-dev-v2-openai", "gpt-5.6-luna", "Luna", "Luna", "#E15759", "openai"),
-    ("pilot-dev-v2-modelscope-max", "qwen3.7-max", "Qwen3.7 Max", "Qwen Max", "#F28E2B", "qwen"),
-    ("pilot-dev-v2-modelscope-plus", "qwen3.7-plus", "Qwen3.7 Plus", "Qwen Plus", "#B07AA1", "qwen"),
-    ("pilot-gemini-37", "gemini-3.7-fl", "Gemini 3.7 Flash", "Gem 3.7", "#76B7B2", "openai"),
-    ("pilot-gemini-35-lite", "gemini-3.5-lite", "Gemini 3.5 Flash-Lite", "Gem 3.5L", "#EDC948", "openai"),
-    ("pilot-terra-80", "gpt-5.6-terra", "Terra", "Terra", "#59A14F", "openai"),
-    ("pilot-muse-80", "muse", "Muse Spark 1.2", "Muse", "#FF9DA7", "deepseek"),
-    ("pilot-grok-80", "grok", "Grok 4.6", "Grok", "#9C755F", "deepseek"),
-    ("pilot-sol-50", "gpt-5.6-sol", "GPT-5.6 Sol", "Sol", "#BAB0AC", "openai"),
+# Tableau-10 categorical palette, cycled by manifest order -- colors are a
+# display concern only, not part of the manifest's job.
+_PALETTE = ["#4E79A7", "#E15759", "#F28E2B", "#B07AA1", "#76B7B2", "#EDC948",
+            "#59A14F", "#FF9DA7", "#9C755F", "#BAB0AC", "#2563A8", "#8C564B"]
+_LOGOS = {"deepseek", "openai", "qwen", "glm", "nemotron", "inkling"}
+
+# Substring -> logo bucket, checked in order (first match wins). "glm" must be
+# checked before "deepseek" would ever be reachable by accident, and every
+# entry needs its own bucket now that the dashboard has real icons for them --
+# previously glm fell into the deepseek bucket and inkling/nemotron fell
+# through to the openai default, all silently wrong.
+_LOGO_RULES = [
+    ("glm", "glm"),
+    ("deepseek", "deepseek"),
+    ("qwen", "qwen"),
+    ("nemotron", "nemotron"),
+    ("inkling", "inkling"),
 ]
+
+
+def _logo_for(model_id: str) -> str:
+    lower = model_id.lower()
+    for needle, logo in _LOGO_RULES:
+        if needle in lower:
+            return logo
+    return "openai"  # true fallback: OpenAI models, and any genuinely new/unmapped model
+
+
+def load_pilots() -> list[tuple[str, str, str, str, str, str]]:
+    """(runset, modelId, displayName, short, color, logo) for every available manifest entry."""
+    manifest = load_manifest()
+    pilots = []
+    for i, m in enumerate(manifest["models"]):
+        if m["status"] != "available":
+            continue
+        color = _PALETTE[i % len(_PALETTE)]
+        logo = _logo_for(m["modelId"])
+        short = m["displayName"].replace("GPT-5.6 ", "").replace(" Spark 1.2", " Spark")
+        pilots.append((m["runSet"], m["modelId"], m["displayName"], short, color, logo))
+    return pilots
+
+
+PILOTS = load_pilots()
 
 
 def build_entry(runset: str) -> dict:

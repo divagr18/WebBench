@@ -50,8 +50,11 @@ DATA = json.load(open(os.path.join(HERE, "paper_data.json"), encoding="utf-8"))
 CROSS = json.load(open(os.path.join(HERE, "cross_field_data.json"), encoding="utf-8"))
 
 # Field-only view, ordered by EAS descending (leaderboard order) -- matches gen_tables.py.
+# Must be the SAME set cross_field.py's eligible() computed (CROSS["fieldModels"]), not a
+# separate role=="field" re-filter -- see gen_tables.py's FIELD_KEYS comment for why.
+_field_display_names = set(CROSS["fieldModels"])
 MODEL_ORDER = sorted(
-    (k for k, d in DATA.items() if d["role"] == "field"),
+    (k for k, d in DATA.items() if d["displayName"] in _field_display_names),
     key=lambda k: DATA[k]["eas"], reverse=True,
 )
 DISPLAY = {k: DATA[k]["displayName"] for k in MODEL_ORDER}
@@ -99,7 +102,19 @@ for k in MODEL_ORDER:
     accs = [DATA[k]["conditions"][c]["acc"] for c in COND_ORDER]
     ax.plot(range(len(COND_ORDER)), accs, marker="o", markersize=2.6,
             color=COLORS[k], label=SHORT[k], zorder=3)
-ax.axvspan(4.5, 5.5, color="0.93", zorder=0)
+# Shade whichever condition(s) currently separate the field most, computed fresh each
+# build rather than hand-picked -- which condition(s) this is has already changed once
+# as the field grew (false-majority alone -> manufactured-consensus and false-majority),
+# so a hardcoded index would silently go stale the same way the prose around this figure
+# already did once.
+_spreads = {
+    i: max(DATA[k]["conditions"][c]["acc"] for k in MODEL_ORDER) - min(DATA[k]["conditions"][c]["acc"] for k in MODEL_ORDER)
+    for i, c in enumerate(COND_ORDER)
+}
+_shade_threshold = 0.30
+for i, spread in _spreads.items():
+    if spread >= _shade_threshold:
+        ax.axvspan(i - 0.5, i + 0.5, color="0.93", zorder=0)
 ax.set_xticks(range(len(COND_ORDER)))
 ax.set_xticklabels([COND_LABEL[c] for c in COND_ORDER])
 ax.set_ylabel("Accuracy")
@@ -217,7 +232,7 @@ if n_panels > 0:
 fig.tight_layout(pad=0.6, h_pad=0.9)
 save(fig, "fig_calibration")
 
-# ------------------------------------------------ F8: paired differences vs the raw EAS leader
+# ------------------------------------------------ F8: paired differences vs the shared-episode accuracy leader
 vs_leader = CROSS["pairwise"]["vsLeader"]
 if vs_leader:
     fig, ax = plt.subplots(figsize=(5.5, 0.5 + 0.32 * len(vs_leader)))

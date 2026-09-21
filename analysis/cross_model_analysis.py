@@ -6,10 +6,19 @@ a failure taxonomy, and confidence calibration + discrimination (AUC/Brier).
 
 All models answered the same plan-seed episodes, so pairwise tests are PAIRED
 on the shared episode set (far stronger than independent CIs).
+
+Model list comes from `paper/run_manifest.json` (every available entry, any
+role) instead of a hand-maintained list -- this was previously a second,
+independently-stale copy of the same list (including a `pilot-dev-v2-openai-
+low` entry that never actually shipped). Pairwise significance reuses
+`paper/cross_field.py`'s claim-clustered bootstrap instead of carrying its
+own second, unclustered copy of the same logic (the unclustered version
+double-counts within-claim correlation -- see that module's docstring).
 """
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -19,20 +28,22 @@ REPORTS = REPO / "reports" / "dev"
 OUT = REPO / "analysis"
 EXPORTS = OUT / "exports"
 
-# (run-set-id, display name, short key)  — finished pilots only
-PILOTS = [
-    ("pilot-dev-v2", "DeepSeek", "ds"),
-    ("pilot-dev-v2-openai", "Luna none", "luna-n"),
-    ("pilot-dev-v2-openai-low", "Luna low", "luna-l"),
-    ("pilot-dev-v2-modelscope-max", "Qwen3.7-max", "qmax"),
-    ("pilot-dev-v2-modelscope-plus", "Qwen3.7-plus", "qplus"),
-    ("pilot-gemini-37", "Gemini 3.7-fl", "g37"),
-    ("pilot-gemini-35-lite", "Gemini 3.5-lite", "g35l"),
-    ("pilot-terra-80", "Terra", "terra"),
-    ("pilot-muse-80", "Muse", "muse"),
-    ("pilot-grok-80", "Grok 4.6", "grok"),
-    ("pilot-sol-50", "Sol", "sol"),
-]
+sys.path.insert(0, str(REPO / "paper"))
+from validate_manifest import load_manifest  # noqa: E402
+from cross_field import paired_bootstrap_clustered  # noqa: E402
+
+
+def load_pilots() -> list[tuple[str, str, str]]:
+    """(runset, displayName, shortKey) for every available manifest entry."""
+    manifest = load_manifest()
+    return [
+        (m["runSet"], m["displayName"], m["modelId"])
+        for m in manifest["models"]
+        if m["status"] == "available"
+    ]
+
+
+PILOTS = load_pilots()
 
 N_BOOT = 2000
 SEED = 42
@@ -62,17 +73,6 @@ def load_runs(runset: str) -> dict:
 
 def load_score(runset: str) -> dict:
     return json.loads((REPORTS / runset / "score-report.json").read_text(encoding="utf8"))
-
-
-def paired_bootstrap(a: np.ndarray, b: np.ndarray) -> tuple[float, float, float]:
-    """Mean paired diff (a-b), 95% CI via bootstrap. CI excluding 0 => significant."""
-    d = a.astype(float) - b.astype(float)
-    n = len(d)
-    rng = np.random.default_rng(SEED)
-    idx = rng.integers(0, n, size=(N_BOOT, n))
-    diffs = d[idx].mean(axis=1)
-    lo, hi = np.percentile(diffs, [2.5, 97.5])
-    return float(d.mean()), float(lo), float(hi)
 
 
 def main() -> int:
@@ -106,13 +106,17 @@ def main() -> int:
     for i, ka in enumerate(rank):
         for kb in rank[i + 1 :]:
             common = sorted(eps_per[ka] & eps_per[kb])
-            a = np.array([data[ka][ep]["finalCorrect"] for ep in common])
-            b = np.array([data[kb][ep]["finalCorrect"] for ep in common])
-            diff, lo, hi = paired_bootstrap(a, b)
-            sig = "**yes**" if (lo > 0 or hi < 0) else "no"
+            pairs_by_ep = {
+                ep: (data[ka][ep]["claimId"], float(data[ka][ep]["finalCorrect"]), float(data[kb][ep]["finalCorrect"]))
+                for ep in common
+            }
+            boot = paired_bootstrap_clustered(pairs_by_ep, common)
+            a_mean = np.mean([data[ka][ep]["finalCorrect"] for ep in common])
+            b_mean = np.mean([data[kb][ep]["finalCorrect"] for ep in common])
+            sig = "**yes**" if (boot["lo"] > 0 or boot["hi"] < 0) else "no"
             lines.append(
-                f"| {name[ka]} | {name[kb]} | {a.mean():.3f} | {b.mean():.3f} | "
-                f"{diff:+.3f} | [{lo:+.3f}, {hi:+.3f}] | {sig} |"
+                f"| {name[ka]} | {name[kb]} | {a_mean:.3f} | {b_mean:.3f} | "
+                f"{boot['diff']:+.3f} | [{boot['lo']:+.3f}, {boot['hi']:+.3f}] | {sig} |"
             )
     lines.append("")
 

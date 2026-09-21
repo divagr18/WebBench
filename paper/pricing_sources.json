@@ -1,0 +1,125 @@
+{
+  "schemaVersion": 1,
+  "notes": [
+    "Per-token list prices actually used to estimate cost (packages/llm/src/pricing.ts is the",
+    "code source of truth; this file adds source/date/verification provenance for the paper's",
+    "pricing table, formalizing what PREREG.md's amendments and main.tex's tab:protocols already",
+    "state in prose). dateChecked marks when the rate was verified against a source, not when",
+    "the run itself happened. 'verified: false' entries are flagged and must not be read as settled."
+  ],
+  "entries": [
+    {
+      "modelRequested": "deepseek-chat",
+      "displayName": "DeepSeek V4 Flash",
+      "inputPerM": 0.14,
+      "outputPerM": 0.28,
+      "cacheHitInputPerM": 0.0028,
+      "source": "DeepSeek platform published pricing",
+      "dateChecked": "2026-08-13",
+      "verified": true
+    },
+    {
+      "modelRequested": "Qwen-Ambassador/Qwen3.7-Max",
+      "displayName": "Qwen3.7 Max (ModelScope native)",
+      "inputPerM": 2.5,
+      "outputPerM": 7.5,
+      "cacheHitInputPerM": 0.5,
+      "source": "Alibaba Model Studio list pricing (cost guard; actual ModelScope billing is separate per PREREG.md)",
+      "dateChecked": "2026-08-13",
+      "verified": true
+    },
+    {
+      "modelRequested": "Qwen-Ambassador/Qwen3.7-Plus",
+      "displayName": "Qwen3.7 Plus (ModelScope native)",
+      "inputPerM": 0.4,
+      "outputPerM": 1.6,
+      "cacheHitInputPerM": 0.08,
+      "source": "Alibaba Model Studio list pricing (cost guard; actual ModelScope billing is separate per PREREG.md)",
+      "dateChecked": "2026-08-13",
+      "verified": true
+    },
+    {
+      "modelRequested": "qwen/qwen3.7-max",
+      "displayName": "Qwen3.7 Max (OpenRouter, superseded route)",
+      "inputPerM": 1.48,
+      "outputPerM": 4.42,
+      "cacheHitInputPerM": 0.0,
+      "source": "OpenRouter published pricing for the superseded route (PREREG.md fourth-provider amendment)",
+      "dateChecked": "2026-08-13",
+      "verified": true
+    },
+    {
+      "modelRequested": "gpt-5.6-luna",
+      "displayName": "GPT-5.6 Luna",
+      "inputPerM": 0.2,
+      "outputPerM": 1.2,
+      "cacheHitInputPerM": 0.02,
+      "source": "OpenAI published pricing (PREREG.md second-provider amendment)",
+      "dateChecked": "2026-08-13",
+      "verified": true
+    },
+    {
+      "modelRequested": "z-ai/glm-5.2 (StreamLake route)",
+      "displayName": "GLM 5.2 (OpenRouter, n=100, route-appendix)",
+      "inputPerM": 0.336,
+      "outputPerM": 1.056,
+      "cacheHitInputPerM": 0.0624,
+      "source": "OpenRouter provider pricing table, StreamLake row (76% off $1.40/$4.40 list)",
+      "dateChecked": "2026-08-22",
+      "verified": true,
+      "note": "Applies to the glm-5.2-openrouter-100 route-appendix entry (not field-eligible: 24% rejection rate), whose report was retroactively recomputed with this rate (paper/fix_glm_pricing.py)."
+    },
+    {
+      "modelRequested": "qwen/qwen3.8-flash",
+      "displayName": "Qwen3.8 Flash (OpenRouter, pinned Alibaba)",
+      "inputPerM": 0.15,
+      "outputPerM": 0.47,
+      "cacheHitInputPerM": 0.016,
+      "source": "OpenRouter /models/qwen/qwen3.8-flash/endpoints API, Alibaba host (the only listed host for this model)",
+      "dateChecked": "2026-08-28",
+      "verified": true
+    },
+    {
+      "modelRequested": "qwen/qwen3.8-27b",
+      "displayName": "Qwen3.8 27B (OpenRouter, pinned Alibaba)",
+      "inputPerM": 0.425,
+      "outputPerM": 2.55,
+      "cacheHitInputPerM": 0.085,
+      "source": "OpenRouter /models/qwen/qwen3.8-27b/endpoints API, Alibaba host (pinned via OPENROUTER_PROVIDER_ORDER=alibaba; cheaper third-party hosts exist, e.g. Chutes $0.35/$2.75, but were not used)",
+      "dateChecked": "2026-08-28",
+      "verified": true
+    },
+    {
+      "modelRequested": "nvidia/nemotron-3-ultra-550b-a55b",
+      "displayName": "Nemotron 3 Ultra (OpenRouter, pinned DeepInfra)",
+      "inputPerM": 0.5,
+      "outputPerM": 2.2,
+      "cacheHitInputPerM": 0.5,
+      "source": "OpenRouter's own DeepInfra pricing row and DeepInfra's published pricing agree",
+      "dateChecked": "2026-08-23",
+      "verified": true
+    },
+    {
+      "modelRequested": "thinkingmachines/inkling-small",
+      "displayName": "Inkling Small (OpenRouter, unpinned)",
+      "inputPerM": 0.45,
+      "outputPerM": 1.2,
+      "cacheHitInputPerM": 0.1,
+      "source": "Provider not pinned in this run; three near-identical OpenRouter hosts exist (DeepInfra $0.45, Baseten/Together $0.50, all $1.20 output) -- DeepInfra used as the lowest/most common default",
+      "dateChecked": "2026-08-22",
+      "verified": false,
+      "note": "Best-estimate rate, not confirmed for this specific run the way the pinned configurations above are."
+    },
+    {
+      "modelRequested": "deepseek/deepseek-v4-pro-0813",
+      "displayName": "DeepSeek V4 Pro, low reasoning (OpenRouter, pinned gmicloud FP8)",
+      "inputPerM": 0.435,
+      "outputPerM": 0.87,
+      "cacheHitInputPerM": 0.003625,
+      "source": "Same rate as the deepseek-v4-pro pricing.ts entry (same underlying weights)",
+      "dateChecked": "2026-08-31",
+      "verified": true,
+      "note": "Below the completeness eligibility bar (49/50 completed) -- not currently in the field, pairwise table, or cost frontier; listed here for completeness."
+    }
+  ]
+}
