@@ -160,6 +160,20 @@ describe('llm package', () => {
     expect(pricingFor('qwen3.8-max-preview')).toEqual({ inputPerM: 2.0, outputPerM: 6.0, cacheHitInputPerM: 0.25 });
   });
 
+  it('has a real pricing entry for z-ai/glm-5.2, not the DeepSeek-flash fallback', () => {
+    // Regression guard: this model previously had no entry and silently fell
+    // through to FLASH_FALLBACK, which was used (uncaught) to cost every
+    // GLM 5.2 run in the paper until the 2026-08-22 correction.
+    expect(pricingFor('z-ai/glm-5.2')).toEqual({ inputPerM: 0.336, outputPerM: 1.056, cacheHitInputPerM: 0.0624 });
+  });
+
+  it('has a real pricing entry for the OpenRouter-dated deepseek-v4-pro-0813 identifier, not the fallback', () => {
+    // Same bug pattern as z-ai/glm-5.2: the exact-string modelRequested for the
+    // low-effort rerun (dev-v4pro-0813-gmicloud-fp8-low-20260821) didn't match the
+    // plain 'deepseek-v4-pro' key, so it silently fell through to FLASH_FALLBACK.
+    expect(pricingFor('deepseek/deepseek-v4-pro-0813')).toEqual(pricingFor('deepseek-v4-pro'));
+  });
+
   it('parses OpenRouter config from env and uses only OpenRouter keys', () => {
     const cfg = openrouterConfigFromEnv({
       OPENROUTER_API_KEY: 'sk-or-test',
