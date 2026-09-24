@@ -1,4 +1,4 @@
-[![DOI: benchmark archive](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22035200-007EC6?logo=zenodo&logoColor=white)](https://doi.org/10.5281/zenodo.22035200)
+[![DOI: benchmark archive](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22035199-007EC6?logo=zenodo&logoColor=white)](https://doi.org/10.5281/zenodo.22035199)
 [![DOI: paper](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22033697-007EC6?logo=zenodo&logoColor=white)](https://doi.org/10.5281/zenodo.22033697)
 
 # EchoBench
