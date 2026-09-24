@@ -261,7 +261,9 @@ lines = [r"\begin{tabular}{lrrrrr}"]
 lines.append(r"\toprule")
 lines.append(r"Model & AUC & Brier & ECE & mean conf. & accuracy \\")
 lines.append(r"\midrule")
-for c in CROSS["calibration"]:
+# Same leaderboard (EAS) order as every other per-model table.
+_rank = {DATA[k]["displayName"]: i for i, k in enumerate(ORDER)}
+for c in sorted(CROSS["calibration"], key=lambda c: _rank.get(c["model"], len(_rank))):
     auc = f"{c['auc']:.3f}" if c["auc"] is not None else "n/a"
     lines.append(rf"{c['model']} & {auc} & {c['brier']:.3f} & {c['ece']:.3f} & {c['meanConfidence']:.3f} & {c['accuracy']:.3f} \\")
 lines.append(r"\bottomrule")

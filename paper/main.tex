@@ -17,6 +17,8 @@
 \usepackage{doi}
 \usepackage{xcolor}
 \usepackage{longtable}
+\usepackage{float}
+\usepackage{needspace}
 
 \title{Consensus Is Not Corroboration:\\ Measuring Epistemic Arbitration on a Synthetic Social Web}
 
@@ -927,7 +929,7 @@ evaluator and are added to the archive as splits stabilize.
 \Cref{tab:full-matrix} reports all twelve metrics for the \FieldSize{} field-eligible
 configurations; bold marks the best value per column.
 
-\begin{table}[h]
+\begin{table}[H]
 \centering
 \footnotesize
 \caption{All metrics, dev-split pilots. SER, PSR, TUA added to the headline set.}
@@ -951,6 +953,7 @@ Holm-Bonferroni-corrected vs-leader family, which is the confirmatory comparison
 }
 
 
+\needspace{0.45\textheight}
 \section{World difficulty}
 \label{app:worlds}
 
@@ -959,14 +962,14 @@ configurations that answer them correctly; \Cref{tab:worlds-hard} lists the
 hardest worlds. The four episodes answered correctly by at most three
 configurations all belong to the single synthetic claim \texttt{syn\_008}.
 
-\begin{table}[h]
+\begin{table}[H]
 \centering
 \caption{Shared episodes by number of correct configurations.}
 \label{tab:world-dist}
 \input{tables/tab_world_dist}
 \end{table}
 
-\begin{table}[h]
+\begin{table}[H]
 \centering
 \small
 \caption{Hardest worlds, ordered by number of correct configurations.}
@@ -975,13 +978,14 @@ configurations all belong to the single synthetic claim \texttt{syn\_008}.
 \end{table}
 
 
+\needspace{0.40\textheight}
 \section{Calibration detail}
 \label{app:calibration}
 
 \Cref{tab:calibration-full} reports confidence discrimination and calibration for
 all \FieldSize{} field-eligible configurations.
 
-\begin{table}[h]
+\begin{table}[H]
 \centering
 \caption{Confidence calibration and discrimination, all configurations.}
 \label{tab:calibration-full}
