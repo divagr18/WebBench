@@ -95,13 +95,25 @@ N_RUNS = {k: DATA[k]["completedRuns"] for k in MODEL_ORDER}
 # model keeps its colour in every figure and across rebuilds. Unknown models
 # fall through to the spare list in a fixed order.
 MODEL_COLORS = {
+    # Qwen: blues and teals
     "Qwen3.7 Max": "#0F4D92",
     "Qwen3.7 Plus": "#4A86C5",
     "Qwen3.8 27B": "#2F8A8F",
     "Qwen3.8 Flash": "#7FB9BC",
+    # OpenAI GPT: greys, darkest = largest
+    "GPT-6 Sol": "#1F1F1F",
+    "GPT-5.6 Sol": "#4D4D4D",
+    "GPT-5.6 Terra": "#7A7A7A",
+    "GPT-6 Luna": "#A6A6A6",
+    # Meta Muse: pinks
+    "Muse Spark 1.3": "#B5476B",
+    "Muse Spark 1.2": "#DE93AC",
+    # one hue each
+    "Gemini 3.8 Flash": "#D08C2F",
     "DeepSeek V4 Flash": "#B64342",
     "Nemotron 3 Ultra": "#5E9E55",
     "Inkling Small": "#9A4D8E",
+    "Grok 4.6": "#8E6B3E",
 }
 _SPARE = ["#D08C2F", "#6B6B6B", "#C06C84", "#3B3B98", "#8E7B3E"]
 COLORS = {}
@@ -113,7 +125,7 @@ for k in MODEL_ORDER:
         COLORS[k] = _SPARE[len([c for c in COLORS.values() if c in _SPARE]) % len(_SPARE)]
 
 # Marker shape per model as a second, colour-independent identity channel.
-_MARKERS = ["o", "s", "D", "^", "v", "p", "h", "8"]
+_MARKERS = ["o", "s", "D", "^", "v", "p", "h", "8", "<", ">", "P", "X", "H"]
 MARKERS = {k: _MARKERS[i % len(_MARKERS)] for i, k in enumerate(sorted(MODEL_ORDER))}
 
 COND_ORDER = ["clean", "single_poison", "ranked_poison", "manufactured_consensus",
@@ -125,6 +137,15 @@ COND_LABEL = {
     "manufactured_consensus": "Manufactured consensus",
     "legitimate_update": "Legitimate update",
     "false_majority_true_primary": "False majority, true primary",
+}
+
+COND_LABEL_2L = {
+    "clean": "Clean\n",
+    "single_poison": "Single\npoison",
+    "ranked_poison": "Ranked\npoison",
+    "manufactured_consensus": "Manufactured\nconsensus",
+    "legitimate_update": "Legitimate\nupdate",
+    "false_majority_true_primary": "False majority,\ntrue primary",
 }
 
 WIDTH = 5.5  # inches: \linewidth of the paper's single column
@@ -150,68 +171,17 @@ def pareto_frontier(points):
     return frontier
 
 
-def group_coincident(points, ndigits=4):
-    """points: [(label, x, y)] -> [(joined_label, x, y, [labels])], merging points
-    that sit on the same coordinates so their labels don't print on top of each other."""
-    groups = {}
-    for label, x, y in points:
-        groups.setdefault((round(x, ndigits), round(y, ndigits)), []).append((label, x, y))
-    out = []
-    for members in groups.values():
-        names = [m[0] for m in members]
-        out.append((" / ".join(names), members[0][1], members[0][2], names))
-    return out
-
-
-def place_labels(ax, items, fontsize=7.0, color=INK, obstacles=()):
-    """Direct-label points without collisions.
-
-    items: [(text, x, y)] in data coordinates. Tries a ring of offsets around each
-    point and keeps the first one whose text box neither overlaps an already placed
-    label, marker or obstacle (data-coordinate points sampled along lines the labels
-    must not cross) nor leaves the axes. Deterministic: points are processed in the
-    given order and candidates in a fixed order."""
-    fig = ax.figure
-    fig.canvas.draw()
-    renderer = fig.canvas.get_renderer()
-    ax_box = ax.get_window_extent(renderer)
-    taken = []
-    for _, x, y in items:
-        px, py = ax.transData.transform((x, y))
-        r = 5.0
-        taken.append(matplotlib.transforms.Bbox([[px - r, py - r], [px + r, py + r]]))
-    for x, y in obstacles:
-        px, py = ax.transData.transform((x, y))
-        taken.append(matplotlib.transforms.Bbox([[px - 1.5, py - 1.5], [px + 1.5, py + 1.5]]))
-
-    candidates = [
-        (6, 0, "left", "center"), (-6, 0, "right", "center"),
-        (5, 5, "left", "bottom"), (5, -5, "left", "top"),
-        (-5, 5, "right", "bottom"), (-5, -5, "right", "top"),
-        (0, 7, "center", "bottom"), (0, -7, "center", "top"),
-        (10, 10, "left", "bottom"), (10, -10, "left", "top"),
-        (-10, 10, "right", "bottom"), (-10, -10, "right", "top"),
-    ]
-    for text, x, y in items:
-        chosen = None
-        for dx, dy, ha, va in candidates:
-            ann = ax.annotate(text, (x, y), xytext=(dx, dy), textcoords="offset points",
-                              ha=ha, va=va, fontsize=fontsize, color=color, zorder=5,
-                              path_effects=[pe.withStroke(linewidth=2.6, foreground="white")])
-            bb = ann.get_window_extent(renderer).expanded(1.04, 1.12)
-            inside = (bb.x0 >= ax_box.x0 and bb.x1 <= ax_box.x1 and
-                      bb.y0 >= ax_box.y0 and bb.y1 <= ax_box.y1)
-            if inside and not any(bb.overlaps(t) for t in taken):
-                chosen = bb
-                break
-            ann.remove()
-        if chosen is None:
-            dx, dy, ha, va = candidates[0]
-            ann = ax.annotate(text, (x, y), xytext=(dx, dy), textcoords="offset points",
-                              ha=ha, va=va, fontsize=fontsize, color=color, zorder=5,
-                              path_effects=[pe.withStroke(linewidth=2.6, foreground="white")])
-            chosen = ann.get_window_extent(renderer)
-        taken.append(chosen)
+def model_key(fig, ax, order=None, right=0.70):
+    """Model legend in a dedicated column to the right of a scatter plot:
+    one entry per model with its colour and marker, in leaderboard order."""
+    order = order or MODEL_ORDER
+    handles = [Line2D([0], [0], marker=MARKERS[k], linestyle="none", markersize=5.2,
+                      markerfacecolor=COLORS[k], markeredgecolor="white", markeredgewidth=0.5)
+               for k in order]
+    fig.subplots_adjust(right=right)
+    fig.legend(handles, [DISPLAY[k] for k in order], loc="center left",
+               bbox_to_anchor=(right + 0.015, 0.5), fontsize=6.6, handletextpad=0.3,
+               labelspacing=0.55, borderaxespad=0.0)
 
 
 # ------------------------------------------------ F3: accuracy by condition (small multiples)
@@ -225,7 +195,7 @@ _spreads = {
 }
 _shade_threshold = 0.30
 n_models = len(MODEL_ORDER)
-fig, axes = plt.subplots(2, 3, figsize=(WIDTH, 0.75 + 0.19 * n_models * 2), sharey=True, sharex=True)
+fig, axes = plt.subplots(1, 6, figsize=(WIDTH, 0.85 + 0.15 * n_models), sharey=True, sharex=True)
 axes = axes.ravel()
 ys = np.arange(n_models)[::-1]
 all_acc = [DATA[k]["conditions"][c]["acc"] for k in MODEL_ORDER for c in COND_ORDER]
@@ -236,12 +206,13 @@ for ax, c in zip(axes, COND_ORDER):
     for y, k in zip(ys, MODEL_ORDER):
         acc = DATA[k]["conditions"][c]["acc"]
         ax.hlines(y, x_lo, acc, color=GRID, linewidth=1.0, zorder=1)
-        ax.scatter(acc, y, s=22, color=COLORS[k], marker=MARKERS[k], zorder=3,
+        ax.scatter(acc, y, s=16, color=COLORS[k], marker=MARKERS[k], zorder=3,
                    edgecolors="white", linewidths=0.5)
-    ax.set_title(COND_LABEL[c], loc="left", fontsize=7.5, pad=3,
+    ax.set_title(COND_LABEL_2L[c], loc="center", fontsize=6.6, pad=3,
                  fontweight="bold" if _spreads[c] >= _shade_threshold else "normal")
     ax.set_xlim(x_lo, 1.03)
-    ax.set_xticks([t for t in (0.25, 0.5, 0.75, 1.0) if t >= x_lo])
+    ax.set_xticks([t for t in (0.5, 1.0) if t >= x_lo])
+    ax.tick_params(axis="x", labelsize=6.2)
     ax.xaxis.grid(True, color=GRID, linewidth=0.5)
     ax.set_axisbelow(True)
     ax.spines["left"].set_visible(False)
@@ -253,11 +224,11 @@ for ax in axes:
     for t in ax.get_yticklabels():
         t.set_color(INK)
 fig.supxlabel("Accuracy (fraction of completed runs)", fontsize=8, y=0.01)
-fig.tight_layout(pad=0.4, h_pad=0.9, w_pad=0.6)
+fig.tight_layout(pad=0.4, w_pad=0.35)
 save(fig, "fig_conditions")
 
 # ------------------------------------------------ F4: resistance vs update
-fig, ax = plt.subplots(figsize=(WIDTH, 3.1))
+fig, ax = plt.subplots(figsize=(WIDTH, 3.2))
 curs = [DATA[k]["cur"] for k in MODEL_ORDER]
 ress = [1.0 - DATA[k]["fbar"] for k in MODEL_ORDER]
 x_min = max(0.0, np.floor((min(curs) - 0.06) * 20) / 20)
@@ -285,9 +256,16 @@ for lv in levels:
     if y_min <= y_at <= _y_top:
         ax.text(_x_hi, y_at, f" {lv:.2f}", fontsize=6.2, color=MUTED, ha="left", va="center",
                 clip_on=False)
+# Models with identical (CUR, resistance) are drawn side by side, nudged by a small
+# fixed step along CUR, so none hides another; they share one label.
+_pos = {}
 for k in MODEL_ORDER:
-    ax.scatter(DATA[k]["cur"], 1.0 - DATA[k]["fbar"], s=38, color=COLORS[k], marker=MARKERS[k],
-               edgecolors="white", linewidths=0.7, zorder=4)
+    _pos.setdefault((round(DATA[k]["cur"], 4), round(1.0 - DATA[k]["fbar"], 4)), []).append(k)
+_NUDGE = 0.009
+for (cx, cy), ks in _pos.items():
+    for j, k in enumerate(ks):
+        ax.scatter(cx + (j - (len(ks) - 1) / 2) * _NUDGE, cy, s=38, color=COLORS[k], marker=MARKERS[k],
+                   edgecolors="white", linewidths=0.7, zorder=4)
 ax.set_xlim(x_min, 1.02)
 ax.set_ylim(y_min, 1.015)
 ax.set_xlabel("Correct update rate (CUR)")
@@ -299,12 +277,11 @@ ax.text(0.01, 0.985, "resists lies,\nslow to update", transform=ax.transAxes, fo
 ax.text(0.99, 0.02, "updates readily,\neasier to corrupt", transform=ax.transAxes, fontsize=6.5,
         color=INK_2, style="italic", va="bottom", ha="right",
         bbox=dict(facecolor="white", edgecolor="none", pad=1.5))
-groups = group_coincident([(DISPLAY[k], DATA[k]["cur"], 1.0 - DATA[k]["fbar"]) for k in MODEL_ORDER])
-place_labels(ax, [(label, x, y) for label, x, y, _ in groups])
+model_key(fig, ax)
 save(fig, "fig_arbitration")
 
 # ------------------------------------------------ F5: cost vs EAS
-fig, ax = plt.subplots(figsize=(WIDTH, 3.0))
+fig, ax = plt.subplots(figsize=(WIDTH, 3.2))
 pts = {}
 for k in MODEL_ORDER:
     cost_per_episode = DATA[k]["cost"] / N_RUNS[k]
@@ -314,7 +291,6 @@ all_eas = [e for _, e in pts.values()]
 ax.set_xscale("log")
 ax.set_xlim(min(all_costs) * 0.6, max(all_costs) * 2.2)
 ax.set_ylim(np.floor((min(all_eas) - 0.04) * 20) / 20, 1.0)
-frontier_path = []
 front = pareto_frontier([(k, c, e) for k, (c, e) in pts.items()])
 if front:
     fx = [c for _, c, _ in front]
@@ -322,16 +298,6 @@ if front:
     x_end = ax.get_xlim()[1]
     ax.step(fx + [x_end], fy + [fy[-1]], where="post", color=MUTED, linewidth=0.9,
             linestyle=(0, (1.5, 1.5)), zorder=2)
-    # sample the frontier path so labels are placed clear of it
-    _sx, _sy = [], []
-    _px, _py = fx + [x_end], fy + [fy[-1]]
-    for i in range(len(_px) - 1):
-        for t in np.linspace(0, 1, 40):
-            _sx.append(np.exp(np.log(_px[i]) + t * (np.log(_px[i + 1]) - np.log(_px[i])))); _sy.append(_py[i])
-        if i + 1 < len(_px) - 1:
-            for t in np.linspace(0, 1, 15):
-                _sx.append(_px[i + 1]); _sy.append(_py[i] + t * (_py[i + 1] - _py[i]))
-    frontier_path = list(zip(_sx, _sy))
     print("cost Pareto frontier:", [(k, round(c, 4), round(e, 4)) for k, c, e in front])
 frontier_keys = {k for k, _, _ in front}
 for k in MODEL_ORDER:
@@ -344,7 +310,7 @@ ax.xaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(lambda v, _: f"${v:
 ax.xaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())
 ax.yaxis.grid(True, color=GRID, linewidth=0.5)
 ax.set_axisbelow(True)
-place_labels(ax, [(DISPLAY[k], *pts[k]) for k in MODEL_ORDER], obstacles=frontier_path)
+model_key(fig, ax)
 save(fig, "fig_cost")
 
 # ------------------------------------------------ F6: failure taxonomy (from cross_field_data.json)
@@ -389,9 +355,9 @@ else:
 # fifty-run one. Diagonal = perfect calibration.
 AUC = {c["model"]: c["auc"] for c in CROSS["calibration"] if c["auc"] is not None}
 n_panels = len(MODEL_ORDER)
-n_cols = 4
+n_cols = 5
 n_rows = max(1, (n_panels + n_cols - 1) // n_cols)
-fig, axes = plt.subplots(n_rows, n_cols, figsize=(WIDTH, 1.45 * n_rows + 0.35), sharex=True, sharey=True)
+fig, axes = plt.subplots(n_rows, n_cols, figsize=(WIDTH, 1.3 * n_rows + 0.55), sharex=True, sharey=True)
 axes = np.atleast_1d(axes).ravel()
 all_conf = [b["avgConfidence"] for k in MODEL_ORDER for b in DATA[k]["bins"]]
 c_lo = max(0.0, np.floor((min(all_conf) - 0.05) * 10) / 10) if all_conf else 0.3
@@ -413,24 +379,22 @@ for i, k in enumerate(MODEL_ORDER):
     ax.tick_params(labelsize=6.2)
     disp = DISPLAY[k]
     auc_label = f"AUC {AUC[disp]:.2f} · " if disp in AUC else ""
-    ax.set_title(f"{disp}", loc="left", fontsize=7.0, pad=9, color=INK)
+    ax.set_title(f"{disp}", loc="left", fontsize=6.4, pad=8, color=INK)
     ax.text(0.0, 1.02, f"{auc_label}ECE {d['ece']:.2f}", transform=ax.transAxes,
-            fontsize=6.0, color=INK_2, va="bottom", ha="left")
+            fontsize=5.6, color=INK_2, va="bottom", ha="left")
 for ax in axes[n_panels:]:
     ax.axis("off")
-if n_panels < len(axes):
-    key_ax = axes[n_panels]
-    handles = [Line2D([0], [0], color=MUTED, linewidth=0.7, linestyle=(0, (3, 2)))]
-    labels = ["perfect calibration"]
-    for n in (5, 25, max_count):
-        handles.append(Line2D([0], [0], marker="o", linestyle="none", markerfacecolor=INK_2,
-                              markeredgecolor="white", markersize=np.sqrt(6 + 70 * n / max_count)))
-        labels.append(f"{n} runs in bin")
-    key_ax.legend(handles, labels, loc="center left", fontsize=6.3, handletextpad=0.6,
-                  labelspacing=0.9, borderaxespad=0.0)
+handles = [Line2D([0], [0], color=MUTED, linewidth=0.7, linestyle=(0, (3, 2)))]
+labels = ["perfect calibration"]
+for n in (5, 25, max_count):
+    handles.append(Line2D([0], [0], marker="o", linestyle="none", markerfacecolor=INK_2,
+                          markeredgecolor="white", markersize=np.sqrt(6 + 70 * n / max_count)))
+    labels.append(f"{n} runs in bin")
+fig.legend(handles, labels, loc="upper center", ncols=4, fontsize=6.3, bbox_to_anchor=(0.5, 1.0),
+           handletextpad=0.5, columnspacing=1.6)
 fig.supxlabel("Stated confidence", fontsize=8, y=0.01)
 fig.supylabel("Observed accuracy", fontsize=8, x=0.01)
-fig.tight_layout(pad=0.4, h_pad=1.1, w_pad=0.7)
+fig.tight_layout(pad=0.4, h_pad=1.1, w_pad=0.5, rect=(0, 0, 1, 0.94))
 save(fig, "fig_calibration")
 
 # ------------------------------------------------ F8: paired differences vs the shared-episode accuracy leader
@@ -468,5 +432,138 @@ if vs_leader:
     save(fig, "fig_pairwise")
 else:
     print("skipping fig_pairwise: no vs-leader comparisons in cross_field_data.json")
+
+# ------------------------------------------------ Diagrams (drawn, not data-driven)
+# Same type, colours and line weights as the charts, so the paper reads as one set.
+TRUE_EDGE, TRUE_FILL = "#0F4D92", "#DDE8F5"
+FALSE_EDGE, FALSE_FILL = "#B64342", "#F7DEDC"
+STAGE_FILL = "#EEF3FA"
+from matplotlib.patches import FancyBboxPatch
+
+
+def draw_box(ax, cx, cy, w, h, text="", fc="white", ec=INK, lw=0.8, ls="-", tc=INK,
+             fontsize=6.8, weight="normal", z=3):
+    ax.add_patch(FancyBboxPatch((cx - w / 2, cy - h / 2), w, h,
+                                boxstyle="round,pad=0,rounding_size=0.18",
+                                fc=fc, ec=ec, lw=lw, ls=ls, zorder=z))
+    if text:
+        ax.text(cx, cy, text, ha="center", va="center", fontsize=fontsize, color=tc,
+                fontweight=weight, zorder=z + 1, linespacing=1.25)
+
+
+def draw_arrow(ax, xy_from, xy_to, color=INK, lw=0.9, ls="-", both=False, z=2):
+    ax.annotate("", xy=xy_to, xytext=xy_from, zorder=z,
+                arrowprops=dict(arrowstyle="<|-|>" if both else "-|>", color=color, lw=lw,
+                                linestyle=ls, shrinkA=0, shrinkB=0, mutation_scale=7))
+
+
+def diagram_axes(x0, x1, y0, y1, width=WIDTH):
+    fig = plt.figure(figsize=(width, width * (y1 - y0) / (x1 - x0)))
+    ax = fig.add_axes([0, 0, 1, 1])
+    ax.set_xlim(x0, x1)
+    ax.set_ylim(y0, y1)
+    ax.set_aspect("equal")
+    ax.axis("off")
+    return fig, ax
+
+
+# F1: the central manipulation. Both worlds use the same nine page slots
+# (2 official records, 5 news pages, 2 forum posts); only stance and copy edges differ.
+fig, ax = diagram_axes(-3.3, 22.3, -2.0, 7.0)
+ROWS = {"official": 4.8, "news": 3.0, "forum": 1.2}
+ROW_LABEL = {"official": "official\nrecords", "news": "news\npages", "forum": "forum\nposts"}
+BW, BH = 1.75, 0.82
+SLOTS = {"official": [3.0, 7.0], "news": [1.0, 3.0, 5.0, 7.0, 9.0], "forum": [3.0, 7.0]}
+for row, y in ROWS.items():
+    ax.text(-0.35, y, ROW_LABEL[row], ha="right", va="center", fontsize=6.6, color=INK_2,
+            linespacing=1.15)
+
+
+def stance_box(cx, cy, true, emphasis=False):
+    draw_box(ax, cx, cy, BW, BH, "true" if true else "false",
+             fc=TRUE_FILL if true else FALSE_FILL, ec=TRUE_EDGE if true else FALSE_EDGE,
+             tc=TRUE_EDGE if true else FALSE_EDGE, lw=1.6 if emphasis else 0.8, fontsize=6.6)
+
+
+# clean world
+for row, xs in SLOTS.items():
+    for x in xs:
+        stance_box(x, ROWS[row], True)
+ax.text(0.0, 6.25, "Clean", ha="left", va="center", fontsize=8, fontweight="bold")
+ax.text(5.0, -0.25, "9 pages  ·  9 independent origins", ha="center", va="center",
+        fontsize=6.8, color=TRUE_EDGE)
+
+# manufactured-consensus world
+OX = 12.0
+origin = (OX + SLOTS["forum"][0], ROWS["forum"])
+for row, xs in SLOTS.items():
+    for x in xs:
+        is_origin = (row == "forum" and x == SLOTS["forum"][0])
+        stance_box(OX + x, ROWS[row], row == "official", emphasis=is_origin)
+for x in SLOTS["news"]:
+    tx, ty = OX + x, ROWS["news"] - BH / 2
+    dx, dy = tx - origin[0], ty - (origin[1] + BH / 2)
+    draw_arrow(ax, (origin[0] + 0.18 * dx / max(abs(dx), 1e-9) * min(abs(dx), 4.0) / 4.0 if dx else origin[0],
+                    origin[1] + BH / 2), (tx, ty), color=FALSE_EDGE, lw=0.8)
+draw_arrow(ax, (origin[0] + BW / 2, origin[1]), (OX + SLOTS["forum"][1] - BW / 2, ROWS["forum"]),
+           color=FALSE_EDGE, lw=0.8)
+ax.text(origin[0], origin[1] - BH / 2 - 0.12, "unsupported post", ha="center", va="top",
+        fontsize=5.8, color=FALSE_EDGE, style="italic")
+ax.text(OX, 6.25, "Manufactured consensus", ha="left", va="center", fontsize=8, fontweight="bold")
+ax.text(OX + 5.0, -0.55, "9 pages  ·  3 independent origins", ha="center", va="center",
+        fontsize=6.8, color=INK)
+ax.text(OX + 5.0, -1.15, "the 7 false pages all copy one unsupported post (arrows)",
+        ha="center", va="center", fontsize=6.3, color=FALSE_EDGE)
+ax.plot([10.9, 10.9], [0.3, 6.5], color=GRID, lw=0.8)
+ax.text(9.5, -1.85, "Held constant across worlds: page slots, domains, engagement counts, "
+        "publication ages and wording targets.", ha="center", va="center", fontsize=6.4,
+        color=INK_2, style="italic")
+save(fig, "fig_worlds")
+
+# F2: evaluation protocol.
+fig, ax = diagram_axes(-0.2, 30.2, -1.9, 6.6)
+Y = 4.6
+W, H = 5.0, 2.6
+XS = [2.55, 8.8, 15.05, 21.3, 27.55]
+stages = [
+    ("Claim question", "", "white", INK),
+    ("Stage 1", "prior belief\nno tools", STAGE_FILL, TRUE_EDGE),
+    ("Stage 2", "research loop,\nup to 20 tool calls", STAGE_FILL, TRUE_EDGE),
+    ("Stage 3", "final judgment\nschema-checked", STAGE_FILL, TRUE_EDGE),
+    ("Scorer", "deterministic", "#F0F0F0", INK),
+]
+for x, (title, body, fc, ec) in zip(XS, stages):
+    draw_box(ax, x, Y, W, H, fc=fc, ec=ec)
+    if body:
+        ax.text(x, Y + H / 2 - 0.42, title, ha="center", va="center", fontsize=7.2,
+                fontweight="bold", color=INK, zorder=5)
+        ax.text(x, Y - 0.28, body, ha="center", va="center", fontsize=6.4, color=INK_2,
+                zorder=5, linespacing=1.25)
+    else:
+        ax.text(x, Y, title, ha="center", va="center", fontsize=7.2, fontweight="bold",
+                color=INK, zorder=5)
+for a, b in zip(XS[:-1], XS[1:]):
+    draw_arrow(ax, (a + W / 2, Y), (b - W / 2, Y), color=INK)
+ax.text((XS[1] + XS[3]) / 2, Y + H / 2 + 0.55, "same question asked before and after research",
+        ha="center", va="center", fontsize=6.3, color=INK_2, style="italic")
+# synthetic web, used only by stage 2
+draw_box(ax, XS[2], 0.4, 6.0, 1.9, fc="white", ec=INK_2)
+ax.text(XS[2], 0.4 + 0.35, "Synthetic web", ha="center", va="center", fontsize=7.0,
+        fontweight="bold", color=INK, zorder=5)
+ax.text(XS[2], 0.4 - 0.42, "14 pages, hybrid search", ha="center", va="center", fontsize=6.4,
+        color=INK_2, zorder=5)
+draw_arrow(ax, (XS[2], 0.4 + 0.95), (XS[2], Y - H / 2), color=INK, both=True)
+ax.text(XS[2] + 0.25, (0.4 + 0.95 + Y - H / 2) / 2, "search, open page", ha="left",
+        va="center", fontsize=6.0, color=INK_2)
+# hidden provenance graph, read only by the scorer
+draw_box(ax, XS[4] - 1.3, 0.4, 6.8, 1.9, fc="white", ec=MUTED, ls=(0, (3, 2)))
+ax.text(XS[4] - 1.3, 0.4 + 0.35, "Hidden provenance graph", ha="center", va="center",
+        fontsize=7.0, fontweight="bold", color=INK, zorder=5)
+ax.text(XS[4] - 1.3, 0.4 - 0.42, "stance, copied-from, origin", ha="center", va="center",
+        fontsize=6.4, color=INK_2, zorder=5)
+draw_arrow(ax, (XS[4], 0.4 + 0.95), (XS[4], Y - H / 2), color=MUTED, ls=(0, (3, 2)))
+ax.text(XS[4] - 1.3, -1.3, "read by the scorer, never shown to the model", ha="center",
+        va="center", fontsize=6.0, color=INK_2, style="italic")
+save(fig, "fig_protocol")
 
 print("ALL FIGURES DONE")

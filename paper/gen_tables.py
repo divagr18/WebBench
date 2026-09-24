@@ -43,19 +43,22 @@ def write(name, lines):
 
 
 # ------------------------------------------------ macros (prevents eleven/ten drift)
-# \RosterSize = the intended full study roster (every manifest entry with role="field",
-#   available or not yet supplied) -- the abstract's "how many configs are we studying".
+# \RosterSize = field-role configurations that were run and scored (status "available").
+# \LostSize = field-role configurations from an earlier version whose per-run data did not
+#   survive (status "unrecoverable"); disclosed in the paper, never counted as in progress.
 # \FieldSize = how many of those are actually eligible for the comparative leaderboard/
 #   pairwise table/cost frontier right now (available + passes eligible() in cross_field.py)
 #   -- the results section's "how many configs can we actually compare today". These are
 # genuinely different quantities; conflating them under one hand-typed number is exactly
 # the eleven-vs-ten drift both reviews flagged.
 manifest = json.load(open(os.path.join(HERE, "run_manifest.json"), encoding="utf-8"))
-roster_size = sum(1 for m in manifest["models"] if m["role"] == "field")
+roster_size = sum(1 for m in manifest["models"] if m["role"] == "field" and m["status"] == "available")
+lost_size = sum(1 for m in manifest["models"] if m["role"] == "field" and m["status"] == "unrecoverable")
 macro_lines = [
     f"\\newcommand{{\\RosterSize}}{{{roster_size}}}",
     f"\\newcommand{{\\FieldSize}}{{{len(ORDER)}}}",
     f"\\newcommand{{\\CommonEpisodes}}{{{CROSS['commonEpisodeCount']}}}",
+    f"\\newcommand{{\\LostSize}}{{{lost_size}}}",
 ]
 write("tab_macros.tex", macro_lines)
 

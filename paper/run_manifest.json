@@ -12,7 +12,9 @@
     "  'route-appendix' = same weights/effort via a different serving route, reported only as a",
     "  route-sensitivity note, never in the field.",
     "status: 'available' = reports/dev/<runSet>/score-report.json + runs.csv exist.",
-    "  'missing' = expected but not yet present; validate_manifest.py checks this against disk."
+    "  'missing' = expected but not yet present; validate_manifest.py checks this against disk.",
+    "  'unrecoverable' = run in an earlier version, but no raw traces or per-run reports survive;",
+    "  excluded from every table, figure and roster count, and disclosed as a limitation."
   ],
   "models": [
     {
@@ -29,8 +31,8 @@
       "runSet": "pilot-dev-v2-openai-low",
       "modelRequested": "gpt-5.6-luna",
       "role": "field",
-      "status": "missing",
-      "note": "Genuinely un-shipped low-reasoning-effort run (confirmed via git log --all: never committed, not a rename of pilot-dev-v2-openai). User will supply. Do not substitute the 'none' variant below."
+      "status": "unrecoverable",
+      "note": "Unrecoverable: no raw traces or per-run reports exist in git history, the other worktree, or the second machine (searched 2026-09-24). Only summary numbers survive in older paper sources, which cannot be re-scored or audited."
     },
     {
       "modelId": "gpt-5.6-luna-none",
@@ -62,8 +64,8 @@
       "runSet": "pilot-gemini-37",
       "modelRequested": "gemini-3.7-flash",
       "role": "field",
-      "status": "missing",
-      "note": "User will supply."
+      "status": "unrecoverable",
+      "note": "Unrecoverable: no raw traces or per-run reports exist in git history, the other worktree, or the second machine (searched 2026-09-24). Only summary numbers survive in older paper sources, which cannot be re-scored or audited."
     },
     {
       "modelId": "gemini-3.5-lite",
@@ -71,8 +73,8 @@
       "runSet": "pilot-gemini-35-lite",
       "modelRequested": "gemini-3.5-flash-lite",
       "role": "field",
-      "status": "missing",
-      "note": "User will supply."
+      "status": "unrecoverable",
+      "note": "Unrecoverable: no raw traces or per-run reports exist in git history, the other worktree, or the second machine (searched 2026-09-24). Only summary numbers survive in older paper sources, which cannot be re-scored or audited."
     },
     {
       "modelId": "gpt-5.6-terra",
@@ -80,35 +82,35 @@
       "runSet": "pilot-terra-80",
       "modelRequested": "gpt-5.6-terra",
       "role": "field",
-      "status": "missing",
-      "note": "User will supply."
+      "status": "available",
+      "note": "80/80 completed. Re-scored 2026-09-24 from the original raw traces (traces/dev/pilot-terra-80); EAS reproduces the v0.1.0 value."
     },
     {
       "modelId": "muse",
       "displayName": "Muse Spark 1.2",
       "runSet": "pilot-muse-80",
-      "modelRequested": "muse-spark-1.2",
+      "modelRequested": "muse-spark-1.2-contributor",
       "role": "field",
-      "status": "missing",
-      "note": "User will supply."
+      "status": "available",
+      "note": "77/80 completed, 3 rejected. Ran on the contributor tier; costs reported at the 1.2 standard-tier rate. Re-scored 2026-09-24 from the original raw traces; EAS reproduces the v0.1.0 value."
     },
     {
       "modelId": "grok",
       "displayName": "Grok 4.6",
       "runSet": "pilot-grok-80",
-      "modelRequested": "grok-4.6",
+      "modelRequested": "x-ai/grok-4.6",
       "role": "field",
-      "status": "missing",
-      "note": "Being freshly re-run, not recovered from an old directory -- treat main.tex passages that cite its numbers (ICS discussion, worst-calibration callout, results table) as regenerated, not re-pointed, once this lands. runSet name may change once the new run-set-id is chosen; update this entry then."
+      "status": "available",
+      "note": "80/80 completed, served via OpenRouter. Re-scored 2026-09-24 from the original raw traces (not re-run); EAS reproduces the v0.1.0 value."
     },
     {
       "modelId": "gpt-5.6-sol",
       "displayName": "GPT-5.6 Sol",
       "runSet": "pilot-sol-50",
-      "modelRequested": "gpt-5.6-sol",
+      "modelRequested": "openai/gpt-5.6-sol",
       "role": "field",
-      "status": "missing",
-      "note": "User will supply."
+      "status": "available",
+      "note": "50/50 completed, served via OpenRouter. Re-scored 2026-09-24 from the original raw traces; EAS reproduces the v0.1.0 value."
     },
     {
       "modelId": "glm-5.2-openrouter-100",
@@ -172,6 +174,24 @@
       "role": "effort-appendix",
       "status": "available",
       "note": "100/100 completed, 0 rejected. Original pilot; excluded from the field by design (not a data gap) -- V4 Pro ignores the legacy enable_thinking flag, so 'thinking disabled' silently runs at default effort, making this pilot a reasoning-effort variant of deepseek-v4-pro-low above, not an independent configuration. Kept for the effort-sensitivity analysis only, per PREREG.md's original Pilot section."
+    },
+    {
+      "modelId": "gemini-3.8-flash",
+      "displayName": "Gemini 3.8 Flash",
+      "runSet": "gemini38-flash-50-20260903",
+      "modelRequested": "gemini-3.8-flash",
+      "role": "field",
+      "status": "available",
+      "note": "100/100 completed, 0 rejected, Gemini API, thinking at the lowest level."
+    },
+    {
+      "modelId": "muse-1.3",
+      "displayName": "Muse Spark 1.3",
+      "runSet": "muse13-contributor-100-20260903",
+      "modelRequested": "muse-spark-1.3-contributor",
+      "role": "field",
+      "status": "available",
+      "note": "100/100 completed, 0 rejected, contributor tier; costs reported at the 1.2 standard-tier rate because 1.3 has no published standard price."
     }
   ]
 }

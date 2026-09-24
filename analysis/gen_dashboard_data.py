@@ -130,7 +130,9 @@ def build_entry(runset: str) -> dict:
     cost = score["cost"]
     total_runs = score["totalRuns"]
     # Muse ran on the contributor (training-opt-in) tier; surface OFFICIAL standard pricing
-    runset_is_muse = runset == "pilot-muse-80"
+    # Same policy for the Muse Spark 1.3 contributor run. 1.3 has no published
+    # standard-tier price yet, so it uses the 1.2 standard rate (see pricing_sources.json).
+    runset_is_muse = runset in ("pilot-muse-80", "muse13-contributor-100-20260903")
     if runset_is_muse:
         per_run = (cost["meanInputTokens"] / 1e6) * 1.25 + (cost["meanOutputTokens"] / 1e6) * 4.25
         entry["cost"] = round(per_run * total_runs, 4)

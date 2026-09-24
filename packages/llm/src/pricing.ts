@@ -45,6 +45,10 @@ export const PRICING: Record<string, ModelPricing> = {
   // Meta Muse Spark 1.2 (contributor tier = training-opt-in, model id muse-spark-1.2-contributor)
   'muse-spark-1.2': { inputPerM: 1.25, outputPerM: 4.25, cacheHitInputPerM: 0.15 },
   'muse-spark-1.2-contributor': { inputPerM: 0.1, outputPerM: 0.2, cacheHitInputPerM: 0.002 },
+  // GPT-6 Sol / GPT-6 Luna on the OpenAI API directly, standard tier, short-context
+  // rates (developers.openai.com/api/docs/pricing, 2026-09-24).
+  'gpt-6-sol': { inputPerM: 2.0, outputPerM: 10.0, cacheHitInputPerM: 0.2 },
+  'gpt-6-luna': { inputPerM: 0.1, outputPerM: 0.5, cacheHitInputPerM: 0.01 },
   // Muse Spark 1.3 contributor tier -- no public pricing page exists yet;
   // user-confirmed 2026-09-03 to reuse the 1.2 contributor rate as the best
   // available estimate. Flag if a real 1.3 rate is published later.

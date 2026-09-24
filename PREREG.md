@@ -323,3 +323,27 @@ temperature 0.7, JSON-object enforcement, matching the frozen dev plan
   `paper/fix_glm_pricing.py` from their recorded token counts at the
   confirmed rate. This does not change any accuracy/EAS/FBAR/etc. metric —
   only the `cost` field of the affected reports.
+
+## Roster changes (2026-09-24)
+
+Recorded per the version-bump clause above; the frozen protocol, prompts, scorer and
+eligibility rule are unchanged.
+
+- **Re-scored from original traces (not re-run):** GPT-5.6 Terra (`pilot-terra-80`),
+  GPT-5.6 Sol (`pilot-sol-50`), Muse Spark 1.2 (`pilot-muse-80`) and Grok 4.6
+  (`pilot-grok-80`). Their score reports had never been committed; they were
+  regenerated with the current scorer from the raw traces, and each reproduces the
+  EAS reported in v0.1.0. All four clear the eligibility rule and join the field.
+- **New configurations:** Gemini 3.8 Flash (`gemini38-flash-50-20260903`, Gemini API,
+  thinking at the lowest level, 100/100 completed) and Muse Spark 1.3
+  (`muse13-contributor-100-20260903`, `api.meta.ai` contributor tier, reasoning
+  `minimal`, 100/100 completed). Muse Spark 1.3 has no published standard-tier price;
+  its cost is reported at the 1.2 standard rate and flagged as an estimate.
+- **Unrecoverable:** Gemini 3.7 Flash, Gemini 3.5 Flash-Lite and GPT-5.6 Luna (low
+  reasoning effort). No raw traces or per-run reports survive in the repository
+  history, the second worktree, or the second machine used for runs. They are
+  marked `unrecoverable` in `paper/run_manifest.json`, excluded from every table,
+  figure and roster count, and disclosed as a limitation. Their v0.1.0 summary
+  numbers are not reported, because they cannot be regenerated or audited.
+- **Planned, not yet run:** GPT-6 Sol and GPT-6 Luna on the OpenAI API. Not part of
+  this version.

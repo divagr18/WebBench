@@ -44,6 +44,12 @@ def validate(manifest):
                 f"and/or runs.csv is missing. Either the directory hasn't been supplied yet "
                 f"(flip status to 'missing') or the runSet string is wrong."
             )
+        elif m["status"] == "unrecoverable" and present:
+            problems.append(
+                f"{m['modelId']} ({m['displayName']}): manifest says 'unrecoverable', but "
+                f"reports/dev/{m['runSet']}/ has score-report.json and runs.csv. Flip status "
+                f"to 'available' and update its note."
+            )
         elif m["status"] == "missing" and present:
             problems.append(
                 f"{m['modelId']} ({m['displayName']}): manifest says 'missing', but "
@@ -59,7 +65,10 @@ def main() -> int:
     problems = validate(manifest)
     available = [m["modelId"] for m in manifest["models"] if m["status"] == "available"]
     missing = [m["modelId"] for m in manifest["models"] if m["status"] == "missing"]
-    print(f"[validate_manifest] {len(available)} available, {len(missing)} missing:")
+    lost = [m["modelId"] for m in manifest["models"] if m["status"] == "unrecoverable"]
+    print(f"[validate_manifest] {len(available)} available, {len(missing)} missing, {len(lost)} unrecoverable:")
+    for mid in lost:
+        print(f"  unrecoverable: {mid}")
     for mid in missing:
         print(f"  missing: {mid}")
     if problems:

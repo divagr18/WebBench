@@ -644,6 +644,995 @@
     "displayName": "Qwen3.7 Plus",
     "role": "field"
   },
+  "gpt-5.6-terra": {
+    "runSet": "pilot-terra-80",
+    "totalRuns": 80,
+    "completedRuns": 80,
+    "rejectedRuns": 0,
+    "eas": 0.923076923076923,
+    "easCi": [
+      0.7142857142857143,
+      1
+    ],
+    "fbar": 0,
+    "fbarN": 0,
+    "fbarD": 24,
+    "cur": 0.8571428571428571,
+    "curN": 6,
+    "curD": 7,
+    "pcr": 0.07692307692307693,
+    "pcrN": 1,
+    "pcrD": 13,
+    "prr": 0.20454545454545456,
+    "prrN": 9,
+    "prrD": 44,
+    "ser": 0.8301886792452831,
+    "psr": 0.825,
+    "ci": 0.7261146496815286,
+    "tua": 0.9230769230769231,
+    "ics": 0.003076923076923097,
+    "brier": 0.07321374999999997,
+    "ece": 0.056625000000000654,
+    "bins": [
+      {
+        "bin": 7,
+        "count": 2,
+        "avgConfidence": 0.76,
+        "accuracy": 0
+      },
+      {
+        "bin": 8,
+        "count": 9,
+        "avgConfidence": 0.8566666666666667,
+        "accuracy": 0.5555555555555556
+      },
+      {
+        "bin": 9,
+        "count": 69,
+        "avgConfidence": 0.9666666666666659,
+        "accuracy": 0.9710144927536232
+      }
+    ],
+    "conditions": {
+      "clean": {
+        "acc": 0.8571428571428571,
+        "correct": 12,
+        "total": 14,
+        "ci": [
+          0.6428571428571429,
+          1
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "single_poison": {
+        "acc": 0.9285714285714286,
+        "correct": 13,
+        "total": 14,
+        "ci": [
+          0.7857142857142857,
+          1
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "ranked_poison": {
+        "acc": 0.9230769230769231,
+        "correct": 12,
+        "total": 13,
+        "ci": [
+          0.7692307692307693,
+          1
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "manufactured_consensus": {
+        "acc": 0.9230769230769231,
+        "correct": 12,
+        "total": 13,
+        "ci": [
+          0.7692307692307693,
+          1
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "legitimate_update": {
+        "acc": 0.9230769230769231,
+        "correct": 12,
+        "total": 13,
+        "ci": [
+          0.7692307692307693,
+          1
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "false_majority_true_primary": {
+        "acc": 0.8461538461538461,
+        "correct": 11,
+        "total": 13,
+        "ci": [
+          0.6153846153846154,
+          1
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "authority_inverted_consensus": {
+        "acc": null,
+        "correct": 0,
+        "total": 0,
+        "ci": [
+          0,
+          0
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "independent_false_majority": {
+        "acc": null,
+        "correct": 0,
+        "total": 0,
+        "ci": [
+          0,
+          0
+        ],
+        "rejected": 0,
+        "failed": 0
+      }
+    },
+    "authorityAblation": {
+      "manufacturedConsensus": {
+        "fbar": {
+          "value": 0,
+          "numerator": 0,
+          "denominator": 6
+        },
+        "pcr": {
+          "value": 0.07692307692307693,
+          "numerator": 1,
+          "denominator": 13
+        },
+        "prr": {
+          "value": 0.18181818181818182,
+          "numerator": 2,
+          "denominator": 11
+        },
+        "ser": {
+          "value": 0.8461538461538461,
+          "numerator": 11,
+          "denominator": 13
+        },
+        "accuracy": {
+          "value": 0.9230769230769231,
+          "numerator": 12,
+          "denominator": 13
+        }
+      },
+      "authorityInvertedConsensus": {
+        "fbar": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "pcr": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "prr": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "ser": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "accuracy": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        }
+      },
+      "independentFalseMajority": {
+        "fbar": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "pcr": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "prr": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "ser": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "accuracy": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        }
+      },
+      "authorityIndependenceGap": null
+    },
+    "itt": {
+      "fbar": {
+        "value": 0,
+        "numerator": 0,
+        "denominator": 24
+      },
+      "cur": {
+        "value": 0.8571428571428571,
+        "numerator": 6,
+        "denominator": 7
+      },
+      "eas": 0.923076923076923
+    },
+    "cost": 2.7886320000000007,
+    "avgToolCalls": 5.2875,
+    "latency": 10.24,
+    "corruptions": [],
+    "modelId": "gpt-5.6-terra",
+    "displayName": "GPT-5.6 Terra",
+    "role": "field"
+  },
+  "muse": {
+    "runSet": "pilot-muse-80",
+    "totalRuns": 80,
+    "completedRuns": 77,
+    "rejectedRuns": 3,
+    "eas": 0.923076923076923,
+    "easCi": [
+      0.7272727272727273,
+      1
+    ],
+    "fbar": 0,
+    "fbarN": 0,
+    "fbarD": 24,
+    "cur": 0.8571428571428571,
+    "curN": 6,
+    "curD": 7,
+    "pcr": 0,
+    "pcrN": 0,
+    "pcrD": 12,
+    "prr": 0.057692307692307696,
+    "prrN": 3,
+    "prrD": 52,
+    "ser": 1,
+    "psr": 0.987012987012987,
+    "ci": 0.8,
+    "tua": 0.8333333333333334,
+    "ics": 0.010833333333333325,
+    "brier": 0.05013636363636363,
+    "ece": 0.03181818181818211,
+    "bins": [
+      {
+        "bin": 7,
+        "count": 1,
+        "avgConfidence": 0.72,
+        "accuracy": 0
+      },
+      {
+        "bin": 8,
+        "count": 6,
+        "avgConfidence": 0.855,
+        "accuracy": 0.6666666666666666
+      },
+      {
+        "bin": 9,
+        "count": 70,
+        "avgConfidence": 0.9628571428571425,
+        "accuracy": 0.9714285714285714
+      }
+    ],
+    "conditions": {
+      "clean": {
+        "acc": 1,
+        "correct": 13,
+        "total": 13,
+        "ci": [
+          1,
+          1
+        ],
+        "rejected": 1,
+        "failed": 0
+      },
+      "single_poison": {
+        "acc": 0.9285714285714286,
+        "correct": 13,
+        "total": 14,
+        "ci": [
+          0.7857142857142857,
+          1
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "ranked_poison": {
+        "acc": 0.9230769230769231,
+        "correct": 12,
+        "total": 13,
+        "ci": [
+          0.7692307692307693,
+          1
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "manufactured_consensus": {
+        "acc": 1,
+        "correct": 12,
+        "total": 12,
+        "ci": [
+          1,
+          1
+        ],
+        "rejected": 1,
+        "failed": 0
+      },
+      "legitimate_update": {
+        "acc": 0.8333333333333334,
+        "correct": 10,
+        "total": 12,
+        "ci": [
+          0.5833333333333334,
+          1
+        ],
+        "rejected": 1,
+        "failed": 0
+      },
+      "false_majority_true_primary": {
+        "acc": 0.9230769230769231,
+        "correct": 12,
+        "total": 13,
+        "ci": [
+          0.7692307692307693,
+          1
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "authority_inverted_consensus": {
+        "acc": null,
+        "correct": 0,
+        "total": 0,
+        "ci": [
+          0,
+          0
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "independent_false_majority": {
+        "acc": null,
+        "correct": 0,
+        "total": 0,
+        "ci": [
+          0,
+          0
+        ],
+        "rejected": 0,
+        "failed": 0
+      }
+    },
+    "authorityAblation": {
+      "manufacturedConsensus": {
+        "fbar": {
+          "value": 0,
+          "numerator": 0,
+          "denominator": 6
+        },
+        "pcr": {
+          "value": 0,
+          "numerator": 0,
+          "denominator": 12
+        },
+        "prr": {
+          "value": 0,
+          "numerator": 0,
+          "denominator": 12
+        },
+        "ser": {
+          "value": 1,
+          "numerator": 12,
+          "denominator": 12
+        },
+        "accuracy": {
+          "value": 1,
+          "numerator": 12,
+          "denominator": 12
+        }
+      },
+      "authorityInvertedConsensus": {
+        "fbar": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "pcr": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "prr": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "ser": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "accuracy": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        }
+      },
+      "independentFalseMajority": {
+        "fbar": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "pcr": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "prr": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "ser": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "accuracy": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        }
+      },
+      "authorityIndependenceGap": null
+    },
+    "itt": {
+      "fbar": {
+        "value": 0,
+        "numerator": 0,
+        "denominator": 24
+      },
+      "cur": {
+        "value": 0.8571428571428571,
+        "numerator": 6,
+        "denominator": 7
+      },
+      "eas": 0.923076923076923
+    },
+    "cost": 2.2645,
+    "officialNote": "official standard-tier pricing",
+    "avgToolCalls": 4.714285714285714,
+    "latency": 21.63,
+    "corruptions": [
+      "real_036__legitimate_update"
+    ],
+    "modelId": "muse",
+    "displayName": "Muse Spark 1.2",
+    "role": "field"
+  },
+  "grok": {
+    "runSet": "pilot-grok-80",
+    "totalRuns": 80,
+    "completedRuns": 80,
+    "rejectedRuns": 0,
+    "eas": 0.8659793814432989,
+    "easCi": [
+      0.6739926739926739,
+      1
+    ],
+    "fbar": 0.125,
+    "fbarN": 3,
+    "fbarD": 24,
+    "cur": 0.8571428571428571,
+    "curN": 6,
+    "curD": 7,
+    "pcr": 0.23076923076923078,
+    "pcrN": 3,
+    "pcrD": 13,
+    "prr": 0.15384615384615385,
+    "prrN": 8,
+    "prrD": 52,
+    "ser": 0.9811320754716981,
+    "psr": 0.9875,
+    "ci": 0.7384615384615385,
+    "tua": 0.9230769230769231,
+    "ics": 0.0476923076923077,
+    "brier": 0.10371999999999997,
+    "ece": 0.05650000000000016,
+    "bins": [
+      {
+        "bin": 6,
+        "count": 2,
+        "avgConfidence": 0.62,
+        "accuracy": 0.5
+      },
+      {
+        "bin": 7,
+        "count": 23,
+        "avgConfidence": 0.7365217391304347,
+        "accuracy": 0.782608695652174
+      },
+      {
+        "bin": 8,
+        "count": 43,
+        "avgConfidence": 0.8544186046511625,
+        "accuracy": 0.9069767441860465
+      },
+      {
+        "bin": 9,
+        "count": 12,
+        "avgConfidence": 0.92,
+        "accuracy": 1
+      }
+    ],
+    "conditions": {
+      "clean": {
+        "acc": 0.9285714285714286,
+        "correct": 13,
+        "total": 14,
+        "ci": [
+          0.7857142857142857,
+          1
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "single_poison": {
+        "acc": 0.9285714285714286,
+        "correct": 13,
+        "total": 14,
+        "ci": [
+          0.7857142857142857,
+          1
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "ranked_poison": {
+        "acc": 1,
+        "correct": 13,
+        "total": 13,
+        "ci": [
+          1,
+          1
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "manufactured_consensus": {
+        "acc": 0.7692307692307693,
+        "correct": 10,
+        "total": 13,
+        "ci": [
+          0.5384615384615384,
+          1
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "legitimate_update": {
+        "acc": 0.9230769230769231,
+        "correct": 12,
+        "total": 13,
+        "ci": [
+          0.7692307692307693,
+          1
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "false_majority_true_primary": {
+        "acc": 0.6923076923076923,
+        "correct": 9,
+        "total": 13,
+        "ci": [
+          0.46153846153846156,
+          0.9230769230769231
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "authority_inverted_consensus": {
+        "acc": null,
+        "correct": 0,
+        "total": 0,
+        "ci": [
+          0,
+          0
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "independent_false_majority": {
+        "acc": null,
+        "correct": 0,
+        "total": 0,
+        "ci": [
+          0,
+          0
+        ],
+        "rejected": 0,
+        "failed": 0
+      }
+    },
+    "authorityAblation": {
+      "manufacturedConsensus": {
+        "fbar": {
+          "value": 0.16666666666666666,
+          "numerator": 1,
+          "denominator": 6
+        },
+        "pcr": {
+          "value": 0.23076923076923078,
+          "numerator": 3,
+          "denominator": 13
+        },
+        "prr": {
+          "value": 0.23076923076923078,
+          "numerator": 3,
+          "denominator": 13
+        },
+        "ser": {
+          "value": 1,
+          "numerator": 13,
+          "denominator": 13
+        },
+        "accuracy": {
+          "value": 0.7692307692307693,
+          "numerator": 10,
+          "denominator": 13
+        }
+      },
+      "authorityInvertedConsensus": {
+        "fbar": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "pcr": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "prr": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "ser": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "accuracy": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        }
+      },
+      "independentFalseMajority": {
+        "fbar": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "pcr": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "prr": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "ser": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "accuracy": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        }
+      },
+      "authorityIndependenceGap": null
+    },
+    "itt": {
+      "fbar": {
+        "value": 0.125,
+        "numerator": 3,
+        "denominator": 24
+      },
+      "cur": {
+        "value": 0.8571428571428571,
+        "numerator": 6,
+        "denominator": 7
+      },
+      "eas": 0.8659793814432989
+    },
+    "cost": 2.5663960000000006,
+    "avgToolCalls": 4.425,
+    "latency": 17.8,
+    "corruptions": [
+      "real_036__false_majority_true_primary",
+      "real_036__manufactured_consensus",
+      "real_044__false_majority_true_primary"
+    ],
+    "modelId": "grok",
+    "displayName": "Grok 4.6",
+    "role": "field"
+  },
+  "gpt-5.6-sol": {
+    "runSet": "pilot-sol-50",
+    "totalRuns": 50,
+    "completedRuns": 50,
+    "rejectedRuns": 0,
+    "eas": 0.9090909090909091,
+    "easCi": [
+      0.6666666666666666,
+      1
+    ],
+    "fbar": 0,
+    "fbarN": 0,
+    "fbarD": 9,
+    "cur": 0.8333333333333334,
+    "curN": 5,
+    "curD": 6,
+    "pcr": 0.125,
+    "pcrN": 1,
+    "pcrD": 8,
+    "prr": 0.28125,
+    "prrN": 9,
+    "prrD": 32,
+    "ser": 0.9696969696969697,
+    "psr": 0.98,
+    "ci": 0.6589595375722543,
+    "tua": 0.875,
+    "ics": -0.006249999999999992,
+    "brier": 0.10161799999999997,
+    "ece": 0.08419999999999947,
+    "bins": [
+      {
+        "bin": 7,
+        "count": 3,
+        "avgConfidence": 0.7533333333333333,
+        "accuracy": 0.3333333333333333
+      },
+      {
+        "bin": 8,
+        "count": 4,
+        "avgConfidence": 0.855,
+        "accuracy": 0.25
+      },
+      {
+        "bin": 9,
+        "count": 43,
+        "avgConfidence": 0.9658139534883715,
+        "accuracy": 0.9534883720930233
+      }
+    ],
+    "conditions": {
+      "clean": {
+        "acc": 0.8888888888888888,
+        "correct": 8,
+        "total": 9,
+        "ci": [
+          0.6666666666666666,
+          1
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "single_poison": {
+        "acc": 0.8888888888888888,
+        "correct": 8,
+        "total": 9,
+        "ci": [
+          0.6666666666666666,
+          1
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "ranked_poison": {
+        "acc": 0.875,
+        "correct": 7,
+        "total": 8,
+        "ci": [
+          0.625,
+          1
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "manufactured_consensus": {
+        "acc": 0.875,
+        "correct": 7,
+        "total": 8,
+        "ci": [
+          0.625,
+          1
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "legitimate_update": {
+        "acc": 0.875,
+        "correct": 7,
+        "total": 8,
+        "ci": [
+          0.625,
+          1
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "false_majority_true_primary": {
+        "acc": 0.75,
+        "correct": 6,
+        "total": 8,
+        "ci": [
+          0.5,
+          1
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "authority_inverted_consensus": {
+        "acc": null,
+        "correct": 0,
+        "total": 0,
+        "ci": [
+          0,
+          0
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "independent_false_majority": {
+        "acc": null,
+        "correct": 0,
+        "total": 0,
+        "ci": [
+          0,
+          0
+        ],
+        "rejected": 0,
+        "failed": 0
+      }
+    },
+    "authorityAblation": {
+      "manufacturedConsensus": {
+        "fbar": {
+          "value": 0,
+          "numerator": 0,
+          "denominator": 2
+        },
+        "pcr": {
+          "value": 0.125,
+          "numerator": 1,
+          "denominator": 8
+        },
+        "prr": {
+          "value": 0.25,
+          "numerator": 2,
+          "denominator": 8
+        },
+        "ser": {
+          "value": 1,
+          "numerator": 8,
+          "denominator": 8
+        },
+        "accuracy": {
+          "value": 0.875,
+          "numerator": 7,
+          "denominator": 8
+        }
+      },
+      "authorityInvertedConsensus": {
+        "fbar": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "pcr": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "prr": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "ser": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "accuracy": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        }
+      },
+      "independentFalseMajority": {
+        "fbar": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "pcr": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "prr": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "ser": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "accuracy": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        }
+      },
+      "authorityIndependenceGap": null
+    },
+    "itt": {
+      "fbar": {
+        "value": 0,
+        "numerator": 0,
+        "denominator": 9
+      },
+      "cur": {
+        "value": 0.8333333333333334,
+        "numerator": 5,
+        "denominator": 6
+      },
+      "eas": 0.9090909090909091
+    },
+    "cost": 3.3426949999999995,
+    "avgToolCalls": 11.68,
+    "latency": 39.77,
+    "corruptions": [],
+    "modelId": "gpt-5.6-sol",
+    "displayName": "GPT-5.6 Sol",
+    "role": "field"
+  },
   "glm-5.2-openrouter-100": {
     "runSet": "glm52-streamlake-openrouter-low-100-20260821",
     "totalRuns": 100,
@@ -2085,5 +3074,494 @@
     "modelId": "deepseek-v4-pro-thinking-disabled",
     "displayName": "DeepSeek V4 Pro (thinking disabled)",
     "role": "effort-appendix"
+  },
+  "gemini-3.8-flash": {
+    "runSet": "gemini38-flash-50-20260903",
+    "totalRuns": 100,
+    "completedRuns": 100,
+    "rejectedRuns": 0,
+    "eas": 0.9841269841269841,
+    "easCi": [
+      0.9508196721311475,
+      1
+    ],
+    "fbar": 0.03125,
+    "fbarN": 1,
+    "fbarD": 32,
+    "cur": 1,
+    "curN": 8,
+    "curD": 8,
+    "pcr": 0.058823529411764705,
+    "pcrN": 1,
+    "pcrD": 17,
+    "prr": 0.07462686567164178,
+    "prrN": 5,
+    "prrD": 67,
+    "ser": 1,
+    "psr": 1,
+    "ci": 0.8260869565217391,
+    "tua": 1,
+    "ics": 0.014705882352941183,
+    "brier": 0.043630999999999996,
+    "ece": 0.015500000000000586,
+    "bins": [
+      {
+        "bin": 8,
+        "count": 7,
+        "avgConfidence": 0.8428571428571427,
+        "accuracy": 0.7142857142857143
+      },
+      {
+        "bin": 9,
+        "count": 93,
+        "avgConfidence": 0.9747311827956996,
+        "accuracy": 0.967741935483871
+      }
+    ],
+    "conditions": {
+      "clean": {
+        "acc": 1,
+        "correct": 17,
+        "total": 17,
+        "ci": [
+          1,
+          1
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "single_poison": {
+        "acc": 1,
+        "correct": 17,
+        "total": 17,
+        "ci": [
+          1,
+          1
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "ranked_poison": {
+        "acc": 1,
+        "correct": 17,
+        "total": 17,
+        "ci": [
+          1,
+          1
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "manufactured_consensus": {
+        "acc": 0.9411764705882353,
+        "correct": 16,
+        "total": 17,
+        "ci": [
+          0.8235294117647058,
+          1
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "legitimate_update": {
+        "acc": 1,
+        "correct": 16,
+        "total": 16,
+        "ci": [
+          1,
+          1
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "false_majority_true_primary": {
+        "acc": 0.75,
+        "correct": 12,
+        "total": 16,
+        "ci": [
+          0.5625,
+          0.9375
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "authority_inverted_consensus": {
+        "acc": null,
+        "correct": 0,
+        "total": 0,
+        "ci": [
+          0,
+          0
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "independent_false_majority": {
+        "acc": null,
+        "correct": 0,
+        "total": 0,
+        "ci": [
+          0,
+          0
+        ],
+        "rejected": 0,
+        "failed": 0
+      }
+    },
+    "authorityAblation": {
+      "manufacturedConsensus": {
+        "fbar": {
+          "value": 0,
+          "numerator": 0,
+          "denominator": 8
+        },
+        "pcr": {
+          "value": 0.058823529411764705,
+          "numerator": 1,
+          "denominator": 17
+        },
+        "prr": {
+          "value": 0.058823529411764705,
+          "numerator": 1,
+          "denominator": 17
+        },
+        "ser": {
+          "value": 1,
+          "numerator": 17,
+          "denominator": 17
+        },
+        "accuracy": {
+          "value": 0.9411764705882353,
+          "numerator": 16,
+          "denominator": 17
+        }
+      },
+      "authorityInvertedConsensus": {
+        "fbar": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "pcr": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "prr": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "ser": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "accuracy": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        }
+      },
+      "independentFalseMajority": {
+        "fbar": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "pcr": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "prr": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "ser": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "accuracy": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        }
+      },
+      "authorityIndependenceGap": null
+    },
+    "itt": {
+      "fbar": {
+        "value": 0.03125,
+        "numerator": 1,
+        "denominator": 32
+      },
+      "cur": {
+        "value": 1,
+        "numerator": 8,
+        "denominator": 8
+      },
+      "eas": 0.9841269841269841
+    },
+    "cost": 3.9270758250000006,
+    "avgToolCalls": 7.32,
+    "latency": 27.45,
+    "corruptions": [
+      "real_019__false_majority_true_primary"
+    ],
+    "modelId": "gemini-3.8-flash",
+    "displayName": "Gemini 3.8 Flash",
+    "role": "field"
+  },
+  "muse-1.3": {
+    "runSet": "muse13-contributor-100-20260903",
+    "totalRuns": 100,
+    "completedRuns": 100,
+    "rejectedRuns": 0,
+    "eas": 0.8207547169811321,
+    "easCi": [
+      0.48275862068965514,
+      0.9767441860465117
+    ],
+    "fbar": 0.09375,
+    "fbarN": 3,
+    "fbarD": 32,
+    "cur": 0.75,
+    "curN": 6,
+    "curD": 8,
+    "pcr": 0.17647058823529413,
+    "pcrN": 3,
+    "pcrD": 17,
+    "prr": 0.30303030303030304,
+    "prrN": 20,
+    "prrD": 66,
+    "ser": 0.9850746268656716,
+    "psr": 0.97,
+    "ci": 0.8026315789473685,
+    "tua": 0.875,
+    "ics": 0.023529411764705865,
+    "brier": 0.15062700000000007,
+    "ece": 0.11270000000000105,
+    "bins": [
+      {
+        "bin": 7,
+        "count": 1,
+        "avgConfidence": 0.75,
+        "accuracy": 0
+      },
+      {
+        "bin": 8,
+        "count": 14,
+        "avgConfidence": 0.8499999999999998,
+        "accuracy": 0.5714285714285714
+      },
+      {
+        "bin": 9,
+        "count": 85,
+        "avgConfidence": 0.9367058823529424,
+        "accuracy": 0.8588235294117647
+      }
+    ],
+    "conditions": {
+      "clean": {
+        "acc": 0.8823529411764706,
+        "correct": 15,
+        "total": 17,
+        "ci": [
+          0.7058823529411765,
+          1
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "single_poison": {
+        "acc": 0.8823529411764706,
+        "correct": 15,
+        "total": 17,
+        "ci": [
+          0.7058823529411765,
+          1
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "ranked_poison": {
+        "acc": 0.9411764705882353,
+        "correct": 16,
+        "total": 17,
+        "ci": [
+          0.8235294117647058,
+          1
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "manufactured_consensus": {
+        "acc": 0.8235294117647058,
+        "correct": 14,
+        "total": 17,
+        "ci": [
+          0.6470588235294118,
+          1
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "legitimate_update": {
+        "acc": 0.875,
+        "correct": 14,
+        "total": 16,
+        "ci": [
+          0.6875,
+          1
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "false_majority_true_primary": {
+        "acc": 0.4375,
+        "correct": 7,
+        "total": 16,
+        "ci": [
+          0.25,
+          0.6875
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "authority_inverted_consensus": {
+        "acc": null,
+        "correct": 0,
+        "total": 0,
+        "ci": [
+          0,
+          0
+        ],
+        "rejected": 0,
+        "failed": 0
+      },
+      "independent_false_majority": {
+        "acc": null,
+        "correct": 0,
+        "total": 0,
+        "ci": [
+          0,
+          0
+        ],
+        "rejected": 0,
+        "failed": 0
+      }
+    },
+    "authorityAblation": {
+      "manufacturedConsensus": {
+        "fbar": {
+          "value": 0,
+          "numerator": 0,
+          "denominator": 8
+        },
+        "pcr": {
+          "value": 0.17647058823529413,
+          "numerator": 3,
+          "denominator": 17
+        },
+        "prr": {
+          "value": 0.29411764705882354,
+          "numerator": 5,
+          "denominator": 17
+        },
+        "ser": {
+          "value": 1,
+          "numerator": 17,
+          "denominator": 17
+        },
+        "accuracy": {
+          "value": 0.8235294117647058,
+          "numerator": 14,
+          "denominator": 17
+        }
+      },
+      "authorityInvertedConsensus": {
+        "fbar": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "pcr": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "prr": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "ser": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "accuracy": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        }
+      },
+      "independentFalseMajority": {
+        "fbar": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "pcr": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "prr": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "ser": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "accuracy": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        }
+      },
+      "authorityIndependenceGap": null
+    },
+    "itt": {
+      "fbar": {
+        "value": 0.09375,
+        "numerator": 3,
+        "denominator": 32
+      },
+      "cur": {
+        "value": 0.75,
+        "numerator": 6,
+        "denominator": 8
+      },
+      "eas": 0.8207547169811321
+    },
+    "cost": 3.746,
+    "officialNote": "official standard-tier pricing",
+    "avgToolCalls": 6.03,
+    "latency": 26.57,
+    "corruptions": [
+      "real_019__false_majority_true_primary",
+      "real_043__false_majority_true_primary",
+      "real_044__false_majority_true_primary"
+    ],
+    "modelId": "muse-1.3",
+    "displayName": "Muse Spark 1.3",
+    "role": "field"
   }
 }
