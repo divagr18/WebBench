@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use EchoBench or its results, please cite the paper below."
+title: "EchoBench: a synthetic social web for measuring epistemic arbitration"
+type: software
+authors:
+  - family-names: Agrawal
+    given-names: Divyansh
+license: MIT
+repository-code: "https://github.com/divagr18/WebBench"
+doi: 10.5281/zenodo.22035199
+keywords:
+  - epistemic arbitration
+  - misinformation robustness
+  - web agents
+  - benchmark
+  - provenance
+preferred-citation:
+  type: article
+  title: "Consensus Is Not Corroboration: Measuring Epistemic Arbitration on a Synthetic Social Web"
+  authors:
+    - family-names: Agrawal
+      given-names: Divyansh
+  year: 2026
+  publisher:
+    name: Zenodo
+  doi: 10.5281/zenodo.22033697
+  url: "https://doi.org/10.5281/zenodo.22033697"

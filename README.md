@@ -342,3 +342,34 @@ pnpm -r test        # 113 tests
 Coverage includes schema rejection (leaked hidden fields / broken citations / cycles /
 dev-test overlap), determinism and matched-world invariants, hand-computed metric
 fixtures, search ranking + isolation, and the resumable runner with a mock LLM.
+
+## Citation
+
+If you use EchoBench or its results, please cite the paper:
+
+```bibtex
+@misc{agrawal2026consensus,
+  title     = {Consensus Is Not Corroboration: Measuring Epistemic Arbitration on a Synthetic Social Web},
+  author    = {Agrawal, Divyansh},
+  year      = {2026},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.22033697},
+  url       = {https://doi.org/10.5281/zenodo.22033697}
+}
+```
+
+To cite the benchmark code itself:
+
+```bibtex
+@software{agrawal2026echobench,
+  title     = {EchoBench: a synthetic social web for measuring epistemic arbitration},
+  author    = {Agrawal, Divyansh},
+  year      = {2026},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.22035199},
+  url       = {https://github.com/divagr18/WebBench}
+}
+```
+
+Both DOIs always resolve to the latest version. GitHub's "Cite this repository"
+button reads the same information from `CITATION.cff`.

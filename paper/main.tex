@@ -760,8 +760,8 @@ correct answers. Qwen3.7 Max keeps the best ECE (0.040) and the best Brier
 \begin{figure}
 \centering
 \includegraphics[width=\linewidth]{figures/fig_calibration.pdf}
-\caption{Reliability diagrams for the \FieldSize{} field-eligible configurations (bars: accuracy
-within confidence bins; line: perfect calibration). Titles give confidence AUC and
+\caption{Reliability diagrams for the \FieldSize{} field-eligible configurations (points: accuracy
+within each confidence bin, sized by the number of runs in it; dashed line: perfect calibration). Titles give confidence AUC and
 ECE. DeepSeek V4 Flash discriminates best (AUC 0.826) despite a low-to-mid EAS;
 Qwen3.8 Flash and Qwen3.8 27B are confidently wrong.}
 \label{fig:calibration}
